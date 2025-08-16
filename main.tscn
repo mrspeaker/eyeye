@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=22 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Texture2D" uid="uid://cmds8qx1vf577" path="res://textures/texture_08_white.png" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b1gg1msla62me" path="res://textures/texture_08_green.png" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://bo45ugossoyqt" path="res://textures/texture_08_orange.png" id="2_lquwl"]
 [ext_resource type="Texture2D" uid="uid://cdtexb12g74dn" path="res://textures/texture_08_purple.png" id="4_7mycd"]
+[ext_resource type="PackedScene" uid="uid://ckhyfiqfbm4oa" path="res://models/ring.glb" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://dewxkmiwspcf8" path="res://models/scarecrow.glb" id="10_4c57u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -187,3 +189,9 @@ player_view = 1
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48424, 1.01069, 0.0108802)
+
+[node name="ring" parent="." instance=ExtResource("9_kek77")]
+transform = Transform3D(-0.0277123, 0, -0.999616, 0, 1, 0, 0.999616, 0, -0.0277123, 18.2651, 1.54292, -11.7989)
+
+[node name="scarecrow" parent="." instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.152572, 0, 0.988293, 0, 1, 0, -0.988293, 0, 0.152572, -19.1674, 0.1005, -7.46088)
