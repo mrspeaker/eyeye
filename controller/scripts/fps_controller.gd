@@ -23,7 +23,8 @@ func _physics_process(dt: float) -> void:
 	var p1 = player_view == 0
 	var jump = Input.is_action_just_pressed("jump") if p1 else false
 	if jump and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		#velocity.y = JUMP_VELOCITY
+		pass
 		
 	var fwd = Input.is_action_pressed("move_forward") if p1 else false
 	if fwd and move_time <= 0:

@@ -97,35 +97,35 @@ size = Vector3(10, 5, 0.2)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Floor4" type="CSGBox3D" parent="."]
-transform = Transform3D(-8.5216e-08, 0, 1.00001, 0, 1.005, 0, -1.005, 0, -6.33299e-08, -4.05307, 2.59585, -0.255447)
+transform = Transform3D(-8.5216e-08, 0, 1.00002, 0, 1.005, 0, -1.005, 0, -6.51926e-08, -4.09506, 2.59585, -0.657933)
 material_override = SubResource("StandardMaterial3D_lquwl")
 use_collision = true
-size = Vector3(10.2472, 5, 0.2)
+size = Vector3(11.0475, 5, 0.2)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Floor6" type="CSGBox3D" parent="."]
-transform = Transform3D(-8.5216e-08, 0, 1.00001, 0, 1.005, 0, -1.005, 0, -6.37956e-08, -3.95045, 2.59585, -14.3779)
+transform = Transform3D(-8.5216e-08, 0, 1.00002, 0, 1.005, 0, -1.005, 0, -6.51926e-08, -3.95045, 2.59585, -13.9757)
 material_override = SubResource("StandardMaterial3D_lquwl")
 use_collision = true
-size = Vector3(9.5083, 5, 0.2)
+size = Vector3(10.3088, 5, 0.2)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Floor5" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.393e-08, 0, 1.00002, 0, 1.005, 0, -1.005, 0, -4.37122e-08, 3.96138, 2.59585, -3.62123)
+transform = Transform3D(-4.37722e-08, 0, 1.00002, 0, 1.005, 0, -1.005, 0, -4.74975e-08, 3.96138, 2.59585, -4.04965)
 material_override = SubResource("StandardMaterial3D_272bh")
 use_collision = true
-size = Vector3(13.082, 5, 0.2)
+size = Vector3(13.9345, 5, 0.2)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Floor8" type="CSGBox3D" parent="."]
-transform = Transform3D(-8.5216e-08, 0, 1.00002, 0, 1.005, 0, -1.005, 0, -6.47269e-08, 4.064, 2.59585, -17.8184)
+transform = Transform3D(-8.5216e-08, 0, 1.00002, 0, 1.005, 0, -1.005, 0, -6.51926e-08, 4.0566, 2.59585, -16.8078)
 material_override = SubResource("StandardMaterial3D_272bh")
 use_collision = true
 size = Vector3(6.5249, 5, 0.2)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="PhysCube" type="RigidBody3D" parent="."]
-transform = Transform3D(-1.00358, 1.51537e-07, 0, -1.51537e-07, -1.00358, 0, 0, 1.11022e-16, 1.00358, 0.611164, 3.21355, -1.39698e-09)
+transform = Transform3D(-1.00358, 1.51537e-07, -1.86265e-09, -1.51537e-07, -1.00358, 0, -1.86265e-09, 1.11022e-16, 1.00358, -18.5806, 3.21355, -7.49698)
 
 [node name="Box" type="CSGBox3D" parent="PhysCube"]
 use_collision = true
@@ -149,7 +149,7 @@ shape = SubResource("BoxShape3D_7dm0k")
 transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 0.0336207, 1.28402, -1.78452)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." node_paths=PackedStringArray("p1", "p2")]
-modulate = Color(1, 1, 1, 0.501961)
+modulate = Color(1, 1, 1, 0.239216)
 offset_right = 1151.0
 offset_bottom = 648.0
 stretch = true
