@@ -90,6 +90,7 @@ offset_top = -108.0
 offset_right = 395.0
 offset_bottom = 192.0
 scale = Vector2(2.885, 2.885)
+mouse_filter = 1
 stream = ExtResource("13_ycdy4")
 volume_db = -80.0
 autoplay = true

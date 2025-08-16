@@ -9,14 +9,49 @@ const MOVE_TIME = 0.3
 var move_time = 0.0
 var dest = null
 
+var _mouse_input = false
+var _mouse_rot: Vector3
+var _rot_input: float
+var _tilt_input: float
+var TILT_LOWER := deg_to_rad(-30)
+var TILT_UPPER := deg_to_rad(30.0)
+@export var CAM_CONTROLLER : Camera3D
+
 func _ready() -> void:
 	if player_view == 1:
 		var new_mat = $PlaceholderMesh.get_active_material(0).duplicate()
 		new_mat.albedo_color = Color(0,0.4,0.8) # Change color to red
 		$PlaceholderMesh.set_surface_override_material(0, new_mat)
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		
+func _input(event):
+	if event.is_action_pressed("exit"):
+		get_tree().quit()
+		
+func _unhandled_input(event):
+	if player_view == 0:
+		pass
+	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
+	if _mouse_input:
+		_rot_input = -event.relative.x
+		_tilt_input = -event.relative.y
+
+func update_camera(dt):
+	_tilt_input *= 0.4
+	_rot_input *= 0.4
+	_mouse_rot.x += _tilt_input * dt
+	_mouse_rot.x = clamp(_mouse_rot.x, TILT_LOWER, TILT_UPPER)
+	_mouse_rot.y += _rot_input * dt
+	_mouse_rot.y = clamp(_mouse_rot.y, TILT_LOWER, TILT_UPPER)
+	CAM_CONTROLLER.transform.basis = Basis.from_euler(_mouse_rot)
+	CAM_CONTROLLER.rotation.z = 0
+	_rot_input = 0.0
+	_tilt_input = 0.0
 
 func _physics_process(dt: float) -> void:
 	move_time -= dt;
+	update_camera(dt)
+	
 	if not is_on_floor():
 		velocity += get_gravity() * dt
 
