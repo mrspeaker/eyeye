@@ -12,6 +12,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		visible = !visible
-		if visible:
+		if !visible:
+			p2.position = p1.position - p1.basis.z
+			p2.rotation = p1.rotation
+		else:
 			p1.position = p2.position + p2.basis.z
 			p1.rotation = p2.rotation
