@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=24 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Texture2D" uid="uid://cmds8qx1vf577" path="res://textures/texture_08_white.png" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ckhyfiqfbm4oa" path="res://models/ring.glb" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://dewxkmiwspcf8" path="res://models/scarecrow.glb" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://c3q8yb6n8npqa" path="res://models/model.gltf" id="11_efxa6"]
+[ext_resource type="Script" uid="uid://8qkxbx67p0pp" path="res://controller/scripts/bob.gd" id="12_dg77c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -206,3 +207,4 @@ transform = Transform3D(0.0186628, 0, 0.999975, 0, 1.88618, 0, -2.54592, 0, 0.00
 
 [node name="ring" parent="." instance=ExtResource("9_kek77")]
 transform = Transform3D(0.128311, 0, -0.991734, 0, 1, 0, 0.991734, 0, 0.128311, 18.7359, 1.24589, -12.5102)
+script = ExtResource("12_dg77c")
