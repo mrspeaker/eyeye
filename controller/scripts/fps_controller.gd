@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 const SPEED = 1.0
 const JUMP_VELOCITY = 4.5
-const MOVE_TIME = 0.5
+const MOVE_TIME = 0.3
 
 var move_time = 0.0
 var dest = null
