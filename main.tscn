@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=20 format=3 uid="uid://dp4n7bws1xtqu"]
 
+[ext_resource type="Texture2D" uid="uid://cmds8qx1vf577" path="res://textures/texture_08_white.png" id="1_5vw27"]
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="Texture2D" uid="uid://je0cflyvwgdf" path="res://textures/texture_08.png" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
@@ -19,10 +20,16 @@ sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
 background_mode = 1
 sky = SubResource("Sky_ig7tw")
 ambient_light_source = 2
-ambient_light_color = Color(0.486799, 0.441619, 0.407128, 1)
-ambient_light_energy = 5.0
-tonemap_mode = 2
+ambient_light_color = Color(0.461592, 0.439792, 0.52805, 1)
+ambient_light_energy = 2.82
+tonemap_mode = 3
 glow_enabled = true
+glow_intensity = 4.42
+fog_enabled = true
+fog_light_color = Color(0.227956, 0.183643, 0.239159, 1)
+fog_light_energy = 2.1
+fog_sun_scatter = 0.2
+fog_density = 0.0907
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vw27"]
 albedo_texture = ExtResource("1_h2yge")
@@ -35,6 +42,9 @@ uv1_world_triplanar = true
 uv2_scale = Vector3(0.1, 0.1, 0.1)
 uv2_triplanar = true
 uv2_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
+albedo_texture = ExtResource("1_5vw27")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
 albedo_texture = ExtResource("2_lquwl")
@@ -66,25 +76,33 @@ environment = SubResource("Environment_0xm2m")
 transform = Transform3D(1.005, 0, 9.77889e-09, 0, 1.005, 0, -1.02445e-08, 0, 1, -2.6077e-08, 0, -7.35598)
 material_override = SubResource("StandardMaterial3D_5vw27")
 use_collision = true
-size = Vector3(4, 0.2, 20)
+size = Vector3(9, 0.2, 20)
+material = SubResource("StandardMaterial3D_0xm2m")
+
+[node name="Floor10" type="CSGBox3D" parent="."]
+transform = Transform3D(1.005, 0, 9.77889e-09, 0, 1.005, 0, -1.07102e-08, 0, 1, -2.98023e-08, 4.92833, -7.35598)
+material_override = SubResource("StandardMaterial3D_5vw27")
+use_collision = true
+size = Vector3(9, 0.2, 20)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Floor7" type="CSGBox3D" parent="."]
-transform = Transform3D(-5.54137e-08, 0, 1, 0, 1.005, 0, -1.005, 0, -5.40167e-08, -11.9986, 0, -7.44394)
+transform = Transform3D(-1.03842e-07, 0, 1.00001, 0, 1.005, 0, -1.005, 0, -6.28643e-08, -11.9716, 0, -7.43492)
 material_override = SubResource("StandardMaterial3D_5vw27")
 use_collision = true
-size = Vector3(4, 0.2, 20)
+size = Vector3(4, 0.2, 15)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Floor9" type="CSGBox3D" parent="."]
 transform = Transform3D(-5.6345e-08, 0, 1, 0, 1.005, 0, -1.005, 0, -5.4948e-08, 12.0375, 0, -12.2679)
 material_override = SubResource("StandardMaterial3D_5vw27")
 use_collision = true
-size = Vector3(4, 0.2, 20)
+size = Vector3(4, 0.2, 15)
 material = SubResource("StandardMaterial3D_0xm2m")
 
 [node name="Floor2" type="CSGBox3D" parent="."]
 transform = Transform3D(1.005, 0, 1.49012e-08, 0, 1.005, 0, -3.95812e-08, 0, 1.00001, -0.0732445, 2.59585, 2.63575)
+material_override = SubResource("StandardMaterial3D_kek77")
 use_collision = true
 size = Vector3(10, 5, 0.2)
 material = SubResource("StandardMaterial3D_0xm2m")
@@ -166,3 +184,6 @@ render_target_update_mode = 4
 [node name="CharacterBody3D2" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ig7tw")]
 transform = Transform3D(0.999532, 0, 0.030608, 0, 1, 0, -0.030608, 0, 0.999532, 0.0622466, 1.18009, 1.74383)
 player_view = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48424, 1.01069, 0.0108802)
