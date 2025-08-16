@@ -1,13 +1,17 @@
 extends CharacterBody3D
 
+@onready var gridmap: GridMap = $"../GridMap"
+
 @export var player_view:= 0
 
-const SPEED = 1.0
+const SPEED = 3.0
 const JUMP_VELOCITY = 4.5
-const MOVE_TIME = 0.3
+const MOVE_TIME = 0.2
+const TURN_TIME = 0.3
 
 var move_time = 0.0
 var dest = null
+var turning = false
 
 var _mouse_input = false
 var _mouse_rot: Vector3
@@ -37,8 +41,8 @@ func _unhandled_input(event):
 		_tilt_input = -event.relative.y
 
 func update_camera(dt):
-	_tilt_input *= 0.4
-	_rot_input *= 0.4
+	_tilt_input *= 0.1
+	_rot_input *= 0.1
 	_mouse_rot.x += _tilt_input * dt
 	_mouse_rot.x = clamp(_mouse_rot.x, TILT_LOWER, TILT_UPPER)
 	_mouse_rot.y += _rot_input * dt
@@ -61,38 +65,50 @@ func _physics_process(dt: float) -> void:
 		#velocity.y = JUMP_VELOCITY
 		pass
 		
+	#var fwd = Input.is_action_pressed("move_forward") if p1 else false
+	#if fwd and move_time <= 0:
+		#dest = position - basis.z # Vector3.FORWARD
+		#move_time = MOVE_TIME
+	#
+	#var bak = Input.is_action_pressed("move_backward") if p1 else false
+	#if bak and move_time <= 0:
+		#dest = position + basis.z #Vector3.FORWARD
+		#move_time = MOVE_TIME
+		
 	var fwd = Input.is_action_pressed("move_forward") if p1 else false
-	if fwd and move_time <= 0:
-		dest = position - basis.z # Vector3.FORWARD
-		move_time = MOVE_TIME
-	
-	var bak = Input.is_action_pressed("move_backward") if p1 else false
-	if bak and move_time <= 0:
-		dest = position + basis.z #Vector3.FORWARD
+	if fwd and move_time <= 0 and !turning:
+		# this converts the player position to a grid cell coordinate
+		var grid_pos = gridmap.local_to_map(position)
+		# forward direction as grid step, round gives us a clean integer z
+		var forward = -basis.z.round()   
+		# position plus one grid cell coordinate (Vector3i) forwards
+		var next_cell = grid_pos + Vector3i(forward)
+		dest = gridmap.map_to_local(next_cell)
 		move_time = MOVE_TIME
 		
+	var bak = Input.is_action_pressed("move_backward") if p1 else false
+	if bak and move_time <= 0 and !turning:
+		# this converts the player position to a grid cell coordinate
+		var grid_pos = gridmap.local_to_map(position)
+		# backwards direction as grid step, round gives us a clean integer z
+		var backward = basis.z.round()
+		# position plus one grid cell coordinate (Vector3i) backwards
+		var next_cell = grid_pos + Vector3i(backward)
+		dest = gridmap.map_to_local(next_cell)
+		move_time = MOVE_TIME
 			
 	if dest:
-	#	velocity = velocity.move_toward(dest, SPEED * dt)
-		position = dest
-		dest = null
-		
-	# Get the input direction and handle the movement/deceleration.
-	#var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	#var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	#if direction:
-#		velocity.x = direction.x * SPEED
-	#	velocity.z = direction.z * SPEED
-	#else:
-#		velocity.x = move_toward(velocity.x, 0, SPEED)
-	#	velocity.z = move_toward(velocity.z, 0, SPEED)
-	
+		position = position.move_toward(dest, SPEED * dt)
+		if position.distance_to(dest) < 0.01:
+			position = dest
+			dest = null
+			
 	if position.y < -2.0:
 		get_tree().reload_current_scene()
 
 	move_and_slide()
 
-var turning = false
+
 var current_rot = Vector3.ZERO
 var target_rot = Vector3.ZERO
 var elapsed_time = 0.0
@@ -102,7 +118,7 @@ func _process(delta):
 		
 	if turning:
 		elapsed_time += delta
-		var t = elapsed_time / MOVE_TIME
+		var t = elapsed_time / TURN_TIME
 		if t >= 1.0:
 			t = 1.0
 			turning = false

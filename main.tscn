@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ckhyfiqfbm4oa" path="res://models/ring.glb" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://dewxkmiwspcf8" path="res://models/scarecrow.glb" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://c3q8yb6n8npqa" path="res://models/model.gltf" id="11_efxa6"]
-[ext_resource type="Script" uid="uid://8qkxbx67p0pp" path="res://controller/scripts/bob.gd" id="12_dg77c"]
+[ext_resource type="Script" path="res://controller/scripts/bob.gd" id="12_dg77c"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
@@ -97,7 +97,6 @@ autoplay = true
 loop = true
 
 [node name="Room" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Roof" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1.005, 0, 9.77889e-09, 0, 1.005, 0, -1.11759e-08, 0, 1, -3.72529e-09, 5, -7.5)
@@ -204,7 +203,6 @@ operation = 2
 size = Vector3(2.5, 3.5, 0.3)
 
 [node name="FloorTile" type="CSGBox3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_dg77c")
 use_collision = true
 size = Vector3(5, 0.2, 5)
@@ -279,3 +277,5 @@ transform = Transform3D(0.152572, 0, 0.988293, 0, 1, 0, -0.988293, 0, 0.152572, 
 [node name="Grudge" parent="." instance=ExtResource("9_kek77")]
 transform = Transform3D(0.128311, 0, -0.991735, 0, 1, 0, 0.991735, 0, 0.128311, 15.9765, 1.49639, -15.075)
 script = ExtResource("12_dg77c")
+
+[node name="GridMap" type="GridMap" parent="."]
