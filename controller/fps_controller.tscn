@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ciolrmdh2mxkt"]
+
+[ext_resource type="Script" uid="uid://cpdbcodwufswg" path="res://controller/scripts/fps_controller.gd" id="1_liegp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0767"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_liegp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j0767"]
+albedo_color = Color(1, 0.25, 0.25, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ja5wc"]
+material = SubResource("StandardMaterial3D_j0767")
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_liegp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886452, 0.00259399, 0)
+shape = SubResource("CapsuleShape3D_j0767")
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595528, -0.00837469)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000890255, -0.0081923, 0.000113219)
+
+[node name="Jead" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.639593, 0, 0, 0, 0.809617, 0, 0, 0, 0.687613, 0, 0.724478, -0.242746)
+mesh = SubResource("SphereMesh_liegp")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886452, 0.00259399, 0)
+mesh = SubResource("CapsuleMesh_ja5wc")
+skeleton = NodePath("../CollisionShape3D")
