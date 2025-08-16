@@ -36,13 +36,6 @@ func _physics_process(dt: float) -> void:
 		dest = position + basis.z #Vector3.FORWARD
 		move_time = MOVE_TIME
 		
-	if p1 and Input.is_action_pressed("move_left") and move_time <= 0:
-		rotation_degrees += Vector3(0, 90.0, 0)
-		move_time = MOVE_TIME
-
-	if p1 and Input.is_action_pressed("move_right") and move_time <= 0:
-		rotation_degrees += Vector3(0, -90.0, 0)
-		move_time = MOVE_TIME
 			
 	if dest:
 	#	velocity = velocity.move_toward(dest, SPEED * dt)
@@ -63,3 +56,35 @@ func _physics_process(dt: float) -> void:
 		get_tree().reload_current_scene()
 
 	move_and_slide()
+
+var turning = false
+var current_rot = Vector3.ZERO
+var target_rot = Vector3.ZERO
+var elapsed_time = 0.0
+
+func _process(delta):
+	var p1 = player_view == 0
+		
+	if turning:
+		elapsed_time += delta
+		var t = elapsed_time / MOVE_TIME
+		if t >= 1.0:
+			t = 1.0
+			turning = false
+		# Ease out cubic (fast start, slow end)
+		var eased_t = 1 - pow(1 - t, 3)
+		rotation_degrees = current_rot.lerp(target_rot, eased_t)
+	
+	# Start turning left
+	if p1 and Input.is_action_just_pressed("move_left") and not turning:
+		current_rot = rotation_degrees
+		target_rot = rotation_degrees + Vector3(0, 90, 0)
+		elapsed_time = 0.0
+		turning = true
+	
+	# Start turning right
+	if p1 and Input.is_action_just_pressed("move_right") and not turning:
+		current_rot = rotation_degrees
+		target_rot = rotation_degrees + Vector3(0, -90, 0)
+		elapsed_time = 0.0
+		turning = true
