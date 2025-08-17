@@ -9,9 +9,8 @@ const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
 var move_time = 0.0
-var aadest = null
 var turning = false
-var dest_cell = null
+var dest_pos = null
 
 var sensitivity = 0.2
 var _mouse_input = false
@@ -28,11 +27,7 @@ func _ready() -> void:
 		new_mat.albedo_color = Color(0,0.4,0.8) # Change color to for p2
 		$PlaceholderMesh.set_surface_override_material(0, new_mat)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		
-func _input(event):
-	if event.is_action_pressed("exit"):
-		get_tree().quit()
-		
+
 func _unhandled_input(event):
 	if player_view == 0:
 		pass
@@ -64,48 +59,24 @@ func _physics_process(dt: float) -> void:
 		velocity += get_gravity() * dt
 
 	var p1 = player_view == 0
-	var jump = Input.is_action_just_pressed("jump") if p1 else false
-	if jump and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-		pass
-		
-	#var fwd = Input.is_action_pressed("move_forward") if p1 else false
-	#if fwd and move_time <= 0:
-		#dest = position - basis.z # Vector3.FORWARD
-		#move_time = MOVE_TIME
-	#
-	#var bak = Input.is_action_pressed("move_backward") if p1 else false
-	#if bak and move_time <= 0:
-		#dest = position + basis.z #Vector3.FORWARD
-		#move_time = MOVE_TIME
-		
+	var can_move = move_time <= 0 and not turning
+	
 	var fwd = Input.is_action_pressed("move_forward") if p1 else false
-	if fwd and move_time <= 0 and !turning:
-		# this converts the player position to a grid cell coordinate
+	var bak = Input.is_action_pressed("move_backward") if p1 else false	
+	var dir = -1 if fwd else 1 if bak else 0 
+	if dir != 0 and can_move:
 		var grid_pos = gridmap.local_to_map(position)
-		# forward direction as grid step, round gives us a clean integer z
-		var forward = -basis.z.round()   
-		# position plus one grid cell coordinate (Vector3i) forwards
-		var next_cell = grid_pos + Vector3i(forward)
-		dest_cell = gridmap.map_to_local(next_cell)
+		var one_cell = Vector3i(dir * basis.z.round())   
+		var next_cell = grid_pos + one_cell
+		dest_pos = gridmap.map_to_local(next_cell)
+		#print(grid_pos, one_cell, dest_pos, next_cell)
 		move_time = MOVE_TIME
-		
-	var bak = Input.is_action_pressed("move_backward") if p1 else false
-	if bak and move_time <= 0 and !turning:
-		# this converts the player position to a grid cell coordinate
-		var grid_pos = gridmap.local_to_map(position)
-		# backwards direction as grid step, round gives us a clean integer z
-		var backward = basis.z.round()
-		# position plus one grid cell coordinate (Vector3i) backwards
-		var next_cell = grid_pos + Vector3i(backward)
-		dest_cell = gridmap.map_to_local(next_cell)
-		move_time = MOVE_TIME
-			
-	if dest_cell:
-		position = position.move_toward(dest_cell, SPEED * dt)
-		if position.distance_to(dest_cell) < 0.01:
-			position = dest_cell
-			dest_cell = null
+
+	if dest_pos:
+		position = position.move_toward(dest_pos, SPEED * dt)
+		if position.distance_to(dest_pos) < 0.01:
+			position = dest_pos
+			dest_pos = null
 
 	# Reset if fall off map
 	if position.y < -2.0:

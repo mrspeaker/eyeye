@@ -233,7 +233,7 @@ size = Vector3(0.5, 0.5, 0.5)
 shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="PlayerMain" parent="." instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 0.0336207, 1.28402, -1.78452)
+transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, 0, 1.284, 0)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." node_paths=PackedStringArray("p1", "p2")]
 modulate = Color(1, 1, 1, 0.345098)
@@ -272,6 +272,7 @@ transform = Transform3D(0.128311, 0, -0.991735, 0, 1, 0, 0.991735, 0, 0.128311, 
 script = ExtResource("12_dg77c")
 
 [node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(2, 1, 2)
 
 [node name="GrudgeFloor" type="CSGBox3D" parent="."]
 transform = Transform3D(-5.7742e-08, 0, 1, 0, 1.005, 0, -1.005, 0, -5.54137e-08, 10, 0, -15)
