@@ -4,15 +4,16 @@ extends CharacterBody3D
 
 @export var player_view:= 0
 
-const SPEED = 3.0
-const JUMP_VELOCITY = 4.5
+const SPEED = 50;
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
 var move_time = 0.0
-var dest = null
+var aadest = null
 var turning = false
+var dest_cell = null
 
+var sensitivity = 0.2
 var _mouse_input = false
 var _mouse_rot: Vector3
 var _rot_input: float
@@ -24,7 +25,7 @@ var TILT_UPPER := deg_to_rad(30.0)
 func _ready() -> void:
 	if player_view == 1:
 		var new_mat = $PlaceholderMesh.get_active_material(0).duplicate()
-		new_mat.albedo_color = Color(0,0.4,0.8) # Change color to red
+		new_mat.albedo_color = Color(0,0.4,0.8) # Change color to for p2
 		$PlaceholderMesh.set_surface_override_material(0, new_mat)
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
@@ -41,17 +42,20 @@ func _unhandled_input(event):
 		_tilt_input = -event.relative.y
 
 func update_camera(dt):
-	_tilt_input *= 0.1
-	_rot_input *= 0.1
+	_tilt_input *= sensitivity
+	_rot_input *= sensitivity
+	
 	_mouse_rot.x += _tilt_input * dt
 	_mouse_rot.x = clamp(_mouse_rot.x, TILT_LOWER, TILT_UPPER)
-	_mouse_rot.y += _rot_input * dt
-	_mouse_rot.y = clamp(_mouse_rot.y, TILT_LOWER, TILT_UPPER)
-	CAM_CONTROLLER.transform.basis = Basis.from_euler(_mouse_rot)
-	CAM_CONTROLLER.rotation.z = 0
-	_rot_input = 0.0
 	_tilt_input = 0.0
 
+	_mouse_rot.y += _rot_input * dt
+	_mouse_rot.y = clamp(_mouse_rot.y, TILT_LOWER, TILT_UPPER)
+	_rot_input = 0.0
+	
+	CAM_CONTROLLER.transform.basis = Basis.from_euler(_mouse_rot)
+	CAM_CONTROLLER.rotation.z = 0
+		
 func _physics_process(dt: float) -> void:
 	move_time -= dt;
 	update_camera(dt)
@@ -83,7 +87,7 @@ func _physics_process(dt: float) -> void:
 		var forward = -basis.z.round()   
 		# position plus one grid cell coordinate (Vector3i) forwards
 		var next_cell = grid_pos + Vector3i(forward)
-		dest = gridmap.map_to_local(next_cell)
+		dest_cell = gridmap.map_to_local(next_cell)
 		move_time = MOVE_TIME
 		
 	var bak = Input.is_action_pressed("move_backward") if p1 else false
@@ -94,15 +98,16 @@ func _physics_process(dt: float) -> void:
 		var backward = basis.z.round()
 		# position plus one grid cell coordinate (Vector3i) backwards
 		var next_cell = grid_pos + Vector3i(backward)
-		dest = gridmap.map_to_local(next_cell)
+		dest_cell = gridmap.map_to_local(next_cell)
 		move_time = MOVE_TIME
 			
-	if dest:
-		position = position.move_toward(dest, SPEED * dt)
-		if position.distance_to(dest) < 0.01:
-			position = dest
-			dest = null
-			
+	if dest_cell:
+		position = position.move_toward(dest_cell, SPEED * dt)
+		if position.distance_to(dest_cell) < 0.01:
+			position = dest_cell
+			dest_cell = null
+
+	# Reset if fall off map
 	if position.y < -2.0:
 		get_tree().reload_current_scene()
 
@@ -125,6 +130,7 @@ func _process(delta):
 		# Ease out cubic (fast start, slow end)
 		var eased_t = 1 - pow(1 - t, 3)
 		rotation_degrees = current_rot.lerp(target_rot, eased_t)
+		_mouse_rot.y *= 0.85 # move view back towards middle
 	
 	# Start turning left
 	if p1 and Input.is_action_just_pressed("move_left") and not turning:

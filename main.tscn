@@ -105,20 +105,6 @@ use_collision = true
 size = Vector3(7.25, 0.2, 20)
 material = SubResource("StandardMaterial3D_0xm2m")
 
-[node name="Floor7" type="CSGBox3D" parent="Room"]
-transform = Transform3D(-1.04308e-07, 0, 1.00001, 0, 1.005, 0, -1.005, 0, -6.28643e-08, -10, 0, -10)
-material_override = SubResource("StandardMaterial3D_5vw27")
-use_collision = true
-size = Vector3(5, 0.2, 15)
-material = SubResource("StandardMaterial3D_0xm2m")
-
-[node name="Floor9" type="CSGBox3D" parent="Room"]
-transform = Transform3D(-5.68107e-08, 0, 1, 0, 1.005, 0, -1.005, 0, -5.4948e-08, 10, 0, -15)
-material_override = SubResource("StandardMaterial3D_5vw27")
-use_collision = true
-size = Vector3(5, 0.2, 15)
-material = SubResource("StandardMaterial3D_0xm2m")
-
 [node name="Backwall" type="CSGBox3D" parent="Room"]
 transform = Transform3D(1.005, 0, 2.14204e-08, 0, 1.005, 0, -8.28877e-08, 0, 1.00002, 0, 2.5, 2.5)
 material_override = SubResource("StandardMaterial3D_kek77")
@@ -274,8 +260,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2579, 1.44726, -10.1214)
 [node name="Scarecrow" parent="." instance=ExtResource("10_4c57u")]
 transform = Transform3D(0.152572, 0, 0.988293, 0, 1, 0, -0.988293, 0, 0.152572, -16.5142, -0.390775, -10.2373)
 
+[node name="Scarefloor" type="CSGBox3D" parent="."]
+transform = Transform3D(-1.05239e-07, 0, 1.00001, 0, 1.005, 0, -1.005, 0, -6.28643e-08, -10, 0, -10)
+material_override = SubResource("StandardMaterial3D_5vw27")
+use_collision = true
+size = Vector3(5, 0.2, 15)
+material = SubResource("StandardMaterial3D_0xm2m")
+
 [node name="Grudge" parent="." instance=ExtResource("9_kek77")]
 transform = Transform3D(0.128311, 0, -0.991735, 0, 1, 0, 0.991735, 0, 0.128311, 15.9765, 1.49639, -15.075)
 script = ExtResource("12_dg77c")
 
+<<<<<<< HEAD
 [node name="GridMap" type="GridMap" parent="."]
+=======
+[node name="GrudgeFloor" type="CSGBox3D" parent="."]
+transform = Transform3D(-5.7742e-08, 0, 1, 0, 1.005, 0, -1.005, 0, -5.54137e-08, 10, 0, -15)
+material_override = SubResource("StandardMaterial3D_5vw27")
+use_collision = true
+size = Vector3(5, 0.2, 15)
+material = SubResource("StandardMaterial3D_0xm2m")
+>>>>>>> 71afc7e (move view back to center when rotate)
