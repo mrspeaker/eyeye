@@ -17,6 +17,7 @@ func _process(delta: float) -> void:
 		if !visible:
 			p2.position = p1.position - p1.basis.z
 			p2.rotation = p1.rotation
+			p2.clear_destination()
 		else:
 			p1.position = p2.position + p2.basis.z
 			p1.rotation = p2.rotation

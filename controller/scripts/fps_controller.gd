@@ -35,6 +35,9 @@ func _unhandled_input(event):
 	if _mouse_input:
 		_rot_input = -event.relative.x
 		_tilt_input = -event.relative.y
+		
+func clear_destination():
+	dest_pos = null
 
 func update_camera(dt):
 	_tilt_input *= sensitivity
@@ -69,7 +72,7 @@ func _physics_process(dt: float) -> void:
 		var one_cell = Vector3i(dir * basis.z.round())   
 		var next_cell = grid_pos + one_cell
 		dest_pos = gridmap.map_to_local(next_cell)
-		#print(grid_pos, one_cell, dest_pos, next_cell)
+		# print(grid_pos, one_cell, dest_pos, next_cell)
 		move_time = MOVE_TIME
 
 	if dest_pos:
