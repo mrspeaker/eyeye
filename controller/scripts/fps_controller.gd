@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 @export var player_view:= 0
 
-const SPEED = 50;
+const SPEED = 3;
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
