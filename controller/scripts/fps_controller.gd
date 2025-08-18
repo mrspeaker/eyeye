@@ -76,18 +76,14 @@ func _physics_process(dt: float) -> void:
 		var next_cell = grid_pos + one_cell
 		start_pos = position
 		dest_pos = gridmap.map_to_local(next_cell)
-		# print(grid_pos, one_cell, dest_pos, next_cell)
 		move_time = MOVE_TIME
 		
 
-	var move_duration = 0.6        # seconds to reach the target
+	var move_duration = 0.5        # seconds to reach the target
 	
 	if dest_pos:
-		#print(dt)
 		move_elapsed += dt
 		var t = move_elapsed / move_duration
-		#print(move_elapsed)
-		print(t)
 		if t >= 1.0:
 			position = dest_pos
 			position.y = start_pos.y 
@@ -96,7 +92,6 @@ func _physics_process(dt: float) -> void:
 		else:
 			position = start_pos.lerp(dest_pos, t)
 			position.y = start_pos.y 
-			print(position.distance_to(dest_pos))
 
 	# Reset if fall off map
 	if position.y < -2.0:
@@ -130,7 +125,6 @@ func _process(delta):
 		target_rot = rotation_degrees + Vector3(0, 90, 0)
 		elapsed_time = 0.0
 		turning = true
-		print(move_time, 'turnL')
 	
 	# Start turning right
 	if p1 and Input.is_action_just_pressed("move_right") and dest_pos == null:
@@ -138,4 +132,3 @@ func _process(delta):
 		target_rot = rotation_degrees + Vector3(0, -90, 0)
 		elapsed_time = 0.0
 		turning = true
-		print(move_time, 'turnR')
