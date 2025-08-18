@@ -4,13 +4,16 @@ extends CharacterBody3D
 
 @export var player_view:= 0
 
-const SPEED = 3;
+const SPEED = 4;
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
 var move_time = 0.0
 var turning = false
 var dest_pos = null
+var start_pos = null
+var can_move = true
+var move_elapsed = 0.0
 
 var sensitivity = 0.2
 var _mouse_input = false
@@ -62,7 +65,7 @@ func _physics_process(dt: float) -> void:
 		velocity += get_gravity() * dt
 
 	var p1 = player_view == 0
-	var can_move = move_time <= 0 and not turning
+	can_move = move_time <= 0 and not turning and dest_pos == null
 	
 	var fwd = Input.is_action_pressed("move_forward") if p1 else false
 	var bak = Input.is_action_pressed("move_backward") if p1 else false	
@@ -71,15 +74,29 @@ func _physics_process(dt: float) -> void:
 		var grid_pos = gridmap.local_to_map(position)
 		var one_cell = Vector3i(dir * basis.z.round())   
 		var next_cell = grid_pos + one_cell
+		start_pos = position
 		dest_pos = gridmap.map_to_local(next_cell)
 		# print(grid_pos, one_cell, dest_pos, next_cell)
 		move_time = MOVE_TIME
+		
 
+	var move_duration = 0.6        # seconds to reach the target
+	
 	if dest_pos:
-		position = position.move_toward(dest_pos, SPEED * dt)
-		if position.distance_to(dest_pos) < 0.01:
+		#print(dt)
+		move_elapsed += dt
+		var t = move_elapsed / move_duration
+		#print(move_elapsed)
+		print(t)
+		if t >= 1.0:
 			position = dest_pos
+			position.y = start_pos.y 
 			dest_pos = null
+			move_elapsed = 0
+		else:
+			position = start_pos.lerp(dest_pos, t)
+			position.y = start_pos.y 
+			print(position.distance_to(dest_pos))
 
 	# Reset if fall off map
 	if position.y < -2.0:
@@ -94,7 +111,8 @@ var elapsed_time = 0.0
 
 func _process(delta):
 	var p1 = player_view == 0
-		
+	
+	can_move = move_time <= 0 and not turning
 	if turning:
 		elapsed_time += delta
 		var t = elapsed_time / TURN_TIME
@@ -107,15 +125,17 @@ func _process(delta):
 		_mouse_rot.y *= 0.85 # move view back towards middle
 	
 	# Start turning left
-	if p1 and Input.is_action_just_pressed("move_left") and not turning:
+	if p1 and Input.is_action_just_pressed("move_left") and dest_pos == null:
 		current_rot = rotation_degrees
 		target_rot = rotation_degrees + Vector3(0, 90, 0)
 		elapsed_time = 0.0
 		turning = true
+		print(move_time, 'turnL')
 	
 	# Start turning right
-	if p1 and Input.is_action_just_pressed("move_right") and not turning:
+	if p1 and Input.is_action_just_pressed("move_right") and dest_pos == null:
 		current_rot = rotation_degrees
 		target_rot = rotation_degrees + Vector3(0, -90, 0)
 		elapsed_time = 0.0
 		turning = true
+		print(move_time, 'turnR')
