@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
-@onready var gridmap: GridMap = $"../GridMap"
+#@onready var gridmap: GridMap = $"../GridMap"
+@onready var gridmap: GridMap = get_node("../GridMap") as GridMap
+
 
 @export var player_view:= 0
 
@@ -15,6 +17,8 @@ var start_pos = null
 var can_move = true
 var move_elapsed = 0.0
 
+var cell_size_x = 0
+
 var sensitivity = 0.2
 var _mouse_input = false
 var _mouse_rot: Vector3
@@ -25,6 +29,13 @@ var TILT_UPPER := deg_to_rad(30.0)
 @export var CAM_CONTROLLER : Camera3D
 
 func _ready() -> void:
+	if gridmap == null:
+		print("GridMap node not found!")
+		pass
+	else:
+		print("GridMap cell size:", gridmap.cell_size)
+		cell_size_x = gridmap.cell_size.x
+
 	if player_view == 1:
 		var new_mat = $PlaceholderMesh.get_active_material(0).duplicate()
 		new_mat.albedo_color = Color(0,0.4,0.8) # Change color to for p2
@@ -65,17 +76,48 @@ func _physics_process(dt: float) -> void:
 		velocity += get_gravity() * dt
 
 	var p1 = player_view == 0
+	
+	# Movement logic
 	can_move = move_time <= 0 and not turning and dest_pos == null
 	
 	var fwd = Input.is_action_pressed("move_forward") if p1 else false
 	var bak = Input.is_action_pressed("move_backward") if p1 else false	
 	var dir = -1 if fwd else 1 if bak else 0 
+	var dir_norm = transform.basis.z.normalized() * dir
+	
+	var ray = PhysicsRayQueryParameters3D.new()
+	ray.from = global_position
+	ray.to = global_position + dir_norm * (cell_size_x / 1.5) + Vector3(0, 1, 0) # distance forward and up
+	ray.exclude = [self]
+	var space_state = get_world_3d().direct_space_state
+	var wall_ahead = space_state.intersect_ray(ray)
+
 	if dir != 0 and can_move:
 		var grid_pos = gridmap.local_to_map(position)
 		var one_cell = Vector3i(dir * basis.z.round())   
 		var next_cell = grid_pos + one_cell
 		start_pos = position
-		dest_pos = gridmap.map_to_local(next_cell)
+		
+		# Step 1: check if wall ahead
+		if wall_ahead:
+			print("Wall detected ahead!")
+		# Step 2: check same height floor
+		elif gridmap.get_cell_item(next_cell) != -1:
+			dest_pos = gridmap.map_to_local(next_cell)
+		else:
+			# Step 3: Check one cell above (slope up / stairs)
+			var up_cell = next_cell + Vector3i(0, 1, 0)
+			if gridmap.get_cell_item(up_cell) != -1:
+				next_cell = up_cell
+				dest_pos = gridmap.map_to_local(next_cell)
+			else:
+				# Step 3: Check one cell below (slope down)
+				var down_cell = next_cell + Vector3i(0, -1, 0)
+				if gridmap.get_cell_item(down_cell) != -1:
+					next_cell = down_cell
+					dest_pos = gridmap.map_to_local(next_cell)
+				else:
+					dest_pos = null
 		move_time = MOVE_TIME
 		
 
@@ -85,13 +127,21 @@ func _physics_process(dt: float) -> void:
 		move_elapsed += dt
 		var t = move_elapsed / move_duration
 		if t >= 1.0:
-			position = dest_pos
-			position.y = start_pos.y 
+			position.x = dest_pos.x
+			position.z = dest_pos.z
+			#position = dest_pos
+			#position.y = start_pos.y 
 			dest_pos = null
 			move_elapsed = 0
 		else:
-			position = start_pos.lerp(dest_pos, t)
-			position.y = start_pos.y 
+			 # Lerp only X and Z
+			var new_x = lerp(start_pos.x, dest_pos.x, t)
+			var new_z = lerp(start_pos.z, dest_pos.z, t)
+			position.x = new_x
+			position.z = new_z
+			# Y stays as is
+			#position = start_pos.lerp(dest_pos, t)
+			#position.y = start_pos.y 
 
 	# Reset if fall off map
 	if position.y < -2.0:
