@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=9 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
-[ext_resource type="Texture2D" uid="uid://je0cflyvwgdf" path="res://textures/texture_08.png" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b2ie1ji32skhx" path="res://sub_viewport_container.gd" id="2_0xm2m"]
 [ext_resource type="MeshLibrary" uid="uid://7cbhx0dktsd2" path="res://meshes/newmeshlib.tres" id="9_4c57u"]
@@ -30,12 +29,6 @@ fog_light_energy = 2.1
 fog_sun_scatter = 0.2
 fog_density = 0.0907
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycdy4"]
-albedo_texture = ExtResource("1_h2yge")
-
 [node name="world" type="Node3D"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, 0, 0, 0)
 script = ExtResource("1_272bh")
@@ -62,29 +55,6 @@ volume_db = -80.0
 autoplay = true
 loop = true
 
-[node name="Boxy1" type="RigidBody3D" parent="."]
-transform = Transform3D(-1.00358, 1.51537e-07, -3.72529e-09, -1.51537e-07, -1.00358, 0, -3.72529e-09, 1.11022e-16, 1.00358, -14.2334, 3.21355, -6.23833)
-
-[node name="Box" type="CSGBox3D" parent="Boxy1"]
-transform = Transform3D(1, -1.33903e-14, 0, 8.23126e-16, 1, -1.11022e-16, 0, -1.11022e-16, 1, -0.996406, 2.38419e-07, 0.00730419)
-use_collision = true
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxy1"]
-transform = Transform3D(1, -1.33903e-14, 0, 8.23126e-16, 1, -1.11022e-16, 0, -1.11022e-16, 1, -0.996406, 2.38419e-07, 0.00730419)
-shape = SubResource("BoxShape3D_7dm0k")
-
-[node name="Boxy2" type="RigidBody3D" parent="."]
-transform = Transform3D(-1, 1.50996e-07, 9.31323e-10, -1.50996e-07, -1, 0, 9.31323e-10, -1.11022e-16, 1, 2.75044, 2.2553, -5.34683)
-
-[node name="Box" type="CSGBox3D" parent="Boxy2"]
-material_override = SubResource("StandardMaterial3D_ycdy4")
-use_collision = true
-size = Vector3(0.5, 0.5, 0.5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Boxy2"]
-shape = SubResource("BoxShape3D_7dm0k")
-
 [node name="PlayerMain" parent="." instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, -1, 1, -1)
 
@@ -108,12 +78,14 @@ transform = Transform3D(0.999532, 0, 0.030608, 0, 1, 0, -0.030608, 0, 0.999532, 
 player_view = 1
 
 [node name="Light" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2579, 1.44726, -10.1214)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.35333, 1.44726, 2.9149)
+light_color = Color(0.802328, 0.601779, 0.525608, 1)
+light_energy = 6.291
 
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = ExtResource("9_4c57u")
 cell_size = Vector3(3, 3, 3)
 data = {
-"cells": PackedInt32Array(0, 1, 2, 65535, 1, 2, 0, 0, 2, 65535, 0, 2, 65534, 65535, 1, 65534, 0, 2, 65533, 0, 2, 65534, 1, 2, 65534, 2, 1048577, 0, 2, 655361, 0, 65535, 1441793, 1, 1, 655361, 1, 0, 1441793, 65533, 1, 1441794, 65532, 1, 1441794, 65532, 0, 1441794, 65531, 0, 655365, 65531, 1, 655365, 65535, 2, 1441794, 65535, 3, 655362, 65535, 65535, 1441794, 65535, 65534, 1441794, 65535, 65533, 1441794, 65535, 4, 655362, 0, 3, 589826, 0, 4, 589826, 65534, 4, 720898, 65534, 3, 720898, 131071, 3, 655362, 131071, 4, 655362, 131071, 2, 655362, 65536, 2, 655362, 131070, 2, 655362, 65533, 2, 458754, 65532, 2, 458754, 65531, 2, 458754, 131069, 2, 1441794, 131068, 2, 1441794, 131067, 2, 1441794, 131066, 2, 1441794, 131066, 1, 1441794, 131066, 0, 1441794)
+"cells": PackedInt32Array(0, 1, 2, 65535, 1, 2, 0, 0, 2, 65535, 0, 2, 65534, 65535, 1, 65534, 0, 2, 65533, 0, 2, 65534, 1, 2, 65534, 2, 1048577, 0, 2, 655361, 0, 65535, 1441793, 1, 1, 655361, 1, 0, 1441793, 65533, 1, 2, 65532, 1, 2, 65532, 0, 2, 65531, 0, 655365, 65531, 1, 655365, 65535, 2, 2, 65535, 3, 2, 65535, 65535, 1441794, 65535, 65534, 1441794, 65535, 65533, 1441794, 65535, 4, 2, 0, 3, 2, 0, 4, 589826, 65534, 4, 720898, 65534, 3, 2, 131071, 3, 655362, 131071, 4, 655362, 131071, 2, 655362, 65536, 2, 655362, 131070, 2, 655362, 65533, 2, 458754, 65532, 2, 458754, 65531, 2, 458754, 131069, 2, 1441794, 131068, 2, 1441794, 131067, 2, 1441794, 131066, 2, 1441794, 131066, 1, 1441794, 131066, 0, 1441794, 65532, 3, 2, 65529, 2, 2, 65535, 5, 2)
 }
-metadata/_editor_floor_ = Vector3(0, 1, 0)
+metadata/_editor_floor_ = Vector3(0, 0, 0)
