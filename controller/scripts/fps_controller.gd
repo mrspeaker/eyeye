@@ -157,7 +157,7 @@ var elapsed_time = 0.0
 func _process(delta):
 	var p1 = player_view == 0
 	
-	can_move = move_time <= 0 and not turning
+	can_move = move_time <= 0 and not turning and dest_pos == null
 	if turning:
 		elapsed_time += delta
 		var t = elapsed_time / TURN_TIME
@@ -170,14 +170,14 @@ func _process(delta):
 		_mouse_rot.y *= 0.85 # move view back towards middle
 	
 	# Start turning left
-	if p1 and Input.is_action_just_pressed("move_left") and dest_pos == null:
+	if p1 and Input.is_action_just_pressed("move_left") and can_move:
 		current_rot = rotation_degrees
 		target_rot = rotation_degrees + Vector3(0, 90, 0)
 		elapsed_time = 0.0
 		turning = true
 	
 	# Start turning right
-	if p1 and Input.is_action_just_pressed("move_right") and dest_pos == null:
+	if p1 and Input.is_action_just_pressed("move_right") and can_move:
 		current_rot = rotation_degrees
 		target_rot = rotation_degrees + Vector3(0, -90, 0)
 		elapsed_time = 0.0
