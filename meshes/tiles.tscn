@@ -150,6 +150,15 @@ mesh = SubResource("ArrayMesh_wwaon")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Corner-Piece Mesh New/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tjejb")
 
+[node name="Flat-Piece Mesh New" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0)
+mesh = SubResource("ArrayMesh_reyib")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Flat-Piece Mesh New"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Flat-Piece Mesh New/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_q22k1")
+
 [node name="Flat-Piece" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0)
 visible = false
@@ -159,15 +168,6 @@ size = Vector3(3, 3, 3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 operation = 2
 size = Vector3(3, 3, 3)
-
-[node name="Flat-Piece Mesh New" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0)
-mesh = SubResource("ArrayMesh_reyib")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Flat-Piece Mesh New"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Flat-Piece Mesh New/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_q22k1")
 
 [node name="U-Piece" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0, 0)
