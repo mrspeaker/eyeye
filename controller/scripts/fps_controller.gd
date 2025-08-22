@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 #@onready var gridmap: GridMap = $"../GridMap"
 @onready var gridmap: GridMap = get_node("../GridMap") as GridMap
-
+@onready var interact_label = get_node("../UI/CanvasLayer/InteractLabel")
 
 @export var player_view:= 0
 
@@ -29,6 +29,7 @@ var TILT_UPPER := deg_to_rad(30.0)
 @export var CAM_CONTROLLER : Camera3D
 
 func _ready() -> void:
+	print(get_tree().get_nodes_in_group("NPC"))
 	if gridmap == null:
 		print("GridMap node not found!")
 		pass
@@ -67,7 +68,7 @@ func update_camera(dt):
 	
 	CAM_CONTROLLER.transform.basis = Basis.from_euler(_mouse_rot)
 	CAM_CONTROLLER.rotation.z = 0
-		
+
 func _physics_process(dt: float) -> void:
 	move_time -= dt;
 	update_camera(dt)
@@ -77,8 +78,7 @@ func _physics_process(dt: float) -> void:
 
 	var p1 = player_view == 0
 	
-	# Movement logic
-	can_move = move_time <= 0 and not turning and dest_pos == null
+	can_move = move_time <= 0 and not turning and dest_pos == null 
 	
 	var fwd = Input.is_action_pressed("move_forward") if p1 else false
 	var bak = Input.is_action_pressed("move_backward") if p1 else false	
@@ -92,10 +92,10 @@ func _physics_process(dt: float) -> void:
 	var space_state = get_world_3d().direct_space_state
 	var wall_ahead = space_state.intersect_ray(ray)
 
-	if dir != 0 and can_move:
-		var grid_pos = gridmap.local_to_map(position)
-		var one_cell = Vector3i(dir * basis.z.round())   
-		var next_cell = grid_pos + one_cell
+	# movement check and logic
+	if dir != 0 and can_move and (scan_ahead() == null or dir == 1):
+		
+		var next_cell = get_next_cell(dir)
 		start_pos = position
 		
 		# Step 1: check if wall ahead
@@ -133,6 +133,14 @@ func _physics_process(dt: float) -> void:
 			#position.y = start_pos.y 
 			dest_pos = null
 			move_elapsed = 0
+			turn_end()
+			var scanned = scan_ahead()
+			#print(scanned)
+			if scanned != null and scanned.is_in_group("NPC"):
+				interact_label.text = "[E] Interact"
+				interact_label.visible = true
+			else:
+				interact_label.visible = false
 		else:
 			 # Lerp only X and Z
 			var new_x = lerp(start_pos.x, dest_pos.x, t)
@@ -149,6 +157,31 @@ func _physics_process(dt: float) -> void:
 
 	move_and_slide()
 
+func get_next_cell(dir):
+	var grid_pos = gridmap.local_to_map(position)
+	var one_cell = Vector3i(dir * basis.z.round())   
+	var next_cell = grid_pos + one_cell
+	return next_cell
+
+func turn_end():
+	# world acts here
+	turn_start()
+	
+# player turn begins after commital action+
+func turn_start():
+	scan_ahead()
+
+# checks ahead to see if there is something interactable
+func scan_ahead():
+	var next_cell = get_next_cell(-1)
+	#func get_interactable_at(cell: Vector3i) -> Interactable:
+	var world_pos = gridmap.map_to_local(next_cell)
+	for node in get_tree().get_nodes_in_group("NPC"):
+		#print("world_pos:", world_pos, " npc_pos:", node.global_position)
+		# compare positions approximately (floating point tolerance)
+		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
+			return node
+	return null
 
 var current_rot = Vector3.ZERO
 var target_rot = Vector3.ZERO
@@ -164,6 +197,13 @@ func _process(delta):
 		if t >= 1.0:
 			t = 1.0
 			turning = false
+			var scanned = scan_ahead()
+			#print(scanned)
+			if scanned != null and scanned.is_in_group("NPC"):
+				interact_label.text = "[E] Interact"
+				interact_label.visible = true
+			else:
+				interact_label.visible = false
 		# Ease out cubic (fast start, slow end)
 		var eased_t = 1 - pow(1 - t, 3)
 		rotation_degrees = current_rot.lerp(target_rot, eased_t)
@@ -182,3 +222,10 @@ func _process(delta):
 		target_rot = rotation_degrees + Vector3(0, -90, 0)
 		elapsed_time = 0.0
 		turning = true
+	
+	if p1 and Input.is_action_pressed("interact"):  
+		var scanned = scan_ahead()
+		if scanned != null and scanned.is_in_group("NPC"):
+			# scanned.interact()  # define this in NPC script at some point
+			interact_label.text = "You'd be so scared if you were a crow."
+			interact_label.visible = true
