@@ -139,6 +139,9 @@ func _physics_process(dt: float) -> void:
 			if scanned != null and scanned.is_in_group("NPC"):
 				interact_label.text = "[E] Interact"
 				interact_label.visible = true
+			elif scanned != null and scanned.is_in_group("Container"):
+				interact_label.text = "[E] Loot"
+				interact_label.visible = true
 			else:
 				interact_label.visible = false
 		else:
@@ -181,6 +184,11 @@ func scan_ahead():
 		# compare positions approximately (floating point tolerance)
 		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
 			return node
+	for node in get_tree().get_nodes_in_group("Container"):
+		print("world_pos:", world_pos, " con_pos:", node.global_position)
+		# compare positions approximately (floating point tolerance)
+		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
+			return node
 	return null
 
 var current_rot = Vector3.ZERO
@@ -201,6 +209,9 @@ func _process(delta):
 			#print(scanned)
 			if scanned != null and scanned.is_in_group("NPC"):
 				interact_label.text = "[E] Interact"
+				interact_label.visible = true
+			elif scanned != null and scanned.is_in_group("Container"):
+				interact_label.text = "[E] Loot"
 				interact_label.visible = true
 			else:
 				interact_label.visible = false
@@ -223,9 +234,10 @@ func _process(delta):
 		elapsed_time = 0.0
 		turning = true
 	
+	# Interact with object ahead
 	if p1 and Input.is_action_pressed("interact"):  
 		var scanned = scan_ahead()
 		if scanned != null and scanned.is_in_group("NPC"):
-			# scanned.interact()  # define this in NPC script at some point
-			interact_label.text = "You'd be so scared if you were a crow."
-			interact_label.visible = true
+			scanned.interact()  # run NPC specific interaction
+		elif scanned != null and scanned.is_in_group("Container"):
+			scanned.interact() # run Container specific interaction

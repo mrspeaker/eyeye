@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://coijfyox5m5lc"]
+
+[ext_resource type="PackedScene" uid="uid://cjspt6gtasc77" path="res://models/KenneyRetroMedieval/barrels.glb" id="1_1gic5"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2o06s"]
+points = PackedVector3Array(-0.291587, 0.00289551, -0.15, 0.290219, 0.484666, 0.15, 0.290219, 0.00401715, 0.15, 0.291574, 0.485788, -0.15, -0.290232, 0.484666, 0.15, 0.291574, 0.00289551, -0.15, -0.291587, 0.485788, -0.15, -0.290232, 0.00401715, 0.15)
+
+[node name="barrels" groups=["Container"] instance=ExtResource("1_1gic5")]
+
+[node name="barrels" parent="." index="0"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="barrels" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="barrels/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_2o06s")
