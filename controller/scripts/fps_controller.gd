@@ -136,14 +136,7 @@ func _physics_process(dt: float) -> void:
 			turn_end()
 			var scanned = scan_ahead()
 			#print(scanned)
-			if scanned != null and scanned.is_in_group("NPC"):
-				interact_label.text = "[E] Interact"
-				interact_label.visible = true
-			elif scanned != null and scanned.is_in_group("Container"):
-				interact_label.text = "[E] Loot"
-				interact_label.visible = true
-			else:
-				interact_label.visible = false
+			handle_scanned(scanned)
 		else:
 			 # Lerp only X and Z
 			var new_x = lerp(start_pos.x, dest_pos.x, t)
@@ -191,6 +184,16 @@ func scan_ahead():
 			return node
 	return null
 
+func handle_scanned(scanned):
+	if scanned != null and scanned.is_in_group("NPC"):
+		interact_label.text = "[E] Interact"
+		interact_label.visible = true
+	elif scanned != null and scanned.is_in_group("Container"):
+		interact_label.text = "[E] Loot"
+		interact_label.visible = true
+	else:
+		interact_label.visible = false
+
 var current_rot = Vector3.ZERO
 var target_rot = Vector3.ZERO
 var elapsed_time = 0.0
@@ -207,14 +210,8 @@ func _process(delta):
 			turning = false
 			var scanned = scan_ahead()
 			#print(scanned)
-			if scanned != null and scanned.is_in_group("NPC"):
-				interact_label.text = "[E] Interact"
-				interact_label.visible = true
-			elif scanned != null and scanned.is_in_group("Container"):
-				interact_label.text = "[E] Loot"
-				interact_label.visible = true
-			else:
-				interact_label.visible = false
+			handle_scanned(scanned)
+	
 		# Ease out cubic (fast start, slow end)
 		var eased_t = 1 - pow(1 - t, 3)
 		rotation_degrees = current_rot.lerp(target_rot, eased_t)
