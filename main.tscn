@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=14 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
@@ -10,12 +10,25 @@
 [ext_resource type="Script" uid="uid://b2f83eabx121f" path="res://scripts/barrels.gd" id="9_kek77"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
+sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
+
+[sub_resource type="Sky" id="Sky_kek77"]
+sky_material = SubResource("ProceduralSkyMaterial_kek77")
+
 [sub_resource type="Environment" id="Environment_lquwl"]
-ambient_light_source = 2
-ambient_light_color = Color(0.460062, 0.41902, 0.342021, 1)
-ambient_light_energy = 8.6
+background_mode = 2
+background_energy_multiplier = 0.2
+sky = SubResource("Sky_kek77")
+ambient_light_source = 3
+ambient_light_color = Color(0.145218, 0.168094, 0.162729, 1)
+ambient_light_sky_contribution = 0.1
+ambient_light_energy = 11.13
+reflected_light_source = 2
+tonemap_mode = 2
 ssao_enabled = true
 ssao_intensity = 4.13
+volumetric_fog_enabled = true
 
 [sub_resource type="FontFile" id="FontFile_7mycd"]
 cache/0/16/0/ascent = 0.0
@@ -35,6 +48,12 @@ script = ExtResource("1_272bh")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lquwl")
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.860458, 0.438499, 0.259482, -0.00634825, -0.5, 0.866002, 0.509482, -0.746806, -0.427445, 0, 13, 0)
+light_color = Color(0.528371, 0.378574, 0.339909, 1)
+light_energy = 0.613
+light_volumetric_fog_energy = 1.516
 
 [node name="Astral Viewport" type="SubViewportContainer" parent="." node_paths=PackedStringArray("astral_view", "entity")]
 modulate = Color(1, 1, 1, 0.345098)
