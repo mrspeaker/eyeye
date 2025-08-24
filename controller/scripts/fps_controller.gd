@@ -93,7 +93,9 @@ func _physics_process(dt: float) -> void:
 		
 		# Step 1: check if wall ahead
 		if wall_ahead:
-			print("Wall detected ahead!")
+			print("Wall detected ahead")
+			if wall_ahead.collider.has_method("interact"):
+				wall_ahead.collider.interact()
 		# Step 2: check same height floor
 		elif gridmap.get_cell_item(next_cell) != -1:
 			dest_pos = gridmap.map_to_local(next_cell)

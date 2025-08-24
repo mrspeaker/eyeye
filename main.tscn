@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=15 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://coijfyox5m5lc" path="res://scenes/barrels.tscn" id="8_5vw27"]
 [ext_resource type="MeshLibrary" uid="uid://7cbhx0dktsd2" path="res://meshes/newmeshlib.tres" id="9_4c57u"]
 [ext_resource type="Script" uid="uid://b2f83eabx121f" path="res://scripts/barrels.gd" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://b3tlrnbv41w47" path="res://scenes/Door.tscn" id="10_4c57u"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
@@ -146,3 +147,6 @@ horizontal_alignment = 1
 [node name="barrels" parent="." instance=ExtResource("8_5vw27")]
 transform = Transform3D(0.999973, 0, -0.00733032, 0, 1, 0, 0.00733032, 0, 0.999973, 1.479, 0.1, 7.506)
 script = ExtResource("9_kek77")
+
+[node name="Door" parent="." instance=ExtResource("10_4c57u")]
+transform = Transform3D(0.999973, 0, -0.00733032, 0, 1, 0, 0.00733032, 0, 0.999973, 1.51659, 1.30339, -11.9892)
