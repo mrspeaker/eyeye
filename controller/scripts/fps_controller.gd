@@ -4,8 +4,6 @@ extends CharacterBody3D
 @onready var gridmap: GridMap = get_node("../GridMap") as GridMap
 @onready var interact_label = get_node("../UI/CanvasLayer/InteractLabel")
 
-@export var player_view:= 0
-
 const SPEED = 4;
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
@@ -37,15 +35,12 @@ func _ready() -> void:
 		print("GridMap cell size:", gridmap.cell_size)
 		cell_size_x = gridmap.cell_size.x
 
-	if player_view == 1:
-		var new_mat = $PlaceholderMesh.get_active_material(0).duplicate()
-		new_mat.albedo_color = Color(0,0.4,0.8) # Change color to for p2
-		$PlaceholderMesh.set_surface_override_material(0, new_mat)
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	var new_mat = $PlaceholderMesh.get_active_material(0).duplicate()
+	new_mat.albedo_color = Color(0,0.4,0.8) # Change color to for p2
+	$PlaceholderMesh.set_surface_override_material(0, new_mat)
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _unhandled_input(event):
-	if player_view == 0:
-		pass
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input:
 		_rot_input = -event.relative.x
@@ -76,12 +71,10 @@ func _physics_process(dt: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * dt
 
-	var p1 = player_view == 0
-	
 	can_move = move_time <= 0 and not turning and dest_pos == null 
 	
-	var fwd = Input.is_action_pressed("move_forward") if p1 else false
-	var bak = Input.is_action_pressed("move_backward") if p1 else false	
+	var fwd = Input.is_action_pressed("move_forward")
+	var bak = Input.is_action_pressed("move_backward")	
 	var dir = -1 if fwd else 1 if bak else 0 
 	var dir_norm = transform.basis.z.normalized() * dir
 	
@@ -199,8 +192,6 @@ var target_rot = Vector3.ZERO
 var elapsed_time = 0.0
 
 func _process(delta):
-	var p1 = player_view == 0
-	
 	can_move = move_time <= 0 and not turning and dest_pos == null
 	if turning:
 		elapsed_time += delta
@@ -218,21 +209,21 @@ func _process(delta):
 		_mouse_rot.y *= 0.85 # move view back towards middle
 	
 	# Start turning left
-	if p1 and Input.is_action_just_pressed("move_left") and can_move:
+	if Input.is_action_just_pressed("move_left") and can_move:
 		current_rot = rotation_degrees
 		target_rot = rotation_degrees + Vector3(0, 90, 0)
 		elapsed_time = 0.0
 		turning = true
 	
 	# Start turning right
-	if p1 and Input.is_action_just_pressed("move_right") and can_move:
+	if Input.is_action_just_pressed("move_right") and can_move:
 		current_rot = rotation_degrees
 		target_rot = rotation_degrees + Vector3(0, -90, 0)
 		elapsed_time = 0.0
 		turning = true
 	
 	# Interact with object ahead
-	if p1 and Input.is_action_pressed("interact"):  
+	if Input.is_action_pressed("interact"):  
 		var scanned = scan_ahead()
 		if scanned != null and scanned.is_in_group("NPC"):
 			scanned.interact()  # run NPC specific interaction

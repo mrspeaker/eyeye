@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://b2ie1ji32skhx" path="res://sub_viewport_container.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://b2ie1ji32skhx" path="res://scripts/astral_viewport.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://scenes/scarecrow.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://d08x7vijxbycr" path="res://scripts/scarecrow.gd" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://coijfyox5m5lc" path="res://scenes/barrels.tscn" id="8_5vw27"]
@@ -34,6 +34,25 @@ script = ExtResource("1_272bh")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lquwl")
 
+[node name="Astral Viewport" type="SubViewportContainer" parent="." node_paths=PackedStringArray("astral_view", "entity")]
+modulate = Color(1, 1, 1, 0.345098)
+offset_right = 1151.0
+offset_bottom = 648.0
+stretch = true
+script = ExtResource("2_0xm2m")
+astral_view = NodePath("SubViewport/Astral View")
+entity = NodePath("../PlayerMain")
+
+[node name="SubViewport" type="SubViewport" parent="Astral Viewport"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1151, 648)
+render_target_update_mode = 4
+
+[node name="Astral View" type="Node3D" parent="Astral Viewport/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="Astral Viewport/SubViewport/Astral View"]
+
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 modulate = Color(1, 1, 1, 0.156863)
 self_modulate = Color(0.635133, 0.2335, 0.107684, 1)
@@ -50,25 +69,6 @@ loop = true
 
 [node name="PlayerMain" parent="." instance=ExtResource("1_ig7tw")]
 transform = Transform3D(1, 0, 4.65661e-10, 0, 1, 0, -4.65661e-10, 0, 1, -1, 1, -1)
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="." node_paths=PackedStringArray("p1", "p2")]
-modulate = Color(1, 1, 1, 0.345098)
-offset_right = 1151.0
-offset_bottom = 648.0
-stretch = true
-script = ExtResource("2_0xm2m")
-p1 = NodePath("SubViewport/PlayerSub")
-p2 = NodePath("../PlayerMain")
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(1151, 648)
-render_target_update_mode = 4
-
-[node name="PlayerSub" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.999532, 0, 0.030608, 0, 1, 0, -0.030608, 0, 0.999532, 0.0622466, 1.18009, 1.74383)
-player_view = 1
 
 [node name="Light" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.35333, 7.15886, 2.9149)
