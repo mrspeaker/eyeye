@@ -3,8 +3,8 @@ extends CharacterBody3D
 #@onready var gridmap: GridMap = $"../GridMap"
 @onready var gridmap: GridMap = get_node("../GridMap") as GridMap
 @onready var interact_label = get_node("../UI/CanvasLayer/InteractLabel")
+@onready var world = get_node("..")
 
-const SPEED = 4;
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
@@ -27,7 +27,7 @@ var TILT_UPPER := deg_to_rad(30.0)
 @export var CAM_CONTROLLER : Camera3D
 
 func _ready() -> void:
-	print(get_tree().get_nodes_in_group("NPC"))
+	#print(get_tree().get_nodes_in_group("NPC"))
 	if gridmap == null:
 		print("GridMap node not found!")
 		pass
@@ -129,9 +129,7 @@ func _physics_process(dt: float) -> void:
 			dest_pos = null
 			move_elapsed = 0
 			turn_end()
-			var scanned = scan_ahead()
-			#print(scanned)
-			handle_scanned(scanned)
+			
 		else:
 			 # Lerp only X and Z
 			var new_x = lerp(start_pos.x, dest_pos.x, t)
@@ -156,11 +154,16 @@ func get_next_cell(dir):
 
 func turn_end():
 	# world acts here
+	world.world_turn()
+	print('am here')
 	turn_start()
 	
 # player turn begins after commital action+
 func turn_start():
-	scan_ahead()
+	var scanned = scan_ahead()
+	#print(scanned)
+	handle_scanned(scanned)
+	#scan_ahead()
 
 # checks ahead to see if there is something interactable
 func scan_ahead():
@@ -173,7 +176,7 @@ func scan_ahead():
 		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
 			return node
 	for node in get_tree().get_nodes_in_group("Container"):
-		print("world_pos:", world_pos, " con_pos:", node.global_position)
+		#print("world_pos:", world_pos, " con_pos:", node.global_position)
 		# compare positions approximately (floating point tolerance)
 		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
 			return node

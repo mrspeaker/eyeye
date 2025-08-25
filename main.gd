@@ -13,3 +13,11 @@ func _input(event):
 func _process(delta: float) -> void:
 	pass
 		 
+func world_turn():
+	enemies_act()
+
+# loop through all enemies turns
+func enemies_act():
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		if enemy.has_method("turn_start"):
+			enemy.turn_start()
