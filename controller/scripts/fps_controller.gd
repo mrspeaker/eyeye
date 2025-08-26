@@ -35,12 +35,10 @@ func _ready() -> void:
 		print("GridMap cell size:", gridmap.cell_size)
 		cell_size_x = gridmap.cell_size.x
 
-	var new_mat = $PlaceholderMesh.get_active_material(0).duplicate()
-	new_mat.albedo_color = Color(0,0.4,0.8) # Change color to for p2
-	$PlaceholderMesh.set_surface_override_material(0, new_mat)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
-func _unhandled_input(event):
+#func _unhandled_input(event):
+func _input(event):
 	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if _mouse_input:
 		_rot_input = -event.relative.x

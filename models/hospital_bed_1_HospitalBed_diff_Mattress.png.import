@@ -1,0 +1,38 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://b4pt7ximtljvr"
+path.s3tc="res://.godot/imported/hospital_bed_1_HospitalBed_diff_Mattress.png-e1e6a736143a79084c2ae51e67d4160a.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={
+"md5": "3cdf9f8629f61ac3d67981fe7eff62f0"
+}
+
+[deps]
+
+source_file="res://models/hospital_bed_1_HospitalBed_diff_Mattress.png"
+dest_files=["res://.godot/imported/hospital_bed_1_HospitalBed_diff_Mattress.png-e1e6a736143a79084c2ae51e67d4160a.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0
