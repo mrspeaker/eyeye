@@ -154,6 +154,7 @@ func turn_end():
 	# world acts here
 	world.world_turn()
 	print('am here')
+	get_node("HealthComponent").apply_damage(10.0)
 	turn_start()
 	
 # player turn begins after commital action+
@@ -232,3 +233,7 @@ func _process(delta):
 			scanned.interact()  # run NPC specific interaction
 		elif scanned != null and scanned.is_in_group("Container"):
 			scanned.interact() # run Container specific interaction
+
+func _on_health_component_died() -> void:
+	print("Health < 0. Dead.")
+	get_node("HealthComponent").reset()
