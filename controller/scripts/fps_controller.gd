@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-#@onready var gridmap: GridMap = $"../GridMap"
-@onready var gridmap: GridMap = get_node("../GridMap") as GridMap
-@onready var interact_label = get_node("../UI/CanvasLayer/InteractLabel")
-@onready var world = get_node("..")
+@export var gridmap: GridMap; # = get_node("../GridMap") as GridMap
+@onready var interact_label = get_node("../../UI/CanvasLayer/InteractLabel")
+@onready var world = get_node("../../")
+@export var health_component: HealthComponent
 
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
@@ -154,7 +154,7 @@ func turn_end():
 	# world acts here
 	world.world_turn()
 	print('am here')
-	get_node("HealthComponent").apply_damage(10.0)
+	health_component.apply_damage(10.0)
 	turn_start()
 	
 # player turn begins after commital action+
@@ -235,5 +235,5 @@ func _process(delta):
 			scanned.interact() # run Container specific interaction
 
 func _on_health_component_died() -> void:
-	print("Health < 0. Dead.")
-	get_node("HealthComponent").reset()
+	health_component.reset()
+	print("health reset to ", health_component.health)

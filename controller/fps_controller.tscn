@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://ciolrmdh2mxkt"]
+[gd_scene load_steps=6 format=3 uid="uid://ciolrmdh2mxkt"]
 
 [ext_resource type="Script" uid="uid://cpdbcodwufswg" path="res://controller/scripts/fps_controller.gd" id="1_liegp"]
-[ext_resource type="Script" uid="uid://cr3afoq8poqwa" path="res://components/health_component.gd" id="2_uyxtt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0767"]
 
@@ -36,9 +35,3 @@ mesh = SubResource("SphereMesh_liegp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886452, 0.00259399, 0)
 mesh = SubResource("CapsuleMesh_ja5wc")
 skeleton = NodePath("../CollisionShape3D")
-
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("2_uyxtt")
-metadata/_custom_type_script = "uid://cr3afoq8poqwa"
-
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
