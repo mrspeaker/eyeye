@@ -12,9 +12,9 @@ albedo_color = Color(1, 0.25, 0.25, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ja5wc"]
 material = SubResource("StandardMaterial3D_j0767")
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAM_CONTROLLER")]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_liegp")
-CAM_CONTROLLER = NodePath("CameraController/Camera3D")
+camera = NodePath("CameraController/Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886452, 0.00259399, 0)

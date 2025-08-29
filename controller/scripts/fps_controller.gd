@@ -1,9 +1,11 @@
 extends CharacterBody3D
 
-@export var gridmap: GridMap; # = get_node("../GridMap") as GridMap
+@export var gridmap: GridMap;
+@export var camera : Camera3D
+@export var health_component: HealthComponent
+
 @onready var interact_label = get_node("../../UI/CanvasLayer/InteractLabel")
 @onready var world = get_node("../../")
-@export var health_component: HealthComponent
 
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
@@ -15,8 +17,6 @@ var start_pos = null
 var can_move = true
 var move_elapsed = 0.0
 
-var cell_size_x = 0
-
 var sensitivity = 0.2
 var _mouse_input = false
 var _mouse_rot: Vector3
@@ -24,17 +24,14 @@ var _rot_input: float
 var _tilt_input: float
 var TILT_LOWER := deg_to_rad(-30)
 var TILT_UPPER := deg_to_rad(30.0)
-@export var CAM_CONTROLLER : Camera3D
+
+var current_rot = Vector3.ZERO
+var target_rot = Vector3.ZERO
+var elapsed_time = 0.0
+
+var scanned_thing = null
 
 func _ready() -> void:
-	#print(get_tree().get_nodes_in_group("NPC"))
-	if gridmap == null:
-		print("GridMap node not found!")
-		pass
-	else:
-		print("GridMap cell size:", gridmap.cell_size)
-		cell_size_x = gridmap.cell_size.x
-
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 #func _unhandled_input(event):
@@ -43,7 +40,7 @@ func _input(event):
 	if _mouse_input:
 		_rot_input = -event.relative.x
 		_tilt_input = -event.relative.y
-		
+
 func clear_destination():
 	dest_pos = null
 
@@ -59,8 +56,8 @@ func update_camera(dt):
 	_mouse_rot.y = clamp(_mouse_rot.y, TILT_LOWER, TILT_UPPER)
 	_rot_input = 0.0
 	
-	CAM_CONTROLLER.transform.basis = Basis.from_euler(_mouse_rot)
-	CAM_CONTROLLER.rotation.z = 0
+	camera.transform.basis = Basis.from_euler(_mouse_rot)
+	camera.rotation.z = 0
 
 func _physics_process(dt: float) -> void:
 	move_time -= dt;
@@ -74,17 +71,14 @@ func _physics_process(dt: float) -> void:
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")	
 	var dir = -1 if fwd else 1 if bak else 0 
-	var dir_norm = transform.basis.z.normalized() * dir
 	
-	var ray = PhysicsRayQueryParameters3D.new()
-	ray.from = global_position
-	ray.to = global_position + dir_norm * (cell_size_x / 1.5) + Vector3(0, 1, 0) # distance forward and up
-	ray.exclude = [self]
-	var space_state = get_world_3d().direct_space_state
-	var wall_ahead = space_state.intersect_ray(ray)
-
+	var wall_ahead = raycast_ahead(dir)
+	scanned_thing = scan_ahead()
+	var blocked = !(scanned_thing == null or dir == 1)
+	
 	# movement check and logic
-	if dir != 0 and can_move and (scan_ahead() == null or dir == 1):
+	if dir != 0 and can_move and not blocked:
+		move_time = MOVE_TIME
 		
 		var next_cell = get_next_cell(dir)
 		start_pos = position
@@ -104,29 +98,28 @@ func _physics_process(dt: float) -> void:
 				next_cell = up_cell
 				dest_pos = gridmap.map_to_local(next_cell)
 			else:
-				# Step 3: Check one cell below (slope down)
+				# Step 4: Check one cell below (slope down)
 				var down_cell = next_cell + Vector3i(0, -1, 0)
 				if gridmap.get_cell_item(down_cell) != -1:
 					next_cell = down_cell
 					dest_pos = gridmap.map_to_local(next_cell)
 				else:
 					dest_pos = null
-		move_time = MOVE_TIME
-		
 
-	var move_duration = 0.5        # seconds to reach the target
-	
 	if dest_pos:
 		move_elapsed += dt
+		const move_duration = 0.5        # seconds to reach the target
 		var t = move_elapsed / move_duration
 		if t >= 1.0:
+			# Turn ended.
 			position.x = dest_pos.x
 			position.z = dest_pos.z
-			#position = dest_pos
-			#position.y = start_pos.y 
 			dest_pos = null
 			move_elapsed = 0
-			turn_end()
+			
+			# world acts here
+			world.world_turn()
+			handle_scanned(scanned_thing)
 			
 		else:
 			 # Lerp only X and Z
@@ -134,15 +127,21 @@ func _physics_process(dt: float) -> void:
 			var new_z = lerp(start_pos.z, dest_pos.z, t)
 			position.x = new_x
 			position.z = new_z
-			# Y stays as is
-			#position = start_pos.lerp(dest_pos, t)
-			#position.y = start_pos.y 
 
 	# Reset if fall off map
 	if position.y < -2.0:
 		get_tree().reload_current_scene()
 
 	move_and_slide()
+	
+func raycast_ahead(dir):
+	var dir_norm = transform.basis.z.normalized() * dir
+	var ray = PhysicsRayQueryParameters3D.new()
+	ray.from = global_position
+	ray.to = global_position + dir_norm * (gridmap.cell_size.x / 1.5) + Vector3(0, 1, 0) # distance forward and up
+	ray.exclude = [self]
+	var space_state = get_world_3d().direct_space_state
+	return space_state.intersect_ray(ray)
 
 func get_next_cell(dir):
 	var grid_pos = gridmap.local_to_map(position)
@@ -150,34 +149,15 @@ func get_next_cell(dir):
 	var next_cell = grid_pos + one_cell
 	return next_cell
 
-func turn_end():
-	# world acts here
-	world.world_turn()
-	print('am here')
-	health_component.apply_damage(10.0)
-	turn_start()
-	
-# player turn begins after commital action+
-func turn_start():
-	var scanned = scan_ahead()
-	#print(scanned)
-	handle_scanned(scanned)
-	#scan_ahead()
-
 # checks ahead to see if there is something interactable
 func scan_ahead():
 	var next_cell = get_next_cell(-1)
-	#func get_interactable_at(cell: Vector3i) -> Interactable:
 	var world_pos = gridmap.map_to_local(next_cell)
 	for node in get_tree().get_nodes_in_group("NPC"):
-		#print("world_pos:", world_pos, " npc_pos:", node.global_position)
-		# compare positions approximately (floating point tolerance)
-		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
+		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x / 2:
 			return node
 	for node in get_tree().get_nodes_in_group("Container"):
-		#print("world_pos:", world_pos, " con_pos:", node.global_position)
-		# compare positions approximately (floating point tolerance)
-		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
+		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x / 2:
 			return node
 	return null
 
@@ -191,10 +171,6 @@ func handle_scanned(scanned):
 	else:
 		interact_label.visible = false
 
-var current_rot = Vector3.ZERO
-var target_rot = Vector3.ZERO
-var elapsed_time = 0.0
-
 func _process(delta):
 	can_move = move_time <= 0 and not turning and dest_pos == null
 	if turning:
@@ -204,7 +180,6 @@ func _process(delta):
 			t = 1.0
 			turning = false
 			var scanned = scan_ahead()
-			#print(scanned)
 			handle_scanned(scanned)
 	
 		# Ease out cubic (fast start, slow end)
