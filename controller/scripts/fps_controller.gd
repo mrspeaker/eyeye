@@ -10,24 +10,22 @@ extends CharacterBody3D
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
-var move_time = 0.0
+var moving = false
+var move_elapsed_time = 0.0
+var move_dest_pos = null
+var move_start_pos = null
+
 var turning = false
-var dest_pos = null
-var start_pos = null
-var can_move = true
-var move_elapsed = 0.0
+var turn_current_rot = Vector3.ZERO
+var turn_target_rot = Vector3.ZERO
+var turn_elapsed_time = 0.0
 
 var sensitivity = 0.2
-var _mouse_input = false
+const TILT_LOWER := deg_to_rad(-30)
+const TILT_UPPER := deg_to_rad(30.0)
 var _mouse_rot: Vector3
 var _rot_input: float
 var _tilt_input: float
-var TILT_LOWER := deg_to_rad(-30)
-var TILT_UPPER := deg_to_rad(30.0)
-
-var current_rot = Vector3.ZERO
-var target_rot = Vector3.ZERO
-var elapsed_time = 0.0
 
 var scanned_thing = null
 
@@ -36,13 +34,10 @@ func _ready() -> void:
 
 #func _unhandled_input(event):
 func _input(event):
-	_mouse_input = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-	if _mouse_input:
+	var is_mouse_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
+	if is_mouse_event:
 		_rot_input = -event.relative.x
 		_tilt_input = -event.relative.y
-
-func clear_destination():
-	dest_pos = null
 
 func update_camera(dt):
 	_tilt_input *= sensitivity
@@ -60,13 +55,16 @@ func update_camera(dt):
 	camera.rotation.z = 0
 
 func _physics_process(dt: float) -> void:
-	move_time -= dt;
 	update_camera(dt)
-	
+
+	# gravity	
 	if not is_on_floor():
 		velocity += get_gravity() * dt
+	# Reset if fall off map
+	if position.y < -2.0:
+		get_tree().reload_current_scene()
 
-	can_move = move_time <= 0 and not turning and dest_pos == null 
+	var can_move = not moving and not turning
 	
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")	
@@ -78,10 +76,8 @@ func _physics_process(dt: float) -> void:
 	
 	# movement check and logic
 	if dir != 0 and can_move and not blocked:
-		move_time = MOVE_TIME
-		
 		var next_cell = get_next_cell(dir)
-		start_pos = position
+		move_start_pos = position
 		
 		# Step 1: check if wall ahead
 		if wall_ahead:
@@ -90,32 +86,32 @@ func _physics_process(dt: float) -> void:
 				wall_ahead.collider.interact()
 		# Step 2: check same height floor
 		elif gridmap.get_cell_item(next_cell) != -1:
-			dest_pos = gridmap.map_to_local(next_cell)
+			move_dest_pos = gridmap.map_to_local(next_cell)
 		else:
 			# Step 3: Check one cell above (slope up / stairs)
 			var up_cell = next_cell + Vector3i(0, 1, 0)
 			if gridmap.get_cell_item(up_cell) != -1:
 				next_cell = up_cell
-				dest_pos = gridmap.map_to_local(next_cell)
+				move_dest_pos = gridmap.map_to_local(next_cell)
 			else:
 				# Step 4: Check one cell below (slope down)
 				var down_cell = next_cell + Vector3i(0, -1, 0)
 				if gridmap.get_cell_item(down_cell) != -1:
 					next_cell = down_cell
-					dest_pos = gridmap.map_to_local(next_cell)
+					move_dest_pos = gridmap.map_to_local(next_cell)
 				else:
-					dest_pos = null
+					move_dest_pos = null
 
-	if dest_pos:
-		move_elapsed += dt
+	if move_dest_pos:
+		move_elapsed_time += dt
 		const move_duration = 0.5        # seconds to reach the target
-		var t = move_elapsed / move_duration
+		var t = move_elapsed_time / move_duration
 		if t >= 1.0:
 			# Turn ended.
-			position.x = dest_pos.x
-			position.z = dest_pos.z
-			dest_pos = null
-			move_elapsed = 0
+			position.x = move_dest_pos.x
+			position.z =  move_dest_pos.z
+			move_dest_pos = null
+			move_elapsed_time = 0
 			
 			# world acts here
 			world.world_turn()
@@ -123,17 +119,54 @@ func _physics_process(dt: float) -> void:
 			
 		else:
 			 # Lerp only X and Z
-			var new_x = lerp(start_pos.x, dest_pos.x, t)
-			var new_z = lerp(start_pos.z, dest_pos.z, t)
+			var new_x = lerp(move_start_pos.x, move_dest_pos.x, t)
+			var new_z = lerp(move_start_pos.z, move_dest_pos.z, t)
 			position.x = new_x
 			position.z = new_z
-
-	# Reset if fall off map
-	if position.y < -2.0:
-		get_tree().reload_current_scene()
-
+			
+	moving = move_dest_pos != null
 	move_and_slide()
 	
+func _process(delta):
+	if turning:
+		turn_elapsed_time += delta
+		var t = turn_elapsed_time / TURN_TIME
+		if t >= 1.0:
+			# turn done (TODO: signal)
+			t = 1.0
+			turning = false
+			# TODO: handle this in signal somewhere else
+			handle_scanned(scanned_thing)
+	
+		# Ease out cubic (fast start, slow end)
+		var eased_t = 1 - pow(1 - t, 3)
+		rotation_degrees = turn_current_rot.lerp(turn_target_rot, eased_t)
+		_mouse_rot.y *= 0.85 # move view back towards middle
+	
+	var can_turn = not moving and not turning
+	
+	# Start turning left
+	if Input.is_action_just_pressed("move_left") and can_turn:
+		turn_current_rot = rotation_degrees
+		turn_target_rot = rotation_degrees + Vector3(0, 90, 0)
+		turn_elapsed_time = 0.0
+		turning = true
+	
+	# Start turning right
+	if Input.is_action_just_pressed("move_right") and can_turn:
+		turn_current_rot = rotation_degrees
+		turn_target_rot = rotation_degrees + Vector3(0, -90, 0)
+		turn_elapsed_time = 0.0
+		turning = true
+	
+	# Interact with object ahead
+	if Input.is_action_pressed("interact"):  
+		var scanned = scan_ahead()
+		if scanned != null and scanned.is_in_group("NPC"):
+			scanned.interact()  # run NPC specific interaction
+		elif scanned != null and scanned.is_in_group("Container"):
+			scanned.interact() # run Container specific interaction
+
 func raycast_ahead(dir):
 	var dir_norm = transform.basis.z.normalized() * dir
 	var ray = PhysicsRayQueryParameters3D.new()
@@ -142,12 +175,6 @@ func raycast_ahead(dir):
 	ray.exclude = [self]
 	var space_state = get_world_3d().direct_space_state
 	return space_state.intersect_ray(ray)
-
-func get_next_cell(dir):
-	var grid_pos = gridmap.local_to_map(position)
-	var one_cell = Vector3i(dir * basis.z.round())   
-	var next_cell = grid_pos + one_cell
-	return next_cell
 
 # checks ahead to see if there is something interactable
 func scan_ahead():
@@ -171,44 +198,15 @@ func handle_scanned(scanned):
 	else:
 		interact_label.visible = false
 
-func _process(delta):
-	can_move = move_time <= 0 and not turning and dest_pos == null
-	if turning:
-		elapsed_time += delta
-		var t = elapsed_time / TURN_TIME
-		if t >= 1.0:
-			t = 1.0
-			turning = false
-			var scanned = scan_ahead()
-			handle_scanned(scanned)
+func get_next_cell(dir):
+	var grid_pos = gridmap.local_to_map(position)
+	var one_cell = Vector3i(dir * basis.z.round())   
+	var next_cell = grid_pos + one_cell
+	return next_cell
 	
-		# Ease out cubic (fast start, slow end)
-		var eased_t = 1 - pow(1 - t, 3)
-		rotation_degrees = current_rot.lerp(target_rot, eased_t)
-		_mouse_rot.y *= 0.85 # move view back towards middle
+func clear_destination():
+	move_dest_pos = null
 	
-	# Start turning left
-	if Input.is_action_just_pressed("move_left") and can_move:
-		current_rot = rotation_degrees
-		target_rot = rotation_degrees + Vector3(0, 90, 0)
-		elapsed_time = 0.0
-		turning = true
-	
-	# Start turning right
-	if Input.is_action_just_pressed("move_right") and can_move:
-		current_rot = rotation_degrees
-		target_rot = rotation_degrees + Vector3(0, -90, 0)
-		elapsed_time = 0.0
-		turning = true
-	
-	# Interact with object ahead
-	if Input.is_action_pressed("interact"):  
-		var scanned = scan_ahead()
-		if scanned != null and scanned.is_in_group("NPC"):
-			scanned.interact()  # run NPC specific interaction
-		elif scanned != null and scanned.is_in_group("Container"):
-			scanned.interact() # run Container specific interaction
-
 func _on_health_component_died() -> void:
 	health_component.reset()
 	print("health reset to ", health_component.health)
