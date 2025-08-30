@@ -20,12 +20,11 @@ var turn_current_rot = Vector3.ZERO
 var turn_target_rot = Vector3.ZERO
 var turn_elapsed_time = 0.0
 
-var sensitivity = 0.2
-const TILT_LOWER := deg_to_rad(-30)
-const TILT_UPPER := deg_to_rad(30.0)
-var _mouse_rot: Vector3
-var _rot_input: float
-var _tilt_input: float
+const MOUSE_ROT_MAX := deg_to_rad(30)
+var mouse_sensitivity = 0.2
+var mouse_rot: Vector3
+var mouse_yaw: float
+var mouse_pitch: float
 
 var scanned_thing = null
 
@@ -36,22 +35,22 @@ func _ready() -> void:
 func _input(event):
 	var is_mouse_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 	if is_mouse_event:
-		_rot_input = -event.relative.x
-		_tilt_input = -event.relative.y
+		mouse_yaw = -event.relative.x
+		mouse_pitch = -event.relative.y
 
 func update_camera(dt):
-	_tilt_input *= sensitivity
-	_rot_input *= sensitivity
+	mouse_pitch *= mouse_sensitivity
+	mouse_yaw *= mouse_sensitivity
 	
-	_mouse_rot.x += _tilt_input * dt
-	_mouse_rot.x = clamp(_mouse_rot.x, TILT_LOWER, TILT_UPPER)
-	_tilt_input = 0.0
+	mouse_rot.x += mouse_pitch * dt
+	mouse_rot.x = clamp(mouse_rot.x, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
+	mouse_pitch = 0.0
 
-	_mouse_rot.y += _rot_input * dt
-	_mouse_rot.y = clamp(_mouse_rot.y, TILT_LOWER, TILT_UPPER)
-	_rot_input = 0.0
+	mouse_rot.y += mouse_yaw * dt
+	mouse_rot.y = clamp(mouse_rot.y, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
+	mouse_yaw = 0.0
 	
-	camera.transform.basis = Basis.from_euler(_mouse_rot)
+	camera.transform.basis = Basis.from_euler(mouse_rot)
 	camera.rotation.z = 0
 
 func _physics_process(dt: float) -> void:
@@ -64,18 +63,16 @@ func _physics_process(dt: float) -> void:
 	if position.y < -2.0:
 		get_tree().reload_current_scene()
 
-	var can_move = not moving and not turning
-	
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")	
 	var dir = -1 if fwd else 1 if bak else 0 
 	
 	var wall_ahead = raycast_ahead(dir)
 	scanned_thing = scan_ahead()
-	var blocked = !(scanned_thing == null or dir == 1)
+	var blocked = fwd and scanned_thing != null
 	
-	# movement check and logic
-	if dir != 0 and can_move and not blocked:
+	var can_move = not moving and not turning and not blocked
+	if dir != 0 and can_move:
 		var next_cell = get_next_cell(dir)
 		move_start_pos = position
 		
@@ -109,7 +106,7 @@ func _physics_process(dt: float) -> void:
 		if t >= 1.0:
 			# Turn ended.
 			position.x = move_dest_pos.x
-			position.z =  move_dest_pos.z
+			position.z = move_dest_pos.z
 			move_dest_pos = null
 			move_elapsed_time = 0
 			
@@ -141,24 +138,21 @@ func _process(delta):
 		# Ease out cubic (fast start, slow end)
 		var eased_t = 1 - pow(1 - t, 3)
 		rotation_degrees = turn_current_rot.lerp(turn_target_rot, eased_t)
-		_mouse_rot.y *= 0.85 # move view back towards middle
+		mouse_rot.y *= 0.85 # move view back towards middle
 	
 	var can_turn = not moving and not turning
 	
-	# Start turning left
-	if Input.is_action_just_pressed("move_left") and can_turn:
+	var left = Input.is_action_pressed("move_left")
+	var right = Input.is_action_pressed("move_right")
+	var dir = 1 if left else -1 if right else 0 
+	
+	# Start turning
+	if dir != 0 and can_turn:
 		turn_current_rot = rotation_degrees
-		turn_target_rot = rotation_degrees + Vector3(0, 90, 0)
+		turn_target_rot = rotation_degrees + Vector3(0, 90 * dir, 0)
 		turn_elapsed_time = 0.0
 		turning = true
-	
-	# Start turning right
-	if Input.is_action_just_pressed("move_right") and can_turn:
-		turn_current_rot = rotation_degrees
-		turn_target_rot = rotation_degrees + Vector3(0, -90, 0)
-		turn_elapsed_time = 0.0
-		turning = true
-	
+
 	# Interact with object ahead
 	if Input.is_action_pressed("interact"):  
 		var scanned = scan_ahead()
