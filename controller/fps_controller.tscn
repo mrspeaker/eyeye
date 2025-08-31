@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciolrmdh2mxkt"]
+[gd_scene load_steps=7 format=3 uid="uid://ciolrmdh2mxkt"]
 
 [ext_resource type="Script" uid="uid://cpdbcodwufswg" path="res://controller/scripts/fps_controller.gd" id="1_liegp"]
+[ext_resource type="PackedScene" uid="uid://bbsgy3eiwl6f6" path="res://scenes/arms.tscn" id="2_uyxtt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0767"]
 
@@ -27,11 +28,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595528, -0.00837469)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000890255, 0.110735, 0.000113219)
 fov = 60.6
 
-[node name="Jead" type="MeshInstance3D" parent="."]
+[node name="Arms" parent="CameraController" instance=ExtResource("2_uyxtt")]
+transform = Transform3D(-0.1, -9.66534e-11, -1.4692e-08, -3.48443e-09, 0.097301, 0.0230763, 1.42732e-08, 0.0230763, -0.097301, 0, -0.219582, 0.44463)
+
+[node name="Headball" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.639593, 0, 0, 0, 0.809617, 0, 0, 0, 0.687613, 0, 0.724478, -0.242746)
 mesh = SubResource("SphereMesh_liegp")
 
-[node name="PlaceholderMesh" type="MeshInstance3D" parent="."]
+[node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886452, 0.00259399, 0)
 mesh = SubResource("CapsuleMesh_ja5wc")
 skeleton = NodePath("../CollisionShape3D")
