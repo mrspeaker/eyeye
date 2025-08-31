@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@onready var gridmap: GridMap = get_node("../GridMap") as GridMap
-@onready var interact_label = get_node("../UI/CanvasLayer/InteractLabel")
+@onready var gridmap: GridMap = get_node("../../GridMap") as GridMap
+@onready var interact_label = get_node("../../UI/CanvasLayer/InteractLabel")
 
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
