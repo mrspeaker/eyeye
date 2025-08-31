@@ -7,7 +7,10 @@ points = PackedVector3Array(1.24318, 2.46542, 0.123111, -1.29347, 2.36403, 0.072
 
 [node name="scarecrow" groups=["NPC"] instance=ExtResource("1_jfcr3")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="model_0" index="0"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="model_0/StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
 shape = SubResource("ConvexPolygonShape3D_wiik7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+
+[node name="model_0" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.519714, 0)

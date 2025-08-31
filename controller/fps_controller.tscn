@@ -29,7 +29,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000890255, 0.110735, 0.0001
 fov = 60.6
 
 [node name="Arms" parent="CameraController" instance=ExtResource("2_uyxtt")]
-transform = Transform3D(-0.1, -9.66534e-11, -1.4692e-08, -3.48443e-09, 0.097301, 0.0230763, 1.42732e-08, 0.0230763, -0.097301, 0, -0.219582, 0.44463)
+transform = Transform3D(-0.1, -9.6653e-11, -1.4692e-08, 3.28084e-09, 0.0973259, -0.022971, 1.43214e-08, -0.022971, -0.0973259, 0, 0.0540251, 0.402375)
 
 [node name="Headball" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.639593, 0, 0, 0, 0.809617, 0, 0, 0, 0.687613, 0, 0.724478, -0.242746)

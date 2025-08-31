@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=4 uid="uid://cayqy7q31qdx"]
+[gd_scene load_steps=23 format=4 uid="uid://cayqy7q31qdx"]
 
 [ext_resource type="Material" uid="uid://cjqhju1v8vmdi" path="res://materials/rock.tres" id="1_aakgr"]
 [ext_resource type="Material" uid="uid://df7cbhgesvvh2" path="res://materials/hl-lab1.tres" id="2_6txx0"]
+[ext_resource type="Texture2D" uid="uid://yjtofm50mhli" path="res://textures/lab1_flr4.png" id="3_wwaon"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ihhu8"]
 _surfaces = [{
@@ -149,167 +150,217 @@ _surfaces = [{
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_reyib"]
 data = PackedVector3Array(1, -1.45, -1.5, -1, -1.4807, -1.5, 1, -1.4807, -1.5, 1.5, -1.55, 1.5, 1.5, -1.45, 1.5, 1.5, -1.55, -1.5, -1.5, -1.55, 1.5, -1.5, -1.55, -1.5, -1.5, -1.5, -1.5, -1.5, -1.55, 1.5, -1.5, -1.5, -1.5, -1.5, -1.45, -1.5, -1.5, -1.45, -1.5, -1.5, -1.45, -1.45, -1.5, -1.55, 1.5, 1.5, -1.45, 1.5, 1.5, -1.55, 1.5, -1.5, -1.55, 1.5, -1.5, -1.55, 1.5, 1.5, -1.55, 1.5, 1.5, -1.55, -1.5, 1.5, -1.45, 1.5, 1.5, -1.45, -1.45, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.55, -1.5, 1.5, -1.45, 1.5, 1.5, -1.45, 1.5, 1, -1.45, -1.45, 1.5, -1.45, -1.45, 1.5, -1.5, -1.5, 1.5, -1.45, -1.45, 1.5, -1.45, -1.5, -1.5, -1.55, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.45, 1.5, -1, -1.45, -1.45, 1, -1.45, -1.45, 1.5, -1.55, -1.5, 1.5, -1.5, -1.5, -1.5, -1.55, -1.5, 1, -1.45, -1.45, -1, -1.45, -1.45, 1, -1.45, -1.5, -1, -1.4807, -1.5, 1, -1.45, -1.5, -1, -1.45, -1.5, 1, -1.45, -1.5, -1, -1.45, -1.45, -1, -1.45, -1.5, -1.5, -1.55, 1.5, 1.5, -1.55, -1.5, -1.5, -1.55, -1.5, -1.5, -1.45, -1.45, -1, -1.45, -1.45, 1.5, -1.45, 1.5, -1.5, -1.45, -1.45, -1.5, -1.45, 1.5, -1.5, -1.55, 1.5, -1.5, -1.45, 1.5, -1.5, -1.45, -1.45, 1.5, -1.45, 1.5, -1.5, -1.45, 1.5, 1.5, -1.45, 1.5, -1.5, -1.55, 1.5, -1.5, -1.5, -1.55, -1.5, -1.45, -1.5, -1.5, -1.5, -1.5, 1.5, -1.45, -1.5, 1.5, 1.5, -1.45, 1.5, -1.5, -1.55, -1.5, 1.5, -1.45, -1, 1.0193, -1.45, -1.5, -1.45, -1.45, 1.5, 1.5, -1.45, 1.5, 1.5, -1.55, 1.5, -1.5, -1.55, -1.5, 1.5, -1.45, 1, 1.0193, -1.45, -1, 1.0193, -1.45, -1.5, 1.5, -1.55, 1.5, 1.5, -1.45, -1.5, 1.5, -1.45, 1, -1.45, -1.45, 1, 1.0193, -1.45, 1.5, 1.5, -1.45, -1, 1.0193, -1.55, 1.5, 1.5, -1.55, -1.5, 1.5, -1.55, 1.5, -1.5, -1.55, 1, -1.4807, -1.55, -1.5, -1.5, -1.55, 1.5, -1.5, -1.55, 1.5, 1.5, -1.55, 1, 1.0193, -1.55, -1, -1.4807, -1.55, -1, 1.0193, -1.55, -1.5, 1.5, -1.55, 1.5, 1.5, -1.55, 1.5, 1.5, -1.45, -1.5, 1.5, -1.55, -1.5, -1.5, -1.55, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.55, 1.5, -1.5, -1.5, 1.5, -1.5, -1.55, -1, -1.4807, -1.55, -1.5, -1.5, -1.55, 1, -1.4807, -1.55, -1, 1.0193, -1.55, 1, 1.0193, -1.55, 1.5, 1.5, -1.55, 1.5, -1.45, -1.5, 1.5, -1.5, -1.55, 1.5, -1.5, -1.5, 1.5, 1.5, -1.45, 1, 1.0193, -1.45, -1.5, 1.5, -1.45, -1.5, 1.5, -1.55, -1.5, -1.45, -1.5, -1.5, -1.5, -1.55, -1, -1.45, -1.45, -1.5, -1.45, -1.45, -1, 1.0193, -1.45, -1.5, -1.5, -1.55, -1, -1.4807, -1.55, -1.5, 1.5, -1.55, -1.5, -1.45, -1.45, -1.5, -1.45, -1.5, -1.5, 1.5, -1.45, 1.5, 1.5, -1.45, 1.5, -1.45, -1.5, 1.5, -1.45, -1.45, 1.5, -1.5, -1.55, 1, 1.0193, -1.55, 1, -1.4807, -1.55, 1.5, -1.45, -1.45, 1, -1.45, -1.45, 1.5, 1.5, -1.45, -1.5, 1.5, -1.55, -1.5, 1.5, -1.45, -1.5, -1.45, -1.5, 1, -1.45, -1.45, 1, -1.45, -1.5, 1, 1.0193, -1.45, 1, 1.0193, -1.55, 1, -1.45, -1.5, 1, -1.4807, -1.55, -1, -1.45, -1.5, -1, 1.0193, -1.45, -1, -1.4807, -1.55, -1, -1.45, -1.5, -1, -1.4807, -1.55, -1, -1.4807, -1.5, 1, 1.0193, -1.45, 1, 1.0193, -1.55, -1, 1.0193, -1.55, -1, 1.0193, -1.45, -1, -1.45, -1.5, -1, -1.45, -1.45, 1, -1.4807, -1.55, 1, -1.45, -1.5, 1, -1.4807, -1.5, 1, -1.4807, -1.55, -1, -1.4807, -1.5, -1, -1.4807, -1.55, 1, 1.0193, -1.55, 1, 1.0193, -1.45, 1, -1.45, -1.5, 1, -1.4807, -1.55, 1, -1.4807, -1.5, -1, -1.4807, -1.5, -1, 1.0193, -1.45, 1, 1.0193, -1.45, -1, 1.0193, -1.55, -1, 1.0193, -1.45, -1, 1.0193, -1.55, -1, -1.4807, -1.55)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tjejb"]
+albedo_texture = ExtResource("3_wwaon")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_q22k1"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -1.5, 3, 0.1, 3),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAHd3dz8AAAAAAAAAAAAAAAAAAIA/AACAPwAAgD8AAAAAAACAP3d3dz8AAAAAAACAPwAAgD8AAIA/AACAPwAAAAAAAAAAi4gIPQAAgD+LiAg9d3d3PwAAAAB3d3c/AACAPwAAgD8AAIA/AAAAAIuICD0AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAHd3dz8AAAAAd3d3PwAAAAB3d3c/AACAPwAAgD8AAIA/AAAAAAAAgD8AAIA/d3d3PwAAAAB3d3c/AACAPwAAAAAAAIA/AACAPwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAIA/"),
+"format": 34359738391,
+"material": SubResource("StandardMaterial3D_tjejb"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AADAvwAAwL8AAMA/AADAvwAAwL8AAMC/AADAvzMzs78AAMC/AADAvwAAwL8AAMA/AADAPwAAwL8AAMC/AADAvwAAwL8AAMC/AADAvzMzs78AAMA/AADAPwAAwL8AAMA/AADAvwAAwL8AAMA/AADAvwAAwL8AAMC/AADAPzMzs78AAMC/AADAvzMzs78AAMC/AADAvzMzs78AAMC/AADAvzMzs78AAMA/AADAvwAAwL8AAMA/AADAPzMzs78AAMC/AADAvwAAwL8AAMC/AADAPwAAwL8AAMC/AADAvwAAwL8AAMA/AADAPwAAwL8AAMA/AADAPwAAwL8AAMC/AADAPwAAwL8AAMC/AADAPwAAwL8AAMA/AADAPzMzs78AAMA/AADAPzMzs78AAMA/AADAPzMzs78AAMC/AADAPwAAwL8AAMC/AADAPwAAwL8AAMA/AADAvzMzs78AAMA/AADAPzMzs78AAMA/AADAvzMzs78AAMC/AADAPzMzs78AAMC/AADAvzMzs78AAMA/AADAPzMzs78AAMA/AADAvzMzs78AAMA/AADAPzMzs78AAMC/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8//////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//////wAA/z//////AAD/P/////8AAP8//38AAP//AAD/fwAA//8AAP9/AAD//wAA////f/9//n////9//3/+f////3//f/5/////f/9//n////9//3/+f////3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////////f/////////9//////////3//////////f/////////9/////////")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_h1txn"]
+data = PackedVector3Array(-1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.4, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.4, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.4, -1.5, -1.5, -1.4, -1.5, -1.5, -1.4, -1.5, -1.5, -1.4, 1.5, -1.5, -1.5, 1.5, 1.5, -1.4, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.4, 1.5, 1.5, -1.4, 1.5, 1.5, -1.4, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, -1.5, -1.4, 1.5, 1.5, -1.4, 1.5, -1.5, -1.4, -1.5, 1.5, -1.4, -1.5, -1.5, -1.4, 1.5, 1.5, -1.4, 1.5, -1.5, -1.4, 1.5, 1.5, -1.4, -1.5)
+
 [node name="Node3D" type="Node3D"]
 
-[node name="Slope-Piece" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 0)
+[node name="Stone" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 3.93945)
+
+[node name="Slope-Piece" type="CSGBox3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9, 0, -3.93945)
 visible = false
 size = Vector3(3, 3, 3)
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Slope-Piece"]
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Stone/Slope-Piece"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, 1.5)
 operation = 2
 polygon = PackedVector2Array(0, -2, 0, 1, 3, 1)
 depth = 3.0
 
-[node name="Slope-Piece Mesh New" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 0)
+[node name="Slope-Piece Mesh New" type="MeshInstance3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.9, 0, -3.93945)
 mesh = SubResource("ArrayMesh_ihhu8")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Slope-Piece Mesh New"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Stone/Slope-Piece Mesh New"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Slope-Piece Mesh New/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/Slope-Piece Mesh New/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_aakgr")
 
-[node name="L-Piece" type="CSGBox3D" parent="."]
+[node name="L-Piece" type="CSGBox3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 0, -3.93945)
 visible = false
 size = Vector3(3, 3, 3)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="L-Piece"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Stone/L-Piece"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.1, 0)
 operation = 2
 size = Vector3(3, 3, 3)
 
-[node name="L-Piece Mesh New" type="MeshInstance3D" parent="."]
+[node name="L-Piece Mesh New" type="MeshInstance3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 0, -3.93945)
 mesh = SubResource("ArrayMesh_aakgr")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="L-Piece Mesh New"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Stone/L-Piece Mesh New"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="L-Piece Mesh New/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/L-Piece Mesh New/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_6txx0")
 
-[node name="Corner-Piece" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 0, 0)
+[node name="Corner-Piece" type="CSGBox3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, -3.93945)
 visible = false
 size = Vector3(3, 3, 3)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Corner-Piece"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Stone/Corner-Piece"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0.1, 0.1)
 operation = 2
 size = Vector3(3, 3, 3)
 
-[node name="Corner-Piece Mesh New" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 0, 0)
+[node name="Corner-Piece Mesh New" type="MeshInstance3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, -3.93945)
 mesh = SubResource("ArrayMesh_wwaon")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Corner-Piece Mesh New"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Stone/Corner-Piece Mesh New"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Corner-Piece Mesh New/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/Corner-Piece Mesh New/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_tjejb")
 
-[node name="Flat-Piece Mesh New" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0)
+[node name="Flat-Piece Mesh New" type="MeshInstance3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.93945)
 mesh = SubResource("ArrayMesh_reyib")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Flat-Piece Mesh New"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Stone/Flat-Piece Mesh New"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Flat-Piece Mesh New/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/Flat-Piece Mesh New/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_q22k1")
 
-[node name="Flat-Piece" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0)
+[node name="Flat-Piece" type="CSGBox3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.93945)
 visible = false
 size = Vector3(3, 3, 3)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Flat-Piece"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Stone/Flat-Piece"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 operation = 2
 size = Vector3(3, 3, 3)
 
-[node name="U-Piece" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0, 0)
+[node name="U-Piece" type="CSGBox3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, -3.93945)
 visible = false
 size = Vector3(3, 3, 3)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="U-Piece"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Stone/U-Piece"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 operation = 2
 size = Vector3(2.8, 3, 3)
 
-[node name="U-Piece Mesh New" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0, 0)
+[node name="U-Piece Mesh New" type="MeshInstance3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, -3.93945)
 mesh = SubResource("ArrayMesh_h1txn")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="U-Piece Mesh New"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Stone/U-Piece Mesh New"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="U-Piece Mesh New/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/U-Piece Mesh New/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_5qnjm")
 
-[node name="O-Piece" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9, 0, 0)
+[node name="O-Piece" type="CSGBox3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0, -3.93945)
 visible = false
 size = Vector3(3, 3, 3)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="O-Piece"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Stone/O-Piece"]
 operation = 2
 size = Vector3(2.8, 2.8, 3)
 
-[node name="O-Piece Mesh New" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9, 0, 0)
+[node name="O-Piece Mesh New" type="MeshInstance3D" parent="Stone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6, 0, -3.93945)
 mesh = SubResource("ArrayMesh_qa2vf")
+skeleton = NodePath("../..")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="O-Piece Mesh New"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Stone/O-Piece Mesh New"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="O-Piece Mesh New/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stone/O-Piece Mesh New/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_4swub")
 
-[node name="Test Two" type="Node3D" parent="."]
+[node name="LabStone" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 3.93945)
 
-[node name="L-Piece 2" type="CSGCombiner3D" parent="Test Two"]
+[node name="L-Piece 2" type="CSGCombiner3D" parent="LabStone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 
-[node name="floor" type="CSGBox3D" parent="Test Two/L-Piece 2"]
+[node name="floor" type="CSGBox3D" parent="LabStone/L-Piece 2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 size = Vector3(3, 0.1, 3)
 material = ExtResource("1_aakgr")
 
-[node name="wall" type="CSGBox3D" parent="Test Two/L-Piece 2"]
+[node name="wall" type="CSGBox3D" parent="LabStone/L-Piece 2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 size = Vector3(3, 3, 0.1)
 material = ExtResource("2_6txx0")
 
-[node name="L-Peice 2" type="MeshInstance3D" parent="Test Two"]
+[node name="L-Peice 2" type="MeshInstance3D" parent="LabStone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
 mesh = SubResource("ArrayMesh_6txx0")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Test Two/L-Peice 2"]
+[node name="StaticBody3D" type="StaticBody3D" parent="LabStone/L-Peice 2"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Test Two/L-Peice 2/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LabStone/L-Peice 2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_wwaon")
 
-[node name="L-Piece Door" type="CSGCombiner3D" parent="Test Two"]
+[node name="L-Piece Door" type="CSGCombiner3D" parent="LabStone"]
 visible = false
 
-[node name="floor" type="CSGBox3D" parent="Test Two/L-Piece Door"]
+[node name="floor" type="CSGBox3D" parent="LabStone/L-Piece Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 size = Vector3(3, 0.1, 3)
 material = ExtResource("1_aakgr")
 
-[node name="wall" type="CSGBox3D" parent="Test Two/L-Piece Door"]
+[node name="wall" type="CSGBox3D" parent="LabStone/L-Piece Door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 size = Vector3(3, 3, 0.1)
 material = ExtResource("2_6txx0")
 
-[node name="doorhole" type="CSGBox3D" parent="Test Two/L-Piece Door/wall"]
+[node name="doorhole" type="CSGBox3D" parent="LabStone/L-Piece Door/wall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.230713, 0)
 operation = 2
 size = Vector3(2, 2.5, 1)
 
-[node name="L-Peice Door" type="MeshInstance3D" parent="Test Two"]
+[node name="L-Peice Door" type="MeshInstance3D" parent="LabStone"]
 mesh = SubResource("ArrayMesh_tjejb")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Test Two/L-Peice Door"]
+[node name="StaticBody3D" type="StaticBody3D" parent="LabStone/L-Peice Door"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Test Two/L-Peice Door/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LabStone/L-Peice Door/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_reyib")
+
+[node name="Lab" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Flat-Piece2" type="CSGBox3D" parent="Lab"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0)
+size = Vector3(3, 3, 3)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Lab/Flat-Piece2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+operation = 2
+size = Vector3(3, 3, 3)
+
+[node name="Flat-Peice-Lab" type="MeshInstance3D" parent="Lab"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 0, 0)
+mesh = SubResource("ArrayMesh_q22k1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Lab/Flat-Peice-Lab"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Lab/Flat-Peice-Lab/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_h1txn")
