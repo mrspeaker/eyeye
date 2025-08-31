@@ -7,6 +7,8 @@ extends CharacterBody3D
 @onready var interact_label = get_node("../../UI/CanvasLayer/InteractLabel")
 @onready var world = get_node("../../")
 
+@onready var crosshair = get_node("../../UI/CanvasLayer/Crosshair")
+
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
@@ -28,30 +30,87 @@ var mouse_pitch: float
 
 var scanned_thing = null
 
+var mouse_free = false
+var start_rotation = Vector3.ZERO
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	var crosshair_tex = preload("res://textures/UI/white circle small.png")
+	var size = crosshair_tex.get_size()
+	var img_centre = size / 2   # centre of whatever custom cursor
+	Input.set_custom_mouse_cursor(crosshair_tex, Input.CURSOR_ARROW, img_centre)
 
 #func _unhandled_input(event):
 func _input(event):
-	var is_mouse_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-	if is_mouse_event:
+	var is_fps_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
+	var is_free_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE
+
+	if event.is_action_pressed("test_input"):
+		mouse_free = !mouse_free
+		if mouse_free:
+			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # Free movement
+			Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+			start_rotation = rotation_degrees
+		else:
+			rotation_degrees = start_rotation
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # FPS mode
+	if is_fps_event:
 		mouse_yaw = -event.relative.x
 		mouse_pitch = -event.relative.y
 
 func update_camera(dt):
-	mouse_pitch *= mouse_sensitivity
-	mouse_yaw *= mouse_sensitivity
+	var max_angle = 10.0 # degrees of max camera tilt
 	
-	mouse_rot.x += mouse_pitch * dt
-	mouse_rot.x = clamp(mouse_rot.x, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
-	mouse_pitch = 0.0
+	if mouse_free: # fixed edge looking
+		var viewport_size = get_viewport().get_visible_rect().size
+		var center = viewport_size / 2
+		var mouse_pos = get_viewport().get_mouse_position()
+		
+		# offset from center (-1.0 to 1.0 range)
+		var offset = (mouse_pos - center) / center  
+		#print(offset)
+	
+		# Clamp in case of screen weirdness I don't know
+		offset = offset.clamp(Vector2(-1, -1), Vector2(1, 1))
+		
+		# Dead zone threshold
+		var threshold = 0.8  # 0.0 = instant, 1.0 = only edges
+		if abs(offset.x) < threshold: offset.x = 0
+		else: offset.x = (abs(offset.x) - threshold) / (1.0 - threshold) * sign(offset.x)
 
-	mouse_rot.y += mouse_yaw * dt
-	mouse_rot.y = clamp(mouse_rot.y, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
-	mouse_yaw = 0.0
-	
-	camera.transform.basis = Basis.from_euler(mouse_rot)
-	camera.rotation.z = 0
+		if abs(offset.y) < threshold: offset.y = 0
+		else: offset.y = (abs(offset.y) - threshold) / (1.0 - threshold) * sign(offset.y)
+
+
+		# Compute offset rotation
+		var yaw_offset   = -offset.x * max_angle * 0.5
+		var pitch_offset = -offset.y * max_angle * 0.5
+		
+		# Target rotation = starting rotation + offset
+		var target_yaw   = start_rotation.y + yaw_offset
+		var target_pitch = start_rotation.x + pitch_offset
+		
+		
+		# Apply smoothing (lerp so movement slows at edges)
+		
+		# TODO Fix this somehow so it does not spin 360 moving from -179 to -181
+		var t = 1.0 - exp(-5.0 * dt) # smooth factor
+		rotation_degrees.y = lerp(rotation_degrees.y, target_yaw, t)
+		rotation_degrees.x = lerp(rotation_degrees.x, target_pitch, t)
+	else: # regular FPS controls 
+		mouse_pitch *= mouse_sensitivity
+		mouse_yaw *= mouse_sensitivity
+		
+		mouse_rot.x += mouse_pitch * dt
+		mouse_rot.x = clamp(mouse_rot.x, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
+		mouse_pitch = 0.0
+
+		mouse_rot.y += mouse_yaw * dt
+		mouse_rot.y = clamp(mouse_rot.y, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
+		mouse_yaw = 0.0
+		
+		camera.transform.basis = Basis.from_euler(mouse_rot)
+		camera.rotation.z = 0
 
 func _physics_process(dt: float) -> void:
 	update_camera(dt)
@@ -125,6 +184,9 @@ func _physics_process(dt: float) -> void:
 	move_and_slide()
 	
 func _process(delta):
+	# set crosshair visibility depending on mouse mode
+	#crosshair.visible = mouse_free
+	
 	if turning:
 		turn_elapsed_time += delta
 		var t = turn_elapsed_time / TURN_TIME
