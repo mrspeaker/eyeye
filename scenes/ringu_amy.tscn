@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://ddvagl21eutfi"]
+
+[ext_resource type="Texture2D" uid="uid://b6duguercdomk" path="res://textures/ringu.png" id="1_wai70"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_074og"]
+atlas = ExtResource("1_wai70")
+region = Rect2(0, 0, 85, 260)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cegan"]
+atlas = ExtResource("1_wai70")
+region = Rect2(85, 0, 85, 260)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82xsv"]
+atlas = ExtResource("1_wai70")
+region = Rect2(170, 0, 85, 260)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_getpj"]
+atlas = ExtResource("1_wai70")
+region = Rect2(255, 0, 85, 260)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d13ii"]
+atlas = ExtResource("1_wai70")
+region = Rect2(425, 0, 85, 260)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1u8w0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_074og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cegan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82xsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_getpj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13ii")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[node name="RinguAmy" type="Node3D"]
+
+[node name="TestAnimSprite" type="AnimatedSprite3D" parent="."]
+offset = Vector2(0, 130)
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_1u8w0")
+autoplay = "default"
+frame_progress = 0.91282

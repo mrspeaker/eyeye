@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=23 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dw54qwn7m4t43" path="res://models/hospital_bed_1.glb" id="13_w48qg"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy.tscn" id="17_yaehf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -208,6 +209,15 @@ script = ExtResource("9_kek77")
 [node name="scarecrow" parent="Level" instance=ExtResource("6_7mycd")]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, -1.56577, 0.0542517, -7.54822)
 script = ExtResource("6_272bh")
+
+[node name="RinguAmy" parent="Level" instance=ExtResource("17_yaehf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33692, 0, 22.7329)
+
+[node name="RinguAmy2" parent="Level" instance=ExtResource("17_yaehf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33692, 0, 20.9431)
+
+[node name="RinguAmy3" parent="Level" instance=ExtResource("17_yaehf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09379, 0, 19.2801)
 
 [connection signal="died" from="Player/HealthComponent" to="Player" method="_on_health_component_died"]
 [connection signal="died" from="Player/HealthComponent" to="Player/Controller" method="_on_health_component_died"]
