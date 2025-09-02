@@ -58,6 +58,12 @@ func _input(event):
 		mouse_yaw = -event.relative.x
 		mouse_pitch = -event.relative.y
 
+func shortest_angle_diff(current, target):
+	# Shift into [0, 360), then offset to (–180, +180]
+	var raw = fposmod((target - current) + 180.0, 360.0) - 180.0
+	return raw
+
+
 func update_camera(dt):
 	var max_angle = 10.0 # degrees of max camera tilt
 	
@@ -90,13 +96,17 @@ func update_camera(dt):
 		var target_yaw   = start_rotation.y + yaw_offset
 		var target_pitch = start_rotation.x + pitch_offset
 		
-		
 		# Apply smoothing (lerp so movement slows at edges)
+		var t = 1.0 - exp(-5.0 * dt)
 		
-		# TODO Fix this somehow so it does not spin 360 moving from -179 to -181
-		var t = 1.0 - exp(-5.0 * dt) # smooth factor
-		rotation_degrees.y = lerp(rotation_degrees.y, target_yaw, t)
-		rotation_degrees.x = lerp(rotation_degrees.x, target_pitch, t)
+		# Yaw step toward target:
+		var yaw_delta = shortest_angle_diff(rotation_degrees.y, target_yaw)
+		rotation_degrees.y += yaw_delta * t
+
+		# Pitch 
+		var pitch_delta = shortest_angle_diff(rotation_degrees.x, target_pitch)
+		rotation_degrees.x = rotation_degrees.x + pitch_delta * t
+		
 	else: # regular FPS controls 
 		mouse_pitch *= mouse_sensitivity
 		mouse_yaw *= mouse_sensitivity
