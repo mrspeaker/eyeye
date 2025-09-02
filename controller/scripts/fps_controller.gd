@@ -7,8 +7,6 @@ extends CharacterBody3D
 @onready var interact_label = get_node("../../UI/CanvasLayer/InteractLabel")
 @onready var world = get_node("../../")
 
-@onready var crosshair = get_node("../../UI/CanvasLayer/Crosshair")
-
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
@@ -30,11 +28,17 @@ var mouse_pitch: float
 
 var scanned_thing = null
 
-var mouse_free = false
+var mouse_free = true
 var start_rotation = Vector3.ZERO
 
 func _ready() -> void:
+	# Starting with this centres the mouse before swapping
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	
+	#rotation_degrees.y = fposmod(rotation_degrees.y, 90)
+	# set faced direction to start_rotation to prevent spin on spawn
+	start_rotation = rotation_degrees
 	var crosshair_tex = preload("res://textures/UI/white circle small.png")
 	var size = crosshair_tex.get_size()
 	var img_centre = size / 2   # centre of whatever custom cursor
@@ -194,8 +198,6 @@ func _physics_process(dt: float) -> void:
 	move_and_slide()
 	
 func _process(delta):
-	# set crosshair visibility depending on mouse mode
-	#crosshair.visible = mouse_free
 	
 	if turning:
 		turn_elapsed_time += delta
@@ -203,6 +205,15 @@ func _process(delta):
 		if t >= 1.0:
 			# turn done (TODO: signal)
 			t = 1.0
+			print(start_rotation, ' ', rotation_degrees)
+			# realign just in case
+			rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
+			rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
+			# set current faced direction default for edge looking system
+			start_rotation = rotation_degrees
+			print(start_rotation, ' ', rotation_degrees)
+			# reset cursor to confined to allow movement again
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 			turning = false
 			# TODO: handle this in signal somewhere else
 			handle_scanned(scanned_thing)
@@ -220,8 +231,16 @@ func _process(delta):
 	
 	# Start turning
 	if dir != 0 and can_turn:
+		# capture mouse until turn is finished to prevent offsetting alignment
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		turn_current_rot = rotation_degrees
+		
+		# keep from drifting when turning while edge looking by rounding
+		rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
+		rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
 		turn_target_rot = rotation_degrees + Vector3(0, 90 * dir, 0)
+		#turn_target_rot.y = round(turn_target_rot.y)
+		print('targ ', turn_target_rot)
 		turn_elapsed_time = 0.0
 		turning = true
 

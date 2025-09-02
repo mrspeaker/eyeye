@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=22 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
@@ -37,8 +37,6 @@ tonemap_mode = 2
 ssao_enabled = true
 ssao_intensity = 4.13
 volumetric_fog_enabled = true
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_2cqfq"]
 
 [sub_resource type="FontFile" id="FontFile_7mycd"]
 cache/0/16/0/ascent = 0.0
@@ -102,7 +100,7 @@ loop = true
 script = ExtResource("4_vivmo")
 
 [node name="Controller" parent="Player" node_paths=PackedStringArray("gridmap", "health_component") instance=ExtResource("1_ig7tw")]
-transform = Transform3D(-0.00733036, 0, 0.999973, 0, 1, 0, -0.999973, 0, -0.00733036, -4.0073, 1, -1.29455)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.0073, 1, -1.29455)
 gridmap = NodePath("../../GridMap")
 health_component = NodePath("../HealthComponent")
 
@@ -128,21 +126,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI"]
-
-[node name="Crosshair" type="TextureRect" parent="UI/CanvasLayer"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("CanvasTexture_2cqfq")
 
 [node name="InteractLabel" type="Label" parent="UI/CanvasLayer"]
 visible = false
