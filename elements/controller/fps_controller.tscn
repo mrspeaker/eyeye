@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ciolrmdh2mxkt"]
 
-[ext_resource type="Script" uid="uid://cpdbcodwufswg" path="res://controller/scripts/fps_controller.gd" id="1_liegp"]
+[ext_resource type="Script" uid="uid://cpdbcodwufswg" path="res://elements/controller/scripts/fps_controller.gd" id="1_liegp"]
 [ext_resource type="PackedScene" uid="uid://bbsgy3eiwl6f6" path="res://scenes/arms.tscn" id="2_uyxtt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_j0767"]

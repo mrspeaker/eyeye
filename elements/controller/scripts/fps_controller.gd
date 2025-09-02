@@ -37,7 +37,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	
 	#rotation_degrees.y = fposmod(rotation_degrees.y, 90)
-	# set faced direction to start_rotation to prevent spin on spawn
+	# set faced direction to start_rotation to prevent spin on spa wn
 	start_rotation = rotation_degrees
 	var crosshair_tex = preload("res://textures/UI/white circle small.png")
 	var size = crosshair_tex.get_size()
@@ -295,3 +295,7 @@ func clear_destination():
 func _on_health_component_died() -> void:
 	health_component.reset()
 	print("health reset to ", health_component.health)
+
+
+func on_item_picked_up(item:Item):
+	print("picked it up yo", item.name)

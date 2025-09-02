@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dewxkmiwspcf8" path="res://models/scarecrow.glb" id="1_4h7xk"]
 [ext_resource type="Texture2D" uid="uid://je0cflyvwgdf" path="res://textures/texture_08.png" id="2_x7026"]
 [ext_resource type="PackedScene" uid="uid://ckhyfiqfbm4oa" path="res://models/ring.glb" id="3_tfs22"]
-[ext_resource type="Script" uid="uid://8qkxbx67p0pp" path="res://controller/scripts/bob.gd" id="4_oprms"]
+[ext_resource type="Script" uid="uid://8qkxbx67p0pp" path="res://elements/controller/scripts/bob.gd" id="4_oprms"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vw27"]
 albedo_texture = ExtResource("2_x7026")

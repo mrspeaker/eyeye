@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dpd6dmcob8qst"]
+
+[ext_resource type="Script" uid="uid://wmlxxtd1rnwv" path="res://scripts/model/item.gd" id="1_0jtar"]
+[ext_resource type="PackedScene" uid="uid://1eo2jsd1ocb5" path="res://models/potion.glb" id="1_wdku8"]
+
+[resource]
+script = ExtResource("1_0jtar")
+name = "potion"
+scene = ExtResource("1_wdku8")
+metadata/_custom_type_script = "uid://wmlxxtd1rnwv"

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7owa6tcqy1bh"]
+
+[ext_resource type="Script" uid="uid://dx7xtwpogljp3" path="res://elements/pickup/pickup.gd" id="1_w677d"]
+[ext_resource type="Resource" uid="uid://dpd6dmcob8qst" path="res://data/items/potion.tres" id="2_meels"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cegan"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_w677d")
+item = ExtResource("2_meels")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.01301, 0.0235508, 0, -0.037765, 0.631727, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_cegan")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

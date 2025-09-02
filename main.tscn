@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=23 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
-[ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://controller/fps_controller.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b2ie1ji32skhx" path="res://scripts/astral_viewport.gd" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cllq0uwwcckq2" path="res://models/hospital_beds.glb" id="3_dg77c"]
 [ext_resource type="Script" uid="uid://b2wbxl22ek0vq" path="res://scripts/player.gd" id="4_vivmo"]
@@ -17,6 +17,7 @@
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy.tscn" id="17_yaehf"]
+[ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -201,6 +202,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33692, 0, 20.9431)
 
 [node name="RinguAmy3" parent="Level" instance=ExtResource("17_yaehf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09379, 0, 19.2801)
+
+[node name="Pickup" parent="Level" instance=ExtResource("18_074og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01165, 0.694466, -1.84675)
+
+[node name="Pickup2" parent="Level" instance=ExtResource("18_074og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01165, 0.694466, -4.14551)
 
 [connection signal="died" from="Player/HealthComponent" to="Player" method="_on_health_component_died"]
 [connection signal="died" from="Player/HealthComponent" to="Player/Controller" method="_on_health_component_died"]
