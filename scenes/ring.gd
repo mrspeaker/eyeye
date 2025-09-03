@@ -62,7 +62,6 @@ func _physics_process(dt: float) -> void:
 			
 			# Step 1: check if wall ahead
 			if wall_ahead:
-				print("Wall detected ahead")
 				if wall_ahead.collider.has_method("interact"):
 					wall_ahead.collider.interact()
 			# Step 2: check same height floor
@@ -134,7 +133,7 @@ func scan_ahead():
 		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
 			return node
 	for node in get_tree().get_nodes_in_group("Container"):
-		print("world_pos:", world_pos, " con_pos:", node.global_position)
+		#print("world_pos:", world_pos, " con_pos:", node.global_position)
 		# compare positions approximately (floating point tolerance)
 		if node.global_position.distance_to(world_pos) < cell_size_x / 2:
 			return node

@@ -26,6 +26,7 @@ var mouse_rot: Vector3
 var mouse_yaw: float
 var mouse_pitch: float
 
+var pointer_on_thing = null
 var scanned_thing = null
 
 var mouse_free = true
@@ -76,10 +77,16 @@ func update_camera(dt):
 		var center = viewport_size / 2
 		var mouse_pos = get_viewport().get_mouse_position()
 		
+		# What are we pointing at?
+		var r = raycast_xy(mouse_pos)
+		if (r && r.collider.get_collision_layer_value(2)):
+			pointer_on_thing = r.collider.get_parent()
+		else:
+			pointer_on_thing = null
+			
 		# offset from center (-1.0 to 1.0 range)
 		var offset = (mouse_pos - center) / center  
-		#print(offset)
-	
+		
 		# Clamp in case of screen weirdness I don't know
 		offset = offset.clamp(Vector2(-1, -1), Vector2(1, 1))
 		
@@ -90,7 +97,6 @@ func update_camera(dt):
 
 		if abs(offset.y) < threshold: offset.y = 0
 		else: offset.y = (abs(offset.y) - threshold) / (1.0 - threshold) * sign(offset.y)
-
 
 		# Compute offset rotation
 		var yaw_offset   = -offset.x * max_angle * 0.5
@@ -151,7 +157,6 @@ func _physics_process(dt: float) -> void:
 		
 		# Step 1: check if wall ahead
 		if wall_ahead:
-			print("Wall detected ahead")
 			if wall_ahead.collider.has_method("interact"):
 				wall_ahead.collider.interact()
 		# Step 2: check same height floor
@@ -205,13 +210,11 @@ func _process(delta):
 		if t >= 1.0:
 			# turn done (TODO: signal)
 			t = 1.0
-			print(start_rotation, ' ', rotation_degrees)
 			# realign just in case
 			rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
 			rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
 			# set current faced direction default for edge looking system
 			start_rotation = rotation_degrees
-			print(start_rotation, ' ', rotation_degrees)
 			# reset cursor to confined to allow movement again
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 			turning = false
@@ -240,7 +243,6 @@ func _process(delta):
 		rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
 		turn_target_rot = rotation_degrees + Vector3(0, 90 * dir, 0)
 		#turn_target_rot.y = round(turn_target_rot.y)
-		print('targ ', turn_target_rot)
 		turn_elapsed_time = 0.0
 		turning = true
 
@@ -251,6 +253,11 @@ func _process(delta):
 			scanned.interact()  # run NPC specific interaction
 		elif scanned != null and scanned.is_in_group("Container"):
 			scanned.interact() # run Container specific interaction
+			
+	if Input.is_mouse_button_pressed(1) and pointer_on_thing != null:
+		if pointer_on_thing.has_method("click_pickup"):
+			pointer_on_thing.click_pickup(self)
+		
 
 func raycast_ahead(dir):
 	var dir_norm = transform.basis.z.normalized() * dir
@@ -261,6 +268,16 @@ func raycast_ahead(dir):
 	var space_state = get_world_3d().direct_space_state
 	return space_state.intersect_ray(ray)
 
+func raycast_xy(pos):
+	var ray_length = 5
+	var ray_origin = camera.project_ray_origin(pos)
+	var ray_end = ray_origin + camera.project_ray_normal(pos) * ray_length
+	var ray = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	ray.collide_with_areas = true
+	var space_state = get_world_3d().direct_space_state
+	return space_state.intersect_ray(ray)
+
+	
 # checks ahead to see if there is something interactable
 func scan_ahead():
 	var next_cell = get_next_cell(-1)
@@ -295,7 +312,6 @@ func clear_destination():
 func _on_health_component_died() -> void:
 	health_component.reset()
 	print("health reset to ", health_component.health)
-
 
 func on_item_picked_up(item:Item):
 	print("picked it up yo", item.name)

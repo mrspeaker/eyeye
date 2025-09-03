@@ -209,5 +209,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01165, 0.694466, -1.84675)
 [node name="Pickup2" parent="Level" instance=ExtResource("18_074og")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01165, 0.694466, -4.14551)
 
+[node name="Pickup3" parent="Level" instance=ExtResource("18_074og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.59169, 0.694466, 16.4447)
+
+[node name="Pickup4" parent="Level" instance=ExtResource("18_074og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99152, 0.916982, 12.1531)
+
 [connection signal="died" from="Player/HealthComponent" to="Player" method="_on_health_component_died"]
 [connection signal="died" from="Player/HealthComponent" to="Player/Controller" method="_on_health_component_died"]
