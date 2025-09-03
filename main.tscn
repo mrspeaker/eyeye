@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=25 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://scenes/scarecrow.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://d08x7vijxbycr" path="res://scripts/scarecrow.gd" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://coijfyox5m5lc" path="res://scenes/barrels.tscn" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://mc2a320q2neq" path="res://ui_manager.gd" id="8_82xsv"]
 [ext_resource type="MeshLibrary" uid="uid://7cbhx0dktsd2" path="res://meshes/newmeshlib.tres" id="9_4c57u"]
+[ext_resource type="Texture2D" uid="uid://ba4rln7b46ps1" path="res://textures/UI/white circle small.png" id="9_getpj"]
 [ext_resource type="Script" uid="uid://b2f83eabx121f" path="res://scripts/barrels.gd" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b3tlrnbv41w47" path="res://scenes/Door.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://6fi2korl6fur" path="res://scenes/ring-new.tscn" id="11_efxa6"]
@@ -125,6 +127,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("8_82xsv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI"]
 
@@ -147,6 +150,14 @@ theme_override_constants/outline_size = 5
 theme_override_fonts/font = SubResource("FontFile_7mycd")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
+
+[node name="Cursor" type="TextureRect" parent="UI"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("9_getpj")
+stretch_mode = 2
 
 [node name="Gorilla" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.197919, 1, -26.9993)

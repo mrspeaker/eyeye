@@ -33,17 +33,9 @@ var mouse_free = true
 var start_rotation = Vector3.ZERO
 
 func _ready() -> void:
-	# Starting with this centres the mouse before swapping
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-	
-	#rotation_degrees.y = fposmod(rotation_degrees.y, 90)
-	# set faced direction to start_rotation to prevent spin on spa wn
+	# set faced direction to start_rotation to prevent spin on spawn
 	start_rotation = rotation_degrees
-	var crosshair_tex = preload("res://textures/UI/white circle small.png")
-	var size = crosshair_tex.get_size()
-	var img_centre = size / 2   # centre of whatever custom cursor
-	Input.set_custom_mouse_cursor(crosshair_tex, Input.CURSOR_ARROW, img_centre)
+
 
 #func _unhandled_input(event):
 func _input(event):
@@ -54,7 +46,7 @@ func _input(event):
 		mouse_free = !mouse_free
 		if mouse_free:
 			#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # Free movement
-			Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+			Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED_HIDDEN)
 			start_rotation = rotation_degrees
 		else:
 			rotation_degrees = start_rotation
@@ -216,7 +208,7 @@ func _process(delta):
 			# set current faced direction default for edge looking system
 			start_rotation = rotation_degrees
 			# reset cursor to confined to allow movement again
-			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 			turning = false
 			# TODO: handle this in signal somewhere else
 			handle_scanned(scanned_thing)
@@ -234,8 +226,6 @@ func _process(delta):
 	
 	# Start turning
 	if dir != 0 and can_turn:
-		# capture mouse until turn is finished to prevent offsetting alignment
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		turn_current_rot = rotation_degrees
 		
 		# keep from drifting when turning while edge looking by rounding
