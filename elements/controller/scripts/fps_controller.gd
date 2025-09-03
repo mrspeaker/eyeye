@@ -28,6 +28,7 @@ var mouse_pitch: float
 
 var pointer_on_thing = null
 var scanned_thing = null
+var wall_fwd = false
 
 var mouse_free = true
 var start_rotation = Vector3.ZERO
@@ -145,6 +146,7 @@ func _physics_process(dt: float) -> void:
 	var bak = Input.is_action_pressed("move_backward")	
 	var dir = -1 if fwd else 1 if bak else 0 
 	
+	wall_fwd = raycast_ahead(-1)
 	var wall_ahead = raycast_ahead(dir)
 	scanned_thing = scan_ahead()
 	var blocked = fwd and scanned_thing != null
@@ -244,7 +246,7 @@ func _process(delta):
 		turning = true
 
 	# Interact with object ahead
-	if Input.is_action_pressed("interact"):  
+	if Input.is_action_pressed("interact"):
 		var scanned = scan_ahead()
 		if scanned != null and scanned.is_in_group("NPC"):
 			scanned.interact()  # run NPC specific interaction
@@ -277,6 +279,8 @@ func raycast_xy(pos):
 	
 # checks ahead to see if there is something interactable
 func scan_ahead():
+	if wall_fwd:
+		return null
 	var next_cell = get_next_cell(-1)
 	var world_pos = gridmap.map_to_local(next_cell)
 	for node in get_tree().get_nodes_in_group("NPC"):
