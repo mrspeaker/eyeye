@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=26 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ba4rln7b46ps1" path="res://textures/UI/white circle small.png" id="9_getpj"]
 [ext_resource type="Script" uid="uid://b2f83eabx121f" path="res://scripts/barrels.gd" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b3tlrnbv41w47" path="res://scenes/Door.tscn" id="10_4c57u"]
+[ext_resource type="Script" uid="uid://c8py40rhmythr" path="res://scripts/eye_patch.gd" id="10_getpj"]
 [ext_resource type="PackedScene" uid="uid://6fi2korl6fur" path="res://scenes/ring-new.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dw54qwn7m4t43" path="res://models/hospital_bed_1.glb" id="13_w48qg"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
@@ -85,20 +86,6 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Astral Viewport/SubViewport/Astral View"]
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-modulate = Color(1, 1, 1, 0.156863)
-self_modulate = Color(0.635133, 0.2335, 0.107684, 1)
-offset_left = -5.0
-offset_top = -108.0
-offset_right = 395.0
-offset_bottom = 192.0
-scale = Vector2(2.885, 2.885)
-mouse_filter = 1
-stream = ExtResource("13_ycdy4")
-volume_db = -80.0
-autoplay = true
-loop = true
-
 [node name="Player" type="Node" parent="."]
 script = ExtResource("4_vivmo")
 
@@ -158,6 +145,32 @@ offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("9_getpj")
 stretch_mode = 2
+
+[node name="EyesWideShut" type="ColorRect" parent="UI" node_paths=PackedStringArray("player")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09, 0.000899999, 0.03357, 0.894118)
+script = ExtResource("10_getpj")
+player = NodePath("../../Player/Controller")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+modulate = Color(1, 1, 1, 0.156863)
+self_modulate = Color(0.635133, 0.2335, 0.107684, 1)
+offset_left = -5.0
+offset_top = -108.0
+offset_right = 395.0
+offset_bottom = 192.0
+scale = Vector2(2.885, 2.885)
+mouse_filter = 1
+stream = ExtResource("13_ycdy4")
+volume_db = -80.0
+autoplay = true
+loop = true
 
 [node name="Gorilla" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.197919, 1, -26.9993)

@@ -32,6 +32,9 @@ var scanned_thing = null
 var mouse_free = true
 var start_rotation = Vector3.ZERO
 
+var eyes_open = true
+signal eyes_toggled(state: bool)
+
 func _ready() -> void:
 	# set faced direction to start_rotation to prevent spin on spawn
 	start_rotation = rotation_degrees
@@ -54,6 +57,10 @@ func _input(event):
 	if is_fps_event:
 		mouse_yaw = -event.relative.x
 		mouse_pitch = -event.relative.y
+		
+	if event.is_action_pressed("close_eyes"):
+		eyes_open = not eyes_open
+		eyes_toggled.emit(eyes_open)
 
 func shortest_angle_diff(current, target):
 	# Shift into [0, 360), then offset to (–180, +180]
