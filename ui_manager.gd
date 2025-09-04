@@ -1,7 +1,8 @@
 extends Control
 @onready var cursor = $Cursor
 @onready var fade_timer = Timer.new()
-@onready var tween = Tween.new()
+
+var fade_tween = Tween.new()
 
 var cursor_texture_size = 0
 var suppress_next_motion = false
@@ -25,18 +26,22 @@ func _input(event):
 		if suppress_next_motion:
 			suppress_next_motion = false
 			return
+		# Cancel fade tween if it's running
+		if fade_tween and fade_tween.is_running():
+			fade_tween.kill()
+			fade_tween = null
 		fade_timer.start()
 		cursor.modulate.a = 0.8  # Make cursor mostly visible
 
 func _on_fade_timer_timeout():
-	var tween := create_tween()
-	tween.tween_property(cursor, "modulate:a", 0.00, 0.8)  # Fade to nothing over 0.8 seconds
-	tween.connect("finished", Callable(self, "_on_fade_complete"))
+	fade_tween = create_tween()
+	fade_tween.tween_property(cursor, "modulate:a", 0.00, 0.8)
+	fade_tween.connect("finished", Callable(self, "_on_fade_complete"))
 
 func _on_fade_complete():
+	fade_tween = null
 	suppress_next_motion = true
 	get_viewport().warp_mouse(get_viewport().size / 2)
-
 
 func _process(delta):
 	cursor.position = get_viewport().get_mouse_position() - (cursor_texture_size / 2)
