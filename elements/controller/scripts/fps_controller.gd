@@ -39,8 +39,7 @@ signal eyes_toggled(state: bool)
 func _ready() -> void:
 	# set faced direction to start_rotation to prevent spin on spawn
 	start_rotation = rotation_degrees
-
-
+	
 #func _unhandled_input(event):
 func _input(event):
 	var is_fps_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
@@ -85,7 +84,7 @@ func update_camera(dt):
 			pointer_on_thing = null
 			
 		# offset from center (-1.0 to 1.0 range)
-		var offset = (mouse_pos - center) / center  
+		var offset = (mouse_pos - center) / center
 		
 		# Clamp in case of screen weirdness I don't know
 		offset = offset.clamp(Vector2(-1, -1), Vector2(1, 1))
@@ -200,7 +199,10 @@ func _physics_process(dt: float) -> void:
 			position.x = new_x
 			position.z = new_z
 			
+	var was_moving = moving
 	moving = move_dest_pos != null
+	if not moving and was_moving:
+		SignalBus.player_moved.emit(self)
 	move_and_slide()
 	
 func _process(delta):
@@ -219,6 +221,7 @@ func _process(delta):
 			# reset cursor to confined to allow movement again
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 			turning = false
+			SignalBus.player_turned.emit(self)
 			# TODO: handle this in signal somewhere else
 			handle_scanned(scanned_thing)
 	
@@ -309,6 +312,7 @@ func get_next_cell(dir):
 	
 func clear_destination():
 	move_dest_pos = null
+	start_rotation = rotation_degrees
 	
 func _on_health_component_died() -> void:
 	health_component.reset()

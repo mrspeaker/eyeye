@@ -12,9 +12,9 @@ func _process(delta: float) -> void:
 		visible = !visible
 		astral_view.visible = visible
 		if !visible:
-			entity.position = astral_view.position - astral_view.basis.z
+			entity.position = astral_view.position# - astral_view.basis.z
 			entity.rotation = astral_view.rotation
 			entity.clear_destination()
 		else:
-			astral_view.position = entity.position + entity.basis.z
+			astral_view.position = entity.position# + entity.basis.z
 			astral_view.rotation = entity.rotation
