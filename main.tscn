@@ -150,7 +150,7 @@ mouse_filter = 2
 texture = ExtResource("9_getpj")
 stretch_mode = 2
 
-[node name="EyesWideShut" type="ColorRect" parent="UI" node_paths=PackedStringArray("player")]
+[node name="EyesWideShut" type="ColorRect" parent="UI"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -160,7 +160,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.09, 0.000899999, 0.03357, 0.894118)
 script = ExtResource("10_getpj")
-player = NodePath("../../Player/Controller")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 modulate = Color(1, 1, 1, 0.156863)

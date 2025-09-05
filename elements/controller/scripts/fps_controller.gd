@@ -34,7 +34,6 @@ var mouse_free = true
 var start_rotation = Vector3.ZERO
 
 var eyes_open = true
-signal eyes_toggled(state: bool)
 
 func _ready() -> void:
 	# set faced direction to start_rotation to prevent spin on spawn
@@ -60,7 +59,6 @@ func _input(event):
 		
 	if event.is_action_pressed("close_eyes"):
 		eyes_open = not eyes_open
-		eyes_toggled.emit(eyes_open)
 		SignalBus.player_eyes_toggled.emit(eyes_open)
 
 func shortest_angle_diff(current, target):
