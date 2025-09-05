@@ -9,7 +9,7 @@ func _ready() -> void:
 func click_pickup(body: Node3D):
 	if body.has_method("on_item_picked_up"):
 		body.on_item_picked_up(item)
-		queue_free()
+	queue_free()
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.has_method("on_item_picked_up"):

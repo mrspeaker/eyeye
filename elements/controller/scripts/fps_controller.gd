@@ -10,30 +10,29 @@ extends CharacterBody3D
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
-var moving = false
-var move_elapsed_time = 0.0
+var eyes_open := true
+
+var moving := false
+var move_elapsed_time := 0.0
 var move_dest_pos = null
 var move_start_pos = null
 
-var turning = false
-var turn_current_rot = Vector3.ZERO
-var turn_target_rot = Vector3.ZERO
-var turn_elapsed_time = 0.0
+var turning := false
+var turn_current_rot := Vector3.ZERO
+var turn_target_rot := Vector3.ZERO
+var turn_elapsed_time := 0.0
 
 const MOUSE_ROT_MAX := deg_to_rad(30)
-var mouse_sensitivity = 0.2
+var mouse_sensitivity := 0.2
 var mouse_rot: Vector3
 var mouse_yaw: float
 var mouse_pitch: float
+var mouse_free := true
+var start_rotation := Vector3.ZERO
 
 var pointer_on_thing = null
 var scanned_thing = null
-var wall_fwd = false
-
-var mouse_free = true
-var start_rotation = Vector3.ZERO
-
-var eyes_open = true
+var wall_fwd = {}
 
 func _ready() -> void:
 	# set faced direction to start_rotation to prevent spin on spawn
@@ -65,7 +64,6 @@ func shortest_angle_diff(current, target):
 	# Shift into [0, 360), then offset to (–180, +180]
 	var raw = fposmod((target - current) + 180.0, 360.0) - 180.0
 	return raw
-
 
 func update_camera(dt):
 	var max_angle = 10.0 # degrees of max camera tilt
@@ -146,7 +144,12 @@ func _physics_process(dt: float) -> void:
 	
 	wall_fwd = raycast_ahead(-1)
 	var wall_ahead = raycast_ahead(dir)
+	var last_scanned = scanned_thing
 	scanned_thing = scan_ahead()
+	if scanned_thing != last_scanned:
+		last_scanned = scanned_thing
+		SignalBus.interactable_scanned.emit(scanned_thing)
+
 	var blocked = fwd and scanned_thing != null
 	
 	var can_move = not moving and not turning and not blocked
@@ -248,17 +251,13 @@ func _process(delta):
 		turning = true
 
 	# Interact with object ahead
-	if Input.is_action_pressed("interact"):
-		var scanned = scan_ahead()
-		if scanned != null and scanned.is_in_group("NPC"):
-			scanned.interact()  # run NPC specific interaction
-		elif scanned != null and scanned.is_in_group("Container"):
-			scanned.interact() # run Container specific interaction
-			
+	if Input.is_action_pressed("interact") and scanned_thing != null:
+		if scanned_thing.is_in_group("NPC") or scanned_thing.is_in_group("Container"):
+			scanned_thing.interact()
+
 	if Input.is_mouse_button_pressed(1) and pointer_on_thing != null:
 		if pointer_on_thing.has_method("click_pickup"):
 			pointer_on_thing.click_pickup(self)
-		
 
 func raycast_ahead(dir):
 	var dir_norm = transform.basis.z.normalized() * dir
@@ -278,7 +277,6 @@ func raycast_xy(pos):
 	var space_state = get_world_3d().direct_space_state
 	return space_state.intersect_ray(ray)
 
-	
 # checks ahead to see if there is something interactable
 func scan_ahead():
 	if wall_fwd:
@@ -311,11 +309,11 @@ func get_next_cell(dir):
 	
 func clear_destination():
 	move_dest_pos = null
-	start_rotation = rotation_degrees
+	start_rotation = rotation_degrees # prevents rotation after astral
 	
+func on_item_picked_up(item:Item):
+	print("Picked up a " + item.name)
+
 func _on_health_component_died() -> void:
 	health_component.reset()
 	print("health reset to ", health_component.health)
-
-func on_item_picked_up(item:Item):
-	print("picked it up yo", item.name)
