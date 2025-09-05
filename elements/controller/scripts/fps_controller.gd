@@ -4,9 +4,6 @@ extends CharacterBody3D
 @export var camera : Camera3D
 @export var health_component: HealthComponent
 
-@onready var interact_label = get_node("../../UI/CanvasLayer/InteractLabel")
-@onready var world = get_node("../../")
-
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
@@ -41,7 +38,7 @@ func _ready() -> void:
 #func _unhandled_input(event):
 func _input(event):
 	var is_fps_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-	var is_free_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE
+	#var is_free_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE
 
 	if event.is_action_pressed("test_input"):
 		mouse_free = !mouse_free
@@ -141,14 +138,16 @@ func _physics_process(dt: float) -> void:
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")	
 	var dir = -1 if fwd else 1 if bak else 0 
+	var wall_ahead = raycast_ahead(dir) # "ahead" is direction moving - not necessarily fwd
 	
+	# Look for interactable things ahead
 	wall_fwd = raycast_ahead(-1)
-	var wall_ahead = raycast_ahead(dir)
-	var last_scanned = scanned_thing
-	scanned_thing = scan_ahead()
-	if scanned_thing != last_scanned:
-		last_scanned = scanned_thing
-		SignalBus.interactable_scanned.emit(scanned_thing)
+	if not wall_fwd:
+		var last_scanned = scanned_thing
+		scanned_thing = scan_ahead()
+		if scanned_thing != last_scanned:
+			last_scanned = scanned_thing
+			SignalBus.interactable_scanned.emit(scanned_thing)
 
 	var blocked = fwd and scanned_thing != null
 	
@@ -189,11 +188,6 @@ func _physics_process(dt: float) -> void:
 			position.z = move_dest_pos.z
 			move_dest_pos = null
 			move_elapsed_time = 0
-			
-			# world acts here
-			world.world_turn()
-			handle_scanned(scanned_thing)
-			
 		else:
 			 # Lerp only X and Z
 			var new_x = lerp(move_start_pos.x, move_dest_pos.x, t)
@@ -208,7 +202,6 @@ func _physics_process(dt: float) -> void:
 	move_and_slide()
 	
 func _process(delta):
-	
 	if turning:
 		turn_elapsed_time += delta
 		var t = turn_elapsed_time / TURN_TIME
@@ -224,8 +217,6 @@ func _process(delta):
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 			turning = false
 			SignalBus.player_turned.emit(self)
-			# TODO: handle this in signal somewhere else
-			handle_scanned(scanned_thing)
 	
 		# Ease out cubic (fast start, slow end)
 		var eased_t = 1 - pow(1 - t, 3)
@@ -255,7 +246,7 @@ func _process(delta):
 		if scanned_thing.is_in_group("NPC") or scanned_thing.is_in_group("Container"):
 			scanned_thing.interact()
 
-	if Input.is_mouse_button_pressed(1) and pointer_on_thing != null:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and pointer_on_thing != null:
 		if pointer_on_thing.has_method("click_pickup"):
 			pointer_on_thing.click_pickup(self)
 
@@ -279,8 +270,6 @@ func raycast_xy(pos):
 
 # checks ahead to see if there is something interactable
 func scan_ahead():
-	if wall_fwd:
-		return null
 	var next_cell = get_next_cell(-1)
 	var world_pos = gridmap.map_to_local(next_cell)
 	for node in get_tree().get_nodes_in_group("NPC"):
@@ -290,16 +279,6 @@ func scan_ahead():
 		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x / 2:
 			return node
 	return null
-
-func handle_scanned(scanned):
-	if scanned != null and scanned.is_in_group("NPC"):
-		interact_label.text = "[E] Interact"
-		interact_label.visible = true
-	elif scanned != null and scanned.is_in_group("Container"):
-		interact_label.text = "[E] Loot"
-		interact_label.visible = true
-	else:
-		interact_label.visible = false
 
 func get_next_cell(dir):
 	var grid_pos = gridmap.local_to_map(position)

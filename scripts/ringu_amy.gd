@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	position.x += vel.x
 	position.z += vel.z
 
-func on_player_moved(player: CharacterBody3D):
+func on_player_moved(_player: CharacterBody3D):
 	move_time = 5.0
 
 func on_player_eyes(open: bool):

@@ -1,13 +1,16 @@
 extends Control
+
+@onready var interact_label: Label = $CanvasLayer/InteractLabel
 @onready var cursor = $Cursor
-@onready var fade_timer = Timer.new()
+@onready var fade_timer := Timer.new()
 
-var fade_tween = Tween.new()
-
-var cursor_texture_size = 0
-var suppress_next_motion = false
+var fade_tween: Tween
+var cursor_texture_size := Vector2.ZERO
+var suppress_next_motion := false
 
 func _ready():
+	SignalBus.interactable_scanned.connect(on_scanned)
+		
 	# Starting with this centres the mouse before swapping
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
@@ -43,5 +46,15 @@ func _on_fade_complete():
 	suppress_next_motion = true
 	get_viewport().warp_mouse(get_viewport().size / 2)
 
-func _process(delta):
+func _process(_delta):
 	cursor.position = get_viewport().get_mouse_position() - (cursor_texture_size / 2)
+
+func on_scanned(scanned):
+	if scanned != null and scanned.is_in_group("NPC"):
+		interact_label.text = "[E] Interact"
+		interact_label.visible = true
+	elif scanned != null and scanned.is_in_group("Container"):
+		interact_label.text = "[E] Loot"
+		interact_label.visible = true
+	else:
+		interact_label.visible = false

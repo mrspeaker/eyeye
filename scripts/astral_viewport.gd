@@ -7,7 +7,7 @@ func _ready() -> void:
 	visible = false
 	astral_view.visible = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("jump"):
 		visible = !visible
 		astral_view.visible = visible
