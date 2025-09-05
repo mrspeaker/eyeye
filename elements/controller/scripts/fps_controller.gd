@@ -61,6 +61,7 @@ func _input(event):
 	if event.is_action_pressed("close_eyes"):
 		eyes_open = not eyes_open
 		eyes_toggled.emit(eyes_open)
+		SignalBus.player_eyes_toggled.emit(eyes_open)
 
 func shortest_angle_diff(current, target):
 	# Shift into [0, 360), then offset to (–180, +180]

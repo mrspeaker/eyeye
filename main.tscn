@@ -222,14 +222,19 @@ script = ExtResource("9_kek77")
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, -1.56577, 0.0542517, -7.54822)
 script = ExtResource("6_272bh")
 
-[node name="RinguAmy" parent="Level" instance=ExtResource("17_yaehf")]
+[node name="RinguAmy" parent="Level" node_paths=PackedStringArray("player") instance=ExtResource("17_yaehf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33692, 0, 22.7329)
+player = NodePath("../../Player/Controller")
+speed = 1.1
 
-[node name="RinguAmy2" parent="Level" instance=ExtResource("17_yaehf")]
+[node name="RinguAmy2" parent="Level" node_paths=PackedStringArray("player") instance=ExtResource("17_yaehf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33692, 0, 20.9431)
+player = NodePath("../../Player/Controller")
+speed = 1.2
 
-[node name="RinguAmy3" parent="Level" instance=ExtResource("17_yaehf")]
+[node name="RinguAmy3" parent="Level" node_paths=PackedStringArray("player") instance=ExtResource("17_yaehf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.09379, 0, 19.2801)
+player = NodePath("../../Player/Controller")
 
 [node name="Pickup" parent="Level" instance=ExtResource("18_074og")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01165, 0.694466, -1.84675)

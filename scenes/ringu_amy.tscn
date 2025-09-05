@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddvagl21eutfi"]
+[gd_scene load_steps=9 format=3 uid="uid://ddvagl21eutfi"]
 
+[ext_resource type="Script" uid="uid://bj2nrwldyjdsf" path="res://scripts/ringu_amy.gd" id="1_2ftxf"]
 [ext_resource type="Texture2D" uid="uid://b6duguercdomk" path="res://textures/ringu.png" id="1_wai70"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_074og"]
@@ -46,6 +47,7 @@ animations = [{
 }]
 
 [node name="RinguAmy" type="Node3D"]
+script = ExtResource("1_2ftxf")
 
 [node name="TestAnimSprite" type="AnimatedSprite3D" parent="."]
 offset = Vector2(0, 130)
