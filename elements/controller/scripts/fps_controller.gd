@@ -244,7 +244,7 @@ func _process(delta):
 		turning = true
 
 	# Interact with object ahead
-	if Input.is_action_pressed("interact") and scanned_thing != null:
+	if Input.is_action_just_pressed("interact") and scanned_thing != null:
 		if scanned_thing.is_in_group("NPC") or scanned_thing.is_in_group("Container"):
 			scanned_thing.interact()
 
