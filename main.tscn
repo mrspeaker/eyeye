@@ -145,17 +145,16 @@ theme_override_fonts/font = SubResource("FontFile_7mycd")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
-[node name="Cursor" type="TextureRect" parent="UI"]
-layout_mode = 1
+[node name="Cursor" type="TextureRect" parent="UI/CanvasLayer"]
+unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource("9_getpj")
 stretch_mode = 2
 
-[node name="EyesWideShut" type="ColorRect" parent="UI"]
+[node name="EyesWideShut" type="ColorRect" parent="UI/CanvasLayer"]
 visible = false
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -164,10 +163,9 @@ grow_vertical = 2
 color = Color(0.09, 0.000899999, 0.03357, 0.894118)
 script = ExtResource("10_getpj")
 
-[node name="InventoryDialog" parent="UI" instance=ExtResource("11_d13ii")]
+[node name="InventoryDialog" parent="UI/CanvasLayer" instance=ExtResource("11_d13ii")]
 unique_name_in_owner = true
 visible = false
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

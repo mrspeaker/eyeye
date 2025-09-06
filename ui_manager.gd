@@ -1,7 +1,7 @@
 extends Control
 
 @onready var interact_label: Label = %InteractLabel
-@onready var cursor = $Cursor
+@onready var cursor = %Cursor
 @onready var fade_timer := Timer.new()
 @onready var player: CharacterBody3D = %Controller 
 @onready var inventory_dialog:InventoryDialog = %InventoryDialog
