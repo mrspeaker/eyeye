@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c14jucp5uf2ey" path="res://textures/Bricks_18-256x256.png" id="1_xcelk"]
 
 [resource]
-albedo_color = Color(0.8, 0.8, 0.8, 1)
+albedo_color = Color(0.4717, 0.53, 0.490162, 1)
 albedo_texture = ExtResource("1_xcelk")
 normal_enabled = true
 uv1_scale = Vector3(2, 2, 2)

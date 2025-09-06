@@ -65,7 +65,7 @@ environment = SubResource("Environment_lquwl")
 
 [node name="sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.860458, 0.438499, 0.259482, -0.00634825, -0.5, 0.866002, 0.509482, -0.746806, -0.427445, 0, 13, 0)
-light_color = Color(0.528371, 0.378574, 0.339909, 1)
+light_color = Color(0.53, 0.53, 0.53, 1)
 light_energy = 0.613
 light_volumetric_fog_energy = 1.516
 
