@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5sxtbk8ttdhx"]
+
+[ext_resource type="Texture2D" uid="uid://do3efr4vbosu" path="res://textures/UI/potion.png" id="1_567tv"]
+
+[node name="ItemSlot" type="PanelContainer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_567tv")

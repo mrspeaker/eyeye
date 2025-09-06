@@ -31,6 +31,8 @@ var pointer_on_thing = null
 var scanned_thing = null
 var wall_fwd = {}
 
+var inventory:Inventory = Inventory.new()
+
 func _ready() -> void:
 	# set faced direction to start_rotation to prevent spin on spawn
 	start_rotation = rotation_degrees
@@ -292,6 +294,7 @@ func clear_destination():
 	
 func on_item_picked_up(item:Item):
 	print("Picked up a " + item.name)
+	inventory.add_item(item)
 
 func _on_health_component_died() -> void:
 	health_component.reset()

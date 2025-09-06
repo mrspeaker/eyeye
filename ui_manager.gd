@@ -1,8 +1,10 @@
 extends Control
 
-@onready var interact_label: Label = $CanvasLayer/InteractLabel
+@onready var interact_label: Label = %InteractLabel
 @onready var cursor = $Cursor
 @onready var fade_timer := Timer.new()
+@onready var player: CharacterBody3D = %Controller 
+@onready var inventory_dialog:InventoryDialog = %InventoryDialog
 
 var fade_tween: Tween
 var cursor_texture_size := Vector2.ZERO
@@ -35,6 +37,9 @@ func _input(event):
 			fade_tween = null
 		fade_timer.start()
 		cursor.modulate.a = 0.8  # Make cursor mostly visible
+		
+	if event.is_action_pressed("inventory"):
+		inventory_dialog.toggle(player.inventory)
 
 func _on_fade_timer_timeout():
 	fade_tween = create_tween()
