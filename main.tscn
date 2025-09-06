@@ -105,6 +105,7 @@ script = ExtResource("5_w48qg")
 metadata/_custom_type_script = "uid://cr3afoq8poqwa"
 
 [node name="GridMap" type="GridMap" parent="."]
+unique_name_in_owner = true
 mesh_library = ExtResource("9_4c57u")
 cell_size = Vector3(3, 3, 3)
 data = {
