@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://dpd6dmcob8qst"]
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://dpd6dmcob8qst"]
 
+[ext_resource type="Texture2D" uid="uid://do3efr4vbosu" path="res://textures/UI/potion.png" id="1_0bv3h"]
 [ext_resource type="Script" uid="uid://wmlxxtd1rnwv" path="res://scripts/model/item.gd" id="1_0jtar"]
 [ext_resource type="PackedScene" uid="uid://1eo2jsd1ocb5" path="res://models/potion.glb" id="1_wdku8"]
 
@@ -7,4 +8,5 @@
 script = ExtResource("1_0jtar")
 name = "potion"
 scene = ExtResource("1_wdku8")
+icon = ExtResource("1_0bv3h")
 metadata/_custom_type_script = "uid://wmlxxtd1rnwv"

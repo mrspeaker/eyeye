@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://ea3eyw4t4afo"]
+
+[ext_resource type="PackedScene" uid="uid://1eo2jsd1ocb5" path="res://models/potion.glb" id="1_qehmw"]
+[ext_resource type="Texture2D" uid="uid://uyext8leonal" path="res://textures/UI/wine.png" id="1_rb3cb"]
+[ext_resource type="Script" uid="uid://wmlxxtd1rnwv" path="res://scripts/model/item.gd" id="2_rb3cb"]
+
+[resource]
+script = ExtResource("2_rb3cb")
+name = "wine"
+scene = ExtResource("1_qehmw")
+icon = ExtResource("1_rb3cb")
+metadata/_custom_type_script = "uid://wmlxxtd1rnwv"

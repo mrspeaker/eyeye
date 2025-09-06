@@ -246,7 +246,7 @@ func _process(delta):
 	# Interact with object ahead
 	if Input.is_action_just_pressed("interact") and scanned_thing != null:
 		if scanned_thing.is_in_group("NPC") or scanned_thing.is_in_group("Container"):
-			scanned_thing.interact()
+			scanned_thing.interact(self)
 
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and pointer_on_thing != null:
 		if pointer_on_thing.has_method("click_pickup"):
