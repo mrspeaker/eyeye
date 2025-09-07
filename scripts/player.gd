@@ -1,11 +1,12 @@
 extends Node
 
-# Called when the node enters the scene tree for the first time.
+@onready var controller: PlayerController = %Controller
+@onready var cam: Camera3D = %AltCamera
+
 func _ready() -> void:
-	pass # Replace with function body.
+	controller.rotate(Vector3.FORWARD, PI/2.0)
+	cam.current = false
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
 

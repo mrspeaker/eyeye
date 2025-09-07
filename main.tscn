@@ -94,6 +94,9 @@ render_target_update_mode = 4
 [node name="Player" type="Node" parent="."]
 script = ExtResource("4_vivmo")
 
+[node name="AltCamera" type="Camera3D" parent="Player"]
+unique_name_in_owner = true
+
 [node name="Controller" parent="Player" node_paths=PackedStringArray("gridmap", "health_component") instance=ExtResource("1_ig7tw")]
 unique_name_in_owner = true
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.0073, 1, -1.29455)

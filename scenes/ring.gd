@@ -19,7 +19,7 @@ var active = false
 var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	rng.set_seed(Time.get_unix_time_from_system()) 
+	rng.set_seed(Time.get_unix_time_from_system() as int) 
 	print(get_tree().get_nodes_in_group("NPC"))
 	if gridmap == null:
 		print("GridMap node not found!")

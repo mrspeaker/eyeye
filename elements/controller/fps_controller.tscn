@@ -13,7 +13,7 @@ albedo_color = Color(1, 0.25, 0.25, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ja5wc"]
 material = SubResource("StandardMaterial3D_j0767")
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
+[node name="PlayerController" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_liegp")
 camera = NodePath("CameraController/Camera3D")
 
@@ -25,17 +25,19 @@ shape = SubResource("CapsuleShape3D_j0767")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595528, -0.00837469)
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000890255, 0.110735, 0.000113219)
 fov = 60.6
 
-[node name="Arms" parent="CameraController" instance=ExtResource("2_uyxtt")]
-transform = Transform3D(-0.1, -9.6653e-11, -1.4692e-08, 3.28084e-09, 0.0973259, -0.022971, 1.43214e-08, -0.022971, -0.0973259, 0, 0.0540251, 0.402375)
+[node name="Meshbits" type="Node3D" parent="."]
 
-[node name="Headball" type="MeshInstance3D" parent="."]
+[node name="Headball" type="MeshInstance3D" parent="Meshbits"]
 transform = Transform3D(0.639593, 0, 0, 0, 0.809617, 0, 0, 0, 0.687613, 0, 0.724478, -0.242746)
 mesh = SubResource("SphereMesh_liegp")
+skeleton = NodePath("../..")
 
-[node name="Body" type="MeshInstance3D" parent="."]
+[node name="Body" type="MeshInstance3D" parent="Meshbits"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886452, 0.00259399, 0)
 mesh = SubResource("CapsuleMesh_ja5wc")
-skeleton = NodePath("../CollisionShape3D")
+skeleton = NodePath("../../CollisionShape3D")
+
+[node name="Arms" parent="Meshbits" instance=ExtResource("2_uyxtt")]
+transform = Transform3D(-0.12, -1.17051e-10, -1.7635e-08, 1.42897e-09, 0.119538, -0.0105171, 1.75774e-08, -0.0105171, -0.119538, 0, 0.24021, 0.204147)

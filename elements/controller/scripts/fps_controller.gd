@@ -1,3 +1,4 @@
+class_name PlayerController
 extends CharacterBody3D
 
 @export var gridmap: GridMap;
@@ -37,10 +38,8 @@ func _ready() -> void:
 	# set faced direction to start_rotation to prevent spin on spawn
 	start_rotation = rotation_degrees
 	
-#func _unhandled_input(event):
-func _input(event):
+func _unhandled_input(event):
 	var is_fps_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
-	#var is_free_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE
 
 	if event.is_action_pressed("test_input"):
 		mouse_free = !mouse_free
