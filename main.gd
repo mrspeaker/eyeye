@@ -1,8 +1,17 @@
+class_name Game
 extends Node3D
 
 @onready var grid:GridMap = %GridMap
 
 var _cell_timer:Timer = Timer.new()
+
+enum GameState {
+	INIT,
+	CUTSCENE,
+	PLAY,
+}
+
+var _state: GameState = GameState.INIT
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +21,8 @@ func _ready() -> void:
 	_cell_timer.connect("timeout", self._on_timeout)
 	_cell_timer.autostart = true
 	add_child(_cell_timer)
+	
+	_state = GameState.PLAY
 
 func _on_timeout():
 	grid.set_cell_item(Vector3i.ZERO, randi_range(0, 8))
