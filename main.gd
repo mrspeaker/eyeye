@@ -2,6 +2,8 @@ class_name Game
 extends Node3D
 
 @onready var grid:GridMap = %GridMap
+@onready var cinema_camera:Camera3D = %CinemaCamera
+@onready var player:PlayerController = %Controller
 
 var _cell_timer:Timer = Timer.new()
 
@@ -12,6 +14,7 @@ enum GameState {
 }
 
 var _state: GameState = GameState.INIT
+var _state_time: float = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,7 +25,8 @@ func _ready() -> void:
 	_cell_timer.autostart = true
 	add_child(_cell_timer)
 	
-	_state = GameState.PLAY
+	_state = GameState.CUTSCENE
+	_state_time = 0.0
 
 func _on_timeout():
 	grid.set_cell_item(Vector3i.ZERO, randi_range(0, 8))
@@ -30,6 +34,15 @@ func _on_timeout():
 func _input(event):
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
+
+func _process(delta: float) -> void:
+	if _state == GameState.CUTSCENE:
+		if _state_time >= 0.0:
+			_state = GameState.PLAY
+			_state_time = 0
+			player.camera.current = true
+			return
+	_state_time += delta
 
 func world_turn(_player):
 	enemies_act()
