@@ -8,6 +8,8 @@ extends CharacterBody3D
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
 
+var enabled := true
+
 var eyes_open := true
 
 var moving := false
@@ -39,6 +41,8 @@ func _ready() -> void:
 	start_rotation = rotation_degrees
 	
 func _unhandled_input(event):
+	if not enabled:
+		return
 	var is_fps_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 
 	if event.is_action_pressed("test_input"):
@@ -127,6 +131,9 @@ func update_camera(dt):
 		camera.rotation.z = 0
 
 func _physics_process(dt: float) -> void:
+	if not enabled:
+		return
+	
 	update_camera(dt)
 
 	# gravity	
@@ -203,6 +210,9 @@ func _physics_process(dt: float) -> void:
 	move_and_slide()
 	
 func _process(delta):
+	if not enabled:
+		return
+	
 	if turning:
 		turn_elapsed_time += delta
 		var t = turn_elapsed_time / TURN_TIME

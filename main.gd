@@ -27,6 +27,7 @@ func _ready() -> void:
 	
 	_state = GameState.CUTSCENE
 	_state_time = 0.0
+	player.enabled = false
 
 func _on_timeout():
 	grid.set_cell_item(Vector3i.ZERO, randi_range(0, 8))
@@ -35,12 +36,15 @@ func _input(event):
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
 
-func _process(delta: float) -> void:
+func _process(delta: float):
 	if _state == GameState.CUTSCENE:
-		if _state_time >= 0.0:
+		if _state_time == 0:
+			player.camera.current = true
+	
+		if _state_time >= 2.0:
 			_state = GameState.PLAY
 			_state_time = 0
-			player.camera.current = true
+			player.enabled = true
 			return
 	_state_time += delta
 
