@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0o57keahxavf"]
+
+[ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://textures/ghoul.png" id="1_pn4bt"]
+
+[node name="Ghoul" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27, 0)
+pixel_size = 0.001
+billboard = 2
+texture = ExtResource("1_pn4bt")

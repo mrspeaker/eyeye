@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=29 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
+[ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://scenes/ghoul.tscn" id="24_1u8w0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -266,6 +267,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.59169, 0.694466, 16.4447)
 
 [node name="Pickup4" parent="Level" instance=ExtResource("18_074og")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99152, 0.916982, 12.1531)
+
+[node name="Ghoul" parent="Level" instance=ExtResource("24_1u8w0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3739908)
 
 [connection signal="died" from="Player/HealthComponent" to="Player" method="_on_health_component_died"]
 [connection signal="died" from="Player/HealthComponent" to="Player/Controller" method="_on_health_component_died"]
