@@ -212,7 +212,7 @@ func _physics_process(dt: float) -> void:
 func _process(delta):
 	if not enabled:
 		return
-	
+
 	if turning:
 		turn_elapsed_time += delta
 		var t = turn_elapsed_time / TURN_TIME

@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
-[ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://scenes/ghoul.tscn" id="24_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://scenes/ghoul/ghoul.tscn" id="24_1u8w0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)

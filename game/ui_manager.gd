@@ -12,7 +12,7 @@ var suppress_next_motion := false
 
 func _ready():
 	SignalBus.interactable_scanned.connect(on_scanned)
-		
+
 	# Starting with this centres the mouse before swapping
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
