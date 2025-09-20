@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cllq0uwwcckq2" path="res://models/hospital_beds.glb" id="3_dg77c"]
 [ext_resource type="Script" uid="uid://b2wbxl22ek0vq" path="res://scripts/player.gd" id="4_vivmo"]
 [ext_resource type="Script" uid="uid://cr3afoq8poqwa" path="res://components/health_component.gd" id="5_w48qg"]
-[ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://scenes/scarecrow.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://scenes/scarecrow/scarecrow.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://d08x7vijxbycr" path="res://scripts/scarecrow.gd" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://coijfyox5m5lc" path="res://scenes/barrels.tscn" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://mc2a320q2neq" path="res://ui_manager.gd" id="8_82xsv"]
@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://dw54qwn7m4t43" path="res://models/hospital_bed_1.glb" id="13_w48qg"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
-[ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy.tscn" id="17_yaehf"]
+[ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy/ringu_amy.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://scenes/ghoul/ghoul.tscn" id="24_1u8w0"]
 

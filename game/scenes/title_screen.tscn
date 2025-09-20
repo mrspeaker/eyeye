@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://clxectw8asedf"]
 
 [ext_resource type="Script" uid="uid://dlba2l4l4jvaa" path="res://scripts/title_screen.gd" id="1_fgkus"]
-[ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy.tscn" id="2_sa3yf"]
+[ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy/ringu_amy.tscn" id="2_sa3yf"]
 
 [sub_resource type="Environment" id="Environment_sa3yf"]
 background_mode = 1
