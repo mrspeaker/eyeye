@@ -40,4 +40,4 @@ mesh = SubResource("CapsuleMesh_ja5wc")
 skeleton = NodePath("../../CollisionShape3D")
 
 [node name="Arms" parent="Meshbits" instance=ExtResource("2_uyxtt")]
-transform = Transform3D(-0.12, -1.17051e-10, -1.7635e-08, 1.42897e-09, 0.119538, -0.0105171, 1.75774e-08, -0.0105171, -0.119538, 0, 0.24021, 0.204147)
+transform = Transform3D(-0.11999999, -1.1705098e-10, -1.7634997e-08, -4.0265768e-10, 0.119984016, 0.001943497, 1.7630787e-08, 0.001943497, -0.119984016, 0.1385448, 0.13267505, 0.272218)
