@@ -16,6 +16,7 @@ var moving := false
 var move_elapsed_time := 0.0
 var move_dest_pos = null
 var move_start_pos = null
+var attempted_move = false
 
 var turning := false
 var turn_current_rot := Vector3.ZERO
@@ -171,6 +172,11 @@ func _physics_process(dt: float) -> void:
 		if wall_ahead:
 			if wall_ahead.collider.has_method("interact"):
 				wall_ahead.collider.interact()
+			else:
+				print('sip')
+				attempted_move = true
+				move_dest_pos = move_start_pos + \
+				(gridmap.map_to_local(next_cell) - move_start_pos).normalized() * 0.33
 		# Step 2: check same height floor
 		elif gridmap.get_cell_item(next_cell) != -1:
 			move_dest_pos = gridmap.map_to_local(next_cell)
@@ -197,7 +203,10 @@ func _physics_process(dt: float) -> void:
 			# Turn ended.
 			position.x = move_dest_pos.x
 			position.z = move_dest_pos.z
-			move_dest_pos = null
+			if attempted_move:
+				move_dest_pos = move_start_pos
+			else:
+				move_dest_pos = null
 			move_elapsed_time = 0
 		else:
 			 # Lerp only X and Z
