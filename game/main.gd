@@ -29,6 +29,7 @@ func _ready() -> void:
 	_state_time = 0.0
 	player.enabled = false
 
+
 func _on_timeout():
 	grid.set_cell_item(Vector3i.ZERO, randi_range(0, 8))
 

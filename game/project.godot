@@ -23,6 +23,10 @@ SignalBus="*res://scripts/signal_bus.gd"
 
 project/assembly_name="eyecontact"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/meshlib_1.5/plugin.cfg")
+
 [filesystem]
 
 import/blender/enabled=false

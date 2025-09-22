@@ -18,16 +18,17 @@ script = ExtResource("1_liegp")
 camera = NodePath("CameraController/Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00886452, 0.00259399, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9981085, 0)
 shape = SubResource("CapsuleShape3D_j0767")
 
 [node name="CameraController" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595528, -0.00837469)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
 fov = 60.6
 
 [node name="Meshbits" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9981086, 0)
 
 [node name="Headball" type="MeshInstance3D" parent="Meshbits"]
 transform = Transform3D(0.639593, 0, 0, 0, 0.809617, 0, 0, 0, 0.687613, 0, 0.724478, -0.242746)

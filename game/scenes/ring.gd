@@ -112,13 +112,13 @@ func _physics_process(dt: float) -> void:
 
 		# Reset if fall off map
 		if position.y < -2.0:
-			get_tree().reload_current_scene()
+			position.y = 1.0
 
 		move_and_slide()
 
 func get_next_cell(dir):
 	var grid_pos = gridmap.local_to_map(position)
-	var one_cell = Vector3i(dir * basis.z.round())   
+	var one_cell = Vector3i(dir * basis.z.round() * 2.0)   
 	var next_cell = grid_pos + one_cell
 	return next_cell
 

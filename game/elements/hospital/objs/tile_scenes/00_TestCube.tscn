@@ -1,0 +1,3 @@
+[gd_scene load_steps=2 format=3 uid="uid://"]
+[ext_resource type="PackedScene" path="res://elements/hospital/objs/00_TestCube.glb" id="1"]
+[node name="00_TestCube" instance=ExtResource("1")]

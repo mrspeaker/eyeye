@@ -147,7 +147,7 @@ func _physics_process(dt: float) -> void:
 	var bak = Input.is_action_pressed("move_backward")	
 	var dir = -1 if fwd else 1 if bak else 0 
 	var wall_ahead = raycast_ahead(dir) # "ahead" is direction moving - not necessarily fwd
-	
+
 	# Look for interactable things ahead
 	wall_fwd = raycast_ahead(-1)
 	if not wall_fwd:
@@ -160,8 +160,11 @@ func _physics_process(dt: float) -> void:
 	var blocked = fwd and scanned_thing != null
 	
 	var can_move = not moving and not turning and not blocked
+
 	if dir != 0 and can_move:
 		var next_cell = get_next_cell(dir)
+		var next_cell_item := gridmap.get_cell_item(next_cell)
+		print(next_cell, next_cell_item)
 		move_start_pos = position
 		
 		# Step 1: check if wall ahead
@@ -267,6 +270,9 @@ func raycast_ahead(dir):
 	ray.from = global_position
 	ray.to = global_position + dir_norm * (gridmap.cell_size.x / 1.5) + Vector3(0, 1, 0) # distance forward and up
 	ray.exclude = [self]
+	var world = get_world_3d()
+	if world == null:
+		return null
 	var space_state = get_world_3d().direct_space_state
 	return space_state.intersect_ray(ray)
 
@@ -293,7 +299,7 @@ func scan_ahead():
 
 func get_next_cell(dir):
 	var grid_pos = gridmap.local_to_map(position)
-	var one_cell = Vector3i(dir * basis.z.round())   
+	var one_cell = Vector3i(dir * basis.z.round() * 2.0)   
 	var next_cell = grid_pos + one_cell
 	return next_cell
 	
