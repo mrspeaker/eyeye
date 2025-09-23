@@ -25,7 +25,7 @@ shape = SubResource("CapsuleShape3D_j0767")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraController"]
-fov = 60.6
+fov = 60.0
 
 [node name="Meshbits" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9981086, 0)

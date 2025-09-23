@@ -165,7 +165,6 @@ func _physics_process(dt: float) -> void:
 	if dir != 0 and can_move:
 		var next_cell = get_next_cell(dir)
 		var next_cell_item := gridmap.get_cell_item(next_cell)
-		print(next_cell, next_cell_item)
 		move_start_pos = position
 		
 		# Step 1: check if wall ahead
