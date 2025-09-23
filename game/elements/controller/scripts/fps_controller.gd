@@ -17,6 +17,7 @@ var move_elapsed_time := 0.0
 var move_dest_pos = null
 var move_start_pos = null
 var attempted_move = false
+var attempt_ended = false
 
 var turning := false
 var turn_current_rot := Vector3.ZERO
@@ -164,7 +165,7 @@ func _physics_process(dt: float) -> void:
 
 	if dir != 0 and can_move:
 		var next_cell = get_next_cell(dir)
-		var next_cell_item := gridmap.get_cell_item(next_cell)
+		#var next_cell_item := gridmap.get_cell_item(next_cell)
 		move_start_pos = position
 		
 		# Step 1: check if wall ahead
@@ -175,7 +176,7 @@ func _physics_process(dt: float) -> void:
 				print('sip')
 				attempted_move = true
 				move_dest_pos = move_start_pos + \
-				(gridmap.map_to_local(next_cell) - move_start_pos).normalized() * 0.33
+				(gridmap.map_to_local(next_cell) - move_start_pos).normalized() * 0.45
 		# Step 2: check same height floor
 		elif gridmap.get_cell_item(next_cell) != -1:
 			move_dest_pos = gridmap.map_to_local(next_cell)
@@ -196,16 +197,26 @@ func _physics_process(dt: float) -> void:
 
 	if move_dest_pos:
 		move_elapsed_time += dt
-		const move_duration = 0.5        # seconds to reach the target
+		var move_duration = 0.5        # seconds to reach the target
+		print (attempted_move, attempt_ended)
+		if attempted_move or attempt_ended:
+			#print('heh')
+			move_duration = move_duration / 1.7
 		var t = move_elapsed_time / move_duration
+		print(move_duration)
 		if t >= 1.0:
 			# Turn ended.
 			position.x = move_dest_pos.x
 			position.z = move_dest_pos.z
 			if attempted_move:
+				var temp_pos = move_dest_pos 
 				move_dest_pos = move_start_pos
+				move_start_pos = temp_pos
+				attempted_move = false
+				attempt_ended = true
 			else:
 				move_dest_pos = null
+				attempt_ended = false
 			move_elapsed_time = 0
 		else:
 			 # Lerp only X and Z
@@ -276,7 +287,7 @@ func raycast_ahead(dir):
 	var dir_norm = transform.basis.z.normalized() * dir
 	var ray = PhysicsRayQueryParameters3D.new()
 	ray.from = global_position
-	ray.to = global_position + dir_norm * (gridmap.cell_size.x / 1.5) + Vector3(0, 1, 0) # distance forward and up
+	ray.to = global_position + dir_norm * (gridmap.cell_size.x / 0.9) + Vector3(0, 1, 0) # distance forward and up
 	ray.exclude = [self]
 	var world = get_world_3d()
 	if world == null:
