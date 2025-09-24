@@ -64,11 +64,6 @@ func _unhandled_input(event):
 		eyes_open = not eyes_open
 		SignalBus.player_eyes_toggled.emit(eyes_open)
 
-func shortest_angle_diff(current, target):
-	# Shift into [0, 360), then offset to (–180, +180]
-	var raw = fposmod((target - current) + 180.0, 360.0) - 180.0
-	return raw
-
 func update_camera(dt):
 	var max_angle = 10.0 # degrees of max camera tilt
 	
@@ -110,11 +105,13 @@ func update_camera(dt):
 		var t = 1.0 - exp(-5.0 * dt)
 		
 		# Yaw step toward target:
-		var yaw_delta = shortest_angle_diff(rotation_degrees.y, target_yaw)
+		# Shift into [0, 360), then offset to (–180, +180]
+		var yaw_delta = fposmod((target_yaw - rotation_degrees.y) + 180.0, 360.0) - 180.0
 		rotation_degrees.y += yaw_delta * t
 
 		# Pitch 
-		var pitch_delta = shortest_angle_diff(rotation_degrees.x, target_pitch)
+		# Shift into [0, 360), then offset to (–180, +180]
+		var pitch_delta = fposmod((target_pitch - rotation_degrees.x) + 180.0, 360.0) - 180.0
 		rotation_degrees.x = rotation_degrees.x + pitch_delta * t
 		
 	else: # regular FPS controls 
@@ -154,7 +151,7 @@ func _physics_process(dt: float) -> void:
 	wall_fwd = raycast_ahead(-1)
 	if not wall_fwd:
 		var last_scanned = scanned_thing
-		scanned_thing = scan_ahead()
+		scanned_thing = scan_cell_ahead()
 		if scanned_thing != last_scanned:
 			last_scanned = scanned_thing
 			SignalBus.interactable_scanned.emit(scanned_thing)
@@ -173,7 +170,6 @@ func _physics_process(dt: float) -> void:
 			if wall_ahead.collider.has_method("interact"):
 				wall_ahead.collider.interact()
 			else:
-				print('sip')
 				attempted_move = true
 				move_dest_pos = move_start_pos + \
 				(gridmap.map_to_local(next_cell) - move_start_pos).normalized() * 0.45
@@ -198,12 +194,9 @@ func _physics_process(dt: float) -> void:
 	if move_dest_pos:
 		move_elapsed_time += dt
 		var move_duration = 0.5        # seconds to reach the target
-		print (attempted_move, attempt_ended)
 		if attempted_move or attempt_ended:
-			#print('heh')
 			move_duration = move_duration / 1.7
 		var t = move_elapsed_time / move_duration
-		print(move_duration)
 		if t >= 1.0:
 			# Turn ended.
 			position.x = move_dest_pos.x
@@ -234,7 +227,14 @@ func _physics_process(dt: float) -> void:
 func _process(delta):
 	if not enabled:
 		return
-
+	
+	for enemy in get_tree().get_nodes_in_group("Enemy"):
+		if is_enemy_in_view(enemy):
+			#print(enemy, ' in view')
+			if is_enemy_visible(enemy):
+				get_node("../../UI").stress_increase()
+				#print(enemy, ' is visible')
+	
 	if turning:
 		turn_elapsed_time += delta
 		var t = turn_elapsed_time / TURN_TIME
@@ -304,8 +304,8 @@ func raycast_xy(pos):
 	var space_state = get_world_3d().direct_space_state
 	return space_state.intersect_ray(ray)
 
-# checks ahead to see if there is something interactable
-func scan_ahead():
+# checks cell ahead to see if there is something interactable
+func scan_cell_ahead():
 	var next_cell = get_next_cell(-1)
 	var world_pos = gridmap.map_to_local(next_cell)
 	for node in get_tree().get_nodes_in_group("NPC"):
@@ -315,6 +315,68 @@ func scan_ahead():
 		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x / 2:
 			return node
 	return null
+
+func is_enemy_in_view(enemy: Node3D, fov_degrees: float = 90.0) -> bool:
+	var to_enemy = (enemy.global_transform.origin - global_transform.origin).normalized()
+	var forward = -global_transform.basis.z.normalized()  # Assuming -Z is forward
+	var angle = rad_to_deg(acos(forward.dot(to_enemy)))
+	return angle <= fov_degrees / 2
+
+	
+func is_enemy_visible(enemy: Node3D) -> bool:
+	var space_state = get_world_3d().direct_space_state
+	var origin = $RayOrigin.global_transform.origin 
+
+	var target_points = [
+		enemy.global_transform.origin + Vector3(0, 2, 0),  # Head
+		enemy.global_transform.origin + Vector3(0, 1.5, 0),  # Chest
+		enemy.global_transform.origin + Vector3(0, 1, 0),   # Legs
+		enemy.global_transform.origin + Vector3(0.5, 1.5, 0.5),   # Left
+		enemy.global_transform.origin + Vector3(-0.5, 1.5, -0.5)   # Right
+	]
+
+	for point in target_points:
+		var query = PhysicsRayQueryParameters3D.new()
+		query.from = origin
+		query.to = point
+		query.exclude = [self]
+		query.collide_with_areas = true
+		query.collide_with_bodies = true
+		
+		#_draw_ray(query.from, query.to)
+
+		var result = space_state.intersect_ray(query)
+		result = result.get("collider")
+		#get root node
+		if result is CharacterBody3D:
+			result = result.get_parent()
+
+		#print('enemy ', enemy)
+		#print('result ', result)
+		
+		if result == enemy:
+			##print(enemy)
+			return true  # At least one part is visible
+
+	return false
+
+func _draw_ray(from: Vector3, to: Vector3):
+	var mesh := ImmediateMesh.new()
+	var material := StandardMaterial3D.new()
+	material.albedo_color = Color.RED
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
+	mesh.surface_add_vertex(from)
+	mesh.surface_add_vertex(to)
+	mesh.surface_end()
+
+	var mesh_instance := MeshInstance3D.new()
+	mesh_instance.mesh = mesh
+	mesh_instance.global_transform.origin = Vector3.ZERO  # World space
+	get_tree().current_scene.add_child(mesh_instance)  # Add to root scene
+
+	await get_tree().create_timer(0.2).timeout
+	mesh_instance.queue_free()
+
 
 func get_next_cell(dir):
 	var grid_pos = gridmap.local_to_map(position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0o57keahxavf"]
+[gd_scene load_steps=5 format=3 uid="uid://c0o57keahxavf"]
 
 [ext_resource type="Shader" uid="uid://b61q613qfwyi8" path="res://scenes/ghoul/ghoul.gdshader" id="1_idavm"]
 [ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://scenes/ghoul/assets/ghoul.png" id="1_pn4bt"]
@@ -13,7 +13,10 @@ shader_parameter/scanlines_opacity = 0.7910000375725
 shader_parameter/scanlines_width = 0.5
 shader_parameter/resolution = Vector2(640, 480)
 
-[node name="Ghoul" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_idavm"]
+size = Vector3(1, 2.4806519, 1)
+
+[node name="Ghoul" type="Node3D" groups=["Enemy"]]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.27, 0)
@@ -21,3 +24,9 @@ material_override = SubResource("ShaderMaterial_bc2bp")
 pixel_size = 0.001
 billboard = 2
 texture = ExtResource("1_pn4bt")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2608337, 0)
+shape = SubResource("BoxShape3D_idavm")
