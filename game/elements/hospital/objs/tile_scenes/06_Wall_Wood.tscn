@@ -1,5 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://a"]
-
-[ext_resource type="PackedScene" uid="uid://dnwmb6n0nrxhl" path="res://elements/hospital/objs/06_Wall_Wood.glb" id="1"]
-
+[gd_scene load_steps=2 format=3 uid="uid://"]
+[ext_resource type="PackedScene" path="res://elements/hospital/objs/06_Wall_Wood.glb" id="1"]
 [node name="06_Wall_Wood" instance=ExtResource("1")]

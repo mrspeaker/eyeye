@@ -1,0 +1,3 @@
+[gd_scene load_steps=2 format=3 uid="uid://"]
+[ext_resource type="PackedScene" path="res://elements/hospital/objs/07_Door_flip.glb" id="1"]
+[node name="07_Door_flip" instance=ExtResource("1")]
