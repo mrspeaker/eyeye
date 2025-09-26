@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://6dx4m7ohhraq"]
+
+[ext_resource type="PackedScene" uid="uid://a" path="res://elements/hospital/objs/tile_scenes/00_TestCube.tscn" id="1_pno1r"]
+[ext_resource type="PackedScene" uid="uid://a" path="res://elements/hospital/objs/tile_scenes/01_Floor.tscn" id="2_iy05m"]
+[ext_resource type="PackedScene" uid="uid://a" path="res://elements/hospital/objs/tile_scenes/02_Wall.tscn" id="3_1uilo"]
+[ext_resource type="PackedScene" uid="uid://a" path="res://elements/hospital/objs/tile_scenes/03_Wall1Half.tscn" id="4_oqq11"]
+[ext_resource type="PackedScene" uid="uid://a" path="res://elements/hospital/objs/tile_scenes/04_Doorway.tscn" id="5_xx1rf"]
+[ext_resource type="PackedScene" uid="uid://a" path="res://elements/hospital/objs/tile_scenes/05_Floor2.tscn" id="6_7fwxk"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="00_TestCube" parent="." instance=ExtResource("1_pno1r")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.69658, 0, -2.4493697)
+
+[node name="01_Floor" parent="." instance=ExtResource("2_iy05m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.730743, 0, -2.4493697)
+
+[node name="02_Wall" parent="." instance=ExtResource("3_1uilo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7845926, 0, -2.4493697)
+
+[node name="03_Wall1Half" parent="." instance=ExtResource("4_oqq11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6412995, 0, -2.4493697)
+
+[node name="04_Doorway" parent="." instance=ExtResource("5_xx1rf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9753056, 0, -2.4493697)
+
+[node name="05_Floor2" parent="." instance=ExtResource("6_7fwxk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.246218, 0, -2.4493697)

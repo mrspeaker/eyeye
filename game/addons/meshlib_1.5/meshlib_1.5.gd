@@ -122,6 +122,9 @@ func regenerate_mesh_library():
 			if static_body != null:
 				var shapes = find_static_body_shapes(static_body)
 				meshlib.set_item_shapes(id, shapes)
+
+			#var tex = meshlib.get_item_preview(id)
+			#meshlib.set_item_preview(id, tex)
 			success = true
 
 	var save_result = ResourceSaver.save(meshlib, meshlib_path)

@@ -1,0 +1,9 @@
+res://main.tscn
+res://materials/rock.tres
+res://meshes/newmeshlib.tres
+res://meshes/tiles.tscn
+res://elements/controller/fps_controller.tscn
+res://scripts/eye_patch.gd
+res://elements/controller/scripts/fps_controller.gd
+res://scripts/signal_bus.gd
+res://elements/pickup/pickup.gd

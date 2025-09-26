@@ -15,9 +15,11 @@ dest_files=["res://.godot/imported/hand.glb-38ed553e4ded1bdc2320dae14756787f.scn
 
 nodes/root_type=""
 nodes/root_name=""
+nodes/root_script=null
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
 nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
@@ -32,18 +34,24 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
+materials/extract=0
+materials/extract_format=0
+materials/extract_path=""
 _subresources={
 "materials": {
 "Material": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": ""
 },
 "Material.001": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": ""
 },
 "Material.002": {
 "use_external/enabled": true,
+"use_external/fallback_path": "",
 "use_external/path": ""
 }
 },
@@ -54,6 +62,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "save_to_file/enabled": true,
+"save_to_file/fallback_path": "",
 "save_to_file/path": ""
 },
 "hand_DrawCall_0121_001": {
@@ -62,6 +71,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 60.0,
 "save_to_file/enabled": true,
+"save_to_file/fallback_path": "",
 "save_to_file/path": ""
 }
 }
