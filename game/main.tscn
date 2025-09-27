@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=42 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bajwlf7krkin8" path="res://models/vending1.glb" id="29_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bsgjeik2whfhs" path="res://models/wheelchair.glb" id="29_kq58d"]
 [ext_resource type="PackedScene" uid="uid://fof1lwq8m1em" path="res://scenes/desk_variant_1.tscn" id="30_htxhm"]
+[ext_resource type="PackedScene" uid="uid://j58rlxvgo28a" path="res://scenes/bench1.tscn" id="31_facbu"]
 [ext_resource type="PackedScene" uid="uid://dy7rbu7ql805s" path="res://models/compymon.glb" id="31_seu75"]
 [ext_resource type="PackedScene" uid="uid://mfty7dih3x37" path="res://models/compybox.glb" id="32_htxhm"]
 [ext_resource type="PackedScene" uid="uid://csw3h0gh8fqvy" path="res://scenes/curtain.tscn" id="34_4k2k6"]
@@ -157,7 +158,7 @@ transform = Transform3D(-0.0073303655, 0, -0.99997324, 0, 1, 0, 0.99997324, 0, -
 transform = Transform3D(-0.0073303655, 0, -0.99997324, 0, 1, 0, 0.99997324, 0, -0.0073303655, 0.66769844, 0.10431743, -30.611128)
 
 [node name="scarecrow" parent="Level/Room Entrance Waiting" instance=ExtResource("6_7mycd")]
-transform = Transform3D(-0.0073303645, 0, -0.9999731, 0, 1, 0, 0.9999731, 0, -0.0073303645, 1.0274985, -0.346693, -25.491354)
+transform = Transform3D(-0.0073303645, 0, -0.9999731, 0, 1, 0, 0.9999731, 0, -0.0073303645, 1.0281901, -0.346693, -25.585705)
 script = ExtResource("6_272bh")
 
 [node name="wait1" type="Label3D" parent="Level/Room Entrance Waiting"]
@@ -181,6 +182,18 @@ transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 
 
 [node name="Fluro4" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
 transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 11.334364, 0, -28.485752)
+
+[node name="Bench" parent="Level/Room Entrance Waiting" instance=ExtResource("31_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 7.506264, 0.07742554, -24.41366)
+
+[node name="Bench3" parent="Level/Room Entrance Waiting" instance=ExtResource("31_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 10.506743, 0.07742554, -24.391665)
+
+[node name="Bench2" parent="Level/Room Entrance Waiting" instance=ExtResource("31_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 4.508572, 0.07742554, -24.435637)
+
+[node name="Bench4" parent="Level/Room Entrance Waiting" instance=ExtResource("31_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 1.6191636, 0.07742554, -24.456816)
 
 [node name="Room Office 1" type="Node3D" parent="Level"]
 
@@ -381,6 +394,12 @@ transform = Transform3D(-0.0043806694, 0, 0.9999905, 0, 1, 0, -0.9999905, 0, -0.
 
 [node name="vending4" parent="Level/Room Waiting 2" instance=ExtResource("29_jq2sk")]
 transform = Transform3D(-0.0043806694, 0, 0.9999905, 0, 1, 0, -0.9999905, 0, -0.0043806694, 52.921932, 0.10431743, -49.19757)
+
+[node name="Bench" parent="Level/Room Waiting 2" instance=ExtResource("31_facbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.275574, 0.07077837, -42.943268)
+
+[node name="Bench2" parent="Level/Room Waiting 2" instance=ExtResource("31_facbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.27099, 0.07077837, -42.943268)
 
 [node name="Room Back loos" type="Node3D" parent="Level"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, -0.703, 0, -65.952)
