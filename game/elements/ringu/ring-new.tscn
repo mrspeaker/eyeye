@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=4 uid="uid://6fi2korl6fur"]
 
-[ext_resource type="Script" uid="uid://bgxcqt1d7tncx" path="res://scenes/ring.gd" id="1_n3y7e"]
+[ext_resource type="Script" uid="uid://c6hd4ah5fepda" path="res://elements/ringu/ring.gd" id="1_n3y7e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0meub"]
 resource_name = "Material.002"
