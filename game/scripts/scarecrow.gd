@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var interact_label = get_node("../../UI/CanvasLayer/InteractLabel")
+@onready var interact_label = %InteractLabel #get_node("../../UI/CanvasLayer/InteractLabel")
 
 func interact(_entity:Node3D):
 	interact_label.text = "You'd be so scared if you were a crow."

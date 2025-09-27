@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6duguercdomk"
-path.s3tc="res://.godot/imported/ringu.png-ff547651f0be37d9841181d431793458.s3tc.ctex"
+path.s3tc="res://.godot/imported/ringu.png-197ad0661b1ecef2ec6e8e30bd2eb20b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/ringu_amy/assets/ringu.png"
-dest_files=["res://.godot/imported/ringu.png-ff547651f0be37d9841181d431793458.s3tc.ctex"]
+source_file="res://elements/ringu_amy/assets/ringu.png"
+dest_files=["res://.godot/imported/ringu.png-197ad0661b1ecef2ec6e8e30bd2eb20b.s3tc.ctex"]
 
 [params]
 

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b4mxs5bemldbi"
-path.s3tc="res://.godot/imported/ghoul.png-b57d8c68166f25fd4e2bca4644d49be1.s3tc.ctex"
+path.s3tc="res://.godot/imported/ghoul.png-30b60dea666f9afac0ccbb6e945fc3b1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://scenes/ghoul/assets/ghoul.png"
-dest_files=["res://.godot/imported/ghoul.png-b57d8c68166f25fd4e2bca4644d49be1.s3tc.ctex"]
+source_file="res://elements/ghoul/assets/ghoul.png"
+dest_files=["res://.godot/imported/ghoul.png-30b60dea666f9afac0ccbb6e945fc3b1.s3tc.ctex"]
 
 [params]
 

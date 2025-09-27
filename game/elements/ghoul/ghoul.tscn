@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0o57keahxavf"]
 
-[ext_resource type="Shader" uid="uid://b61q613qfwyi8" path="res://scenes/ghoul/ghoul.gdshader" id="1_idavm"]
-[ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://scenes/ghoul/assets/ghoul.png" id="1_pn4bt"]
+[ext_resource type="Shader" uid="uid://b61q613qfwyi8" path="res://elements/ghoul/ghoul.gdshader" id="1_idavm"]
+[ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://elements/ghoul/assets/ghoul.png" id="1_pn4bt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bc2bp"]
 render_priority = 0

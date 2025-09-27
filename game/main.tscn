@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=41 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cllq0uwwcckq2" path="res://models/hospital_beds.glb" id="3_dg77c"]
 [ext_resource type="Script" uid="uid://b2wbxl22ek0vq" path="res://scripts/player.gd" id="4_vivmo"]
 [ext_resource type="Script" uid="uid://cr3afoq8poqwa" path="res://components/health_component.gd" id="5_w48qg"]
-[ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://scenes/scarecrow/scarecrow.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://elements/scarecrow/scarecrow.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://d08x7vijxbycr" path="res://scripts/scarecrow.gd" id="6_272bh"]
 [ext_resource type="MeshLibrary" uid="uid://1a3532pmbk0l" path="res://elements/hospital/objs/tile_scenes/meshes.meshlib" id="7_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://coijfyox5m5lc" path="res://scenes/barrels.tscn" id="8_5vw27"]
@@ -21,9 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://dw54qwn7m4t43" path="res://models/hospital_bed_1.glb" id="13_w48qg"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
-[ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://scenes/ringu_amy/ringu_amy.tscn" id="17_yaehf"]
+[ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://elements/ringu_amy/ringu_amy.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
-[ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://scenes/ghoul/ghoul.tscn" id="24_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://elements/ghoul/ghoul.tscn" id="24_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://kyikdxv8lh5s" path="res://scenes/toilet_round_a.tscn" id="25_0odxb"]
 [ext_resource type="PackedScene" uid="uid://dsp36wupbdnyi" path="res://scenes/sink_a.tscn" id="26_lswn8"]
 [ext_resource type="PackedScene" uid="uid://bfam8rwiq7snf" path="res://scenes/urinal_a.tscn" id="27_a6jrf"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://mfty7dih3x37" path="res://models/compybox.glb" id="32_htxhm"]
 [ext_resource type="PackedScene" uid="uid://csw3h0gh8fqvy" path="res://scenes/curtain.tscn" id="34_4k2k6"]
 [ext_resource type="PackedScene" uid="uid://u6eghht22r3h" path="res://models/box_records.glb" id="35_0rl1p"]
+[ext_resource type="PackedScene" uid="uid://bg13ugdp78pba" path="res://scenes/table_variant_2.tscn" id="36_ok6jj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -134,6 +135,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="GridMap-Roof" type="GridMap" parent="."]
 unique_name_in_owner = true
+visible = false
 mesh_library = ExtResource("7_1u8w0")
 cell_size = Vector3(1.5, 3, 1.5)
 cell_center_x = false
@@ -256,6 +258,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.07915, 0.06503141, -36.319
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 41.68453, 2.3708081, -31.752085)
 text = "psychiatric ward"
 font_size = 60
+
+[node name="Table_Variant_2" parent="Level/Room Psych Ward" instance=ExtResource("36_ok6jj")]
+transform = Transform3D(1.2999649, 0, -0.009529419, 0, 1.3, 0, 0.009529419, 0, 1.2999649, 49.294807, 0.107306, -28.468987)
 
 [node name="Room Font loos" type="Node3D" parent="Level"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, 0, 0, 0)
