@@ -17,16 +17,14 @@
 [ext_resource type="PackedScene" uid="uid://b3tlrnbv41w47" path="res://scenes/Door.tscn" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://c8py40rhmythr" path="res://scripts/eye_patch.gd" id="10_getpj"]
 [ext_resource type="PackedScene" uid="uid://cgyrsfgx60lqe" path="res://scenes/inventory_dialog.tscn" id="11_d13ii"]
-[ext_resource type="PackedScene" uid="uid://6fi2korl6fur" path="res://elements/ringu/ring-new.tscn" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://dw54qwn7m4t43" path="res://models/hospital_bed_1.glb" id="13_w48qg"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://elements/ringu_amy/ringu_amy.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
+[ext_resource type="PackedScene" uid="uid://b536lxdtrtuet" path="res://elements/ringu/ring.tscn" id="18_facbu"]
 [ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://elements/ghoul/ghoul.tscn" id="24_1u8w0"]
-[ext_resource type="PackedScene" uid="uid://kyikdxv8lh5s" path="res://scenes/toilet_round_a.tscn" id="25_0odxb"]
 [ext_resource type="PackedScene" uid="uid://dsp36wupbdnyi" path="res://scenes/sink_a.tscn" id="26_lswn8"]
-[ext_resource type="PackedScene" uid="uid://bfam8rwiq7snf" path="res://scenes/urinal_a.tscn" id="27_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://ufcke1sx7h6w" path="res://Assets/LoafbrrAssets/Toilets/Scenes/Objects/toilet_elongated_a.tscn" id="28_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://bajwlf7krkin8" path="res://models/vending1.glb" id="29_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bsgjeik2whfhs" path="res://models/wheelchair.glb" id="29_kq58d"]
@@ -35,7 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://mfty7dih3x37" path="res://models/compybox.glb" id="32_htxhm"]
 [ext_resource type="PackedScene" uid="uid://csw3h0gh8fqvy" path="res://scenes/curtain.tscn" id="34_4k2k6"]
 [ext_resource type="PackedScene" uid="uid://u6eghht22r3h" path="res://models/box_records.glb" id="35_0rl1p"]
+[ext_resource type="PackedScene" uid="uid://bfam8rwiq7snf" path="res://Assets/LoafbrrAssets/Toilets/Scenes/Objects/urinal_a.tscn" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://bg13ugdp78pba" path="res://scenes/table_variant_2.tscn" id="36_ok6jj"]
+[ext_resource type="PackedScene" uid="uid://i0msklgl7gaq" path="res://Assets/lowpoly pack/SM_Light_B.prefab.gltf" id="37_facbu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -170,6 +170,18 @@ transform = Transform3D(0.007330278, 0, 0.99997324, 0, 1, 0, -0.99997324, 0, 0.0
 text = "waiting room"
 font_size = 60
 
+[node name="Fluro" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 4.2809234, 0, -28.65879)
+
+[node name="Fluro2" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 4.3245044, 0, -34.603844)
+
+[node name="Fluro3" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 11.379341, 0, -34.621464)
+
+[node name="Fluro4" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 11.334364, 0, -28.485752)
+
 [node name="Room Office 1" type="Node3D" parent="Level"]
 
 [node name="compymon" parent="Level/Room Office 1" instance=ExtResource("31_seu75")]
@@ -210,12 +222,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.806469, 0, -32.174095)
 
 [node name="Room Pharmacy" type="Node3D" parent="Level"]
 
-[node name="ring" parent="Level/Room Pharmacy" node_paths=PackedStringArray("gridmap") instance=ExtResource("11_efxa6")]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 25.299294, 2, -7.835435)
-gridmap = NodePath("../../../GridMap")
+[node name="pharma" type="Label3D" parent="Level/Room Pharmacy"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.704515, 2.4428668, -27.308006)
+modulate = Color(0.6659669, 0.40723148, 0.96743244, 1)
+text = "pharmacy"
+font_size = 75
 
-[node name="Light" type="OmniLight3D" parent="Level/Room Pharmacy/ring"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.037, 0)
+[node name="ring2" parent="Level/Room Pharmacy" instance=ExtResource("18_facbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.043777, 1.550112, -7.3648763)
+
+[node name="Light" type="OmniLight3D" parent="Level/Room Pharmacy/ring2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024030685, 0.04212904, -0.23860455)
 light_color = Color(0.905279, 0.915045, 0.584185, 1)
 light_energy = 2.181
 light_indirect_energy = 5.376
@@ -223,12 +240,6 @@ light_volumetric_fog_energy = 0.549
 light_size = 0.638
 omni_range = 1.659
 omni_attenuation = -1.374
-
-[node name="pharma" type="Label3D" parent="Level/Room Pharmacy"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.704515, 2.4428668, -27.308006)
-modulate = Color(0.6659669, 0.40723148, 0.96743244, 1)
-text = "pharmacy"
-font_size = 75
 
 [node name="Room Lifts" type="Node3D" parent="Level"]
 
@@ -271,14 +282,14 @@ transform = Transform3D(-8.754432e-08, 0, -1.9999993, 0, 2, 0, 1.9999993, 0, -8.
 [node name="Toilet_Elongated_A2" parent="Level/Room Font loos" instance=ExtResource("28_xuqvo")]
 transform = Transform3D(-8.754432e-08, 0, -1.999999, 0, 2, 0, 1.999999, 0, -8.754432e-08, 5.0762854, 0.10881233, -49.47892)
 
-[node name="Toilet_Round_A" parent="Level/Room Font loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999993, 0, 2, 0, 1.9999993, 0, -8.754432e-08, 11.164243, 0.07406688, -52.357025)
+[node name="Toilet_Elongated_A3" parent="Level/Room Font loos" instance=ExtResource("28_xuqvo")]
+transform = Transform3D(-8.754432e-08, 0, -1.9999989, 0, 2, 0, 1.9999989, 0, -8.754432e-08, 11.120718, 0.10881233, -52.422066)
 
-[node name="Toilet_Round_A2" parent="Level/Room Font loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999992, 0, 2, 0, 1.9999992, 0, -8.754432e-08, 11.190693, 0.07406688, -49.28069)
+[node name="Toilet_Elongated_A4" parent="Level/Room Font loos" instance=ExtResource("28_xuqvo")]
+transform = Transform3D(-8.754432e-08, 0, -1.9999987, 0, 2, 0, 1.9999987, 0, -8.754432e-08, 11.098822, 0.10881233, -49.434772)
 
-[node name="Toilet_Round_A3" parent="Level/Room Font loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999994, 0, 2, 0, 1.9999994, 0, -8.754432e-08, 11.19256, 0.07406688, -46.18103)
+[node name="Toilet_Elongated_A5" parent="Level/Room Font loos" instance=ExtResource("28_xuqvo")]
+transform = Transform3D(-8.754432e-08, 0, -1.9999986, 0, 2, 0, 1.9999986, 0, -8.754432e-08, 11.07789, 0.10881233, -46.579414)
 
 [node name="Sink_A" parent="Level/Room Font loos" instance=ExtResource("26_lswn8")]
 transform = Transform3D(-2, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2, 9.38043, 1.1629024, -39.194267)
@@ -292,16 +303,16 @@ transform = Transform3D(-2, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2, 4.
 [node name="Sink_A4" parent="Level/Room Font loos" instance=ExtResource("26_lswn8")]
 transform = Transform3D(-2, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2, 3.1200073, 1.1769416, -39.240147)
 
-[node name="Urinal_A" parent="Level/Room Font loos" instance=ExtResource("27_a6jrf")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999988, 0, 2, 0, 1.9999988, 0, -8.754432e-08, 5.5965915, 1.0402122, -46.505577)
-
-[node name="Urinal_A2" parent="Level/Room Font loos" instance=ExtResource("27_a6jrf")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999992, 0, 2, 0, 1.9999992, 0, -8.754432e-08, 5.573128, 1.0402122, -43.304394)
-
 [node name="toilets" type="Label3D" parent="Level/Room Font loos"]
 transform = Transform3D(1.0000001, 0, -0.00027925614, 0, 1, 0, 0.00027925614, 0, 1.0000001, 4.504587, 2.3708081, -38.89554)
 text = "toilets"
 font_size = 60
+
+[node name="Urinal_A" parent="Level/Room Font loos" instance=ExtResource("36_facbu")]
+transform = Transform3D(-6.146729e-08, 0, -1.3, 0, 1.3, 0, 1.3, 0, -6.146729e-08, 5.8038096, 1, -46.461815)
+
+[node name="Urinal_A2" parent="Level/Room Font loos" instance=ExtResource("36_facbu")]
+transform = Transform3D(-6.3329935e-08, 0, -1.3, 0, 1.3, 0, 1.3, 0, -6.3329935e-08, 5.783516, 1, -43.693493)
 
 [node name="Room Storage" type="Node3D" parent="Level"]
 
@@ -318,23 +329,61 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 28.7
 text = "storage"
 font_size = 60
 
+[node name="Room Exam 1" type="Node3D" parent="Level"]
+
+[node name="hospital_beds" parent="Level/Room Exam 1" instance=ExtResource("3_dg77c")]
+transform = Transform3D(-1.9999498, 0, -0.014660843, 0, 2, 0, 0.014660843, 0, -1.9999498, -4.2668834, 0, -66.15272)
+
+[node name="hospital_beds2" parent="Level/Room Exam 1" instance=ExtResource("3_dg77c")]
+transform = Transform3D(1.9999498, 0, 0.014660668, 0, 2, 0, -0.014660668, 0, 1.9999498, -4.2668314, 0, -56.686367)
+
+[node name="hospital_beds4" parent="Level/Room Exam 1" instance=ExtResource("3_dg77c")]
+transform = Transform3D(-1.9999498, 0, -0.014660843, 0, 2, 0, 0.014660843, 0, -1.9999498, 0.40449718, 0, -66.1527)
+
+[node name="hospital_beds5" parent="Level/Room Exam 1" instance=ExtResource("3_dg77c")]
+transform = Transform3D(1.9999498, 0, 0.014660668, 0, 2, 0, -0.014660668, 0, 1.9999498, 0.40454894, 0, -56.686367)
+
+[node name="hospital_beds6" parent="Level/Room Exam 1" instance=ExtResource("3_dg77c")]
+transform = Transform3D(-1.9999498, 0, -0.014660843, 0, 2, 0, 0.014660843, 0, -1.9999498, 5.0213447, 0, -66.152695)
+
+[node name="hospital_beds7" parent="Level/Room Exam 1" instance=ExtResource("3_dg77c")]
+transform = Transform3D(1.9999498, 0, 0.014660668, 0, 2, 0, -0.014660668, 0, 1.9999498, 5.0213966, 0, -56.686363)
+
+[node name="Room Exam 2" type="Node3D" parent="Level"]
+
+[node name="hospital_beds8" parent="Level/Room Exam 2" instance=ExtResource("3_dg77c")]
+transform = Transform3D(-1.9999498, 0, -0.014660843, 0, 2, 0, 0.014660843, 0, -1.9999498, -4.266884, 0, -81.75766)
+
+[node name="hospital_beds9" parent="Level/Room Exam 2" instance=ExtResource("3_dg77c")]
+transform = Transform3D(1.9999498, 0, 0.014660668, 0, 2, 0, -0.014660668, 0, 1.9999498, -4.2668314, 0, -72.291306)
+
+[node name="hospital_beds10" parent="Level/Room Exam 2" instance=ExtResource("3_dg77c")]
+transform = Transform3D(-1.9999498, 0, -0.014660843, 0, 2, 0, 0.014660843, 0, -1.9999498, 0.40449733, 0, -81.75763)
+
+[node name="hospital_beds11" parent="Level/Room Exam 2" instance=ExtResource("3_dg77c")]
+transform = Transform3D(1.9999498, 0, 0.014660668, 0, 2, 0, -0.014660668, 0, 1.9999498, 0.404549, 0, -72.29129)
+
+[node name="hospital_beds12" parent="Level/Room Exam 2" instance=ExtResource("3_dg77c")]
+transform = Transform3D(-1.9999498, 0, -0.014660843, 0, 2, 0, 0.014660843, 0, -1.9999498, 5.021344, 0, -81.75762)
+
+[node name="hospital_beds13" parent="Level/Room Exam 2" instance=ExtResource("3_dg77c")]
+transform = Transform3D(1.9999498, 0, 0.014660668, 0, 2, 0, -0.014660668, 0, 1.9999498, 5.0213966, 0, -72.29128)
+
+[node name="Room Exam 3" type="Node3D" parent="Level"]
+
+[node name="wheelchair3" parent="Level/Room Exam 3" instance=ExtResource("29_kq58d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.984184, 0.11643934, -94.999695)
+
+[node name="Room Waiting 2" type="Node3D" parent="Level"]
+
+[node name="vending3" parent="Level/Room Waiting 2" instance=ExtResource("29_jq2sk")]
+transform = Transform3D(-0.0043806694, 0, 0.9999905, 0, 1, 0, -0.9999905, 0, -0.0043806694, 52.92886, 0.10431743, -47.617184)
+
+[node name="vending4" parent="Level/Room Waiting 2" instance=ExtResource("29_jq2sk")]
+transform = Transform3D(-0.0043806694, 0, 0.9999905, 0, 1, 0, -0.9999905, 0, -0.0043806694, 52.921932, 0.10431743, -49.19757)
+
 [node name="Room Back loos" type="Node3D" parent="Level"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, -0.703, 0, -65.952)
-
-[node name="Toilet_Round_A" parent="Level/Room Back loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999994, 0, 2, 0, 1.9999994, 0, -8.754432e-08, 11.395041, 0.19527173, -52.35534)
-
-[node name="Toilet_Round_A2" parent="Level/Room Back loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999993, 0, 2, 0, 1.9999993, 0, -8.754432e-08, 11.421491, 0.19527173, -49.279)
-
-[node name="Toilet_Round_A3" parent="Level/Room Back loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999994, 0, 2, 0, 1.9999994, 0, -8.754432e-08, 11.423358, 0.19527173, -46.179337)
-
-[node name="Toilet_Round_A4" parent="Level/Room Back loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999993, 0, 2, 0, 1.9999993, 0, -8.754432e-08, 5.4660025, 0.19527173, -49.446182)
-
-[node name="Toilet_Round_A5" parent="Level/Room Back loos" instance=ExtResource("25_0odxb")]
-transform = Transform3D(-8.754432e-08, 0, -1.999999, 0, 2, 0, 1.999999, 0, -8.754432e-08, 5.4864335, 0.19527173, -52.233418)
 
 [node name="Sink_A" parent="Level/Room Back loos" instance=ExtResource("26_lswn8")]
 transform = Transform3D(-2, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2, 9.38043, 1.1629024, -39.194267)
@@ -347,51 +396,6 @@ transform = Transform3D(-2, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2, 4.
 
 [node name="Sink_A4" parent="Level/Room Back loos" instance=ExtResource("26_lswn8")]
 transform = Transform3D(-2, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2, 3.1200073, 1.1769416, -39.240147)
-
-[node name="Urinal_A" parent="Level/Room Back loos" instance=ExtResource("27_a6jrf")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999989, 0, 2, 0, 1.9999989, 0, -8.754432e-08, 5.5980406, 1.0402122, -46.703194)
-
-[node name="Urinal_A2" parent="Level/Room Back loos" instance=ExtResource("27_a6jrf")]
-transform = Transform3D(-8.754432e-08, 0, -1.9999994, 0, 2, 0, 1.9999994, 0, -8.754432e-08, 5.584067, 1.0402122, -44.796593)
-
-[node name="Beds" type="Node3D" parent="Level"]
-transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, 0, 0, 0)
-
-[node name="hospital_beds" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(-2.0000038, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2.0000038, -3.7818487, 0, -66.18223)
-
-[node name="hospital_beds2" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(2.0000038, 0, 0, 0, 2, 0, 0, 0, 2.0000038, -3.8511882, 0, -56.716125)
-
-[node name="hospital_beds4" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(-2.0000038, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2.0000038, 0.8894069, 0, -66.147964)
-
-[node name="hospital_beds5" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(2.0000038, 0, 0, 0, 2, 0, 0, 0, 2.0000038, 0.8200674, 0, -56.681885)
-
-[node name="hospital_beds6" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(-2.0000038, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2.0000038, 5.506131, 0, -66.11412)
-
-[node name="hospital_beds7" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(2.0000038, 0, 0, 0, 2, 0, 0, 0, 2.0000038, 5.436792, 0, -56.64804)
-
-[node name="hospital_beds8" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(-2.0000038, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2.0000038, -3.6674595, 0, -81.78675)
-
-[node name="hospital_beds9" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(2.0000038, 0, 0, 0, 2, 0, 0, 0, 2.0000038, -3.7367988, 0, -72.32065)
-
-[node name="hospital_beds10" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(-2.0000038, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2.0000038, 1.0037962, 0, -81.75248)
-
-[node name="hospital_beds11" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(2.0000038, 0, 0, 0, 2, 0, 0, 0, 2.0000038, 0.9344566, 0, -72.28639)
-
-[node name="hospital_beds12" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(-2.0000038, 0, -1.7508864e-07, 0, 2, 0, 1.7508864e-07, 0, -2.0000038, 5.6205196, 0, -81.71863)
-
-[node name="hospital_beds13" parent="Level/Beds" instance=ExtResource("3_dg77c")]
-transform = Transform3D(2.0000038, 0, 0, 0, 2, 0, 0, 0, 2.0000038, 5.551181, 0, -72.25254)
 
 [node name="Door" parent="Level" instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9853187, 1.4890633, -12.5060425)
@@ -423,17 +427,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.877449, 1.4499439, -30.825
 [node name="Pickup4" parent="Level" instance=ExtResource("18_074og")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.99152, 0.916982, 12.1531)
 
-[node name="vending3" parent="Level" instance=ExtResource("29_jq2sk")]
-transform = Transform3D(-0.0043806694, 0, 0.9999905, 0, 1, 0, -0.9999905, 0, -0.0043806694, 52.92886, 0.10431743, -47.617184)
-
-[node name="vending4" parent="Level" instance=ExtResource("29_jq2sk")]
-transform = Transform3D(-0.0043806694, 0, 0.9999905, 0, 1, 0, -0.9999905, 0, -0.0043806694, 52.921932, 0.10431743, -49.19757)
-
 [node name="wheelchair2" parent="Level" instance=ExtResource("29_kq58d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.206844, 0.11643934, -116.83435)
-
-[node name="wheelchair3" parent="Level" instance=ExtResource("29_kq58d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.984184, 0.11643934, -94.999695)
 
 [node name="wheelchair4" parent="Level" instance=ExtResource("29_kq58d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 53.479412, 0.11643934, -97.568184)
