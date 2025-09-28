@@ -33,6 +33,7 @@ var mouse_free := true
 var start_rotation := Vector3.ZERO
 
 var pointer_on_thing = null
+var last_pointed_object = null
 var scanned_thing = null
 var wall_fwd = {}
 
@@ -283,6 +284,13 @@ func _process(delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and pointer_on_thing != null:
 		if pointer_on_thing.has_method("click_pickup"):
 			pointer_on_thing.click_pickup(self)
+	
+	# emit if new thing moused over in case they has stuff to do when moused on/off
+	if pointer_on_thing != last_pointed_object:
+		last_pointed_object = pointer_on_thing
+		SignalBus.hovered_object_changed.emit(pointer_on_thing)
+
+		
 
 func raycast_ahead(dir):
 	var dir_norm = transform.basis.z.normalized() * dir

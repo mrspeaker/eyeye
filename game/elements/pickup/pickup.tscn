@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cegan"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" groups=["Pickup"]]
 script = ExtResource("1_w677d")
 item = ExtResource("2_meels")
 
@@ -17,3 +17,5 @@ transform = Transform3D(1.01301, 0.0235508, 0, -0.037765, 0.631727, 0, 0, 0, 1, 
 shape = SubResource("CapsuleShape3D_cegan")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]
