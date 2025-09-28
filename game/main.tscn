@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=44 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -24,6 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
 [ext_resource type="PackedScene" uid="uid://b536lxdtrtuet" path="res://elements/ringu/ring.tscn" id="18_facbu"]
 [ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://elements/ghoul/ghoul.tscn" id="24_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://ui1f70xj22re" path="res://models/mri_machine.glb" id="25_come4"]
+[ext_resource type="PackedScene" uid="uid://ludg30fe4squ" path="res://models/crumble_sign.glb" id="26_h8e4i"]
 [ext_resource type="PackedScene" uid="uid://dsp36wupbdnyi" path="res://scenes/sink_a.tscn" id="26_lswn8"]
 [ext_resource type="PackedScene" uid="uid://ufcke1sx7h6w" path="res://Assets/LoafbrrAssets/Toilets/Scenes/Objects/toilet_elongated_a.tscn" id="28_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://bajwlf7krkin8" path="res://models/vending1.glb" id="29_jq2sk"]
@@ -286,6 +288,15 @@ font_size = 60
 
 [node name="Table_Variant_2" parent="Level/Room Psych Ward" instance=ExtResource("36_ok6jj")]
 transform = Transform3D(1.2999649, 0, -0.009529419, 0, 1.3, 0, 0.009529419, 0, 1.2999649, 49.294807, 0.107306, -28.468987)
+
+[node name="mri_machine" parent="Level/Room Psych Ward" instance=ExtResource("25_come4")]
+transform = Transform3D(0.005113774, 0, 0.99998695, 0, 1, 0, -0.99998695, 0, 0.005113774, -1.1711154, 0, -90.09357)
+
+[node name="crumble_sign" parent="Level/Room Psych Ward" instance=ExtResource("26_h8e4i")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, -5.5729547, 1.9057412, -104.879684)
+
+[node name="crumble_sign2" parent="Level/Room Psych Ward" instance=ExtResource("26_h8e4i")]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 57.140102, 1.9057412, -104.879684)
 
 [node name="Room Font loos" type="Node3D" parent="Level"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, 0, 0, 0)
