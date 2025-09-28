@@ -162,6 +162,7 @@ func _physics_process(dt: float) -> void:
 
 	if dir != 0 and can_move:
 		var next_cell = get_next_cell(dir)
+		print(position.x)
 		#var next_cell_item := gridmap.get_cell_item(next_cell)
 		move_start_pos = position
 		

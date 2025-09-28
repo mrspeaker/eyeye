@@ -18,7 +18,7 @@ script = ExtResource("1_liegp")
 camera = NodePath("CameraController/Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9981085, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_j0767")
 
 [node name="CameraController" type="Node3D" parent="."]
