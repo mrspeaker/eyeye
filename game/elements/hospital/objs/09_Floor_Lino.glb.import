@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://quc2lel5w83y"
-path="res://.godot/imported/08_Floor_Lino.glb-acdc06ca3f215df277d24265637741f1.scn"
+uid="uid://cj5m0vo5a5van"
+path="res://.godot/imported/09_Floor_Lino.glb-c1babf384ac79ef1c09314cfe740e3ae.scn"
 
 [deps]
 
-source_file="res://elements/hospital/objs/08_Floor_Lino.glb"
-dest_files=["res://.godot/imported/08_Floor_Lino.glb-acdc06ca3f215df277d24265637741f1.scn"]
+source_file="res://elements/hospital/objs/09_Floor_Lino.glb"
+dest_files=["res://.godot/imported/09_Floor_Lino.glb-c1babf384ac79ef1c09314cfe740e3ae.scn"]
 
 [params]
 

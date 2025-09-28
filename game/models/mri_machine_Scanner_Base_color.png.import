@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://udssjqu2uwbk"
-path.s3tc="res://.godot/imported/08_Floor_Lino_F10.png-fa6d44e65d00b6221bca3274fde24779.s3tc.ctex"
+uid="uid://dhvy7s46j45ya"
+path.s3tc="res://.godot/imported/mri_machine_Scanner_Base_color.png-c208dc3e4f02c1780f747e01e37317f5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d894a2289e07cc2ca68098586c7211d4"
+"md5": "a15740288dd1571ac3b89932162d7208"
 }
 
 [deps]
 
-source_file="res://elements/hospital/objs/08_Floor_Lino_F10.png"
-dest_files=["res://.godot/imported/08_Floor_Lino_F10.png-fa6d44e65d00b6221bca3274fde24779.s3tc.ctex"]
+source_file="res://models/mri_machine_Scanner_Base_color.png"
+dest_files=["res://.godot/imported/mri_machine_Scanner_Base_color.png-c208dc3e4f02c1780f747e01e37317f5.s3tc.ctex"]
 
 [params]
 

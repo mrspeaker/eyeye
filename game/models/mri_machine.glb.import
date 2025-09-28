@@ -3,12 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://1wnahoi43oro"
-valid=false
+uid="uid://ui1f70xj22re"
+path="res://.godot/imported/mri_machine.glb-ba6c3121ac8e677f9ab06795bf7b65a5.scn"
 
 [deps]
 
-source_file="res://elements/hospital/objs/00_TestCube.glb"
+source_file="res://models/mri_machine.glb"
+dest_files=["res://.godot/imported/mri_machine.glb-ba6c3121ac8e677f9ab06795bf7b65a5.scn"]
 
 [params]
 
