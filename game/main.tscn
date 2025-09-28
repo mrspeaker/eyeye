@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=45 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cr3afoq8poqwa" path="res://components/health_component.gd" id="5_w48qg"]
 [ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://elements/scarecrow/scarecrow.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://d08x7vijxbycr" path="res://scripts/scarecrow.gd" id="6_272bh"]
+[ext_resource type="Script" uid="uid://c3sgvcmh21pi1" path="res://flashlight.gd" id="6_h8e4i"]
 [ext_resource type="MeshLibrary" uid="uid://1a3532pmbk0l" path="res://elements/hospital/objs/tile_scenes/meshes.meshlib" id="7_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://coijfyox5m5lc" path="res://scenes/barrels.tscn" id="8_5vw27"]
 [ext_resource type="Script" uid="uid://mc2a320q2neq" path="res://ui_manager.gd" id="8_82xsv"]
@@ -52,7 +53,7 @@ background_energy_multiplier = 0.2
 sky = SubResource("Sky_kek77")
 ambient_light_source = 3
 ambient_light_color = Color(0.051599998, 0.06, 0.058039997, 1)
-ambient_light_sky_contribution = 0.1
+ambient_light_sky_contribution = 0.95
 ambient_light_energy = 11.13
 reflected_light_source = 2
 tonemap_mode = 2
@@ -124,7 +125,12 @@ health_component = NodePath("../HealthComponent")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Controller"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2356507, -0.40715027)
-light_energy = 6.749
+light_energy = 7.0
+light_volumetric_fog_energy = 0.0
+spot_range = 15.0
+spot_attenuation = 2.0
+spot_angle = 20.0
+script = ExtResource("6_h8e4i")
 
 [node name="HealthComponent" type="Node" parent="Player"]
 script = ExtResource("5_w48qg")
@@ -558,6 +564,7 @@ offset_right = 170.5
 offset_bottom = 108.5
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.156863)
 self_modulate = Color(0.635133, 0.2335, 0.107684, 1)
 offset_left = -5.0
