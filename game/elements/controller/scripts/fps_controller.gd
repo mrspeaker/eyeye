@@ -289,7 +289,6 @@ func _process(delta):
 	if pointer_on_thing != last_pointed_object:
 		last_pointed_object = pointer_on_thing
 		SignalBus.hovered_object_changed.emit(pointer_on_thing)
-
 		
 
 func raycast_ahead(dir):
