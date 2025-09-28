@@ -324,13 +324,14 @@ func scan_cell_ahead():
 			return node
 	return null
 
+# is enemy within cone in front of player
 func is_enemy_in_view(enemy: Node3D, fov_degrees: float = 90.0) -> bool:
 	var to_enemy = (enemy.global_transform.origin - global_transform.origin).normalized()
 	var forward = -global_transform.basis.z.normalized()  # Assuming -Z is forward
 	var angle = rad_to_deg(acos(forward.dot(to_enemy)))
 	return angle <= fov_degrees / 2
 
-	
+# is enemy unobstructed from view
 func is_enemy_visible(enemy: Node3D) -> bool:
 	var space_state = get_world_3d().direct_space_state
 	var origin = $RayOrigin.global_transform.origin 
@@ -355,15 +356,10 @@ func is_enemy_visible(enemy: Node3D) -> bool:
 
 		var result = space_state.intersect_ray(query)
 		result = result.get("collider")
-		#get root node
 		if result is CharacterBody3D:
 			result = result.get_parent()
 
-		#print('enemy ', enemy)
-		#print('result ', result)
-		
 		if result == enemy:
-			##print(enemy)
 			return true  # At least one part is visible
 
 	return false
