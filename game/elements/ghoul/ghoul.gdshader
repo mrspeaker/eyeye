@@ -19,6 +19,7 @@ float vignette(vec2 uv){
 
 void fragment() {
 	vec4 color = texture(sprite_texture, UV);
+	vec4 ocolor = color;
 	float scanlines = 0.5;
 	float width = scanlines_width;
 	width += abs(sin(TIME))+0.2;
