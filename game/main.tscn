@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=46 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://bfam8rwiq7snf" path="res://Assets/LoafbrrAssets/Toilets/Scenes/Objects/urinal_a.tscn" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://bg13ugdp78pba" path="res://scenes/table_variant_2.tscn" id="36_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://i0msklgl7gaq" path="res://Assets/lowpoly pack/SM_Light_B.prefab.gltf" id="37_facbu"]
+[ext_resource type="PackedScene" uid="uid://cmeit4kxblibp" path="res://scenes/fluro.tscn" id="41_4lmeg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -148,7 +149,6 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="GridMap-Roof" type="GridMap" parent="."]
 unique_name_in_owner = true
-visible = false
 mesh_library = ExtResource("7_1u8w0")
 cell_size = Vector3(1.5, 3, 1.5)
 cell_center_x = false
@@ -173,20 +173,20 @@ transform = Transform3D(-0.0073303655, 0, -0.99997324, 0, 1, 0, 0.99997324, 0, -
 transform = Transform3D(-0.0073303645, 0, -0.9999731, 0, 1, 0, 0.9999731, 0, -0.0073303645, 1.0281901, -0.346693, -25.585705)
 script = ExtResource("6_272bh")
 
-[node name="Fluro" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
-transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 4.2809234, 0, -28.65879)
+[node name="Fluro" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 4.165, 0, -30.491)
 
-[node name="Fluro2" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
-transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 4.3245044, 0, -34.603844)
+[node name="Fluro2" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 4.2013526, 0, -35.387653)
 
-[node name="Fluro3" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
-transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 11.379341, 0, -34.621464)
+[node name="Fluro3" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 10.788997, 0, -35.339363)
 
-[node name="Fluro4" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
-transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 11.334364, 0, -28.485752)
+[node name="Fluro4" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 10.754, 0, -30.556)
 
-[node name="Fluro5" parent="Level/Room Entrance Waiting" instance=ExtResource("37_facbu")]
-transform = Transform3D(-4.377216e-08, 0, 1.0000001, 0, 1, 0, -1.0000001, 0, -4.377216e-08, 20.94472, 0, -28.446747)
+[node name="Fluro6" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(-4.377216e-08, 0, 1.0000001, 0, 1, 0, -1.0000001, 0, -4.377216e-08, 27.494377, 0, -28.33025)
 
 [node name="Bench" parent="Level/Room Entrance Waiting" instance=ExtResource("31_facbu")]
 transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 7.506264, 0.07742554, -24.41366)
@@ -242,7 +242,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.406857, 0.66995597, -31.89
 [node name="Room Pharmacy" type="Node3D" parent="Level"]
 
 [node name="pharma" type="Label3D" parent="Level/Room Pharmacy"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.704515, 2.4428668, -27.308006)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 28.450588, 2.6332955, -27.086103)
 modulate = Color(0.6659669, 0.40723148, 0.96743244, 1)
 text = "pharmacy"
 font_size = 75

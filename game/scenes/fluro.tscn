@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmeit4kxblibp"]
+
+[ext_resource type="PackedScene" uid="uid://i0msklgl7gaq" path="res://Assets/lowpoly pack/SM_Light_B.prefab.gltf" id="1_b7ci1"]
+
+[node name="Fluro" type="Node3D"]
+
+[node name="Fluro" parent="." instance=ExtResource("1_b7ci1")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.3459892, 0)
+light_energy = 0.5
+omni_range = 4.0
+omni_attenuation = 0.2
