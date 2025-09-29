@@ -133,9 +133,7 @@ func update_camera(dt):
 func _physics_process(dt: float) -> void:
 	if not enabled:
 		return
-	
 	update_camera(dt)
-
 	# gravity	
 	if not is_on_floor():
 		velocity += get_gravity() * dt
@@ -144,7 +142,7 @@ func _physics_process(dt: float) -> void:
 		get_tree().reload_current_scene()
 
 	var fwd = Input.is_action_pressed("move_forward")
-	var bak = Input.is_action_pressed("move_backward")	
+	var bak = Input.is_action_pressed("move_backward")
 	var dir = -1 if fwd else 1 if bak else 0 
 	var wall_ahead = raycast_ahead(dir) # "ahead" is direction moving - not necessarily fwd
 
@@ -163,7 +161,6 @@ func _physics_process(dt: float) -> void:
 
 	if dir != 0 and can_move:
 		var next_cell = get_next_cell(dir)
-		print(position.x)
 		#var next_cell_item := gridmap.get_cell_item(next_cell)
 		move_start_pos = position
 		
@@ -291,6 +288,11 @@ func _process(delta):
 		SignalBus.hovered_object_changed.emit(pointer_on_thing)
 		
 
+"""
+Send a ray either forward (-1) or backwards (1) along the z axis
+
+returns a dictionary of hits
+"""
 func raycast_ahead(dir):
 	var dir_norm = transform.basis.z.normalized() * dir
 	var ray = PhysicsRayQueryParameters3D.new()
@@ -317,10 +319,10 @@ func scan_cell_ahead():
 	var next_cell = get_next_cell(-1)
 	var world_pos = gridmap.map_to_local(next_cell)
 	for node in get_tree().get_nodes_in_group("NPC"):
-		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x / 2:
+		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x * 2:
 			return node
 	for node in get_tree().get_nodes_in_group("Container"):
-		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x / 2:
+		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x * 2:
 			return node
 	return null
 
@@ -384,8 +386,10 @@ func _draw_ray(from: Vector3, to: Vector3):
 
 func get_next_cell(dir):
 	var grid_pos = gridmap.local_to_map(position)
+	# "Modulus" postions: can only be in one of the 2x2 cells
+	var grid_pos_mod_two = Vector3i(floor(grid_pos / 2) * 2) + Vector3i(1, 0, -1)
 	var one_cell = Vector3i(dir * basis.z.round() * 2.0)   
-	var next_cell = grid_pos + one_cell
+	var next_cell = grid_pos_mod_two + one_cell
 	return next_cell
 	
 func clear_destination():
