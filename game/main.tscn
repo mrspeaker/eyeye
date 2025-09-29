@@ -424,6 +424,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.275574, 0.07077837, -42.94
 [node name="Bench2" parent="Level/Room Waiting 2" instance=ExtResource("31_facbu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49.27099, 0.07077837, -42.943268)
 
+[node name="Fluro" parent="Level/Room Waiting 2" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 50.58894, 0, -48.428074)
+
 [node name="Room Back loos" type="Node3D" parent="Level"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, -0.703, 0, -65.952)
 
