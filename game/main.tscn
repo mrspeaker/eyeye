@@ -53,7 +53,6 @@ background_energy_multiplier = 0.2
 sky = SubResource("Sky_kek77")
 ambient_light_source = 3
 ambient_light_color = Color(0.051599998, 0.06, 0.058039997, 1)
-ambient_light_sky_contribution = 0.99
 ambient_light_energy = 11.13
 reflected_light_source = 2
 tonemap_mode = 2

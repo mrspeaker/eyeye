@@ -3,6 +3,17 @@ extends SpotLight3D
 @onready var camera: Camera3D = get_node("%Controller/CameraController/Camera3D")
 @onready var spotlight: SpotLight3D = $"."
 
+#var flashlight_on = false
+
+func _ready() -> void:
+	visible = Globals.flashlight_on
+
+func _input(event):
+	if event.is_action_pressed("flashlight"):
+		Globals.flashlight_on = !Globals.flashlight_on
+		visible = Globals.flashlight_on
+		SignalBus.flashlight_toggled.emit()
+
 func _process(delta):
 	if camera == null:
 		return

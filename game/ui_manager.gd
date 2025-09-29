@@ -15,6 +15,7 @@ var stress = 0
 
 func _ready():
 	SignalBus.interactable_scanned.connect(on_scanned)
+	SignalBus.connect("flashlight_toggled", _on_flashlight_toggled)
 
 	# Starting with this centres the mouse before swapping
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -51,8 +52,19 @@ func _on_fade_timer_timeout():
 
 func _on_fade_complete():
 	fade_tween = null
-	suppress_next_motion = true
-	get_viewport().warp_mouse(get_viewport().size / 2)
+	if !Globals.flashlight_on:
+		suppress_next_motion = true
+		get_viewport().warp_mouse(get_viewport().size / 2)
+
+func _on_flashlight_toggled():
+	#print('here')
+	if !Globals.flashlight_on and fade_timer.is_stopped():
+		suppress_next_motion = true
+		get_viewport().warp_mouse(get_viewport().size / 2)
+	elif not fade_timer.is_stopped():
+		print(fade_timer.wait_time)
+		fade_timer.start(fade_timer.wait_time)
+		
 
 func _process(_delta):
 	cursor.position = get_viewport().get_mouse_position() - (cursor_texture_size / 2)
