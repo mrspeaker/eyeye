@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://elements/ringu_amy/ringu_amy.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
-[ext_resource type="PackedScene" uid="uid://b536lxdtrtuet" path="res://elements/ringu/ring.tscn" id="18_facbu"]
+[ext_resource type="PackedScene" uid="uid://bxf6nxlqdci8j" path="res://elements/ringu/ringu.tscn" id="20_4lmeg"]
 [ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://elements/ghoul/ghoul.tscn" id="24_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://ui1f70xj22re" path="res://models/mri_machine.glb" id="25_come4"]
 [ext_resource type="PackedScene" uid="uid://ludg30fe4squ" path="res://models/crumble_sign.glb" id="26_h8e4i"]
@@ -119,7 +119,7 @@ script = ExtResource("4_vivmo")
 
 [node name="Controller" parent="Player" node_paths=PackedStringArray("gridmap", "health_component") instance=ExtResource("1_ig7tw")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -22.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, -22.5)
 gridmap = NodePath("../../GridMap")
 health_component = NodePath("../HealthComponent")
 
@@ -243,24 +243,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.043329, 0.66995597, -67.96
 
 [node name="Room Pharmacy" type="Node3D" parent="Level"]
 
+[node name="Ringu" parent="Level/Room Pharmacy" node_paths=PackedStringArray("gridmap") groups=["Enemy"] instance=ExtResource("20_4lmeg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 1.3261094, -35)
+gridmap = NodePath("../../../GridMap")
+
 [node name="pharma" type="Label3D" parent="Level/Room Pharmacy"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 28.450588, 2.6332955, -27.086103)
 modulate = Color(0.6659669, 0.40723148, 0.96743244, 1)
 text = "pharmacy"
 font_size = 75
-
-[node name="ring2" parent="Level/Room Pharmacy" instance=ExtResource("18_facbu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.043777, 1.550112, -7.3648763)
-
-[node name="Light" type="OmniLight3D" parent="Level/Room Pharmacy/ring2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024030685, 0.04212904, -0.23860455)
-light_color = Color(0.905279, 0.915045, 0.584185, 1)
-light_energy = 2.181
-light_indirect_energy = 5.376
-light_volumetric_fog_energy = 0.549
-light_size = 0.638
-omni_range = 1.659
-omni_attenuation = -1.374
 
 [node name="Room Lifts" type="Node3D" parent="Level"]
 

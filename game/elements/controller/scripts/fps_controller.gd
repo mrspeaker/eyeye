@@ -231,9 +231,8 @@ func _process(delta):
 		if is_enemy_in_view_cone(enemy):
 			if is_enemy_visible(enemy):
 				var dist = position.distance_squared_to(enemy.position)
-				if dist < 100:
+				if dist < 150:
 					get_node("../../UI").stress_increase()
-				#print(enemy, ' is visible')
 	
 	if turning:
 		turn_elapsed_time += delta
@@ -359,7 +358,7 @@ func is_enemy_visible(enemy: Node3D) -> bool:
 
 		var result = space_state.intersect_ray(query)
 		result = result.get("collider")
-		if result is CharacterBody3D:
+		if result is CharacterBody3D and result != enemy:
 			result = result.get_parent()
 
 		if result == enemy:
