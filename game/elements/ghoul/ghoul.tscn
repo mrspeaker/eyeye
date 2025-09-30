@@ -1,17 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0o57keahxavf"]
+[gd_scene load_steps=3 format=3 uid="uid://c0o57keahxavf"]
 
-[ext_resource type="Shader" uid="uid://b61q613qfwyi8" path="res://elements/ghoul/ghoul.gdshader" id="1_idavm"]
 [ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://elements/ghoul/assets/ghoul.png" id="1_pn4bt"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bc2bp"]
-render_priority = 0
-shader = ExtResource("1_idavm")
-shader_parameter/sprite_texture = ExtResource("1_pn4bt")
-shader_parameter/vignette_intensity = -0.01
-shader_parameter/vignette_opacity = 0.2150000102125
-shader_parameter/scanlines_opacity = 0.1130000053675
-shader_parameter/scanlines_width = 0.0470000022325
-shader_parameter/resolution = Vector2(640, 480)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_idavm"]
 size = Vector3(1, 2.4806519, 1)
@@ -20,9 +9,10 @@ size = Vector3(1, 2.4806519, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26635635, 0.957031, 0.15895915)
-material_override = SubResource("ShaderMaterial_bc2bp")
 pixel_size = 0.001
 billboard = 2
+shaded = true
+double_sided = false
 texture = ExtResource("1_pn4bt")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
