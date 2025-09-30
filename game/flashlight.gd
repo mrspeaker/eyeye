@@ -32,10 +32,11 @@ func _process(delta):
 
 	# Apply mirrored offset in camera space
 	#var offset_x = mirrored_x * 0.2  # horizontal sway
+	var offset_x = 0.0  # horizontal sway
 	var offset_y = mirrored_y * 0.1  # vertical sway
 
 	var offset = (
-		camera.transform.basis.x * 0.0 +
+		camera.transform.basis.x * offset_x +
 		camera.transform.basis.y * offset_y
 	)
 
