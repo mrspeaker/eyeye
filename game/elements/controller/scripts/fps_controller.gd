@@ -228,10 +228,11 @@ func _process(delta):
 		return
 	
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		if is_enemy_in_view(enemy):
-			#print(enemy, ' in view')
+		if is_enemy_in_view_cone(enemy):
 			if is_enemy_visible(enemy):
-				get_node("../../UI").stress_increase()
+				var dist = position.distance_squared_to(enemy.position)
+				if dist < 100:
+					get_node("../../UI").stress_increase()
 				#print(enemy, ' is visible')
 	
 	if turning:
@@ -327,7 +328,7 @@ func scan_cell_ahead():
 	return null
 
 # is enemy within cone in front of player
-func is_enemy_in_view(enemy: Node3D, fov_degrees: float = 90.0) -> bool:
+func is_enemy_in_view_cone(enemy: Node3D, fov_degrees: float = 90.0) -> bool:
 	var to_enemy = (enemy.global_transform.origin - global_transform.origin).normalized()
 	var forward = -global_transform.basis.z.normalized()  # Assuming -Z is forward
 	var angle = rad_to_deg(acos(forward.dot(to_enemy)))

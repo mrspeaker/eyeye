@@ -237,7 +237,7 @@ font_size = 60
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.485533, 1.4062284, -41.275696)
 
 [node name="Ghoul" parent="Level/Room Office 1" instance=ExtResource("24_1u8w0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.406857, 0.66995597, -31.890312)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.043329, 0.66995597, -67.96965)
 
 [node name="Room Pharmacy" type="Node3D" parent="Level"]
 
