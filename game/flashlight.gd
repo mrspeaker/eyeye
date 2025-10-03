@@ -15,7 +15,7 @@ func _input(event):
 		visible = Globals.flashlight_on
 		SignalBus.flashlight_toggled.emit()
 
-func _process(delta):
+func _process(_delta):
 	if camera == null:
 		return
 
@@ -27,7 +27,7 @@ func _process(delta):
 	var normalized = Vector2(mouse_pos.x / screen_size.x, mouse_pos.y / screen_size.y)
 
 	# Mirror both axes: top-left → bottom-right
-	var mirrored_x = (1.0 - normalized.x - 0.5) * 2.0  # range [-1, 1]
+	#var mirrored_x = (1.0 - normalized.x - 0.5) * 2.0  # range [-1, 1]
 	var mirrored_y = (1.0 - normalized.y - 0.5) * -2.0
 
 	# Apply mirrored offset in camera space

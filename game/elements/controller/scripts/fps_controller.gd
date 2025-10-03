@@ -156,9 +156,7 @@ func _physics_process(dt: float) -> void:
 			SignalBus.interactable_scanned.emit(scanned_thing)
 
 	var blocked = fwd and scanned_thing != null
-	
 	var can_move = not moving and not turning and not blocked
-
 	if dir != 0 and can_move:
 		var next_cell = get_next_cell(dir)
 		#var next_cell_item := gridmap.get_cell_item(next_cell)

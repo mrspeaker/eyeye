@@ -15,7 +15,7 @@ var move_elapsed = 0.0
 var cell_size_x = 0
 var active = false
 
-var dir = -1
+var dir = Globals.Dir.NONE
 
 var rng = RandomNumberGenerator.new()
 
@@ -37,27 +37,26 @@ func _physics_process(dt: float) -> void:
 	move_time -= dt;
 	can_move = move_time <= 0 and not turning and dest_pos == null
 	#var dir = -1 if rng.randi_range(0, 1) == 0 else 1
-	if dir == -1:
-		dir = rng.randi_range(0, 3)
-		
+	if dir == Globals.Dir.NONE:
+		dir = rng.randi_range(Globals.Dir.N, Globals.Dir.W) as Globals.Dir
+
 	# movement check and logic
 	if can_move:
 		print(dir)
-		#if gridmap.get_cell_item(next_cell)
+		var cur_cell = gridmap.pos_to_two_cell(position)
 		var next_cell = get_next_cell(dir)
-		
+		print(cur_cell, next_cell)	
 		# Check if free spot
-		print(next_cell, gridmap.get_cell_item(next_cell))
-		# TODO: ah, get_cell_item is meaningless in double-grid
-		# Make a func in double_grid.gd to see if this is really
-		# a valid path
-		if gridmap.get_cell_item(next_cell) != -1:
-			dest_pos = gridmap.map_to_local(next_cell)
+
+		if 1 != -1: #and edges[Globals.dir_op(dir)]:
+			# grr, why is  x+1.5 but z +0?
+			dest_pos = gridmap.map_to_local(next_cell) + Vector3(1.5, 0, 0)
+			dest_pos.y = position.y
 			look_at(dest_pos, Vector3.UP, true)
 			start_pos = position
 			move_time = MOVE_TIME
 		else:
-			dir = -1
+			dir = Globals.Dir.NONE
 
 		
 	var move_duration = 0.5        # seconds to reach the target
@@ -79,19 +78,21 @@ func _physics_process(dt: float) -> void:
 			#position.z = new_z
 			#var direct := position.direction_to(dest_pos)
 			var d := transform.basis.z.normalized()  #position.distance_to(dest_pos)
-			var speed := 400.0 * dt
+			var speed := 350.0 * dt
 			velocity = d * speed
 			move_and_slide()
 
-func get_next_cell(dir):
+func get_next_cell(d: Globals.Dir):
 	var x_dir = 0
 	var z_dir = 0
-	if dir == 0: z_dir = -1
-	if dir == 1: z_dir = 1
-	if dir == 2: x_dir = -1
-	if dir == 3: x_dir = 1
-	var grid_pos = gridmap.local_to_map(position)
-	var grid_pos_mod_two = Vector3i(floor(grid_pos / 2) * 2) + Vector3i(1, 0, -1)
-	var one_cell = Vector3i(x_dir * basis.z.round() * 2.0 + z_dir * basis.x.round() * 2.0)   
-	var next_cell = grid_pos_mod_two + one_cell
-	return next_cell
+	if d == Globals.Dir.N: z_dir = -1
+	if d == Globals.Dir.S: z_dir = 1
+	if d == Globals.Dir.E: x_dir = -1
+	if d == Globals.Dir.W: x_dir = 1
+	var cur_cell = gridmap.pos_to_two_cell(position) # gridmap.local_to_map(position)
+	# var grid_pos_mod_two = Vector3i(floor(grid_pos / 2) * 2)# + Vector3i(1, 0, -1)
+	var one_cell = Vector3i(x_dir * basis.z.round() + z_dir * basis.x.round()) * 2
+	return cur_cell + one_cell
+	#var next_cell = grid_pos_mod_two + one_cell
+	#var next_cell = gridmap.get_cell_edge_items(grid_pos + one_cell)
+	#return next_cell
