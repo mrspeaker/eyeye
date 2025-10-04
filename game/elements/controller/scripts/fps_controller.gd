@@ -12,17 +12,22 @@ var enabled := true
 
 var eyes_open := true
 
-var moving := false
 var move_elapsed_time := 0.0
 var move_dest_pos = null
 var move_start_pos = null
 var attempted_move = false
 var attempt_ended = false
 
-var turning := false
 var turn_current_rot := Vector3.ZERO
 var turn_target_rot := Vector3.ZERO
 var turn_elapsed_time := 0.0
+
+enum MoveStates {
+	IDLE,
+	TURNING,
+	MOVING
+}
+var move_state = MoveStates.IDLE;
 
 const MOUSE_ROT_MAX := deg_to_rad(30)
 var mouse_sensitivity := 0.2
@@ -140,88 +145,118 @@ func _physics_process(dt: float) -> void:
 	# Reset if fall off map
 	if position.y < -2.0:
 		get_tree().reload_current_scene()
+	
+	handle_turning(dt)
+	handle_moving(dt)
 
+func handle_moving(dt: float):
+	var prev_state = move_state
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")
 	var dir = -1 if fwd else 1 if bak else 0 
+	var wants_to_move = dir != 0
 	var wall_ahead = raycast_ahead(dir) # "ahead" is direction moving - not necessarily fwd
 
 	# Look for interactable things ahead
 	wall_fwd = raycast_ahead(-1)
-	if not wall_fwd:
-		var last_scanned = scanned_thing
-		scanned_thing = scan_cell_ahead()
-		if scanned_thing != last_scanned:
-			last_scanned = scanned_thing
-			SignalBus.interactable_scanned.emit(scanned_thing)
-
+	if not wall_fwd: set_scanned_thing()
+	
 	var blocked = fwd and scanned_thing != null
-	var can_move = not moving and not turning and not blocked
-	if dir != 0 and can_move:
+	var can_move = move_state == MoveStates.IDLE and not blocked # not moving and not turning and not blocked
+	if wants_to_move and can_move:
 		var next_cell = get_next_cell(dir)
-		#var next_cell_item := gridmap.get_cell_item(next_cell)
 		move_start_pos = position
 		
-		# Step 1: check if wall ahead
+		# Step 1: check raycast results
 		if wall_ahead:
 			if wall_ahead.collider.has_method("interact"):
 				wall_ahead.collider.interact()
 			else:
+				# Smoosh into wall
 				attempted_move = true
 				move_dest_pos = move_start_pos + \
 				(gridmap.map_to_local(next_cell) - move_start_pos).normalized() * 0.45
-		# Step 2: check same height floor
+				move_state = MoveStates.MOVING
+		# Step 2: check gridmap results
 		elif gridmap.get_cell_item(next_cell) != -1:
 			move_dest_pos = gridmap.map_to_local(next_cell)
-		else:
-			# Step 3: Check one cell above (slope up / stairs)
-			var up_cell = next_cell + Vector3i(0, 1, 0)
-			if gridmap.get_cell_item(up_cell) != -1:
-				next_cell = up_cell
-				move_dest_pos = gridmap.map_to_local(next_cell)
-			else:
-				# Step 4: Check one cell below (slope down)
-				var down_cell = next_cell + Vector3i(0, -1, 0)
-				if gridmap.get_cell_item(down_cell) != -1:
-					next_cell = down_cell
-					move_dest_pos = gridmap.map_to_local(next_cell)
-				else:
-					move_dest_pos = null
+			move_state = MoveStates.MOVING
+		
+	if move_state == MoveStates.MOVING: 
+		do_moving(dt)
 
-	if move_dest_pos:
-		move_elapsed_time += dt
-		var move_duration = 0.5        # seconds to reach the target
-		if attempted_move or attempt_ended:
-			move_duration = move_duration / 1.7
-		var t = move_elapsed_time / move_duration
-		if t >= 1.0:
-			# Turn ended.
-			position.x = move_dest_pos.x
-			position.z = move_dest_pos.z
-			if attempted_move:
-				var temp_pos = move_dest_pos 
-				move_dest_pos = move_start_pos
-				move_start_pos = temp_pos
-				attempted_move = false
-				attempt_ended = true
-			else:
-				move_dest_pos = null
-				attempt_ended = false
-			move_elapsed_time = 0
-		else:
-			 # Lerp only X and Z
-			var new_x = lerp(move_start_pos.x, move_dest_pos.x, t)
-			var new_z = lerp(move_start_pos.z, move_dest_pos.z, t)
-			position.x = new_x
-			position.z = new_z
-			
-	var was_moving = moving
-	moving = move_dest_pos != null
-	if not moving and was_moving:
+	# signal
+	if prev_state == MoveStates.MOVING and move_state != MoveStates.MOVING:
 		SignalBus.player_moved.emit(self)
+	
+func do_moving(dt: float):
+	move_elapsed_time += dt
+	var move_duration = 0.5        # seconds to reach the target
+	if attempted_move or attempt_ended:
+		move_duration = move_duration / 1.7
+	var t = move_elapsed_time / move_duration
+	if t >= 1.0:
+		# Turn ended.
+		position.x = move_dest_pos.x
+		position.z = move_dest_pos.z
+		if attempted_move:
+			var temp_pos = move_dest_pos 
+			move_dest_pos = move_start_pos
+			move_start_pos = temp_pos
+			attempted_move = false
+			attempt_ended = true
+			# Don't set to IDLE - have to return back
+		else:
+			move_dest_pos = null
+			attempt_ended = false
+			move_state = MoveStates.IDLE
+		move_elapsed_time = 0
+	else:
+		 # Lerp to destination position
+		position.x = lerp(move_start_pos.x, move_dest_pos.x, t)
+		position.z = lerp(move_start_pos.z, move_dest_pos.z, t)
+	# We're not setting velocity, but this will do physics
 	move_and_slide()
 	
-func _process(delta):
+func handle_turning(dt: float):
+	var left = Input.is_action_pressed("move_left")
+	var right = Input.is_action_pressed("move_right")
+	var dir = 1 if left else -1 if right else 0 
+	var wants_to_turn = dir != 0
+	var is_idle = move_state == MoveStates.IDLE
+	
+	# Start turning
+	if wants_to_turn and is_idle:
+		turn_current_rot = rotation_degrees
+		# keep from drifting when turning while edge looking by rounding
+		rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
+		rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
+		turn_target_rot = rotation_degrees + Vector3(0, 90 * dir, 0)
+		#turn_target_rot.y = round(turn_target_rot.y)
+		turn_elapsed_time = 0.0
+		move_state = MoveStates.TURNING
+		
+	# Do the turn
+	if move_state == MoveStates.TURNING:
+		turn_elapsed_time += dt
+		var t = turn_elapsed_time / TURN_TIME
+		if t >= 1.0:
+			# finished turning
+			t = 1.0
+			# realign just in case
+			rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
+			rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
+			# set current faced direction default for edge looking system
+			start_rotation = rotation_degrees
+			# reset cursor to confined to allow movement again
+			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
+			move_state = MoveStates.IDLE
+			SignalBus.player_turned.emit(self)
+	
+		rotation_degrees = turn_current_rot.lerp(turn_target_rot, Globals.ease_cubic(t))
+		mouse_rot.y *= 0.85 # move view back towards middle	
+		
+func _process(_delta):
 	if not enabled:
 		return
 	
@@ -232,45 +267,6 @@ func _process(delta):
 				if dist < 150:
 					get_node("../../UI").stress_increase()
 	
-	if turning:
-		turn_elapsed_time += delta
-		var t = turn_elapsed_time / TURN_TIME
-		if t >= 1.0:
-			# turn done (TODO: signal)
-			t = 1.0
-			# realign just in case
-			rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
-			rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
-			# set current faced direction default for edge looking system
-			start_rotation = rotation_degrees
-			# reset cursor to confined to allow movement again
-			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
-			turning = false
-			SignalBus.player_turned.emit(self)
-	
-		# Ease out cubic (fast start, slow end)
-		var eased_t = 1 - pow(1 - t, 3)
-		rotation_degrees = turn_current_rot.lerp(turn_target_rot, eased_t)
-		mouse_rot.y *= 0.85 # move view back towards middle
-	
-	var can_turn = not moving and not turning
-	
-	var left = Input.is_action_pressed("move_left")
-	var right = Input.is_action_pressed("move_right")
-	var dir = 1 if left else -1 if right else 0 
-	
-	# Start turning
-	if dir != 0 and can_turn:
-		turn_current_rot = rotation_degrees
-		
-		# keep from drifting when turning while edge looking by rounding
-		rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
-		rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
-		turn_target_rot = rotation_degrees + Vector3(0, 90 * dir, 0)
-		#turn_target_rot.y = round(turn_target_rot.y)
-		turn_elapsed_time = 0.0
-		turning = true
-
 	# Interact with object ahead
 	if Input.is_action_just_pressed("interact") and scanned_thing != null:
 		if scanned_thing.is_in_group("NPC") or scanned_thing.is_in_group("Container"):
@@ -285,6 +281,13 @@ func _process(delta):
 		last_pointed_object = pointer_on_thing
 		SignalBus.hovered_object_changed.emit(pointer_on_thing)
 		
+
+func set_scanned_thing():
+	var last_scanned = scanned_thing
+	scanned_thing = scan_cell_ahead()
+	if scanned_thing != last_scanned:
+		last_scanned = scanned_thing
+		SignalBus.interactable_scanned.emit(scanned_thing)
 
 """
 Send a ray either forward (-1) or backwards (1) along the z axis

@@ -19,3 +19,6 @@ func dir_op (d: Dir):
 	if d == Dir.E: return Dir.W
 	if d == Dir.W: return Dir.E
 	return Dir.NONE
+
+
+func ease_cubic (t: float): return 1 - pow(1 - t, 3)
