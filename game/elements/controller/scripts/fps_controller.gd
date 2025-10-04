@@ -51,6 +51,7 @@ func _ready() -> void:
 func _unhandled_input(event):
 	if not enabled:
 		return
+
 	var is_fps_event = event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED
 
 	if event.is_action_pressed("test_input"):
@@ -146,10 +147,12 @@ func _physics_process(dt: float) -> void:
 	if position.y < -2.0:
 		get_tree().reload_current_scene()
 	
-	handle_turning(dt)
-	handle_moving(dt)
+	_handle_turning(dt)
+	_handle_moving(dt)
+	# We're mostly not setting velocity, but this will do physics
+	move_and_slide()
 
-func handle_moving(dt: float):
+func _handle_moving(dt: float):
 	var prev_state = move_state
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")
@@ -179,17 +182,17 @@ func handle_moving(dt: float):
 				move_state = MoveStates.MOVING
 		# Step 2: check gridmap results
 		elif gridmap.get_cell_item(next_cell) != -1:
-			move_dest_pos = gridmap.map_to_local(next_cell)
+			move_dest_pos = gridmap.map_to_local(next_cell) #+ Vector3(1.5, 0, 0)
 			move_state = MoveStates.MOVING
 		
 	if move_state == MoveStates.MOVING: 
-		do_moving(dt)
+		_do_moving(dt)
 
 	# signal
 	if prev_state == MoveStates.MOVING and move_state != MoveStates.MOVING:
 		SignalBus.player_moved.emit(self)
 	
-func do_moving(dt: float):
+func _do_moving(dt: float):
 	move_elapsed_time += dt
 	var move_duration = 0.5        # seconds to reach the target
 	if attempted_move or attempt_ended:
@@ -215,10 +218,8 @@ func do_moving(dt: float):
 		 # Lerp to destination position
 		position.x = lerp(move_start_pos.x, move_dest_pos.x, t)
 		position.z = lerp(move_start_pos.z, move_dest_pos.z, t)
-	# We're not setting velocity, but this will do physics
-	move_and_slide()
 	
-func handle_turning(dt: float):
+func _handle_turning(dt: float):
 	var left = Input.is_action_pressed("move_left")
 	var right = Input.is_action_pressed("move_right")
 	var dir = 1 if left else -1 if right else 0 
@@ -256,10 +257,13 @@ func handle_turning(dt: float):
 		rotation_degrees = turn_current_rot.lerp(turn_target_rot, Globals.ease_cubic(t))
 		mouse_rot.y *= 0.85 # move view back towards middle	
 		
+'''
+	Process non-physics related stuff
+'''
 func _process(_delta):
 	if not enabled:
 		return
-	
+
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		if is_enemy_in_view_cone(enemy):
 			if is_enemy_visible(enemy):

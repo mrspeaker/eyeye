@@ -1,14 +1,31 @@
 extends GridMap
 
+enum Tiles {
+	TestCube,
+	Floor,
+	Wall,
+	WallHalf,
+	Doorway,
+	Floor2,
+	WallWood,
+	DoorFlip,
+	FloorDark,
+	FloorLino,
+	ShopCube
+}
+
 func pos_to_two_cell(pos: Vector3) -> Vector3i:
 	# 0,0,0 is in positive z direction - so 0,0,-1 is first cell in our world
-	var neg_offset = Vector3i(0, 0, -1 if pos.z < 0 else 0)
+	var neg_offset = Vector3i(
+		-1 if pos.x < 0 else 0, 
+		0, 
+		-1 if pos.z < 0 else 0)
 	var grid_pos = local_to_map(pos) + neg_offset
 	var grid_pos_mod_two = Vector3i(floor(grid_pos / 2) * 2)
 	return grid_pos_mod_two - neg_offset
 	
 func _ready() -> void:
-	_test_two_grid()
+	#_test_two_grid()
 	pass
 	
 '''
@@ -20,12 +37,16 @@ So theThe first floor cell in the game world is (1,0,-1)
 '''
 func get_cell_edge_items(cell: Vector3i):
 	# TODO: assert cell is mod 2?
-	var ground = get_cell_item(cell + Vector3i(0, 0, 0)) # floor is br
-	var north = get_cell_item(cell + Vector3i(0, 0, -1)) # tr is a wall N
+	var ground = get_cell_item(cell + Vector3i(1, 0, 0)) # floor is br
+	if ground == -1:
+		print("no ground!")
+		ground = -2
+		
+	var north = get_cell_item(cell + Vector3i(1, 0, -1)) # tr is a wall N
 	# NOTHING in tl... var trl= get_cell_item(cell + Vector3i(0, 0, -1))
-	var west = get_cell_item(cell + Vector3i(1, 0, 0)) # bl is a wall W
-	var south = get_cell_item(cell + Vector3i(0, 0, 1)) # tr in closer z cell
-	var east = get_cell_item(cell + Vector3i(-1, 0, 0)) # bl in futher x cell
+	var west = get_cell_item(cell + Vector3i(0, 0, 0)) # bl is a wall W
+	var south = get_cell_item(cell + Vector3i(1, 0, 1)) # tr in closer z cell
+	var east = get_cell_item(cell + Vector3i(2, 0, 0)) # bl in futher x cell
 	return [north, south, east, west, ground]
 	
 func get_cell_edges(cell: Vector3i):
@@ -40,6 +61,8 @@ const walkables = [
 func is_walkable(idx: int):
 	if idx == -1:
 		return true
+	if idx == -2:
+		return false
 	return walkables[idx]
 	
 
@@ -86,5 +109,10 @@ func _test_two_grid():
 	ut_eq("pos two-cell6", pos_to_two_cell(Vector3(0.1, 0, -1.6)), Vector3i(0, 0, -1))
 	ut_eq("pos two-cell7", pos_to_two_cell(Vector3(0.1, 0, -3.1)), Vector3i(0, 0, -3))
 	
+	ut_eq("pos two-cell8", pos_to_two_cell(Vector3(-0.1, 0, -0.1)), Vector3i(-1, 0, -1))
+	
+	
 	# Position + direction to cell
-	ut_eq("items 2", get_cell_edge_items(Vector3i(1, 0, -1)), [2, 2, 2, 2, 1])
+	ut_eq("items 1", get_cell_edge_items(Vector3i(0, 0, -1)), [2, 2, 2, 2, 1])
+	ut_eq("items 2", get_cell_edge_items(Vector3i(8, 0, -25)), [-1, -1, 4, -1, 1])
+	ut_eq("items 3", get_cell_edge_items(Vector3i(10, 0, -25)), [-1, 2, -1, 4, 5])
