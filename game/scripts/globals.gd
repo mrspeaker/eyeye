@@ -10,7 +10,8 @@ enum Dir {
 	N = 0,
 	S,
 	E,
-	W
+	W,
+	DOWN
 }
 
 func dir_op (d: Dir):

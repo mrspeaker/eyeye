@@ -65,7 +65,31 @@ func is_walkable(idx: int):
 		return false
 	return walkables[idx]
 	
+func get_pos_in_direction(pos: Vector3, dir: Globals.Dir):
+	var dest = get_next_cell_pos(pos, dir)
+	var cell = pos_to_two_cell(dest)
+	var edges = get_cell_edge_items(cell)
+	# Can we pass?
+	if not is_walkable(edges[Globals.Dir.DOWN]): return null # ground
+	if not is_walkable(edges[Globals.dir_op(dir)]): return null # opposite edge
+	return dest
 
+func get_next_cell_pos(pos: Vector3, d: Globals.Dir) -> Vector3:
+	var cell = get_next_cell(pos, d)
+	var pos_edge = map_to_local(cell)
+	return pos_edge + Vector3(1.5, 0, 0) # todo: why the offset on x (or why ONLY x?!)
+
+func get_next_cell(pos: Vector3, d: Globals.Dir) -> Vector3i:
+	var x_dir = 0
+	var z_dir = 0
+	if d == Globals.Dir.N: z_dir = -1
+	if d == Globals.Dir.S: z_dir = 1
+	if d == Globals.Dir.E: x_dir = 1
+	if d == Globals.Dir.W: x_dir = -1
+	var cur_cell = pos_to_two_cell(pos)
+	var one_cell = Vector3i(x_dir, 0, z_dir) * 2
+	return cur_cell + one_cell
+	
 '''
 Some "unit test" stuff
 '''
