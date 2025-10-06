@@ -27,7 +27,8 @@ enum MoveStates {
 	TURNING,
 	MOVING
 }
-var move_state = MoveStates.IDLE;
+var move_state := MoveStates.IDLE
+var facing := Globals.Dir.N
 
 const MOUSE_ROT_MAX := deg_to_rad(30)
 var mouse_sensitivity := 0.2
@@ -156,19 +157,23 @@ func _handle_moving(dt: float):
 	var prev_state = move_state
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")
-	var dir = -1 if fwd else 1 if bak else 0 
-	var wants_to_move = dir != 0
-	var wall_ahead = raycast_ahead(dir) # "ahead" is direction moving - not necessarily fwd
+	var dir = facing if fwd else Globals.dir_op(facing) if bak else Globals.Dir.NONE 
+	var wants_to_move = dir != Globals.Dir.NONE
+	var wall_ahead = raycast_ahead(1 if bak else -1 if fwd else 0) # "ahead" is direction moving - not necessarily fwd
 
 	# Look for interactable things ahead
 	wall_fwd = raycast_ahead(-1)
 	if not wall_fwd: set_scanned_thing()
 	
 	var blocked = fwd and scanned_thing != null
-	var can_move = move_state == MoveStates.IDLE and not blocked # not moving and not turning and not blocked
+	var can_move = move_state == MoveStates.IDLE and not blocked 
 	if wants_to_move and can_move:
-		var next_cell = get_next_cell(dir)
 		move_start_pos = position
+		
+		var target_pos = gridmap.get_pos_in_direction(position, dir)
+		if target_pos == null:
+			# TODO: This breaks wall smooshing
+			target_pos = position
 		
 		# Step 1: check raycast results
 		if wall_ahead:
@@ -177,12 +182,11 @@ func _handle_moving(dt: float):
 			else:
 				# Smoosh into wall
 				attempted_move = true
-				move_dest_pos = move_start_pos + \
-				(gridmap.map_to_local(next_cell) - move_start_pos).normalized() * 0.45
+				move_dest_pos = target_pos 
 				move_state = MoveStates.MOVING
 		# Step 2: check gridmap results
-		elif gridmap.get_cell_item(next_cell) != -1:
-			move_dest_pos = gridmap.map_to_local(next_cell) #+ Vector3(1.5, 0, 0)
+		elif target_pos:
+			move_dest_pos = target_pos
 			move_state = MoveStates.MOVING
 		
 	if move_state == MoveStates.MOVING: 
@@ -215,14 +219,15 @@ func _do_moving(dt: float):
 			move_state = MoveStates.IDLE
 		move_elapsed_time = 0
 	else:
-		 # Lerp to destination position
-		position.x = lerp(move_start_pos.x, move_dest_pos.x, t)
-		position.z = lerp(move_start_pos.z, move_dest_pos.z, t)
+		if move_dest_pos:
+			 # Lerp to destination position
+			position.x = lerp(move_start_pos.x, move_dest_pos.x, t)
+			position.z = lerp(move_start_pos.z, move_dest_pos.z, t)
 	
 func _handle_turning(dt: float):
 	var left = Input.is_action_pressed("move_left")
 	var right = Input.is_action_pressed("move_right")
-	var dir = 1 if left else -1 if right else 0 
+	var dir = 1 if left else -1 if right else 0
 	var wants_to_turn = dir != 0
 	var is_idle = move_state == MoveStates.IDLE
 	
@@ -233,7 +238,6 @@ func _handle_turning(dt: float):
 		rotation_degrees.x = round(rotation_degrees.x / 90.0) * 90.0
 		rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
 		turn_target_rot = rotation_degrees + Vector3(0, 90 * dir, 0)
-		#turn_target_rot.y = round(turn_target_rot.y)
 		turn_elapsed_time = 0.0
 		move_state = MoveStates.TURNING
 		
@@ -249,6 +253,17 @@ func _handle_turning(dt: float):
 			rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
 			# set current faced direction default for edge looking system
 			start_rotation = rotation_degrees
+			
+			# Set new facing direction
+			var y = start_rotation.y
+			if is_equal_approx(y, 0): facing = Globals.Dir.N
+			elif is_equal_approx(abs(y), 180): facing = Globals.Dir.S
+			elif is_equal_approx(y, -90): facing = Globals.Dir.E
+			elif is_equal_approx(y, 90): facing = Globals.Dir.W
+			else: 
+				facing = Globals.Dir.NONE
+				print("Warning: no facing direction for ", y)
+			
 			# reset cursor to confined to allow movement again
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 			move_state = MoveStates.IDLE
@@ -321,13 +336,14 @@ func raycast_xy(pos):
 
 # checks cell ahead to see if there is something interactable
 func scan_cell_ahead():
-	var next_cell = get_next_cell(-1)
-	var world_pos = gridmap.map_to_local(next_cell)
+	var pos = gridmap.get_pos_in_direction(position, facing)
+	if pos == null: 
+		return null
 	for node in get_tree().get_nodes_in_group("NPC"):
-		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x * 2:
+		if node.global_position.distance_to(pos) < gridmap.cell_size.x * 2:
 			return node
 	for node in get_tree().get_nodes_in_group("Container"):
-		if node.global_position.distance_to(world_pos) < gridmap.cell_size.x * 2:
+		if node.global_position.distance_to(pos) < gridmap.cell_size.x * 2:
 			return node
 	return null
 
@@ -387,15 +403,6 @@ func _draw_ray(from: Vector3, to: Vector3):
 
 	await get_tree().create_timer(0.2).timeout
 	mesh_instance.queue_free()
-
-
-func get_next_cell(dir):
-	var grid_pos = gridmap.local_to_map(position)
-	# "Modulus" postions: can only be in one of the 2x2 cells
-	var grid_pos_mod_two = Vector3i(floor(grid_pos / 2) * 2) + Vector3i(1, 0, -1)
-	var one_cell = Vector3i(dir * basis.z.round() * 2.0)   
-	var next_cell = grid_pos_mod_two + one_cell
-	return next_cell
 	
 func clear_destination():
 	move_dest_pos = null
