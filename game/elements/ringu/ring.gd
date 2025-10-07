@@ -16,22 +16,22 @@ var rng = RandomNumberGenerator.new()
 # Called externally to start a move
 func turn_start():
 	active = true
-	
+
 func turn_end():
 	active = false
-	
+
 func _physics_process(dt: float) -> void:
 	if not active:	return
 
 	# Pick a random direction
 	if dir == Globals.Dir.NONE:
 		dir = rng.randi_range(Globals.Dir.N, Globals.Dir.W) as Globals.Dir
-	
+
 	if target_pos == null:
 		_look_for_a_direction()
 	else:
 		_do_move(dt)
-	
+
 func _do_move(dt: float):
 	move_timer += dt
 	if move_timer / MOVE_TIME < 1.0:
@@ -50,7 +50,7 @@ func _look_for_a_direction():
 	# Silly thing to just not go straight all the time
 	if num_gone_straights > 4:
 		target_pos = null
-		
+
 	if target_pos != null:
 		_start_move()
 	else:

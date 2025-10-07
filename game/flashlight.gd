@@ -3,7 +3,7 @@ extends SpotLight3D
 @onready var camera: Camera3D = get_node("%Controller/CameraController/Camera3D")
 @onready var spotlight: SpotLight3D = $"."
 
-var spotlight_target := Vector3.ZERO 
+var spotlight_target := Vector3.ZERO
 #var flashlight_on = false
 
 func _ready() -> void:
@@ -46,7 +46,7 @@ func _process(_delta):
 
 	# Ray direction still based on actual mouse position
 	var to = from + camera.project_ray_normal(mouse_pos) * 1000
-	
+
 	#spotlight.global_transform.origin = from
 
 	var ray_params := PhysicsRayQueryParameters3D.new()
@@ -55,7 +55,7 @@ func _process(_delta):
 
 	var smoothed_target_pos = spotlight.global_transform.origin.lerp(to + Vector3.UP * 0.1, 0.5)
 	spotlight.look_at(smoothed_target_pos, Vector3.UP)
-#	
+#
 	#_draw_ray(from, to)
 	## Normalize mouse position to range [0, 1]
 	#var normalized = Vector2(mouse_pos.x / screen_size.x, mouse_pos.y / screen_size.y)
@@ -79,7 +79,7 @@ func _process(_delta):
 #
 	#
 	##var from: Vector3 = camera.project_ray_origin(mouse_pos)
-	#spotlight.global_transform.origin = from 
+	#spotlight.global_transform.origin = from
 #
 	##spotlight.global_transform.origin = from + forward_offset
 	#var to: Vector3 = from + camera.project_ray_normal(mouse_pos) * 1000
@@ -92,7 +92,7 @@ func _process(_delta):
 	##var max_distance = 2.5
 	##
 	##var result = space_state.intersect_ray(ray_params)
-	#var target_pos = to 
+	#var target_pos = to
 	##if result and from.distance_to(result.position) <= max_distance and Globals.flashlight_on:
 		##print('close')
 		##target_pos = result.position
@@ -108,8 +108,8 @@ func _process(_delta):
 	#spotlight.look_at(smoothed_target_pos, Vector3.UP)
 
 	#spotlight.look_at(target_pos, Vector3.UP)
-	
-	
+
+
 
 func _draw_ray(from: Vector3, to: Vector3):
 	var mesh := ImmediateMesh.new()

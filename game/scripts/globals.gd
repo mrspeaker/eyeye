@@ -41,4 +41,13 @@ func dir_to_vec (d:Dir):
 	if d == Dir.W: return Vector3(-1, 0,0)
 	return Vector3.ZERO
 
+func angle_to_dir (rad: float):
+	const tau := PI * 2
+	const quat := PI / 4
+	var a := fmod(rad + tau, tau)
+	if a <= quat * 3 and a > quat: return Dir.W
+	if a <= quat * 5 and a > quat * 3: return Dir.S
+	if a <= quat * 7 and a > quat * 5: return Dir.E
+	return Dir.N
+
 func ease_cubic (t: float): return 1 - pow(1 - t, 3)

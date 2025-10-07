@@ -47,7 +47,7 @@ var inventory:Inventory = Inventory.new()
 func _ready() -> void:
 	# set faced direction to start_rotation to prevent spin on spawn
 	start_rotation = rotation_degrees
-	
+
 func _unhandled_input(event):
 	if not enabled:
 		return
@@ -66,32 +66,32 @@ func _unhandled_input(event):
 	if is_fps_event:
 		mouse_yaw = -event.relative.x
 		mouse_pitch = -event.relative.y
-		
+
 	if event.is_action_pressed("close_eyes"):
 		eyes_open = not eyes_open
 		SignalBus.player_eyes_toggled.emit(eyes_open)
 
 func update_camera(dt):
 	var max_angle = 10.0 # degrees of max camera tilt
-	
+
 	if mouse_free: # fixed edge looking
 		var viewport_size = get_viewport().get_visible_rect().size
 		var center = viewport_size / 2
 		var mouse_pos = get_viewport().get_mouse_position()
-		
+
 		# What are we pointing at?
 		var r = raycast_xy(mouse_pos)
 		if (r && r.collider.get_collision_layer_value(2)):
 			pointer_on_thing = r.collider.get_parent()
 		else:
 			pointer_on_thing = null
-			
+
 		# offset from center (-1.0 to 1.0 range)
 		var offset = (mouse_pos - center) / center
-		
+
 		# Clamp in case of screen weirdness I don't know
 		offset = offset.clamp(Vector2(-1, -1), Vector2(1, 1))
-		
+
 		# Dead zone threshold
 		var threshold = 0.8  # 0.0 = instant, 1.0 = only edges
 		if abs(offset.x) < threshold: offset.x = 0
@@ -103,28 +103,28 @@ func update_camera(dt):
 		# Compute offset rotation
 		var yaw_offset   = -offset.x * max_angle * 0.5
 		var pitch_offset = -offset.y * max_angle * 0.5
-		
+
 		# Target rotation = starting rotation + offset
 		var target_yaw   = start_rotation.y + yaw_offset
 		var target_pitch = start_rotation.x + pitch_offset
-		
+
 		# Apply smoothing (lerp so movement slows at edges)
 		var t = 1.0 - exp(-5.0 * dt)
-		
+
 		# Yaw step toward target:
 		# Shift into [0, 360), then offset to (–180, +180]
 		var yaw_delta = fposmod((target_yaw - rotation_degrees.y) + 180.0, 360.0) - 180.0
 		rotation_degrees.y += yaw_delta * t
 
-		# Pitch 
+		# Pitch
 		# Shift into [0, 360), then offset to (–180, +180]
 		var pitch_delta = fposmod((target_pitch - rotation_degrees.x) + 180.0, 360.0) - 180.0
 		rotation_degrees.x = rotation_degrees.x + pitch_delta * t
-		
-	else: # regular FPS controls 
+
+	else: # regular FPS controls
 		mouse_pitch *= mouse_sensitivity
 		mouse_yaw *= mouse_sensitivity
-		
+
 		mouse_rot.x += mouse_pitch * dt
 		mouse_rot.x = clamp(mouse_rot.x, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
 		mouse_pitch = 0.0
@@ -132,7 +132,7 @@ func update_camera(dt):
 		mouse_rot.y += mouse_yaw * dt
 		mouse_rot.y = clamp(mouse_rot.y, -MOUSE_ROT_MAX, MOUSE_ROT_MAX)
 		mouse_yaw = 0.0
-		
+
 		camera.transform.basis = Basis.from_euler(mouse_rot)
 		camera.rotation.z = 0
 
@@ -140,13 +140,13 @@ func _physics_process(dt: float) -> void:
 	if not enabled:
 		return
 	update_camera(dt)
-	# gravity	
+	# gravity
 	if not is_on_floor():
 		velocity += get_gravity() * dt
 	# Reset if fall off map
 	if position.y < -2.0:
 		get_tree().reload_current_scene()
-	
+
 	_handle_turning(dt)
 	_handle_moving(dt)
 	# We're mostly not setting velocity, but this will do physics
@@ -170,7 +170,7 @@ func _handle_moving(dt: float):
 	# Look for things ahead (make sure you can't see them through walls)
 	wall_fwd = raycast_ahead(-1)
 	if not wall_fwd: set_scanned_thing()
-	
+
 	var blocked = fwd and scanned_thing != null
 
 	var can_move = move_state == MoveStates.IDLE and not blocked
@@ -189,14 +189,14 @@ func _handle_moving(dt: float):
 			# Free to move
 			move_dest_pos = target_pos
 			move_state = MoveStates.MOVING
-		
-	if move_state == MoveStates.MOVING: 
+
+	if move_state == MoveStates.MOVING:
 		_do_moving(dt)
 
 	# signal
 	if prev_state == MoveStates.MOVING and move_state != MoveStates.MOVING:
 		SignalBus.player_moved.emit(self)
-	
+
 func _do_moving(dt: float):
 	move_elapsed_time += dt
 	var move_duration = 0.5        # seconds to reach the target
@@ -208,7 +208,7 @@ func _do_moving(dt: float):
 		position.x = move_dest_pos.x
 		position.z = move_dest_pos.z
 		if attempted_move:
-			var temp_pos = move_dest_pos 
+			var temp_pos = move_dest_pos
 			move_dest_pos = move_start_pos
 			move_start_pos = temp_pos
 			attempted_move = false
@@ -224,14 +224,14 @@ func _do_moving(dt: float):
 			 # Lerp to destination position
 			position.x = lerp(move_start_pos.x, move_dest_pos.x, t)
 			position.z = lerp(move_start_pos.z, move_dest_pos.z, t)
-	
+
 func _handle_turning(dt: float):
 	var left = Input.is_action_pressed("rotate_left")
 	var right = Input.is_action_pressed("rotate_right")
 	var dir = 1 if left else -1 if right else 0
 	var wants_to_turn = dir != 0
 	var is_idle = move_state == MoveStates.IDLE
-	
+
 	# Start turning
 	if wants_to_turn and is_idle:
 		turn_current_rot = rotation_degrees
@@ -241,7 +241,7 @@ func _handle_turning(dt: float):
 		turn_target_rot = rotation_degrees + Vector3(0, 90 * dir, 0)
 		turn_elapsed_time = 0.0
 		move_state = MoveStates.TURNING
-		
+
 	# Do the turn
 	if move_state == MoveStates.TURNING:
 		turn_elapsed_time += dt
@@ -254,25 +254,18 @@ func _handle_turning(dt: float):
 			rotation_degrees.y = round(rotation_degrees.y / 90.0) * 90.0
 			# set current faced direction default for edge looking system
 			start_rotation = rotation_degrees
-			
+
 			# Set new facing direction
-			var y = start_rotation.y
-			if is_equal_approx(y, 0): facing = Globals.Dir.N
-			elif is_equal_approx(abs(y), 180): facing = Globals.Dir.S
-			elif is_equal_approx(y, -90): facing = Globals.Dir.E
-			elif is_equal_approx(y, 90): facing = Globals.Dir.W
-			else: 
-				facing = Globals.Dir.NONE
-				print("Warning: no facing direction for ", y)
-			
+			facing = Globals.angle_to_dir(rotation.y)
+
 			# reset cursor to confined to allow movement again
 			Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 			move_state = MoveStates.IDLE
 			SignalBus.player_turned.emit(self)
-	
+
 		rotation_degrees = turn_current_rot.lerp(turn_target_rot, Globals.ease_cubic(t))
-		mouse_rot.y *= 0.85 # move view back towards middle	
-		
+		mouse_rot.y *= 0.85 # move view back towards middle
+
 '''
 	Process non-physics related stuff
 '''
@@ -287,7 +280,7 @@ func _process(_delta):
 				var dist = position.distance_squared_to(enemy.position)
 				if dist < Globals.MAX_STRESS_DISTANCE:
 					SignalBus.emit_signal("eye_contact_with_enemy", dist)
-	
+
 	# Interact with object ahead
 	if Input.is_action_just_pressed("interact") and scanned_thing != null:
 		if scanned_thing.is_in_group("NPC") or scanned_thing.is_in_group("Container"):
@@ -296,12 +289,12 @@ func _process(_delta):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and pointer_on_thing != null:
 		if pointer_on_thing.has_method("click_pickup"):
 			pointer_on_thing.click_pickup(self)
-	
+
 	# emit if new thing moused over in case they has stuff to do when moused on/off
 	if pointer_on_thing != last_pointed_object:
 		last_pointed_object = pointer_on_thing
 		SignalBus.hovered_object_changed.emit(pointer_on_thing)
-		
+
 
 func set_scanned_thing():
 	var last_scanned = scanned_thing
@@ -358,8 +351,10 @@ func raycast_xy(pos):
 # checks cell ahead to see if there is something interactable
 func scan_cell_ahead():
 	var pos = gridmap.get_pos_in_direction(position, facing)
-	if pos == null: 
+	if pos == null:
 		return null
+	# NOTE: iterating over all entities and doing a distance check is very expensive
+	# if we get lots of things in the game, change this!
 	for node in get_tree().get_nodes_in_group("NPC"):
 		if node.global_position.distance_to(pos) < gridmap.cell_size.x * 2:
 			return node
@@ -378,7 +373,7 @@ func is_enemy_in_view_cone(enemy: Node3D, fov_degrees: float = 90.0) -> bool:
 # is enemy unobstructed from view
 func is_enemy_visible(enemy: Node3D) -> bool:
 	var space_state = get_world_3d().direct_space_state
-	var origin = $RayOrigin.global_transform.origin 
+	var origin = $RayOrigin.global_transform.origin
 
 	var target_points = [
 		enemy.global_transform.origin + Vector3(0, 2, 0),  # Head
@@ -395,7 +390,7 @@ func is_enemy_visible(enemy: Node3D) -> bool:
 		query.exclude = [self]
 		query.collide_with_areas = true
 		query.collide_with_bodies = true
-		
+
 		#_draw_ray(query.from, query.to)
 
 		var result = space_state.intersect_ray(query)
@@ -424,11 +419,11 @@ func _draw_ray(from: Vector3, to: Vector3):
 
 	await get_tree().create_timer(0.2).timeout
 	mesh_instance.queue_free()
-	
+
 func clear_destination():
 	move_dest_pos = null
 	start_rotation = rotation_degrees # prevents rotation after astral
-	
+
 func on_item_picked_up(item:Item):
 	print("Picked up a " + item.name)
 	inventory.add_item(item)

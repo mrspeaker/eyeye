@@ -4,7 +4,7 @@ extends Control
 @onready var stress_label: Label = %StressLabel
 @onready var cursor = %Cursor
 @onready var fade_timer := Timer.new()
-@onready var player: CharacterBody3D = %Controller 
+@onready var player: CharacterBody3D = %Controller
 @onready var inventory_dialog:InventoryDialog = %InventoryDialog
 
 var fade_tween: Tween
@@ -20,7 +20,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	add_child(fade_timer)
-	
+
 	cursor_texture_size = cursor.texture.get_size()
 
 	fade_timer.wait_time = 2.5
@@ -40,7 +40,7 @@ func _input(event):
 			fade_tween = null
 		fade_timer.start()
 		cursor.modulate.a = 0.8  # Make cursor mostly visible
-		
+
 	if event.is_action_pressed("inventory"):
 		inventory_dialog.toggle(player.inventory)
 
@@ -63,7 +63,7 @@ func _on_flashlight_toggled():
 	elif not fade_timer.is_stopped():
 		print(fade_timer.wait_time)
 		fade_timer.start(fade_timer.wait_time)
-		
+
 
 func _process(_delta):
 	cursor.position = get_viewport().get_mouse_position() - (cursor_texture_size / 2)

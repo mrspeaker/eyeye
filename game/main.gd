@@ -22,12 +22,12 @@ var stress := 0.0
 func _ready() -> void:
 	SignalBus.player_moved.connect(world_turn)
 	SignalBus.eye_contact_with_enemy.connect(_on_enemy_eye_contact)
-	
+
 	_cell_timer.wait_time = 1.0
 	_cell_timer.connect("timeout", self._on_timeout)
 	_cell_timer.autostart = true
 	add_child(_cell_timer)
-	
+
 	_state = GameState.CUTSCENE
 	_state_time = 0.0
 	player.enabled = false
@@ -44,7 +44,7 @@ func _process(delta: float):
 	if _state == GameState.CUTSCENE:
 		if _state_time == 0:
 			player.camera.current = true
-	
+
 		if _state_time >= 2.0:
 			_state = GameState.PLAY
 			_state_time = 0
@@ -63,7 +63,7 @@ func enemies_act():
 
 func _on_enemy_eye_contact(_distance: float):
 	add_stress()
-	
+
 func add_stress(amount: float = 1.0):
 	stress += amount
 	SignalBus.stress_changed.emit(stress)
