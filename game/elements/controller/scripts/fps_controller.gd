@@ -3,7 +3,6 @@ extends CharacterBody3D
 
 @export var gridmap: GridMap;
 @export var camera : Camera3D
-@export var health_component: HealthComponent
 
 const MOVE_TIME = 0.2
 const TURN_TIME = 0.3
@@ -281,12 +280,13 @@ func _process(_delta):
 	if not enabled:
 		return
 
+	# NOTE: iterating over all enemeies every frame is expensive (if there's lots of enemeies!)
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		if is_enemy_in_view_cone(enemy):
 			if is_enemy_visible(enemy):
 				var dist = position.distance_squared_to(enemy.position)
-				if dist < 150:
-					get_node("../../UI").stress_increase()
+				if dist < Globals.MAX_STRESS_DISTANCE:
+					SignalBus.emit_signal("eye_contact_with_enemy", dist)
 	
 	# Interact with object ahead
 	if Input.is_action_just_pressed("interact") and scanned_thing != null:
@@ -432,7 +432,3 @@ func clear_destination():
 func on_item_picked_up(item:Item):
 	print("Picked up a " + item.name)
 	inventory.add_item(item)
-
-func _on_health_component_died() -> void:
-	health_component.reset()
-	print("health reset to ", health_component.health)

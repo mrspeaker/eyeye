@@ -14,11 +14,14 @@ enum GameState {
 }
 
 var _state: GameState = GameState.INIT
-var _state_time: float = 0.0
+var _state_time := 0.0
+
+var stress := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	SignalBus.player_moved.connect(world_turn)
+	SignalBus.eye_contact_with_enemy.connect(_on_enemy_eye_contact)
 	
 	_cell_timer.wait_time = 1.0
 	_cell_timer.connect("timeout", self._on_timeout)
@@ -57,3 +60,10 @@ func enemies_act():
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		if enemy.has_method("turn_start"):
 			enemy.turn_start()
+
+func _on_enemy_eye_contact(_distance: float):
+	add_stress()
+	
+func add_stress(amount: float = 1.0):
+	stress += amount
+	SignalBus.stress_changed.emit(stress)

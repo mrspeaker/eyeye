@@ -118,11 +118,10 @@ fov = 60.0
 [node name="Player" type="Node" parent="."]
 script = ExtResource("4_vivmo")
 
-[node name="Controller" parent="Player" node_paths=PackedStringArray("gridmap", "health_component") instance=ExtResource("1_ig7tw")]
+[node name="Controller" parent="Player" node_paths=PackedStringArray("gridmap") instance=ExtResource("1_ig7tw")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, -22.5)
 gridmap = NodePath("../../GridMap")
-health_component = NodePath("../HealthComponent")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Player/Controller"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2356507, -0.40715027)
@@ -276,7 +275,7 @@ transform = Transform3D(0.9999731, 0, 0.007330321, 0, 1, 0, -0.007330321, 0, 0.9
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.334637, 0.685171, -37.81854)
 
 [node name="Toilet_Elongated_A3" parent="Level/Room Psych Ward" instance=ExtResource("28_xuqvo")]
-transform = Transform3D(1.9999444, 0, 0.0146606285, 0, 2, 0, -0.0146606285, 0, 1.9999444, 49.07416, 0.10881233, -41.337887)
+transform = Transform3D(1.9999444, 0, 0.0146606285, 0, 2, 0, -0.0146606285, 0, 1.9999444, 49.07416, 0.10881233, -41.11866)
 
 [node name="hospital_bed_1" parent="Level/Room Psych Ward" instance=ExtResource("13_w48qg")]
 transform = Transform3D(2.0000036, 0, 6.9849186e-08, 0, 2, 0, -6.9849186e-08, 0, 2.0000036, 43.25235, 0, -30.416864)

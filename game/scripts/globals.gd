@@ -1,10 +1,9 @@
 extends Node
 
+const MAX_STRESS_DISTANCE := 150
+
 var flashlight_on := false
 #
-#func toggle_flashlight():
-	#flashlight_on = !flashlight_on
-	
 enum Dir {
 	NONE = -1,
 	N = 0,

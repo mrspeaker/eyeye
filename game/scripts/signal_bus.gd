@@ -15,3 +15,9 @@ signal hovered_object_changed(hovered_object: Node3D)
 
 @warning_ignore("unused_signal")
 signal flashlight_toggled()
+
+# Stress/eye contact
+@warning_ignore("unused_signal")
+signal eye_contact_with_enemy(distance: float)
+@warning_ignore("unused_signal")
+signal stress_changed(stress: float)

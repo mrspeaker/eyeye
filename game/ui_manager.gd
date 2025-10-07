@@ -11,11 +11,10 @@ var fade_tween: Tween
 var cursor_texture_size := Vector2.ZERO
 var suppress_next_motion := false
 
-var stress = 0
-
 func _ready():
 	SignalBus.interactable_scanned.connect(on_scanned)
 	SignalBus.connect("flashlight_toggled", _on_flashlight_toggled)
+	SignalBus.connect("stress_changed", _on_stress_changed)
 
 	# Starting with this centres the mouse before swapping
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -79,7 +78,6 @@ func on_scanned(scanned):
 	else:
 		interact_label.visible = false
 
-func stress_increase():
-	stress += 1
-	stress_label.text = "Stress: " + str(stress)
+func _on_stress_changed(stress: float):
+	stress_label.text = "Stress: " + str(stress as int)
 	stress_label.visible = true
