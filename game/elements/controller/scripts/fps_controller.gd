@@ -159,7 +159,6 @@ func _handle_moving(dt: float):
 	var bak = Input.is_action_pressed("move_backward")
 	var dir = facing if fwd else Globals.dir_op(facing) if bak else Globals.Dir.NONE 
 	var wants_to_move = dir != Globals.Dir.NONE
-	var wall_ahead = raycast_ahead(1 if bak else -1 if fwd else 0) # "ahead" is direction moving - not necessarily fwd
 
 	# Look for interactable things ahead
 	wall_fwd = raycast_ahead(-1)
@@ -172,17 +171,19 @@ func _handle_moving(dt: float):
 		
 		var target_pos = gridmap.get_pos_in_direction(position, dir)
 		if target_pos == null:
-			# TODO: This breaks wall smooshing
 			target_pos = position
 		
 		# Step 1: check raycast results
+		# TODO: don't need to raycast, as we can get it from the gridmap.
+		var wall_ahead = raycast_ahead(1 if bak else -1 if fwd else 0) # "ahead" is direction moving - not necessarily fwd
 		if wall_ahead:
 			if wall_ahead.collider.has_method("interact"):
 				wall_ahead.collider.interact()
 			else:
 				# Smoosh into wall
 				attempted_move = true
-				move_dest_pos = target_pos 
+				var ahead = transform.basis.z.normalized() * -1
+				move_dest_pos = target_pos + ahead
 				move_state = MoveStates.MOVING
 		# Step 2: check gridmap results
 		elif target_pos:
