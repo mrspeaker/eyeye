@@ -71,10 +71,10 @@ func _process(_delta):
 
 func on_scanned(scanned):
 	if scanned != null and scanned.is_in_group("NPC"):
-		interact_label.text = "[E] Interact"
+		interact_label.text = "[I] Interact"
 		interact_label.visible = true
 	elif scanned != null and scanned.is_in_group("Container"):
-		interact_label.text = "[E] Loot"
+		interact_label.text = "[I] Loot"
 		interact_label.visible = true
 	else:
 		interact_label.visible = false

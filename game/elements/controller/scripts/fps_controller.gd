@@ -157,36 +157,37 @@ func _handle_moving(dt: float):
 	var prev_state = move_state
 	var fwd = Input.is_action_pressed("move_forward")
 	var bak = Input.is_action_pressed("move_backward")
-	var dir = facing if fwd else Globals.dir_op(facing) if bak else Globals.Dir.NONE 
+	var left = Input.is_action_pressed("strafe_left")
+	var right = Input.is_action_pressed("strafe_right")
+
+	var dir = Globals.dir_left(facing) if left \
+		else Globals.dir_right(facing) if right \
+		else facing if fwd \
+		else Globals.dir_op(facing) if bak \
+		else Globals.Dir.NONE
+
 	var wants_to_move = dir != Globals.Dir.NONE
 
-	# Look for interactable things ahead
+	# Look for things ahead (make sure you can't see them through walls)
 	wall_fwd = raycast_ahead(-1)
 	if not wall_fwd: set_scanned_thing()
 	
 	var blocked = fwd and scanned_thing != null
-	var can_move = move_state == MoveStates.IDLE and not blocked 
+
+	var can_move = move_state == MoveStates.IDLE and not blocked
 	if wants_to_move and can_move:
 		move_start_pos = position
-		
+
 		var target_pos = gridmap.get_pos_in_direction(position, dir)
 		if target_pos == null:
+			# Smoosh into wall
 			target_pos = position
-		
-		# Step 1: check raycast results
-		# TODO: don't need to raycast, as we can get it from the gridmap.
-		var wall_ahead = raycast_ahead(1 if bak else -1 if fwd else 0) # "ahead" is direction moving - not necessarily fwd
-		if wall_ahead:
-			if wall_ahead.collider.has_method("interact"):
-				wall_ahead.collider.interact()
-			else:
-				# Smoosh into wall
-				attempted_move = true
-				var ahead = transform.basis.z.normalized() * -1
-				move_dest_pos = target_pos + ahead
-				move_state = MoveStates.MOVING
-		# Step 2: check gridmap results
-		elif target_pos:
+			attempted_move = true
+			# Try to move beyond wall (and squish into it)
+			move_dest_pos = target_pos + Globals.dir_to_vec(dir)
+			move_state = MoveStates.MOVING
+		else:
+			# Free to move
 			move_dest_pos = target_pos
 			move_state = MoveStates.MOVING
 		
@@ -226,8 +227,8 @@ func _do_moving(dt: float):
 			position.z = lerp(move_start_pos.z, move_dest_pos.z, t)
 	
 func _handle_turning(dt: float):
-	var left = Input.is_action_pressed("move_left")
-	var right = Input.is_action_pressed("move_right")
+	var left = Input.is_action_pressed("rotate_left")
+	var right = Input.is_action_pressed("rotate_right")
 	var dir = 1 if left else -1 if right else 0
 	var wants_to_turn = dir != 0
 	var is_idle = move_state == MoveStates.IDLE
@@ -308,6 +309,25 @@ func set_scanned_thing():
 	if scanned_thing != last_scanned:
 		last_scanned = scanned_thing
 		SignalBus.interactable_scanned.emit(scanned_thing)
+
+"""
+Send a ray in a Globals.Dir direction
+
+returns a dictionary of hits
+"""
+func raycast_dir(dir):
+	var base = transform.basis.z if (dir == Globals.Dir.N or dir == Globals.Dir.S) else transform.basis.x
+	var mult = -1 if (dir == Globals.Dir.N or dir == Globals.Dir.W) else 1
+	var dir_norm = base.normalized() * mult
+	var ray = PhysicsRayQueryParameters3D.new()
+	ray.from = global_position
+	ray.to = global_position + dir_norm * (gridmap.cell_size.x / 0.9) + Vector3(0, 1, 0) # distance forward and up
+	ray.exclude = [self]
+	var world = get_world_3d()
+	if world == null:
+		return null
+	var space_state = get_world_3d().direct_space_state
+	return space_state.intersect_ray(ray)
 
 """
 Send a ray either forward (-1) or backwards (1) along the z axis
