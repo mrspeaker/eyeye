@@ -17,6 +17,8 @@ var _state: GameState = GameState.INIT
 var _state_time := 0.0
 
 var stress := 0.0
+var stress_cooldown := 0.0
+var stress_calm_speed := 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,7 +42,7 @@ func _input(event):
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
 
-func _process(delta: float):
+func _process(dt: float):
 	if _state == GameState.CUTSCENE:
 		if _state_time == 0:
 			player.camera.current = true
@@ -50,7 +52,16 @@ func _process(delta: float):
 			_state_time = 0
 			player.enabled = true
 			return
-	_state_time += delta
+
+	if _state == GameState.PLAY:
+		if stress_cooldown > 0:
+			stress_cooldown -= dt
+		if stress > 0 && stress_cooldown <= 0:
+			add_stress(-stress_calm_speed * dt)
+			stress_calm_speed += dt
+
+	_state_time += dt
+
 
 func world_turn(_player):
 	enemies_act()
@@ -67,3 +78,6 @@ func _on_enemy_eye_contact(_distance: float):
 func add_stress(amount: float = 1.0):
 	stress += amount
 	SignalBus.stress_changed.emit(stress)
+	if amount > 0:
+		stress_cooldown = 5
+		stress_calm_speed = 2

@@ -566,9 +566,10 @@ offset_top = -108.5
 offset_right = 170.5
 offset_bottom = 108.5
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+[node name="GhostVideo" type="VideoStreamPlayer" parent="."]
+unique_name_in_owner = true
 visible = false
-modulate = Color(1, 1, 1, 0.156863)
+modulate = Color(1, 1, 1, 0.22352941)
 self_modulate = Color(0.635133, 0.2335, 0.107684, 1)
 offset_left = -5.0
 offset_top = -108.0

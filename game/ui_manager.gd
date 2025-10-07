@@ -6,6 +6,7 @@ extends Control
 @onready var fade_timer := Timer.new()
 @onready var player: CharacterBody3D = %Controller
 @onready var inventory_dialog:InventoryDialog = %InventoryDialog
+@onready var ghost_video = %GhostVideo
 
 var fade_tween: Tween
 var cursor_texture_size := Vector2.ZERO
@@ -65,7 +66,7 @@ func _on_flashlight_toggled():
 		fade_timer.start(fade_timer.wait_time)
 
 
-func _process(_delta):
+func _process(_dt):
 	cursor.position = get_viewport().get_mouse_position() - (cursor_texture_size / 2)
 
 func on_scanned(scanned):
@@ -80,4 +81,5 @@ func on_scanned(scanned):
 
 func _on_stress_changed(stress: float):
 	stress_label.text = "Stress: " + str(stress as int)
-	stress_label.visible = true
+	stress_label.visible = stress > 0
+	ghost_video.visible = stress > 500
