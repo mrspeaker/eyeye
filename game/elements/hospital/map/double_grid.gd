@@ -26,6 +26,7 @@ func pos_to_two_cell(pos: Vector3) -> Vector3i:
 
 func _ready() -> void:
 	#_test_two_grid()
+	#dumpit()
 	pass
 
 '''
@@ -90,9 +91,19 @@ func get_next_cell(pos: Vector3, d: Globals.Dir) -> Vector3i:
 	var one_cell = Vector3i(x_dir, 0, z_dir) * 2
 	return cur_cell + one_cell
 
+
 '''
 Some "unit test" stuff
 '''
+
+func dumpit():
+	for y in range(0, -82, -1):
+		var row := ""
+		for x in range(0, 43):
+			var item = get_cell_item(Vector3(x, 0, y))
+			row += (str(item) if item >=0 else ".") + " "
+		print(row)
+
 
 func arr_eq(a: Array, b: Array) -> bool:
 	return a.hash() == b.hash()
