@@ -4,7 +4,7 @@ extends Node3D
 @onready var grid:GridMap = %GridMap
 @onready var cinema_camera:Camera3D = %CinemaCamera
 @onready var player:PlayerController = %Controller
-
+@onready var ghoul2 := %Ghoul2
 var _cell_timer:Timer = Timer.new()
 
 enum GameState {
@@ -33,6 +33,8 @@ func _ready() -> void:
 	_state = GameState.CUTSCENE
 	_state_time = 0.0
 	player.enabled = false
+
+	print(grid.find_path(player.position, ghoul2.position))
 
 
 func _on_timeout():

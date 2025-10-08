@@ -272,6 +272,7 @@ transform = Transform3D(0.9999731, 0, 0.007330321, 0, 1, 0, -0.007330321, 0, 0.9
 [node name="Room Psych Ward" type="Node3D" parent="Level"]
 
 [node name="Ghoul2" parent="Level/Room Psych Ward" instance=ExtResource("24_1u8w0")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.334637, 0.685171, -37.81854)
 
 [node name="Toilet_Elongated_A3" parent="Level/Room Psych Ward" instance=ExtResource("28_xuqvo")]

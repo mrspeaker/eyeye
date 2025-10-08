@@ -13,6 +13,14 @@ enum Dir {
 	DOWN
 }
 
+func dir_str(d: Dir):
+	if d == 0: return "N"
+	if d == 1: return "S"
+	if d == 2: return "E"
+	if d == 3: return "W"
+	if d == 4: return "DOWN"
+	return "NONE"
+
 func dir_op (d: Dir):
 	if d == Dir.N: return Dir.S
 	if d == Dir.S: return Dir.N

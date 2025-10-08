@@ -1,5 +1,12 @@
 extends GridMap
 
+const GROUND_IDX := 4
+
+const CELL_SIZE := 3.0
+const CELLS_X := 41
+const CELLS_Z := 22
+var _astar := AStar2D.new()
+
 enum Tiles {
 	TestCube,
 	Floor,
@@ -14,6 +21,61 @@ enum Tiles {
 	ShopCube
 }
 
+func _ready() -> void:
+	_init_astar()
+	#print(find_path(Vector3(18.5, 0.0, -1.5), Vector3(18.5, 0.0, -7.5)))
+
+
+func find_path(from: Vector3, to: Vector3):
+	var p1 = _astar.get_closest_point(Vector2(from.x, from.z))
+	var p2 = _astar.get_closest_point(Vector2(to.x, to.z))
+	return _astar.get_point_path(p1, p2)
+
+func _init_astar():
+	var H = 22
+	var W = 20
+
+	# Add all walkable ground positions
+	for j in range(0, H): # _astar.region.end.y):
+		for i in range(0, W): #_astar.region.end.x):
+			var pos = Vector3(i * CELL_SIZE, 0, -j * CELL_SIZE - 1)
+			var cell = pos_to_two_cell(pos)
+			var edges = get_cell_edge_items(cell)
+			var ground = edges[GROUND_IDX]
+			if !is_walkable(ground):
+				continue
+			var id = _astar.get_available_point_id()
+			_astar.add_point(id, Vector2(pos.x, pos.z))
+			#print(id, " ", pos.x, ":", pos.z, " - ", is_walkable(ground))
+		#print("-------")
+
+	# Take two: connect all walkable points
+	for j in range(0, H): # _astar.region.end.y):
+		for i in range(0, W): #_astar.region.end.x):
+			var pos = Vector3(i * CELL_SIZE, 0, -j * CELL_SIZE - 1)
+			var cell = pos_to_two_cell(pos)
+			var edges = get_cell_edge_items(cell)
+			var ground = edges[GROUND_IDX]
+			if !is_walkable(ground):
+				continue
+			var id = _astar.get_closest_point(Vector2(pos.x, pos.z))
+			_connect_cardinal(id, pos, Globals.Dir.N)
+			_connect_cardinal(id, pos, Globals.Dir.S)
+			_connect_cardinal(id, pos, Globals.Dir.E)
+			_connect_cardinal(id, pos, Globals.Dir.W)
+
+'''
+	Helper method to connect a point to the N,S,E,W cells
+	if they are "walkable"
+'''
+func _connect_cardinal(id: int, pos: Vector3, dir: Globals.Dir):
+	var pos2 = get_pos_in_direction(pos, dir)
+	if pos2 == null: return
+	var nid = _astar.get_closest_point(Vector2(pos2.x, pos2.z))
+	if nid != id:
+		_astar.connect_points(id, nid)
+		#print("connect:", id, " ", nid, Globals.dir_str(dir))
+
 func pos_to_two_cell(pos: Vector3) -> Vector3i:
 	# 0,0,0 is in positive z direction - so 0,0,-1 is first cell in our world
 	var neg_offset = Vector3i(
@@ -23,11 +85,6 @@ func pos_to_two_cell(pos: Vector3) -> Vector3i:
 	var grid_pos = local_to_map(pos) + neg_offset
 	var grid_pos_mod_two = Vector3i(floor(grid_pos / 2) * 2)
 	return grid_pos_mod_two - neg_offset
-
-func _ready() -> void:
-	#_test_two_grid()
-	#dumpit()
-	pass
 
 '''
 THe way the grid works is you give position in the bottom left
@@ -40,7 +97,7 @@ func get_cell_edge_items(cell: Vector3i):
 	# TODO: assert cell is mod 2?
 	var ground = get_cell_item(cell + Vector3i(1, 0, 0)) # floor is br
 	if ground == -1:
-		print("no ground!")
+		#print("no ground!")
 		ground = -2
 
 	var north = get_cell_item(cell + Vector3i(1, 0, -1)) # tr is a wall N
@@ -151,3 +208,5 @@ func _test_two_grid():
 	ut_eq("items 1", get_cell_edge_items(Vector3i(0, 0, -1)), [2, 2, 2, 2, 1])
 	ut_eq("items 2", get_cell_edge_items(Vector3i(8, 0, -25)), [-1, -1, 4, -1, 1])
 	ut_eq("items 3", get_cell_edge_items(Vector3i(10, 0, -25)), [-1, 2, -1, 4, 5])
+
+	#ut_eq("path 1", _astar.get_point_path(3, 7), [Vector3(18.0, 0, -1.0), Vector3(18.0, 0, -4.0), Vector3(18.0, 0, -7.0)])
