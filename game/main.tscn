@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=49 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://by4i42bun3iph" path="res://elements/pathwalker/path_walker.tscn" id="30_d2t1y"]
 [ext_resource type="PackedScene" uid="uid://fof1lwq8m1em" path="res://scenes/desk_variant_1.tscn" id="30_htxhm"]
 [ext_resource type="PackedScene" uid="uid://j58rlxvgo28a" path="res://scenes/bench1.tscn" id="31_facbu"]
+[ext_resource type="PackedScene" uid="uid://bg28adr3xwpnd" path="res://elements/wall_bug/wall_bug.tscn" id="31_gngh3"]
 [ext_resource type="PackedScene" uid="uid://dy7rbu7ql805s" path="res://models/compymon.glb" id="31_seu75"]
 [ext_resource type="PackedScene" uid="uid://mfty7dih3x37" path="res://models/compybox.glb" id="32_htxhm"]
 [ext_resource type="PackedScene" uid="uid://csw3h0gh8fqvy" path="res://scenes/curtain.tscn" id="34_4k2k6"]
@@ -314,6 +315,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.631855, 0, -87.65277)
 
 [node name="PathWalker4" parent="Level/Room Psych Ward" instance=ExtResource("30_d2t1y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.54967, 0, -59.389584)
+
+[node name="WallBug" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.841193, 0.12720096, -31.680706)
+
+[node name="WallBug2" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.499253, 0.1812365, -31.680706)
+
+[node name="WallBug3" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.499253, 0.1812365, -30.040195)
+
+[node name="WallBug4" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7489824, 0.1812365, -30.040195)
+
+[node name="WallBug5" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7489824, 0.1812365, -30.923044)
+
+[node name="WallBug6" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.284169, 0.1812365, -32.558807)
+
+[node name="WallBug7" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.942229, 0.1812365, -32.558807)
+
+[node name="WallBug8" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.942229, 0.1812365, -30.918297)
+
+[node name="WallBug9" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.191958, 0.1812365, -30.918297)
+
+[node name="WallBug10" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.191958, 0.12532657, -31.801146)
+
+[node name="WallBug11" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4833984, 0.1812365, -35.56503)
+
+[node name="WallBug12" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1414585, 0.1812365, -35.56503)
+
+[node name="WallBug13" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1414585, 0.1812365, -33.92452)
+
+[node name="WallBug14" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3911877, 0.1812365, -33.92452)
+
+[node name="WallBug15" parent="Level/Room Psych Ward" instance=ExtResource("31_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3911877, 0.1812365, -34.807365)
 
 [node name="Room Font loos" type="Node3D" parent="Level"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, 0, 0, 0)

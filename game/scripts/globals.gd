@@ -3,6 +3,10 @@ extends Node
 const MAX_STRESS_DISTANCE := 150
 
 var flashlight_on := false
+var rng = RandomNumberGenerator.new()
+
+func _ready() -> void:
+	rng.randomize()
 #
 enum Dir {
 	NONE = -1,

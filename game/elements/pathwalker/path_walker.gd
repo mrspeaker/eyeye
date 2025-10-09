@@ -29,7 +29,6 @@ func _process(dt: float) -> void:
 		var dest = grid.get_rnd_tile_pos_by_type(grid.Tiles.Floor2) if not homing else home
 		path = grid.find_path(position, dest)
 		if path.size() > 0:
-			#print("found path ", path.size())
 			state = PathStates.PATHING
 		return
 
@@ -46,10 +45,9 @@ func _process(dt: float) -> void:
 			# Are we at target cell?
 			if global_transform.origin.distance_to(target) < 0.15:
 				target = Vector3.INF
-				homing = not homing
 		return
 
 	if state == PathStates.DONE_PATH:
-		#print("path over...")
 		state = PathStates.IDLE
+		homing = not homing
 		return
