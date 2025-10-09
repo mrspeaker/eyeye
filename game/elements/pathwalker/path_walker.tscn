@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://by4i42bun3iph"]
+[gd_scene load_steps=4 format=3 uid="uid://by4i42bun3iph"]
 
 [ext_resource type="Script" uid="uid://bytmk43dv8kdo" path="res://elements/pathwalker/path_walker.gd" id="1_8u7ip"]
 [ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://elements/ghoul/assets/ghoul.png" id="1_ndwho"]
+[ext_resource type="PackedScene" uid="uid://b1ag8s81emquk" path="res://components/bob.tscn" id="3_wry3c"]
 
 [node name="PathWalker" type="Node3D"]
 script = ExtResource("1_8u7ip")
@@ -12,3 +13,6 @@ offset = Vector2(0, 1200)
 billboard = 2
 shaded = true
 texture = ExtResource("1_ndwho")
+
+[node name="Bobalob" parent="." node_paths=PackedStringArray("bobobj") instance=ExtResource("3_wry3c")]
+bobobj = NodePath("../Groul")

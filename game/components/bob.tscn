@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1ag8s81emquk"]
+
+[ext_resource type="Script" uid="uid://8qkxbx67p0pp" path="res://components/bob.gd" id="1_xborl"]
+
+[node name="Bobalob" type="Node3D"]
+script = ExtResource("1_xborl")
