@@ -16,3 +16,10 @@ texture = ExtResource("1_ndwho")
 
 [node name="Bobalob" parent="." node_paths=PackedStringArray("bobobj") instance=ExtResource("3_wry3c")]
 bobobj = NodePath("../Groul")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6461823, 0)
+light_color = Color(0.46021122, 0.09444334, 0.1121589, 1)
+light_energy = 0.4
+light_specular = 0.0
+omni_range = 2.3177917

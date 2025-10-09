@@ -10,4 +10,4 @@ func _ready() -> void:
 
 func _process(dt: float) -> void:
 	tim += dt
-	bobobj.position.y = init_y + sin(tim * 8) * 0.05
+	bobobj.position.y = init_y + sin(tim * 8) * 0.03

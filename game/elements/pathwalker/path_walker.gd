@@ -26,7 +26,8 @@ func _process(dt: float) -> void:
 		return
 
 	if state == PathStates.LOOKING:
-		path = grid.find_path(position, grid.get_rnd_tile_pos_by_type(grid.Tiles.Floor2) if not homing else home)
+		var dest = grid.get_rnd_tile_pos_by_type(grid.Tiles.Floor2) if not homing else home
+		path = grid.find_path(position, dest)
 		if path.size() > 0:
 			#print("found path ", path.size())
 			state = PathStates.PATHING
