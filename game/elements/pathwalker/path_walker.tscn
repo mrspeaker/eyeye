@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://by4i42bun3iph"]
+
+[ext_resource type="Script" uid="uid://bytmk43dv8kdo" path="res://elements/pathwalker/path_walker.gd" id="1_8u7ip"]
+[ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://elements/ghoul/assets/ghoul.png" id="1_ndwho"]
+
+[node name="PathWalker" type="Node3D"]
+script = ExtResource("1_8u7ip")
+
+[node name="Groul" type="Sprite3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+offset = Vector2(0, 1200)
+billboard = 2
+texture = ExtResource("1_ndwho")

@@ -34,9 +34,6 @@ func _ready() -> void:
 	_state_time = 0.0
 	player.enabled = false
 
-	print(grid.find_path(player.position, ghoul2.position))
-
-
 func _on_timeout():
 	grid.set_cell_item(Vector3i.ZERO, randi_range(0, 8))
 

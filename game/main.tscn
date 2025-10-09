@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=48 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://ufcke1sx7h6w" path="res://Assets/LoafbrrAssets/Toilets/Scenes/Objects/toilet_elongated_a.tscn" id="28_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://bajwlf7krkin8" path="res://models/vending1.glb" id="29_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://bsgjeik2whfhs" path="res://models/wheelchair.glb" id="29_kq58d"]
+[ext_resource type="PackedScene" uid="uid://by4i42bun3iph" path="res://elements/pathwalker/path_walker.tscn" id="30_d2t1y"]
 [ext_resource type="PackedScene" uid="uid://fof1lwq8m1em" path="res://scenes/desk_variant_1.tscn" id="30_htxhm"]
 [ext_resource type="PackedScene" uid="uid://j58rlxvgo28a" path="res://scenes/bench1.tscn" id="31_facbu"]
 [ext_resource type="PackedScene" uid="uid://dy7rbu7ql805s" path="res://models/compymon.glb" id="31_seu75"]
@@ -301,6 +302,9 @@ transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, 
 
 [node name="crumble_sign2" parent="Level/Room Psych Ward" instance=ExtResource("26_h8e4i")]
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 57.140102, 1.9057412, -104.879684)
+
+[node name="PathWalker" parent="Level/Room Psych Ward" instance=ExtResource("30_d2t1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0964966, 0, -31.57618)
 
 [node name="Room Font loos" type="Node3D" parent="Level"]
 transform = Transform3D(0.999973, 0, 0.00733032, 0, 1, 0, -0.00733032, 0, 0.999973, 0, 0, 0)

@@ -1,7 +1,5 @@
 extends GridMap
 
-const GROUND_IDX := 4
-
 const CELL_SIZE := 3.0
 const CELLS_X := 41
 const CELLS_Z := 22
@@ -25,23 +23,23 @@ func _ready() -> void:
 	_init_astar()
 	#print(find_path(Vector3(18.5, 0.0, -1.5), Vector3(18.5, 0.0, -7.5)))
 
-
-func find_path(from: Vector3, to: Vector3):
+func find_path(from: Vector3, to: Vector3) -> Array[Vector2]:
 	var p1 = _astar.get_closest_point(Vector2(from.x, from.z))
 	var p2 = _astar.get_closest_point(Vector2(to.x, to.z))
-	return _astar.get_point_path(p1, p2)
+	var out: Array[Vector2] = []
+	var packed = _astar.get_point_path(p1, p2)
+	for i in packed: out.append(i)
+	return out
 
 func _init_astar():
-	var H = 22
-	var W = 20
 
 	# Add all walkable ground positions
-	for j in range(0, H): # _astar.region.end.y):
-		for i in range(0, W): #_astar.region.end.x):
+	for j in range(0, CELLS_X): # _astar.region.end.y):
+		for i in range(0, CELLS_Z): #_astar.region.end.x):
 			var pos = Vector3(i * CELL_SIZE, 0, -j * CELL_SIZE - 1)
 			var cell = pos_to_two_cell(pos)
 			var edges = get_cell_edge_items(cell)
-			var ground = edges[GROUND_IDX]
+			var ground = edges[Globals.Dir.DOWN]
 			if !is_walkable(ground):
 				continue
 			var id = _astar.get_available_point_id()
@@ -50,12 +48,12 @@ func _init_astar():
 		#print("-------")
 
 	# Take two: connect all walkable points
-	for j in range(0, H): # _astar.region.end.y):
-		for i in range(0, W): #_astar.region.end.x):
+	for j in range(0, CELLS_X): # _astar.region.end.y):
+		for i in range(0, CELLS_Z): #_astar.region.end.x):
 			var pos = Vector3(i * CELL_SIZE, 0, -j * CELL_SIZE - 1)
 			var cell = pos_to_two_cell(pos)
 			var edges = get_cell_edge_items(cell)
-			var ground = edges[GROUND_IDX]
+			var ground = edges[Globals.Dir.DOWN]
 			if !is_walkable(ground):
 				continue
 			var id = _astar.get_closest_point(Vector2(pos.x, pos.z))
@@ -63,6 +61,7 @@ func _init_astar():
 			_connect_cardinal(id, pos, Globals.Dir.S)
 			_connect_cardinal(id, pos, Globals.Dir.E)
 			_connect_cardinal(id, pos, Globals.Dir.W)
+	#print(_astar.get_available_point_id())
 
 '''
 	Helper method to connect a point to the N,S,E,W cells
