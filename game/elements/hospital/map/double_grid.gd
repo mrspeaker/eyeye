@@ -31,6 +31,11 @@ func find_path(from: Vector3, to: Vector3) -> Array[Vector2]:
 	for i in packed: out.append(i)
 	return out
 
+func get_rnd_tile_pos_by_type(type: Tiles):
+	var all = get_used_cells_by_item(type)
+	var tile = all.pick_random()
+	return map_to_local(tile)
+
 func _init_astar():
 
 	# Add all walkable ground positions

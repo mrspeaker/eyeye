@@ -10,4 +10,5 @@ script = ExtResource("1_8u7ip")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 offset = Vector2(0, 1200)
 billboard = 2
+shaded = true
 texture = ExtResource("1_ndwho")
