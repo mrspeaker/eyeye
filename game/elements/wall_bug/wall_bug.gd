@@ -1,4 +1,4 @@
-extends Sprite3D
+extends Node3D
 
 var target: Vector3 = Vector3.INF
 var speed: float = 2.0
@@ -21,6 +21,7 @@ func _process(dt: float) -> void:
 	wait_time -= dt
 	if wait_time <= 0:
 		var dir = position.direction_to(target).normalized()
+		look_at(Vector3(target.x, position.y, target.z))
 		position = position + (dir * dt * speed)
 		if position.distance_to(target) < 0.03:
 			target = Vector3.INF

@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://dj7xhaqmf0nni" path="res://elements/wall_bug/wall_bug.gd" id="2_medwa"]
 
 [node name="WallBug" type="Node3D"]
+script = ExtResource("2_medwa")
 
 [node name="bugman" type="Sprite3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.0076249144, 0.09970888, 0, -0.09970888, 0.0076249144, 0, 0, 0)
+transform = Transform3D(0.1, 0, 0, 0, -4.371139e-09, 0.1, 0, -0.1, -4.371139e-09, 0, 0, 0)
 shaded = true
 texture = ExtResource("1_g23vc")
-script = ExtResource("2_medwa")
