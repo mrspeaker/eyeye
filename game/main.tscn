@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=50 format=3 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cllq0uwwcckq2" path="res://models/hospital_beds.glb" id="3_dg77c"]
 [ext_resource type="Script" uid="uid://b2wbxl22ek0vq" path="res://scripts/player.gd" id="4_vivmo"]
 [ext_resource type="Script" uid="uid://cr3afoq8poqwa" path="res://components/health_component.gd" id="5_w48qg"]
+[ext_resource type="Texture2D" uid="uid://dsymf6k20ukri" path="res://textures/cookie.jpg" id="6_0n3wm"]
 [ext_resource type="PackedScene" uid="uid://1n8moqe73gpg" path="res://elements/scarecrow/scarecrow.tscn" id="6_7mycd"]
 [ext_resource type="Script" uid="uid://d08x7vijxbycr" path="res://scripts/scarecrow.gd" id="6_272bh"]
 [ext_resource type="Script" uid="uid://c3sgvcmh21pi1" path="res://flashlight.gd" id="6_h8e4i"]
@@ -62,7 +63,12 @@ reflected_light_source = 2
 tonemap_mode = 2
 ssao_enabled = true
 ssao_intensity = 4.13
+glow_enabled = true
+fog_light_color = Color(0.080205925, 0.09142729, 0.10888823, 1)
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.025
+volumetric_fog_albedo = Color(0.8884254, 0.88842535, 0.88842535, 1)
+volumetric_fog_length = 10.0
 
 [sub_resource type="FontFile" id="FontFile_7mycd"]
 cache/0/16/0/ascent = 0.0
@@ -129,8 +135,12 @@ gridmap = NodePath("../../GridMap")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2356507, -0.40715027)
 light_energy = 4.0
 light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
+light_volumetric_fog_energy = 0.328
+light_projector = ExtResource("6_0n3wm")
+light_size = 0.088
+light_specular = 0.582
 light_bake_mode = 0
+shadow_enabled = true
 spot_range = 15.0
 spot_attenuation = 3.0
 spot_angle = 20.0

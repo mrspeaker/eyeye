@@ -4,11 +4,21 @@ var target: Vector3 = Vector3.INF
 var speed: float = 2.0
 var wait_time: float = 5.0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _find_closest_wall():
+	# shoot rays in all directions
+	# find closeest.
+	# orient to that surface.
+	pass
+
+func _check_hit_edge():
+	# shoot ray fwd
+	# if dist close,
+	#   orient to that direction
+	pass
+
 func _process(dt: float) -> void:
 	if target == Vector3.INF:
 		target = position + Vector3(
