@@ -12,7 +12,7 @@ func _ready() -> void:
 	original_position = position
 	SignalBus.connect("hovered_object_changed", _on_hovered_object_changed)
 
-	
+
 func click_pickup(body: Node3D):
 	if body.has_method("on_item_picked_up"):
 		body.on_item_picked_up(item)

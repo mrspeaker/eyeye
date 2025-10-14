@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://a"]
+
+[ext_resource type="PackedScene" uid="uid://cvdmmi0m15ba8" path="res://elements/hospital/objs/11_Wall_Blue.glb" id="1"]
+
+[node name="11_Wall_Blue" instance=ExtResource("1")]

@@ -57,12 +57,10 @@ func _on_fade_complete():
 		get_viewport().warp_mouse(get_viewport().size / 2)
 
 func _on_flashlight_toggled():
-	#print('here')
 	if !Globals.flashlight_on and fade_timer.is_stopped():
 		suppress_next_motion = true
 		get_viewport().warp_mouse(get_viewport().size / 2)
 	elif not fade_timer.is_stopped():
-		print(fade_timer.wait_time)
 		fade_timer.start(fade_timer.wait_time)
 
 

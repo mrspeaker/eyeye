@@ -16,12 +16,14 @@ enum Tiles {
 	DoorFlip,
 	FloorDark,
 	FloorLino,
-	ShopCube
+	ShopCube,
+	WallBlue,
+	HandRail,
+	Grass
 }
 
 func _ready() -> void:
 	_init_astar()
-	#print(find_path(Vector3(18.5, 0.0, -1.5), Vector3(18.5, 0.0, -7.5)))
 
 func find_path(from: Vector3, to: Vector3) -> Array[Vector2]:
 	var p1 = _astar.get_closest_point(Vector2(from.x, from.z))
@@ -49,8 +51,6 @@ func _init_astar():
 				continue
 			var id = _astar.get_available_point_id()
 			_astar.add_point(id, Vector2(pos.x, pos.z))
-			#print(id, " ", pos.x, ":", pos.z, " - ", is_walkable(ground))
-		#print("-------")
 
 	# Take two: connect all walkable points
 	for j in range(0, CELLS_X): # _astar.region.end.y):
@@ -66,7 +66,6 @@ func _init_astar():
 			_connect_cardinal(id, pos, Globals.Dir.S)
 			_connect_cardinal(id, pos, Globals.Dir.E)
 			_connect_cardinal(id, pos, Globals.Dir.W)
-	#print(_astar.get_available_point_id())
 
 '''
 	Helper method to connect a point to the N,S,E,W cells
@@ -78,7 +77,6 @@ func _connect_cardinal(id: int, pos: Vector3, dir: Globals.Dir):
 	var nid = _astar.get_closest_point(Vector2(pos2.x, pos2.z))
 	if nid != id:
 		_astar.connect_points(id, nid)
-		#print("connect:", id, " ", nid, Globals.dir_str(dir))
 
 func pos_to_two_cell(pos: Vector3) -> Vector3i:
 	# 0,0,0 is in positive z direction - so 0,0,-1 is first cell in our world
@@ -117,7 +115,7 @@ func get_cell_edges(cell: Vector3i):
 const walkables = [
 	false, true, false, false, true,
 	true, false, true, true, true,
-	false
+	false, false, false, true
 ]
 
 func is_walkable(idx: int):

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bruf3vqkkalyk"
-path="res://.godot/imported/00_TestCube.glb-e8149c8aceb0bef421b5ff6dcb9352a5.scn"
+uid="uid://cc6ej8u70fi5p"
+path="res://.godot/imported/13_Grass.glb-5f466a72d68c8a60b5f099edf2ecf259.scn"
 
 [deps]
 
-source_file="res://elements/hospital/objs/00_TestCube.glb"
-dest_files=["res://.godot/imported/00_TestCube.glb-e8149c8aceb0bef421b5ff6dcb9352a5.scn"]
+source_file="res://elements/hospital/objs/13_Grass.glb"
+dest_files=["res://.godot/imported/13_Grass.glb-5f466a72d68c8a60b5f099edf2ecf259.scn"]
 
 [params]
 

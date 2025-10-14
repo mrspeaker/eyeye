@@ -114,7 +114,7 @@ func regenerate_mesh_library():
 			if mesh_instance == null:
 				print("No MeshInstance3D found in:", file)
 				continue
-			
+
 			meshlib.create_item(id)
 			meshlib.set_item_mesh(id, mesh_instance.mesh)
 			meshlib.set_item_name(id, file.get_basename())
@@ -168,19 +168,19 @@ func convert_objects_to_scenes():
 		if file.ends_with(".glb") or file.ends_with(".obj") or file.ends_with(".fbx"):
 			var resource_path = original_folder.rstrip("/") + "/" + file
 			var output_scene_path := tile_scene_folder + file.get_basename() + ".tscn"
-			
+
 			# Create a text-based scene file that inherits from the original
 			var scene_file = FileAccess.open(output_scene_path, FileAccess.WRITE)
 			if scene_file:
 				# Write the TSCN file header with inheritance
 				scene_file.store_line("[gd_scene load_steps=2 format=3 uid=\"uid://\"]")
-				
+
 				# Write the inheritance line
 				scene_file.store_line("[ext_resource type=\"PackedScene\" path=\"" + resource_path + "\" id=\"1\"]")
-				
+
 				# Write the node structure with inheritance
 				scene_file.store_line("[node name=\"" + file.get_basename() + "\" instance=ExtResource(\"1\")]")
-				
+
 				scene_file.close()
 				print("Created inherited scene: " + output_scene_path)
 				count += 1
@@ -213,7 +213,7 @@ func find_first_mesh_instance(root: Node) -> MeshInstance3D:
 		if result != null:
 			return result
 	return null
-	
+
 func find_first_static_body(root: Node) -> StaticBody3D:
 	if root is StaticBody3D:
 		return root
@@ -222,7 +222,7 @@ func find_first_static_body(root: Node) -> StaticBody3D:
 		if result != null:
 			return result
 	return null
-	
+
 func find_static_body_shapes(body: StaticBody3D) -> Array:
 	var shapes = []
 	for child in body.get_children():

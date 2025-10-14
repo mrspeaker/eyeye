@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dp4n7bws1xtqu"]
+[gd_scene load_steps=116 format=4 uid="uid://dp4n7bws1xtqu"]
 
 [ext_resource type="Script" uid="uid://dspjy6hj0pupi" path="res://main.gd" id="1_272bh"]
 [ext_resource type="PackedScene" uid="uid://ciolrmdh2mxkt" path="res://elements/controller/fps_controller.tscn" id="1_ig7tw"]
@@ -19,13 +19,25 @@
 [ext_resource type="Script" uid="uid://b2f83eabx121f" path="res://scripts/barrels.gd" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://b3tlrnbv41w47" path="res://scenes/Door.tscn" id="10_4c57u"]
 [ext_resource type="Script" uid="uid://c8py40rhmythr" path="res://scripts/eye_patch.gd" id="10_getpj"]
+[ext_resource type="Texture2D" uid="uid://doxywh4h36g5y" path="res://elements/hospital/objs/01_Floor_lab1_flr4.png" id="10_uit24"]
 [ext_resource type="PackedScene" uid="uid://cgyrsfgx60lqe" path="res://scenes/inventory_dialog.tscn" id="11_d13ii"]
+[ext_resource type="Texture2D" uid="uid://bexyxoa4nue57" path="res://elements/hospital/objs/10_ShoppingCube_Screenshot 2025-03-24 at 9.43.png" id="11_ruth0"]
+[ext_resource type="Texture2D" uid="uid://xmttsrllipby" path="res://elements/hospital/objs/11_Wall_Blue_Wall4.png" id="12_rm4vd"]
 [ext_resource type="PackedScene" uid="uid://dw54qwn7m4t43" path="res://models/hospital_bed_1.glb" id="13_w48qg"]
 [ext_resource type="VideoStream" uid="uid://basbrnirfchdm" path="res://vid/out.ogv" id="13_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://c7a3ugvsmsbbc" path="res://elements/hospital/objs/13_Grass_Grass_03-256x256.png" id="14_sm6fg"]
+[ext_resource type="Texture2D" uid="uid://b0ka1yctnnjja" path="res://elements/hospital/objs/02_Wall_tnnl_w12d2.png" id="15_b17eg"]
 [ext_resource type="Texture2D" uid="uid://b5kv1wwhun4kg" path="res://textures/gorilla-statue-nodiffs.png" id="16_2cqfq"]
+[ext_resource type="Texture2D" uid="uid://cmplu3mf1xluo" path="res://elements/hospital/objs/03_Wall1Half_tnnl_w12d2.png" id="16_ntx8l"]
+[ext_resource type="Texture2D" uid="uid://b80iwgsu68m6j" path="res://elements/hospital/objs/04_Doorway_tnnl_w12d2.png" id="17_uatky"]
 [ext_resource type="PackedScene" uid="uid://ddvagl21eutfi" path="res://elements/ringu_amy/ringu_amy.tscn" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://c7owa6tcqy1bh" path="res://elements/pickup/pickup.tscn" id="18_074og"]
+[ext_resource type="Texture2D" uid="uid://dqjc5uk61qole" path="res://elements/hospital/objs/05_Floor2_lab3_w1d.png" id="18_rqtf5"]
+[ext_resource type="Texture2D" uid="uid://da8domffu68y4" path="res://elements/hospital/objs/06_Wall_Wood_Wall_Variant_1_Base_color.png" id="19_1vm84"]
 [ext_resource type="PackedScene" uid="uid://bxf6nxlqdci8j" path="res://elements/ringu/ringu.tscn" id="20_4lmeg"]
+[ext_resource type="Texture2D" uid="uid://bhu658odt8lwg" path="res://elements/hospital/objs/07_Door_flip_Door_Variant_1_Base_color.png" id="20_wu3dr"]
+[ext_resource type="Texture2D" uid="uid://bglkx4lap1om" path="res://elements/hospital/objs/08_Floor_Dark_F6.png" id="21_cyx1q"]
+[ext_resource type="Texture2D" uid="uid://c77md7kuj7qx2" path="res://elements/hospital/objs/09_Floor_Lino_F10.png" id="22_0dhbp"]
 [ext_resource type="PackedScene" uid="uid://c0o57keahxavf" path="res://elements/ghoul/ghoul.tscn" id="24_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://ui1f70xj22re" path="res://models/mri_machine.glb" id="25_come4"]
 [ext_resource type="PackedScene" uid="uid://ludg30fe4squ" path="res://models/crumble_sign.glb" id="26_h8e4i"]
@@ -45,6 +57,7 @@
 [ext_resource type="PackedScene" uid="uid://bg13ugdp78pba" path="res://scenes/table_variant_2.tscn" id="36_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://i0msklgl7gaq" path="res://Assets/lowpoly pack/SM_Light_B.prefab.gltf" id="37_facbu"]
 [ext_resource type="PackedScene" uid="uid://cmeit4kxblibp" path="res://scenes/fluro.tscn" id="41_4lmeg"]
+[ext_resource type="PackedScene" uid="uid://5oisdstv04ia" path="res://elements/ghoula/ghoula.tscn" id="58_vke2r"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -69,6 +82,668 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.025
 volumetric_fog_albedo = Color(0.8884254, 0.88842535, 0.88842535, 1)
 volumetric_fog_length = 10.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_whhkp"]
+resource_name = "mat_lab_floor"
+cull_mode = 2
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qd6w4"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -1.5, 3, 3, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "mat_lab_floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wwv8h"]
+resource_name = "00_TestCube_Cube_004"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -1.5, 3, 3, 3),
+"attribute_data": PackedByteArray("AAD/////AAAAAAAA/////wAA/////wAAAAAAAP//////////AAAAAP//AAAAAP///////wAAAAD//wAAAAD//wAAAAD///////8AAAAA/////wAAAAD//wAAAAD/////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_whhkp"),
+"name": "mat_lab_floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAAAAAAAAAAAAP////8AAAAAAAD//wAAAAD//wAAAAAAAP//AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AIAAAAAAAAD/P///AAD///8///8AAAAA/z8AAAAA////P/////8AAP+/AAD//////78AAP//AAD/v/////////+//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///wAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qd6w4")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3sfuy"]
+data = PackedVector3Array(-1.5, -1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00132"]
+resource_name = "mat_lab_floor"
+cull_mode = 2
+albedo_texture = ExtResource("10_uit24")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8ct5m"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.575, -1.5, 3, 0.1500001, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "mat_lab_floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nl8l6"]
+resource_name = "01_Floor_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.575, -1.5, 3, 0.1500001, 3),
+"attribute_data": PackedByteArray("AABlhv//mXkAAJl5//9lhgAAZYb//5l5AACZef//ZYb//2WGAACZef//mXkAAGWG//9lhgAAmXn//5l5AABlhgAAAAD///////8AAAAA/////wAAAAD//wAAAAD/////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_00132"),
+"name": "mat_lab_floor",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAAAAAAAAAAAAP////8AAAAAAAD//wAAAAD//wAAAAAAAP//AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AIAAAAAAAAD/P///AAD///8///8AAAAA/z8AAAAA////P/////8AAP+/AAD//////78AAP//AAD/v/////////+//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///wAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_8ct5m")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_eg8qr"]
+data = PackedVector3Array(-1.5, -1.575, 1.5, -1.5, -1.425, -1.5, -1.5, -1.425, 1.5, -1.5, -1.575, 1.5, -1.5, -1.575, -1.5, -1.5, -1.425, -1.5, -1.5, -1.575, -1.5, 1.5, -1.425, -1.5, -1.5, -1.425, -1.5, -1.5, -1.575, -1.5, 1.5, -1.575, -1.5, 1.5, -1.425, -1.5, 1.5, -1.575, -1.5, 1.5, -1.425, 1.5, 1.5, -1.425, -1.5, 1.5, -1.575, -1.5, 1.5, -1.575, 1.5, 1.5, -1.425, 1.5, 1.5, -1.575, 1.5, -1.5, -1.425, 1.5, 1.5, -1.425, 1.5, 1.5, -1.575, 1.5, -1.5, -1.575, 1.5, -1.5, -1.425, 1.5, -1.5, -1.575, -1.5, 1.5, -1.575, 1.5, 1.5, -1.575, -1.5, -1.5, -1.575, -1.5, -1.5, -1.575, 1.5, 1.5, -1.575, 1.5, 1.5, -1.425, -1.5, -1.5, -1.425, 1.5, -1.5, -1.425, -1.5, 1.5, -1.425, -1.5, 1.5, -1.425, 1.5, -1.5, -1.425, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4m3yy"]
+resource_name = "SHop"
+cull_mode = 2
+albedo_texture = ExtResource("11_ruth0")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rt6t1"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -1.5, 3, 3, 3),
+"format": 34896613377,
+"index_count": 456,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQADAAEAAAAFAAEABgAEAAMABQAGAAMABwACAAQABwAAAAIABgAHAAQAAAAIAAUABQAJAAYABQAIAAkAAAAKAAgABwAKAAAABgALAAcABwALAAoABgAJAAsADAAIAAoADQAJAAgADAANAAgADgALAAkADQAOAAkADwAKAAsADwAMAAoADgAPAAsAEAANAAwAEQAOAA0AEQANABAAEgAOABEAEgAPAA4AEwAMAA8AEwAPABIAEAAMABMAFAASABEAFQARABAAFQAUABEAFgAQABMAFgAVABAAFwATABIAFwAWABMAFAAXABIAFgAYABUAFQAZABQAFQAYABkAFgAaABgAFwAaABYAFAAbABcAFwAbABoAFAAZABsAHAAYABoAHQAZABgAHAAdABgAHgAbABkAHQAeABkAHwAaABsAHwAcABoAHgAfABsAIAAdABwAIQAeAB0AIQAdACAAIgAeACEAIgAfAB4AIwAcAB8AIwAfACIAIAAcACMAJAAiACEAJQAhACAAJQAkACEAJgAgACMAJgAlACAAJwAjACIAJwAmACMAJAAnACIAJgAoACUAJQApACQAJQAoACkAJgAqACgAJwAqACYAJAArACcAJwArACoAJAApACsALAAoACoALQApACgALAAtACgALgArACkALQAuACkALwAqACsALwAsACoALgAvACsAMAAtACwAMQAuAC0AMQAtADAAMgAuADEAMgAvAC4AMwAsAC8AMwAvADIAMAAsADMANAAyADEANQAxADAANQA0ADEANgAwADMANgA1ADAANwAzADIANwA2ADMANAA3ADIANgA4ADUANQA5ADQANQA4ADkANgA6ADgANwA6ADYANAA7ADcANwA7ADoANAA5ADsAPAA4ADoAPQA5ADgAPAA9ADgAPgA7ADkAPQA+ADkAPwA6ADsAPwA8ADoAPgA/ADsAQAA9ADwAQQA+AD0AQQA9AEAAQgA+AEEAQgA/AD4AQwA8AD8AQwA/AEIAQAA8AEMARABCAEEARQBAAEMARgBDAEIARgBFAEMARABGAEIARQBHAEAARwBBAEAARwBFAEYARwBEAEEARwBGAEQASABJAEoASABLAEkATABKAEkASwBMAEkATQBIAEoASwBIAE0ATABOAEoATQBKAE4ASwBPAEwASwBNAE8ATwBOAEwATwBNAE4A"),
+"name": "SHop",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 80,
+"vertex_data": PackedByteArray("AAAGxP//AAAAAP//AAAAAAAA/////wAA/////wAAAAD///////8AAAAABsQAAAAA//8GxAAAAAD//wbE//8AAG4DBsRuAwAAkPwGxG4DAABuAwbEkPwAAJD8BsSQ/AAAbgPbjZD8AABuA9uNbgMAAJD8241uAwAAkPzbjZD8AAAAANuNAAAAAP//240AAAAA///bjf//AAAAANuN//8AAP//XoYAAAAAAABehgAAAAAAAF6G//8AAP//Xob//wAAlgNehpYDAABo/F6GlgMAAJYDXoZo/AAAaPxehmj8AACWA09vaPwAAJYDT2+WAwAAaPxPb5YDAABo/E9vaPwAAAAAT28AAAAA//9PbwAAAAD//09v//8AAAAAT2///wAA//9hZwAAAAAAAGFnAAAAAAAAYWf//wAA//9hZ///AABtAmFnbQIAAJH9YWdtAgAAbQJhZ5H9AACR/WFnkf0AAG0CdUaR/QAAbQJ1Rm0CAACR/XVGbQIAAJH9dUaR/QAAAAB1RgAAAAD//3VGAAAAAP//dUb//wAAAAB1Rv//AAD///w+AAAAAAAA/D4AAAAAAAD8Pv//AAD///w+//8AAHgD/D54AwAAhvz8PngDAAB4A/w+hvwAAIb8/D6G/AAAeAOoD4b8AAB4A6gPeAMAAIb8qA94AwAAhvyoD4b8AAAAAKgPAAAAAP//qA8AAAAA//+oD///AAAAAKgP//8AAP//AAAAAAAAAAAAAP//AAD//wAA//8AAAAAAAAAAAAAqiqqKlTVAACqKlTVqioAAKoqVNVU1QAAqiqqKqoqAABU1VTVqioAAFTVqipU1QAAVNVU1VTVAABU1aoqqioAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_h82d2"]
+resource_name = "10_ShoppingCube_Cube_012"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -1.5, 3, 3, 3),
+"attribute_data": PackedByteArray("AAD4O///AAAAAAAA///4OwAA+Dv//wAAAAAAAP//+Dv///g7AAAAAP//AAAAAPg7///4OwAAAAD//wAAAAD4OwAAAAD///////8AAAAA/////wAAAAD//wAAAAD/////AACvkGj8r5D//6+QlgOvkGj8r5CWA6+QAACvkP//oHmWA6B5AACgeWj8oHkAAKB5aPygeZYDoHkAAKB5aPygef//oHmWA6B5//+geZYDoHlo/KB5AAD/////VvAAAFbw/////wAA/////1bwAABW8P//////////AABW8P//VvAAAP///////wAAVvD//1bwAAD//wAA+DuQ/Pg7///4O24D+Dv///g7bgP4O5D8+Dv//yNybgMjcgAAI3KQ/CNyAAAjcpD8I3JuAyNyAAAjcpD8I3L//yNybgMjcv//I3JuAyNykPwjcgAAoHn//yNyAAAjcv//oHkAAKB5//8jcgAAI3L//6B5//+geQAAI3L//yNyAACgef//oHkAACNy//8jcgAAoHmQ/CNybgP4O5D8+DtuAyNykPwjcm4D+DuQ/Pg7bgMjcm4DI3KQ/Pg7bgP4O5D8I3JuAyNykPz4O24D+DuQ/CNy///4O24D+DsAAPg7kPz4OwAA+DuQ/Pg7bgP4OwAAnZj//6+QAACvkP//nZgAAJ2Y//+vkAAAr5D//52Y//+dmAAAr5D//6+QAACdmP//nZgAAK+Q//+vkAAAnZgAAIm5kf2Juf//ibltAom5//+JuW0CibmR/Ym5AACdmJH9nZj//52YbQKdmJH9nZhtAp2YAACdmAAAibmR/Ym5//+JuW0CibmR/Ym5bQKJuQAAibkAAALB//+JuQAAibn//wLBAAACwf//ibkAAIm5//8Cwf//AsEAAIm5//+JuQAAAsH//wLBAACJuf//ibkAAALBaPyvkJYDoHlo/KB5lgOvkGj8r5CWA6B5aPygeZYDr5CWA6+QaPygeZYDoHlo/K+QlgOvkGj8oHmWA6B5aPyvkP//r5CWA6+QAACvkGj8r5CWA6+QaPyvkP//r5CR/Ym5bQKdmJH9nZhtAom5kf2JuW0CnZiR/Z2YbQKJuW0CibmR/Z2YbQKdmJH9ibltAom5kf2dmG0CnZiR/Ym5//+dmG0CnZgAAJ2Ykf2dmG0CnZiR/Z2Y//+dmP//AsF4AwLBAAACwYb8AsEAAALBeAMCwf//VvB4A1bwAABW8Ib8VvB4A1bwhvxW8P//VvAAAALBhvwCwf//AsF4AwLB//8CwXgDAsGG/ALBAABW8Ib8VvD//1bweANW8HgDVvAAAFbwhvxW8HgDAsGG/ALBeANW8Ib8VvB4AwLBhvwCwXgDVvB4A1bwhvwCwXgDAsGG/FbweANW8Ib8AsF4AwLBhvxW8P9f////n/+//5////9f/7//X/+//5//f/+f/7//X/9//1//f/+f/z//n/9//1//P/9f/z//nwAA/5//P/9fAAD/H/9//1//P/9f/3//H/8//5//f//f/z//3/9//5//Pw=="),
+"format": 34896613399,
+"index_count": 456,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAGgAcAB0AGgAdAB4AHwAgACEAHwAiACAAIwAkAB8AIwAlACQAJgAnACgAJgApACcAKgArACYAKgAsACsALQAuAC8ALQAwAC4AMQAyADMAMQA0ADIANQA2ADcANQA4ADYAOQA6ADsAOQA8ADoAPQA+AD8APQBAAD4AQQBCAD0AQQBDAEIARABFAEYARABHAEUASABJAEQASABKAEkASwBMAE0ASwBOAEwATwBQAEsATwBRAFAAUgBTAFQAUgBVAFMAVgBXAFgAVgBZAFcAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAZgBpAGcAagBrAGwAagBtAGsAbgBvAHAAbgBxAG8AcgBzAHQAcgB1AHMAdgB3AHIAdgB4AHcAeQB6AHsAeQB8AHoAfQB+AH8AfQCAAH4AgQCCAIMAgQCEAIIAhQCGAIcAhQCIAIYAiQCKAIsAiQCMAIoAjQCOAIkAjQCPAI4AkACRAJIAkACTAJEAkgCUAJUAkgCVAJYAlwCYAJkAlwCaAJgAmQCbAJwAmQCcAJ0AngCfAKAAngChAJ8AogCjAKQAogClAKMApgCnAKgApgCpAKcAqgCrAKwAqgCtAKsArgCvALAArgCxAK8AsgCzALQAsgC1ALMAtgC3ALgAtgC5ALcAugC7ALwAugC9ALsAvgC/AMAAvgDBAL8AwADCAMMAwADDAMQAxQDGAMcAxQDIAMYAyQDKAMsAyQDMAMoAzQDOAM8AzQDQAM4A0QDSANMA0QDUANIA1QDWANcA1QDYANYA1wDZANoA1wDaANsA3ADdAN4A3ADfAN0A4ADfANwA4ADhAN8A4gDjAOQA4gDlAOMA5ADmAOcA5ADnAOgA6QDqAOsA6QDsAOoA7QDuAOkA7QDvAO4A8ADxAPIA8ADzAPEA8gDxAPQA8gD0APUA9gD3APgA9gD5APcA+gD7APwA+gD9APsA/gD/AAAB/gABAf8AAgEDAQQBAgEFAQMBBgEHAQgBBgEJAQcBCgELAQwBCgENAQsBDgEPARABDgERAQ8BEgETARQBEgEVARMBFgEXARgBFgEZARcBGgEbARwBGgEdARsB"),
+"material": SubResource("StandardMaterial3D_4m3yy"),
+"name": "SHop",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 286,
+"vertex_data": PackedByteArray("AAAGxP//AAAAAP//AAAAAAAA/////wAAAAAGxAAAAAAAAAbEAAAAAP////8AAAAAAAD//wAAAAD//wbEAAAAAP//BsQAAP+//////////7//////AAD/v///BsT///+///8GxP//AIAAAP////8AgP///////wCAAAAGxP//AIAAAAAAAAD/P///AAD///8///8AAAAA/z8AAAAA////P/////8AAP+/AAD//////78AAP//AAD/v/////////+///9Pb////79o/E9vlgP/v///T28AAP+/aPxPb2j8/79o/E9vlgP/v5YDT2+WA/+/AABPbwAA/7///16GAAD/v2j8XoZo/P+///9ehv///79o/F6GlgP/vwAAXoYAAP+/aPxehpYD/7+WA16GlgP/vwAAXob///+/lgNehpYD/78AAF6GAAD/v5YDXoZo/P+///9ehv///7+WA16GaPz/v2j8XoZo/P+/AAAAAP//AAAAAKgPAAAAAAAAqA///wAAAAAAAAAAAAAAAAAAAAAAAP//qA8AAAAAAACoDwAAAAD//wAAAAAAAP//AAAAAP+///+oD////7///6gPAAD/v///AAD///+///8AAP//AIAAAKgP//8AgP//qA///wCAAAAAAP//AIAAAAbE////v24DBsRuA/+/AAAGxAAA/79uAwbEkPz/v///BsT///+/bgMGxJD8/7+Q/AbEkPz/v///240AAP+/bgPbjW4D/78AANuNAAD/v5D8241uA/+////bjf///7+Q/NuNbgP/v5D8242Q/P+/AADbjf///7+Q/NuNkPz/v///243///+/bgPbjZD8/78AANuNAAD/v24D242Q/P+/bgPbjW4D/78AAF6G//8AAAAA240AAAAAAADbjf//AAAAAF6GAAAAAAAAXoYAAAAA///bjQAAAAAAANuNAAAAAP//XoYAAAAA//9ehgAA/7///9uN////v///240AAP+///9ehv///7///16G//8AgAAA243//wCA///bjf//AIAAAF6G//8AgJD8242Q/ACAbgMGxJD8AICQ/AbEkPwAgG4D242Q/ACAkPzbjW4D/7+Q/AbEkPz/v5D8BsRuA/+/kPzbjZD8/79uA9uNbgMAAJD8BsRuAwAAbgMGxG4DAACQ/NuNbgMAAG4D242Q/AAAbgMGxG4DAABuAwbEkPwAAG4D241uAwAA//8GxAAA/7+Q/AbEkPz/v///BsT///+/kPwGxG4D/78AAAbEAAD/v5D8BsRuA/+/bgMGxG4D/78AAGFn//8AAAAAT28AAAAAAABPb///AAAAAGFnAAAAAAAAYWcAAAAA//9PbwAAAAAAAE9vAAAAAP//YWcAAAAA//9hZwAA/7///09v////v///T28AAP+///9hZ////7///2Fn//8AgAAAT2///wCA//9Pb///AIAAAGFn//8AgAAAdUb///+/kf11RpH9/7///3VG////v20CdUaR/f+/AAB1RgAA/79tAnVGkf3/v20CdUZtAv+/AABhZwAA/7+R/WFnbQL/v///YWcAAP+/bQJhZ20C/7+R/WFnbQL/v5H9YWeR/f+///9hZ////7///3VG////v5H9dUZtAv+///91RgAA/7+R/XVGkf3/v5H9dUZtAv+/bQJ1Rm0C/78AAHVGAAD/vwAA/D7//wAAAAB1RgAAAAAAAHVG//8AAAAA/D4AAAAAAAD8PgAAAAD//3VGAAAAAAAAdUYAAAAA///8PgAAAAD///w+AAD/v///dUb///+///91RgAA/7////w+////v////D7//wCAAAB1Rv//AID//3VG//8AgAAA/D7//wCAaPxPb2j8AICWA16GaPwAgGj8XoZo/ACAlgNPb2j8AIBo/E9vlgP/v2j8XoZo/P+/aPxehpYD/79o/E9vaPz/v5YDT2+WAwAAaPxehpYDAACWA16GlgMAAGj8T2+WAwAAlgNPb2j8AACWA16GlgMAAJYDXoZo/AAAlgNPb5YDAAAAAE9vAAD/v5YDT29o/P+/AABPb////7+WA09vlgP/v5YDT29o/P+/aPxPb2j8/7///09v////v5H9dUaR/QCAbQJhZ5H9AICR/WFnkf0AgG0CdUaR/QCAkf11Rm0C/7+R/WFnkf3/v5H9YWdtAv+/kf11RpH9/79tAnVGbQIAAJH9YWdtAgAAbQJhZ20CAACR/XVGbQIAAG0CdUaR/QAAbQJhZ20CAABtAmFnkf0AAG0CdUZtAgAA//9hZ////79tAmFnkf3/vwAAYWf///+/kf1hZ5H9/79tAmFnkf3/v20CYWdtAv+/AABhZwAA/7////w+AAACOob8/D6G/AI6///8Pv//VNWG/Pw+eAMCOgAA/D4AAP+/eAP8PngD/78AAKgPAAD/v3gDqA+G/P+/AACoD////794A6gPeAP/v3gDqA+G/P+/hvyoD4b8/7///6gP////vwAA/D7///+/eAP8PngD/MUAAPw+AACqKngD/D6G/PzF///8Pv///794A/w+hvz/v4b8/D6G/P+///+oD////7+G/KgPeAP/v///qA8AAP+/hvyoD4b8/794A6gPeAP/vwAAqA8AAP+/hvyoD4b8AIB4A/w+hvwAgIb8/D6G/ACAeAOoD4b8AICG/KgPeAP/v4b8/D6G/P+/hvz8PngD/7+G/KgPhvz/v3gDqA94AwAAhvz8PngDAAB4A/w+eAMAAIb8qA94AwAAeAOoD4b8AAB4A/w+eAMAAHgD/D6G/AAAeAOoD3gDAACqKqoqVNVU1aoqVNWqKlTVqipU1VTVVNWqKqoqqipU1aoqqiqqKv//VNVU1aoq//+qKlTVqir//1TVqiqqKv//VNWqKqoqVNVU1VTVVNVU1VTVVNWqKlTVVNWqKlTVVNVU1aoqVNX/v6oqVNVU1f+/VNVU1VTV/7+qKqoqVNX/v6oqqiqqKv+/VNWqKlTV/79U1aoqqir/v6oqqipU1f+/VNVU1aoq//+qKlTVVNX//6oqVNWqKv//VNVU1VTV////P/9//z//f/8//3//P/9/////f////3////9/////f/9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9/////f////3////9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/3//P/9//z//f/8//3//P/9/////f////3////9/////f/9/AAD/fwAA/38AAP9/AAD/f////3////9/////f///AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3////9/////f////3////9/////fwAA/38AAP9/AAD/fwAA////f////3////9/////f/8//3//P/9//z//f/8//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f/8//3//P/9//z//f/8//3////9/////f////3////9//38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f////38AAP9/AAD/fwAA/38AAP///3////9/////f////3//P/9//z//f/8//3//P/9/////f////3////9/////f////3////9/////f/9/////f////3////9/////fwAA/38AAP9/AAD/fwAA////f////3////9/////f/8//3//P/9//z//f/8//38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9//jkAY/45AGNUVVRV/jkAYwAA/38AAP9/////f////3////9/////f////3////9/////fwAA/3/+OQBjVFVUVf45AGMAAP9/AAD/fwAA/3////9/////f////3////9/////f////3//f////3////9/////f////38AAP9/AAD/fwAA/38AAP///3////9/////f////3//P/9//z//f/8//3//P/9/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_rt6t1")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tnbqv"]
+data = PackedVector3Array(-1.5, -1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, -1.5, 1.5, -1.5, -1.5, -1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, -1.5, 1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, -1.5, -1.5, 1.5, 1.5, -1.5, 1.5, -1.5, 1.5, 1.5, -1.5, 1.5, 1.5, 1.5, -1.5, 1.5, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jymg4"]
+resource_name = "Wall_Variant_1.001"
+cull_mode = 2
+albedo_texture = ExtResource("12_rm4vd")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_wx0ph"]
+_surfaces = [{
+"aabb": AABB(-1.4999999, -1.4999999, -0.07500007, 2.9999998, 2.9999998, 0.15000014),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAAAEAAEAAgAFAAMAAgABAAUAAAADAAYABAAAAAYABgADAAUAAQAEAAcABAAGAAcAAQAHAAUABgAFAAcA"),
+"name": "Wall_Variant_1.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/v///wAAAAAAAAAAAAAAAP//AAAAAAAA//8AAP7/AAAAAP7/AAAAAAAAAAD+/wAA/v////7/AAAAAP7///8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_711xl"]
+resource_name = "11_Wall_Blue_Plane_020"
+_surfaces = [{
+"aabb": AABB(-1.4999999, -1.4999999, -0.07500007, 2.9999998, 2.9999998, 0.15000014),
+"attribute_data": PackedByteArray("ogBc/11/oYCiAKGAXX9c/1z/XP+hgKGAoYBc/1z/oYBc/zp9oYAYflz/GH6hgDp9ogB/fl1/oX2iAKF9XX9/fqIAMnxdf1R7ogBUe11/Mnxdf39+ogBdf11/XX+iAH9+"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_jymg4"),
+"name": "Wall_Variant_1.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/v///wAAAAAAAAAAAAAAAP//AAAAAAAAAAD+/wAAAAD+/////v/+fwAAAAD+//5/AAD+/////n///wAA/v/+fwAAAAAAAKoqAAD+////qioAAAAA/v+qKgAA/v8AAKoq/v///wAAqir//wAA/v+qKv7////+/6oq//8AAAAAqir//wAAAAAAAAAAAAD+/wAA//8AAP7/AAAAAAAAAAAAAAAA/v8AAAAA/v////7/AAAAAP7///8AAP7///8AAAAA/3/+//9//v//f////3/+//9/////f////3////9///9UVamqVFWpqlRVqapUVamqqapUVamqVFWpqlRVqapUVf9//z//f/8//3//P/9//z//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_wx0ph")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8awc3"]
+resource_name = "mat_wall_1"
+cull_mode = 2
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_u2xnk"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 1.5, 0.15),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAACAAQAAQAFAAMAAAAEAAYAAQAHAAUAAAAHAAEABwAGAAUABwAAAAYA"),
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD//wAA//8AAP//AAAAAAAA////////AAD/////AAAAAAAA/////wAAAAD//wAAAAAAAAAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_of8xc"]
+resource_name = "12_Hand_Rail_Cube_003"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 1.5, 0.15),
+"attribute_data": PackedByteArray("AACZef//ZYb//5l5AABlhv////8AAP9/////fwAA//9lhv//mXn/f2WG/3+Zef//AAD//////38AAP9//////5l5//9lhv9/mXn/f2WG//8="),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEA"),
+"material": SubResource("StandardMaterial3D_8awc3"),
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAAAAAA/z///wAA////P///AAAAAP8/AAAAAP///z///wAA//8AgAAA/////wCA////////AIAAAAAA//8AgP//AAAAAP+//////////7//////AAD/v///AAD///+/AAAAAAAAAAD/////AAAAAAAA//8AAAAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAAAA/38AAP9/AAD/fwAA/3//f////3////9/////f////38AAP9/AAD/fwAA/38AAP///3////9/////f////3//P/9//z//f/8//3//P/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_u2xnk")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6c2fx"]
+data = PackedVector3Array(-1.0206143, -1.4431224, 0.00475562, -1.0206145, -0.46669257, 0.03191173, -1.0206145, -0.46669257, 0.00475562, -1.0206143, -1.4431224, 0.00475562, -1.0206143, -1.4431224, 0.03191173, -1.0206145, -0.46669257, 0.03191173, -1.0729672, -1.4431224, -0.020440811, -1.0458106, -0.46669257, -0.020440811, -1.0729674, -0.46669257, -0.020440811, -1.0729672, -1.4431224, -0.020440811, -1.0458103, -1.4431224, -0.020440811, -1.0458106, -0.46669257, -0.020440811, -1.0458106, -0.46669257, -0.020440811, -1.0981635, -0.46669257, 0.0047556236, -1.0729674, -0.46669257, -0.020440811, -1.0981635, -0.46669257, 0.0047556236, -1.0729674, -0.46669257, 0.057108164, -1.0981635, -0.46669257, 0.03191174, -1.0729674, -0.46669257, 0.057108164, -1.0206145, -0.46669257, 0.03191173, -1.0458106, -0.46669257, 0.057108164, -1.0206145, -0.46669257, 0.03191173, -1.0458106, -0.46669257, -0.020440811, -1.0206145, -0.46669257, 0.00475562, -1.0458106, -0.46669257, -0.020440811, -1.0729674, -0.46669257, 0.057108164, -1.0981635, -0.46669257, 0.0047556236, -1.0729674, -0.46669257, 0.057108164, -1.0458106, -0.46669257, -0.020440811, -1.0206145, -0.46669257, 0.03191173, -1.0458103, -1.4431224, 0.057108164, -1.0729674, -0.46669257, 0.057108164, -1.0458106, -0.46669257, 0.057108164, -1.0458103, -1.4431224, 0.057108164, -1.0729672, -1.4431224, 0.057108164, -1.0729674, -0.46669257, 0.057108164, -1.0981632, -1.4431224, 0.03191174, -1.0981635, -0.46669257, 0.0047556236, -1.0981635, -0.46669257, 0.03191174, -1.0981632, -1.4431224, 0.03191174, -1.0981632, -1.4431224, 0.0047556236, -1.0981635, -0.46669257, 0.0047556236, -1.0206143, -1.4431224, 0.03191173, -1.0458106, -0.46669257, 0.057108164, -1.0206145, -0.46669257, 0.03191173, -1.0206143, -1.4431224, 0.03191173, -1.0458103, -1.4431224, 0.057108164, -1.0458106, -0.46669257, 0.057108164, -1.0981635, -0.46669257, 0.03191174, -1.0729672, -1.4431224, 0.057108164, -1.0981632, -1.4431224, 0.03191174, -1.0981635, -0.46669257, 0.03191174, -1.0729674, -0.46669257, 0.057108164, -1.0729672, -1.4431224, 0.057108164, -1.0729674, -0.46669257, -0.020440811, -1.0981632, -1.4431224, 0.0047556236, -1.0729672, -1.4431224, -0.020440811, -1.0729674, -0.46669257, -0.020440811, -1.0981635, -0.46669257, 0.0047556236, -1.0981632, -1.4431224, 0.0047556236, -1.0206145, -0.46669257, 0.00475562, -1.0458103, -1.4431224, -0.020440811, -1.0206143, -1.4431224, 0.00475562, -1.0206145, -0.46669257, 0.00475562, -1.0458106, -0.46669257, -0.020440811, -1.0458103, -1.4431224, -0.020440811, -1.0458103, -1.4431224, 0.057108164, -1.0981632, -1.4431224, 0.03191174, -1.0729672, -1.4431224, 0.057108164, -1.0981632, -1.4431224, 0.03191174, -1.0729672, -1.4431224, -0.020440811, -1.0981632, -1.4431224, 0.0047556236, -1.0729672, -1.4431224, -0.020440811, -1.0206143, -1.4431224, 0.00475562, -1.0458103, -1.4431224, -0.020440811, -1.0206143, -1.4431224, 0.00475562, -1.0458103, -1.4431224, 0.057108164, -1.0206143, -1.4431224, 0.03191173, -1.0458103, -1.4431224, 0.057108164, -1.0729672, -1.4431224, -0.020440811, -1.0981632, -1.4431224, 0.03191174, -1.0729672, -1.4431224, -0.020440811, -1.0458103, -1.4431224, 0.057108164, -1.0206143, -1.4431224, 0.00475562, -1.1252801, -0.99368197, 0.0002454007, 1.1118128, -0.9936815, 0.027401477, 1.1118128, -0.9936815, 0.00024530292, -1.1252801, -0.99368197, 0.0002454007, -1.1252801, -0.99368197, 0.027401574, 1.1118128, -0.9936815, 0.027401477, -1.1252801, -0.9413294, -0.024950974, 1.1118128, -0.9684851, -0.02495107, 1.1118128, -0.941329, -0.02495107, -1.1252801, -0.9413294, -0.024950974, -1.1252801, -0.9684856, -0.024950974, 1.1118128, -0.9684851, -0.02495107, 1.1118128, -0.9684851, -0.02495107, 1.1118128, -0.9161326, 0.00024530292, 1.1118128, -0.941329, -0.02495107, 1.1118128, -0.9161326, 0.00024530292, 1.1118128, -0.941329, 0.05259785, 1.1118128, -0.9161326, 0.027401477, 1.1118128, -0.941329, 0.05259785, 1.1118128, -0.9936815, 0.027401477, 1.1118128, -0.9684851, 0.05259785, 1.1118128, -0.9936815, 0.027401477, 1.1118128, -0.9684851, -0.02495107, 1.1118128, -0.9936815, 0.00024530292, 1.1118128, -0.9684851, -0.02495107, 1.1118128, -0.941329, 0.05259785, 1.1118128, -0.9161326, 0.00024530292, 1.1118128, -0.941329, 0.05259785, 1.1118128, -0.9684851, -0.02495107, 1.1118128, -0.9936815, 0.027401477, -1.1252801, -0.9684856, 0.052597947, 1.1118128, -0.941329, 0.05259785, 1.1118128, -0.9684851, 0.05259785, -1.1252801, -0.9684856, 0.052597947, -1.1252801, -0.9413294, 0.052597947, 1.1118128, -0.941329, 0.05259785, -1.1252801, -0.916133, 0.027401574, 1.1118128, -0.9161326, 0.00024530292, 1.1118128, -0.9161326, 0.027401477, -1.1252801, -0.916133, 0.027401574, -1.1252801, -0.916133, 0.0002454007, 1.1118128, -0.9161326, 0.00024530292, -1.1252801, -0.99368197, 0.027401574, 1.1118128, -0.9684851, 0.05259785, 1.1118128, -0.9936815, 0.027401477, -1.1252801, -0.99368197, 0.027401574, -1.1252801, -0.9684856, 0.052597947, 1.1118128, -0.9684851, 0.05259785, 1.1118128, -0.9161326, 0.027401477, -1.1252801, -0.9413294, 0.052597947, -1.1252801, -0.916133, 0.027401574, 1.1118128, -0.9161326, 0.027401477, 1.1118128, -0.941329, 0.05259785, -1.1252801, -0.9413294, 0.052597947, 1.1118128, -0.941329, -0.02495107, -1.1252801, -0.916133, 0.0002454007, -1.1252801, -0.9413294, -0.024950974, 1.1118128, -0.941329, -0.02495107, 1.1118128, -0.9161326, 0.00024530292, -1.1252801, -0.916133, 0.0002454007, 1.1118128, -0.9936815, 0.00024530292, -1.1252801, -0.9684856, -0.024950974, -1.1252801, -0.99368197, 0.0002454007, 1.1118128, -0.9936815, 0.00024530292, 1.1118128, -0.9684851, -0.02495107, -1.1252801, -0.9684856, -0.024950974, -1.1252801, -0.9684856, 0.052597947, -1.1252801, -0.916133, 0.027401574, -1.1252801, -0.9413294, 0.052597947, -1.1252801, -0.916133, 0.027401574, -1.1252801, -0.9413294, -0.024950974, -1.1252801, -0.916133, 0.0002454007, -1.1252801, -0.9413294, -0.024950974, -1.1252801, -0.99368197, 0.0002454007, -1.1252801, -0.9684856, -0.024950974, -1.1252801, -0.99368197, 0.0002454007, -1.1252801, -0.9684856, 0.052597947, -1.1252801, -0.99368197, 0.027401574, -1.1252801, -0.9684856, 0.052597947, -1.1252801, -0.9413294, -0.024950974, -1.1252801, -0.916133, 0.027401574, -1.1252801, -0.9413294, -0.024950974, -1.1252801, -0.9684856, 0.052597947, -1.1252801, -0.99368197, 0.0002454007, 1.0835212, -1.4431218, 0.0047555277, 1.083521, -0.46669215, 0.03191164, 1.083521, -0.46669215, 0.0047555277, 1.0835212, -1.4431218, 0.0047555277, 1.0835212, -1.4431218, 0.03191164, 1.083521, -0.46669215, 0.03191164, 1.0311683, -1.4431218, -0.020440903, 1.0583249, -0.46669215, -0.020440904, 1.0311681, -0.46669215, -0.020440903, 1.0311683, -1.4431218, -0.020440903, 1.0583252, -1.4431218, -0.020440904, 1.0583249, -0.46669215, -0.020440904, 1.0583249, -0.46669215, -0.020440904, 1.005972, -0.46669215, 0.0047555314, 1.0311681, -0.46669215, -0.020440903, 1.005972, -0.46669215, 0.0047555314, 1.0311681, -0.46669215, 0.057108015, 1.005972, -0.46669215, 0.03191164, 1.0311681, -0.46669215, 0.057108015, 1.083521, -0.46669215, 0.03191164, 1.0583249, -0.46669215, 0.057108015, 1.083521, -0.46669215, 0.03191164, 1.0583249, -0.46669215, -0.020440904, 1.083521, -0.46669215, 0.0047555277, 1.0583249, -0.46669215, -0.020440904, 1.0311681, -0.46669215, 0.057108015, 1.005972, -0.46669215, 0.0047555314, 1.0311681, -0.46669215, 0.057108015, 1.0583249, -0.46669215, -0.020440904, 1.083521, -0.46669215, 0.03191164, 1.0583252, -1.4431218, 0.057108015, 1.0311681, -0.46669215, 0.057108015, 1.0583249, -0.46669215, 0.057108015, 1.0583252, -1.4431218, 0.057108015, 1.0311683, -1.4431218, 0.057108015, 1.0311681, -0.46669215, 0.057108015, 1.0059723, -1.4431218, 0.03191164, 1.005972, -0.46669215, 0.0047555314, 1.005972, -0.46669215, 0.03191164, 1.0059723, -1.4431218, 0.03191164, 1.0059723, -1.4431218, 0.0047555314, 1.005972, -0.46669215, 0.0047555314, 1.0835212, -1.4431218, 0.03191164, 1.0583249, -0.46669215, 0.057108015, 1.083521, -0.46669215, 0.03191164, 1.0835212, -1.4431218, 0.03191164, 1.0583252, -1.4431218, 0.057108015, 1.0583249, -0.46669215, 0.057108015, 1.005972, -0.46669215, 0.03191164, 1.0311683, -1.4431218, 0.057108015, 1.0059723, -1.4431218, 0.03191164, 1.005972, -0.46669215, 0.03191164, 1.0311681, -0.46669215, 0.057108015, 1.0311683, -1.4431218, 0.057108015, 1.0311681, -0.46669215, -0.020440903, 1.0059723, -1.4431218, 0.0047555314, 1.0311683, -1.4431218, -0.020440903, 1.0311681, -0.46669215, -0.020440903, 1.005972, -0.46669215, 0.0047555314, 1.0059723, -1.4431218, 0.0047555314, 1.083521, -0.46669215, 0.0047555277, 1.0583252, -1.4431218, -0.020440904, 1.0835212, -1.4431218, 0.0047555277, 1.083521, -0.46669215, 0.0047555277, 1.0583249, -0.46669215, -0.020440904, 1.0583252, -1.4431218, -0.020440904, 1.0583252, -1.4431218, 0.057108015, 1.0059723, -1.4431218, 0.03191164, 1.0311683, -1.4431218, 0.057108015, 1.0059723, -1.4431218, 0.03191164, 1.0311683, -1.4431218, -0.020440903, 1.0059723, -1.4431218, 0.0047555314, 1.0311683, -1.4431218, -0.020440903, 1.0835212, -1.4431218, 0.0047555277, 1.0583252, -1.4431218, -0.020440904, 1.0835212, -1.4431218, 0.0047555277, 1.0583252, -1.4431218, 0.057108015, 1.0835212, -1.4431218, 0.03191164, 1.0583252, -1.4431218, 0.057108015, 1.0311683, -1.4431218, -0.020440903, 1.0059723, -1.4431218, 0.03191164, 1.0311683, -1.4431218, -0.020440903, 1.0583252, -1.4431218, 0.057108015, 1.0835212, -1.4431218, 0.0047555277, -1.1188544, -0.4957149, 0.0030075987, 1.1053858, -0.4957145, 0.032523423, 1.1053858, -0.4957145, 0.0030075014, -1.1188544, -0.4957149, 0.0030075987, -1.1188544, -0.4957149, 0.03252352, 1.1053858, -0.4957145, 0.032523423, -1.1188545, -0.4388131, -0.024378235, 1.1053858, -0.46832865, -0.024378331, 1.1053858, -0.43881273, -0.024378331, -1.1188545, -0.4388131, -0.024378235, -1.1188544, -0.4683289, -0.024378235, 1.1053858, -0.46832865, -0.024378331, 1.1053858, -0.46832865, -0.024378331, 1.1053858, -0.41142666, 0.0030075014, 1.1053858, -0.43881273, -0.024378331, 1.1053858, -0.41142666, 0.0030075014, 1.1053858, -0.43881273, 0.059909306, 1.1053858, -0.41142666, 0.032523423, 1.1053858, -0.43881273, 0.059909306, 1.1053858, -0.4957145, 0.032523423, 1.1053858, -0.46832865, 0.059909306, 1.1053858, -0.4957145, 0.032523423, 1.1053858, -0.46832865, -0.024378331, 1.1053858, -0.4957145, 0.0030075014, 1.1053858, -0.46832865, -0.024378331, 1.1053858, -0.43881273, 0.059909306, 1.1053858, -0.41142666, 0.0030075014, 1.1053858, -0.43881273, 0.059909306, 1.1053858, -0.46832865, -0.024378331, 1.1053858, -0.4957145, 0.032523423, -1.1188544, -0.4683289, 0.059909403, 1.1053858, -0.43881273, 0.059909306, 1.1053858, -0.46832865, 0.059909306, -1.1188544, -0.4683289, 0.059909403, -1.1188545, -0.4388131, 0.059909403, 1.1053858, -0.43881273, 0.059909306, -1.1188545, -0.41142738, 0.03252352, 1.1053858, -0.41142666, 0.0030075014, 1.1053858, -0.41142666, 0.032523423, -1.1188545, -0.41142738, 0.03252352, -1.1188545, -0.41142738, 0.0030075987, 1.1053858, -0.41142666, 0.0030075014, -1.1188544, -0.4957149, 0.03252352, 1.1053858, -0.46832865, 0.059909306, 1.1053858, -0.4957145, 0.032523423, -1.1188544, -0.4957149, 0.03252352, -1.1188544, -0.4683289, 0.059909403, 1.1053858, -0.46832865, 0.059909306, 1.1053858, -0.41142666, 0.032523423, -1.1188545, -0.4388131, 0.059909403, -1.1188545, -0.41142738, 0.03252352, 1.1053858, -0.41142666, 0.032523423, 1.1053858, -0.43881273, 0.059909306, -1.1188545, -0.4388131, 0.059909403, 1.1053858, -0.43881273, -0.024378331, -1.1188545, -0.41142738, 0.0030075987, -1.1188545, -0.4388131, -0.024378235, 1.1053858, -0.43881273, -0.024378331, 1.1053858, -0.41142666, 0.0030075014, -1.1188545, -0.41142738, 0.0030075987, 1.1053858, -0.4957145, 0.0030075014, -1.1188544, -0.4683289, -0.024378235, -1.1188544, -0.4957149, 0.0030075987, 1.1053858, -0.4957145, 0.0030075014, 1.1053858, -0.46832865, -0.024378331, -1.1188544, -0.4683289, -0.024378235, -1.1188544, -0.4683289, 0.059909403, -1.1188545, -0.41142738, 0.03252352, -1.1188545, -0.4388131, 0.059909403, -1.1188545, -0.41142738, 0.03252352, -1.1188545, -0.4388131, -0.024378235, -1.1188545, -0.41142738, 0.0030075987, -1.1188545, -0.4388131, -0.024378235, -1.1188544, -0.4957149, 0.0030075987, -1.1188544, -0.4683289, -0.024378235, -1.1188544, -0.4957149, 0.0030075987, -1.1188544, -0.4683289, 0.059909403, -1.1188544, -0.4957149, 0.03252352, -1.1188544, -0.4683289, 0.059909403, -1.1188545, -0.4388131, -0.024378235, -1.1188545, -0.41142738, 0.03252352, -1.1188545, -0.4388131, -0.024378235, -1.1188544, -0.4683289, 0.059909403, -1.1188544, -0.4957149, 0.0030075987)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss7kf"]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("14_sm6fg")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jnanf"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5749999, -1.5000001, 3, 0.14999986, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAABAP//AAD//wAAAAAAAAAAAAAAAAAAAAD9/wAAAAD//wEA//8AAAAA/////wAA////////AAD///3/AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mhj7q"]
+resource_name = "13_Grass_Plane_005"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5749999, -1.5000001, 3, 0.14999986, 3),
+"attribute_data": PackedByteArray("XP9c/6GAoYBc/6GAoYBc/6IAoYBdf1z/ogBc/11/oYBogZV+rQJdf60ClX5ogV1/aQGhgKIA5gFpAeYBogChgGiBDXytAtR8rQINfGiB1HxogYN5rQJLeq0Cg3logUt6"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_ss7kf"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAABAP///////wAAAAD//wAAAAAAAP////8BAP////8AAP////9U1f///f8AAFTV////////VNUAAP3/AABU1f//AAAAAP//AAD9/wAA//8AAAAAAAD//////f8AAP//AAABAP///7//////////v///AQD///+/AAD//////7///wEA/////////f8AAP////8AAAAA/////////////wAAAAAAAP//AAD///////8AAAEA/////wAA/f8AAP///3//P/9//z//f/8//3//P1TVqipU1aoqVNWqKlTVqir+//9//v//f/7//3/+//9//3//f/9//3//f/9//3//f/+//3//v/9//7//f/+//3//P/9//z//f/8//3//P/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jnanf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6sk42"]
+resource_name = "mat_wall_1"
+cull_mode = 2
+albedo_texture = ExtResource("15_b17eg")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7iw3c"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 3, 0.15),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mu0rh"]
+resource_name = "02_Wall_Cube_002"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 3, 0.15),
+"attribute_data": PackedByteArray("mXn//2WGAACZeQAAZYb//wAA/////wAAAAAAAP////9lhv//mXkAAGWGAACZef///////wAAAAD//wAAAAD//wAAmXn//2WG//+ZeQAAZYb//5l5AABlhgAAmXn//2WG"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_6sk42"),
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAAAAAAAAAAAAP////8AAAAAAAD//wAAAAD//wAAAAAAAP//AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AIAAAAAAAAD/P///AAD///8///8AAAAA/z8AAAAA////P/////8AAP+/AAD//////78AAP//AAD/v/////////+//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///wAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_7iw3c")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jx8jr"]
+data = PackedVector3Array(-1.5, -1.5, 0.075, -1.5, 1.5, -0.075, -1.5, 1.5, 0.075, -1.5, -1.5, 0.075, -1.5, -1.5, -0.075, -1.5, 1.5, -0.075, -1.5, -1.5, -0.075, 1.5, 1.5, -0.075, -1.5, 1.5, -0.075, -1.5, -1.5, -0.075, 1.5, -1.5, -0.075, 1.5, 1.5, -0.075, 1.5, -1.5, -0.075, 1.5, 1.5, 0.075, 1.5, 1.5, -0.075, 1.5, -1.5, -0.075, 1.5, -1.5, 0.075, 1.5, 1.5, 0.075, 1.5, -1.5, 0.075, -1.5, 1.5, 0.075, 1.5, 1.5, 0.075, 1.5, -1.5, 0.075, -1.5, -1.5, 0.075, -1.5, 1.5, 0.075, -1.5, -1.5, -0.075, 1.5, -1.5, 0.075, 1.5, -1.5, -0.075, -1.5, -1.5, -0.075, -1.5, -1.5, 0.075, 1.5, -1.5, 0.075, 1.5, 1.5, -0.075, -1.5, 1.5, 0.075, -1.5, 1.5, -0.075, 1.5, 1.5, -0.075, 1.5, 1.5, 0.075, -1.5, 1.5, 0.075)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jae1w"]
+resource_name = "mat_wall_1"
+cull_mode = 2
+albedo_texture = ExtResource("16_ntx8l")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_f31iq"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 1.5, 0.15),
+"format": 34896613377,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQAAAACAAQAAQAFAAMAAAAEAAYAAQAHAAUAAAAHAAEABwAGAAUABwAAAAYA"),
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAAAAAAD//wAA//8AAP//AAAAAAAA////////AAD/////AAAAAAAA/////wAAAAD//wAAAAAAAAAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_64era"]
+resource_name = "03_Wall1Half_Cube_003"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 1.5, 0.15),
+"attribute_data": PackedByteArray("AACZef//ZYb//5l5AABlhv////8AAP9/////fwAA//9lhv//mXn/f2WG/3+Zef//AAD//////38AAP9//////5l5//9lhv9/mXn/f2WG//8="),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEA"),
+"material": SubResource("StandardMaterial3D_jae1w"),
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 20,
+"vertex_data": PackedByteArray("AAAAAAAA/z///wAA////P///AAAAAP8/AAAAAP///z///wAA//8AgAAA/////wCA////////AIAAAAAA//8AgP//AAAAAP+//////////7//////AAD/v///AAD///+/AAAAAAAAAAD/////AAAAAAAA//8AAAAA//8AAAAAAAAAAAAA//8AAAAA//8AAAAAAAD/////AAAAAAAAAAAAAAAA/38AAP9/AAD/fwAA/3//f////3////9/////f////38AAP9/AAD/fwAA/38AAP///3////9/////f////3//P/9//z//f/8//3//P/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_f31iq")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_2qwdw"]
+data = PackedVector3Array(-1.5, -1.5, -0.075, 1.5, -1.5, 0.075, 1.5, -1.5, -0.075, -1.5, -1.5, -0.075, -1.5, -1.5, 0.075, 1.5, -1.5, 0.075, 1.5, -1.5, 0.075, -1.5, 0, 0.075, 1.5, 0, 0.075, 1.5, -1.5, 0.075, -1.5, -1.5, 0.075, -1.5, 0, 0.075, 1.5, -1.5, -0.075, 1.5, 0, 0.075, 1.5, 0, -0.075, 1.5, -1.5, -0.075, 1.5, -1.5, 0.075, 1.5, 0, 0.075, -1.5, -1.5, -0.075, 1.5, 0, -0.075, -1.5, 0, -0.075, -1.5, -1.5, -0.075, 1.5, -1.5, -0.075, 1.5, 0, -0.075, -1.5, -1.5, 0.075, -1.5, 0, -0.075, -1.5, 0, 0.075, -1.5, -1.5, 0.075, -1.5, -1.5, -0.075, -1.5, 0, -0.075)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nbwf"]
+resource_name = "mat_wall_1"
+cull_mode = 2
+albedo_texture = ExtResource("17_uatky")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mixb5"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 3, 0.15),
+"format": 34359742465,
+"index_count": 132,
+"index_data": PackedByteArray("EAAKAAkAEQAJAAoAEAASAAoAEgARAAoACwASABAAEQATAAkADAAQAAkADAAJABMADwALABAADwAQAAwACwAOABIADgALAA8ADgAPAA0ADAANAA8ADgAIABIADgANAAgADAAIAA0AEgAIABEABgAMABMABgAIAAwAFAATABEACAAUABEAFAAVABMABgATABUACAAFABQABgAFAAgABAAVABQABQAEABQABAAHABUAAwAFAAYAFgAHAAQABQAWAAQAFwAVAAcAFwAGABUAFgAXAAcAAQADAAYAAQAGABcAAwAAAAUAAAADAAEAAAAWAAUAAgABABcAAAABAAIAAgAXABYAAAACABYA"),
+"lods": [0.00059783104, PackedByteArray("AAABAAIAAAADAAEAAAACAAQAAwAAAAUAAAAEAAUAAwAFAAYAAQADAAYAAgABAAcAAgAHAAQAAQAGAAcACAAFAAQABgAFAAgABAAHAAkABwAGAAkABAAJAAoACgAIAAQACwAKAAkABgAIAAwABgAMAAkADAAIAA0ADgAIAAoACwAOAAoADgANAAgADwALAAkADgALAA8ADwAJAAwADgAPAA0ADAANAA8A")],
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("RN9ePwAAwL+amZm9AADAPwAAwL+amZk9AADAPwAAwL+amZm9RN9ePwAAwL+amZk9AADAPwAAwD+amZm9RN9eP8ckXT+amZm9RN9eP8ckXT+amZk9AADAPwAAwD+amZk9RN9ev8ckXT+amZm9AADAvwAAwD+amZk9AADAvwAAwD+amZm9AADAvwAAwL+amZk9RN9ev8ckXT+amZk9RN9evwAAwL+amZm9AADAvwAAwL+amZm9RN9evwAAwL+amZk9AADAv8ckXT+amZk9RN9evwAAwD+amZm9AADAv8ckXT+amZm9RN9evwAAwD+amZk9RN9ePwAAwD+amZm9RN9ePwAAwD+amZk9AADAP8ckXT+amZm9AADAP8ckXT+amZk9")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_j64d7"]
+resource_name = "04_Doorway_Cube_008"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -0.075, 3, 3, 0.15),
+"attribute_data": PackedByteArray("bEpKPzQz8z4AAIA/ZmYGPwAAgD80M/M+bEpKP2dmBj8AAIA/NDPzPgAAAABmZgY/AAAAADQz8z4AAIA/ZmYGPwAAAAA0M/M+UNZWPmdmBj9P1lY+NDPzPgAAAABmZgY/AACAPwAAAABtSko/SCRZPgAAAAAAAAAAAACAPwAAgD9sSko/AACAP1HWVj5IJFk+UNZWPgAAgD8AAAAAAACAPwAAAAAAAAAAUdZWPkgkWT4AAIA/AAAAAAAAAAAAAIA/T9ZWPgAAgD9sSko/SCRZPmxKSj8AAIA/AACAPwAAgD9tSko/SCRZPlHWVj5IJFk+UdZWPkgkWT5sSko/SCRZPmxKSj8AAIA/bEpKP0gkWT5tSko/SCRZPmxKSj8AAIA/ZmYGPwAAgD8zM/M+AAAAAGZmBj8AAAAAMzPzPgAAgD8zM/M+AACAP2ZmBj8AAAAAMzPzPgAAAABmZgY/AACAP1HWVj5IJFk+T9ZWPgAAgD9Q1lY+AACAP1HWVj5IJFk+MzPzPkwkWT5mZgY/TCRZPmxKSj8AAAAAAACAP0wkWT5tSko/AAAAtFLWVj4AAAC0AAAAAEwkWT5Q1lY+AAAAAGZmBj9MJFk+MzPzPkwkWT5P1lY+AAAAAAAAAABMJFk+UtZWPgAAALRtSko/AAAAtAAAgD9MJFk+bEpKPwAAAABQ1lY+NDPzPk/WVj5nZgY/bEpKP2dmBj9sSko/NDPzPmxKSj9mZgY/UNZWPmZmBj9S1lY+NDPzPg=="),
+"format": 34359742487,
+"index_count": 132,
+"index_data": PackedByteArray("MAApACoAMAAxACkAKAAxADAAKAArADEAGQAWADIAGQAzABYAGgAzABkAGgAbADMAFQAZADQAFQA0ADUAFwAYABUAFwAVADYANgAVADcANgA3ABQAOAAlACYAOAA5ACUAJAA5ADgAJAAnADkAEQAOADoAEQA7AA4AEgA7ABEAEgATADsADQARADwADQA8AD0ADwAQAA0ADwANAD4APgANAD8APgA/AAwAAAABAAIAAAADAAEAQAAFAAYAQABBAAUABABCAEMABAAHAEIAQwBEAEUAQwBFAEYACAAJAAoACAALAAkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEALAAtAC4ALAAvAC0A"),
+"lods": [0.00059783104, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADwANAAwADwAQAA0ADQARAA4AEgAOABEAEgATAA4AFAAVABYAFwAVABQAFwAYABUAFQAZABYAGgAWABkAGgAbABYAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A")],
+"material": SubResource("StandardMaterial3D_6nbwf"),
+"name": "mat_wall_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 71,
+"vertex_data": PackedByteArray("RN9ePwAAwL+amZm9AADAPwAAwL+amZk9AADAPwAAwL+amZm9RN9ePwAAwL+amZk9AADAPwAAwD+amZm9AADAvwAAwD+amZk9AADAvwAAwD+amZm9AADAPwAAwD+amZk9AADAvwAAwL+amZm9RN9evwAAwL+amZk9RN9evwAAwL+amZm9AADAvwAAwL+amZk9AADAPwAAwD+amZk9RN9eP8ckXT+amZk9AADAvwAAwD+amZk9AADAPwAAwL+amZk9RN9ePwAAwL+amZk9RN9ev8ckXT+amZk9RN9evwAAwL+amZk9AADAvwAAwL+amZk9AADAvwAAwD+amZm9RN9ev8ckXT+amZm9AADAPwAAwD+amZm9AADAvwAAwL+amZm9RN9evwAAwL+amZm9RN9eP8ckXT+amZm9RN9ePwAAwL+amZm9AADAPwAAwL+amZm9RN9eP8ckXT+amZk9RN9ev8ckXT+amZm9RN9ev8ckXT+amZk9RN9eP8ckXT+amZm9RN9ePwAAwL+amZk9RN9eP8ckXT+amZm9RN9eP8ckXT+amZk9RN9ePwAAwL+amZm9AADAPwAAwL+amZm9AADAPwAAwD+amZk9AADAPwAAwD+amZm9AADAPwAAwL+amZk9AADAvwAAwL+amZk9AADAvwAAwD+amZm9AADAvwAAwD+amZk9AADAvwAAwL+amZm9RN9ev8ckXT+amZk9RN9evwAAwL+amZm9RN9evwAAwL+amZk9RN9ev8ckXT+amZm9AADAv8ckXT+amZk9AADAv8ckXT+amZm9RN9ePwAAwD+amZm9AADAP8ckXT+amZm9RN9ePwAAwD+amZm9RN9evwAAwD+amZm9AADAv8ckXT+amZm9RN9evwAAwD+amZm9AADAP8ckXT+amZm9AADAP8ckXT+amZk9RN9evwAAwD+amZk9AADAv8ckXT+amZk9RN9evwAAwD+amZk9RN9ePwAAwD+amZk9AADAP8ckXT+amZk9RN9ePwAAwD+amZk9RN9evwAAwD+amZm9RN9evwAAwD+amZk9RN9ePwAAwD+amZk9RN9ePwAAwD+amZm9RN9ePwAAwD+amZk9RN9evwAAwD+amZk9RN9evwAAwD+amZm9/38AAP7//z//fwAA////P/9/AAD///8//38AAP7//z//f////v//v/9///////+//3///////7//f////v//v/9/AAD///8//38AAP///z//fwAA////P/9/AAD///8//3//f////7//f/9//v//v/9//3/+//+//3//f////7//f/9/////v/9//3/+//+//3//f////7//f/9/////v/////////8///////7//z///////v//P/////////8//////////z///////v//P/////////8//////////z//fwAA////v/9/AAD///+//38AAP///7//fwAA////vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3////+/////f/////////9//////////3//////////f/////8AAP9///8AAAAA/3///wAAAAD/f///AAAAAP9///8AAP///3//f/8/////f/9//z////9//3//P////3////+/AAD/f///AAAAAP9///8AAP////////8///////7//z//////////P/////////8///////7//z///////v//P////3//////////f///////f/9/////v/9//3/+//+//3//f////7//f/9/////v/9//3/+//+//3//f/7//7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////vw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_mixb5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3oee1"]
+resource_name = "mat_roof"
+cull_mode = 2
+albedo_texture = ExtResource("18_rqtf5")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b4upg"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.575, -1.5, 3, 0.1500001, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "mat_roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0qmf7"]
+resource_name = "05_Floor2_Cube_009"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.575, -1.5, 3, 0.1500001, 3),
+"attribute_data": PackedByteArray("AABlhv//mXkAAJl5//9lhgAAZYb//5l5AACZef//ZYb//2WGAACZef//mXkAAGWG//9lhgAAmXn//5l5AABlhgAAAAD///////8AAAAA/////wAAAAD//wAAAAD/////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_3oee1"),
+"name": "mat_roof",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAAAAAAAAAAAAP////8AAAAAAAD//wAAAAD//wAAAAAAAP//AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AIAAAAAAAAD/P///AAD///8///8AAAAA/z8AAAAA////P/////8AAP+/AAD//////78AAP//AAD/v/////////+//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///wAA/38AAP9/AAD/fwAA/3////9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_b4upg")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8nkje"]
+data = PackedVector3Array(-1.5, -1.575, 1.5, -1.5, -1.425, -1.5, -1.5, -1.425, 1.5, -1.5, -1.575, 1.5, -1.5, -1.575, -1.5, -1.5, -1.425, -1.5, -1.5, -1.575, -1.5, 1.5, -1.425, -1.5, -1.5, -1.425, -1.5, -1.5, -1.575, -1.5, 1.5, -1.575, -1.5, 1.5, -1.425, -1.5, 1.5, -1.575, -1.5, 1.5, -1.425, 1.5, 1.5, -1.425, -1.5, 1.5, -1.575, -1.5, 1.5, -1.575, 1.5, 1.5, -1.425, 1.5, 1.5, -1.575, 1.5, -1.5, -1.425, 1.5, 1.5, -1.425, 1.5, 1.5, -1.575, 1.5, -1.5, -1.575, 1.5, -1.5, -1.425, 1.5, -1.5, -1.575, -1.5, 1.5, -1.575, 1.5, 1.5, -1.575, -1.5, -1.5, -1.575, -1.5, -1.5, -1.575, 1.5, 1.5, -1.575, 1.5, 1.5, -1.425, -1.5, -1.5, -1.425, 1.5, -1.5, -1.425, -1.5, 1.5, -1.425, -1.5, 1.5, -1.425, 1.5, -1.5, -1.425, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_224m8"]
+resource_name = "Wall_Variant_1"
+cull_mode = 2
+albedo_texture = ExtResource("19_1vm84")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lnopx"]
+_surfaces = [{
+"aabb": AABB(-1.4999999, -1.4999999, -0.07500007, 2.9999998, 2.9999998, 0.15000014),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAACAAMAAAAEAAEAAgAFAAMAAgABAAUAAAADAAYABAAAAAYABgADAAUAAQAEAAcABAAGAAcAAQAHAAUABgAFAAcA"),
+"name": "Wall_Variant_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/v///wAAAAAAAAAAAAAAAP//AAAAAAAA//8AAP7/AAAAAP7/AAAAAAAAAAD+/wAA/v////7/AAAAAP7///8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4iv7s"]
+resource_name = "06_Wall_Wood_Plane_019"
+_surfaces = [{
+"aabb": AABB(-1.4999999, -1.4999999, -0.07500007, 2.9999998, 2.9999998, 0.15000014),
+"attribute_data": PackedByteArray("UID//42/ecBQgHnAjb///23///8vwHnAL8D//23/ecBt/8S+L8Azv23/M78vwMS+wcBnv///+L7BwPi+//9nv1CAQL6Nv9C9UIDQvY2/QL6Nv2e/UIDWv42/1r9QgGe/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_224m8"),
+"name": "Wall_Variant_1",
+"primitive": 3,
+"uv_scale": Vector4(2.0039706, 1.9950496, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/v///wAAAAAAAAAAAAAAAP//AAAAAAAAAAD+/wAAAAD+/////v/+fwAAAAD+//5/AAD+/////n///wAA/v/+fwAAAAAAAKoqAAD+////qioAAAAA/v+qKgAA/v8AAKoq/v///wAAqir//wAA/v+qKv7////+/6oq//8AAAAAqir//wAAAAAAAAAAAAD+/wAA//8AAP7/AAAAAAAAAAAAAAAA/v8AAAAA/v////7/AAAAAP7///8AAP7///8AAAAA/3/+//9//v//f////3/+//9/////f////3////9///9UVamqVFWpqlRVqapUVamqqapUVamqVFWpqlRVqapUVf9//z//f/8//3//P/9//z//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_lnopx")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_al6nd"]
+data = PackedVector3Array(1.4999996, 1.4999999, -0.074998416, -1.4999996, -1.4999999, -0.074999936, 1.4999999, -1.4999995, -0.07500007, 1.4999996, 1.4999999, -0.074998416, -1.4999999, 1.4999996, -0.07499828, -1.4999996, -1.4999999, -0.074999936, 1.4999996, 1.4999999, 0.074999936, -1.4999996, -1.4999999, 0.074998416, -1.4999999, 1.4999996, 0.07500007, 1.4999996, 1.4999999, 0.074999936, 1.4999999, -1.4999995, 0.07499828, -1.4999996, -1.4999999, 0.074998416, -1.4999996, -1.4999999, -0.074999936, -1.4999999, 1.4999996, 0.07500007, -1.4999996, -1.4999999, 0.074998416, -1.4999996, -1.4999999, -0.074999936, -1.4999999, 1.4999996, -0.07499828, -1.4999999, 1.4999996, 0.07500007, 1.4999996, 1.4999999, -0.074998416, 1.4999999, -1.4999995, 0.07499828, 1.4999996, 1.4999999, 0.074999936, 1.4999996, 1.4999999, -0.074998416, 1.4999999, -1.4999995, -0.07500007, 1.4999999, -1.4999995, 0.07499828, 1.4999999, -1.4999995, -0.07500007, -1.4999996, -1.4999999, 0.074998416, 1.4999999, -1.4999995, 0.07499828, 1.4999999, -1.4999995, -0.07500007, -1.4999996, -1.4999999, -0.074999936, -1.4999996, -1.4999999, 0.074998416, -1.4999999, 1.4999996, -0.07499828, 1.4999996, 1.4999999, 0.074999936, -1.4999999, 1.4999996, 0.07500007, -1.4999999, 1.4999996, -0.07499828, 1.4999996, 1.4999999, -0.074998416, 1.4999996, 1.4999999, 0.074999936)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_440y0"]
+resource_name = "Door_Variant_1"
+cull_mode = 2
+albedo_texture = ExtResource("20_wu3dr")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fcaue"]
+_surfaces = [{
+"aabb": AABB(-1.512027, -1.5000001, -0.047968462, 3.0173514, 3, 0.15000007),
+"format": 34896613377,
+"index_count": 288,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQADAAEAAAAFAAEABgAEAAMABQAGAAMABwACAAQABwAAAAIABgAHAAQACAAFAAAACQAHAAYACgAGAAUACgAJAAYACAAKAAUACQALAAcACwAAAAcACgALAAkACwAIAAAACgAIAAsADAANAA4ADgANAA8ADgAPABAAEAAMAA4AEAAPABEADQARAA8AEAARABIAEwASABEAFAAQABIAEwAUABIAFAAMABAAEQAVABMAFAATABUADQAVABEAFAAVABYADAAXAA0AGAAUABYADAAUABgAGQAWABUAGQAYABYADAAYABoAFwAMABoAGAAZABsAFQAbABkAGAAbABoAFQANABsAFwAaABsAGwANABcAHAAdAB4AHwAeAB0AHwAgAB4AIQAfAB0AHAAhAB0AIgAgAB8AIQAiAB8AIwAeACAAIwAcAB4AIgAjACAAJAAhABwAJQAjACIAJgAiACEAJgAlACIAJAAmACEAJQAnACMAJwAcACMAJgAnACUAJwAkABwAJgAkACcAKAApACoAKgApACsAKgArACwALAAoACoALAArAC0AKQAtACsALAAtAC4ALwAuAC0AMAAsAC4ALwAwAC4AMAAoACwALQAxAC8AMAAvADEAKQAxAC0AMAAxADIAKAAzACkANAAwADIAKAAwADQANQAyADEANQA0ADIAKAA0ADYAMwAoADYANAA1ADcAMQA3ADUANAA3ADYAMQApADcAMwA2ADcANwApADMA"),
+"name": "Door_Variant_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("Q3+6MDCeAAAAAP7/MJ4AAEN///8wngAAAAD+/wAAAABDf///AAAAAAAAujAwngAAAAC6MAAAAABDf7owAAAAAEN/AAAwngAAAAAAAAAAAAAAAAAAMJ4AAEN/AAAAAAAAfGnSkBDkAAB8aSxv/r4AAHxp0pD+vgAAT2ssbw+jAABPa9KQD6MAALttLG8PowAAu23SkA+jAACObyxv/r4AAI5v0pD+vgAAjm8sbxDkAACOb9KQEOQAAHxpLG8Q5AAAu23SkP7/AAC7bSxv/v8AAE9r0pD+/wAAT2ssb/7/AAC7gLowMJ4AAP////8wngAAu4D//zCeAAD/////AAAAALuA//8AAAAA/v+6MDCeAAD+/7owAAAAALuAujAAAAAAu4AAADCeAAD+/wAAAAAAAP7/AAAwngAAu4AAAAAAAACCltKQEOQAAIKWLG/+vgAAgpbSkP6+AACvlCxvD6MAAK+U0pAPowAAQ5Isbw+jAABDktKQD6MAAHCQLG/+vgAAcJDSkP6+AABwkCxvEOQAAHCQ0pAQ5AAAgpYsbxDkAABDktKQ//8AAEOSLG///wAAr5TSkP//AACvlCxv//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hnvrf"]
+resource_name = "07_Door_flip_Cube_075"
+_surfaces = [{
+"aabb": AABB(-1.512027, -1.5000001, -0.047968462, 3.0173514, 3, 0.15000007),
+"attribute_data": PackedByteArray("8JNhlrcAR/+3AGGW8JNH/422YZaNtkf//LcObOraR//8t0f/6toObPy3cUnq2nFJ8JOSK7cAeJS3AJIr8JN4lI22kiuNtniU8JO7BrcAqSm3ALsG8JOpKY22uwaNtqkpRv9hllncR/9Z3GGWRv9H/0f/kitZ3HiUWdySK0f/eJT8tytA48/7N/y3+zfjzytAUdMdMFLRNhhS0R0wUdM2GJrVxyYa2ZwgG9ecIJva9i6b2scmG9chNZrV9i4a2SE1CtypKfHzqicK3Kon8fOpKfy38Snjz8Ih/LfCIePP8Sn8t/s348/QMfy30DHjz/s348/xKfy3HDDjzxww/LfxKePPlxv8t8Ih48/CIfy3lxvjzytA/LdWRuPPVkb8tytAUtH7N9LU0DHT0tAxU9YqQFPW+zfT0lVGUtEqQNLUVUbwk2GWtwBH/7cAYZbwk0f/jbZhlo22R//8tw5s6tpH//y3R//q2g5s/LdxSeracUnwk5IrtwB4lLcAkivwk3iUjbaSK422eJTwk7sGtwCpKbcAuwbwk6kpjba7Bo22qSlG/2GWWdxH/1ncYZZG/0f/R/+SK1nceJRZ3JIrR/94lPy3K0Djz/s3/Lf7N+PPK0BR0x0wUtE2GFLRHTBR0zYYmtXHJhrZnCAb15wgm9r2LpvaxyYb1yE1mtX2LhrZITUK3Kkp8fOqJwrcqifx86kp/LfxKePPwiH8t8Ih48/xKfy3+zfjz9Ax/LfQMePP+zfjz/Ep/LccMOPPHDD8t/Ep48+XG/y3wiHjz8Ih/LeXG+PPK0D8t1ZG489WRvy3K0BS0fs30tTQMdPS0DFT1ipAU9b7N9PSVUZS0SpA0tRVRg=="),
+"format": 34896613399,
+"index_count": 288,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAADAAAABAAFAAMABgAHAAgABgAJAAcACgAJAAYACgALAAkADAANAA4ADAAPAA0AEAAPAAwAEAARAA8AEgATABQAEgAVABMAFgAVABIAFgAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkAKQArACwAKwAoAC0ALQAoAC4AKwAtAC8AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkASQBLAEwASwBIAE0ATQBIAE4ASwBNAE8AUABRAFIAUABTAFEAVABTAFAAVABVAFMAVgBXAFgAVgBZAFcAWgBZAFYAWgBbAFkAXABdAF4AXABfAF0AYABfAFwAYABhAF8AYgBjAGQAYgBlAGMAZgBlAGIAZgBnAGUAaABpAGoAaABrAGkAbABtAG4AbABvAG0AcABxAHIAcABzAHEAdAB1AHYAdAB3AHUAeAB5AHoAeAB7AHkAeQB7AHwAewB4AH0AfQB4AH4AewB9AH8AgACBAIIAgACDAIEAhACFAIYAhACHAIUAiACJAIoAiACLAIkAjACNAI4AjACPAI0AkACRAJIAkACTAJEAlACVAJYAlACXAJUAmACZAJoAmACbAJkAmQCbAJwAmwCYAJ0AnQCYAJ4AmwCdAJ8A"),
+"material": SubResource("StandardMaterial3D_440y0"),
+"name": "Door_Variant_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 160,
+"vertex_data": PackedByteArray("Q3+6MDCe/78AAP7/MJ7/v0N///8wnv+/AAC6MDCe/79DfwAAMJ7/vwAAAAAwnv+/AAC6MDCe//8AAP7/AAD//wAA/v8wnv//AAC6MAAA//8AAAAAMJ7//wAAAAAAAP//AAC6MAAA//9Df///AAD//wAA/v8AAP//Q3+6MAAA//8AAAAAAAD//0N/AAAAAP//Q3+6MAAAVNVDf///MJ5U1UN///8AAFTVQ3+6MDCeVNVDfwAAAABU1UN/AAAwnlTVAAAAADCeVNVDfwAAAABU1QAAAAAAAFTVQ38AADCeVNUAAP7/AABU1UN///8wnlTVAAD+/zCeVNVDf///AABU1Xxp0pAQ5KoqfGksb/6+qip8adKQ/r6qKnxpLG8Q5Koqu23SkP7//n9Payxv/v/+f09r0pD+//5/u20sb/7//n+ObyxvEOQAAE9rLG/+/wAAu20sb/7/AAB8aSxv/r4AAHxpLG8Q5AAAu20sbw+jAACObyxv/r4AAE9rLG8PowAAT2vSkA+jAAC7bSxvD6MAALtt0pAPowAAT2ssbw+jAACOb9KQ/r6qKo5vLG8Q5Koqjm/SkBDkqiqObyxv/r6qKnxp0pD+vpEST2ssbw+jkRJPa9KQD6OREnxpLG/+vpESjm8sb/6+kRK7bdKQD6ORErttLG8Po5ESjm/SkP6+kRK7bSxv/v/VO45v0pAQ5NU7jm8sbxDk1Tu7bdKQ/v/VO3xpLG8Q5NU7T2vSkP7/1TtPayxv/v/VO3xp0pAQ5NU7jm/SkP6+AABPa9KQD6MAALtt0pAPowAAfGnSkBDkAAB8adKQ/r4AALtt0pD+/wAAjm/SkBDkAABPa9KQ/v8AALuAujAwnv///////zCe//+7gP//MJ7///7/ujAwnv//u4AAADCe///+/wAAMJ7///7/ujAwnv///////wAA////////MJ7///7/ujAAAP///v8AADCe///+/wAAAAD///7/ujAAAP+/u4D//wAA/7//////AAD/v7uAujAAAP+//v8AAAAA/7+7gAAAAAD/v7uAujAAAFTVu4D//zCeVNW7gP//AABU1buAujAwnlTVu4AAAAAAVNW7gAAAMJ5U1f7/AAAwnlTVu4AAAAAAVNX+/wAAAABU1buAAAAwnlTV/////wAAVNW7gP//MJ5U1f////8wnlTVu4D//wAAVNWCltKQEOSqKoKWLG/+vqoqgpbSkP6+qiqClixvEOSqKkOS0pD//wAAr5Qsb///AACvlNKQ//8AAEOSLG///wAAcJAsbxDk/z+vlCxv////P0OSLG////8/gpYsb/6+/z+ClixvEOT/P0OSLG8Po/8/cJAsb/6+/z+vlCxvD6P/P6+U0pAPo/8/Q5Isbw+j/z9DktKQD6P/P6+ULG8Po/8/cJDSkP6+qipwkCxvEOSqKnCQ0pAQ5KoqcJAsb/6+qiqCltKQ/r7VO6+ULG8Po9U7r5TSkA+j1TuClixv/r7VO3CQLG/+vtU7Q5LSkA+j1TtDkixvD6PVO3CQ0pD+vtU7Q5Isb///kRJwkNKQEOSREnCQLG8Q5JESQ5LSkP//kRKClixvEOSREq+U0pD//5ESr5Qsb///kRKCltKQEOSREnCQ0pD+vv8/r5TSkA+j/z9DktKQD6P/P4KW0pAQ5P8/gpbSkP6+/z9DktKQ////P3CQ0pAQ5P8/r5TSkP///z//f/9//3//f/9//3//f/9//3//f/9//3//P/9//z//f/8//3//P/9//z//f/8//3//v/8//7//P/+//z//v/8//7//P/+//z+qqlRVqqpUVaqqVFWqqlRVqqpUVaqqVFWqKlTVqipU1aoqVNWqKlTVVNWqKlTVqipU1aoqVNWqKlRVqqpUVamqVFWqqlRVqar/f////3////9/////f////3//P/9//z//f/8//3//P/9//z//f/8//3//P/9//z//v/8//7//P/+//z//v/8/qqpVVaqqVFWqqlVVqqpUVTtJw7Y7ScO2O0nDtjtJw7bDtjtJw7Y7ScO2O0nDtjtJxZk5ZsWZOWbFmTlmxZk5ZjlmxZk5ZsWZOWbFmTlmxZn/f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/8//7//P/+//z//v/8//7//P/+//z//v/8//3//P/9//z//f/8//3//P/9//z//f/9//3//f/9//3//f/9//3//f/9//3//f6qqVFWqqlRVqqpUVaqqVFWqqlRVqqpUVaqqqqqqqqqqqqqqqqqqqqpUVVRVVFVUVVRVVFVUVVRVVFWqqlRVqapUVaqqVFWpqv9/////f////3////9////+//9/////f////3/+//9//v//f////3/+//9/////f/9//3//f/9//3//f/9//3+qqlVVqqpUVaqqVVWqqlRVOWbFmTlmxZk5ZsWZOWbFmcWZOWbFmTlmxZk5ZsWZOWbDtjtJw7Y7ScO2O0nDtjtJO0nDtjtJw7Y7ScO2O0nDtgAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_fcaue")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4wem"]
+resource_name = "Floor.004"
+cull_mode = 2
+albedo_texture = ExtResource("21_cyx1q")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qvy0y"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5750002, -1.5000001, 3, 0.15000033, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYA"),
+"name": "Floor.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAABAP//AAD//wAAAAAAAAAAAAAAAAAAAAD9/wAAAAD//wEA//8AAAAA/////wAA////////AAD///3/AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gl31h"]
+resource_name = "08_Floor_Dark_Plane_006"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5750002, -1.5000001, 3, 0.15000033, 3),
+"attribute_data": PackedByteArray("XP9c/6GAoYBc/6GAoYBc/6IAoYBdf1z/ogBc/11/oYBogZV+rQJdf60ClX5ogV1/aQGhgKIA5gFpAeYBogChgGiBDXytAtR8rQINfGiB1HxogYN5rQJLeq0Cg3logUt6"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_r4wem"),
+"name": "Floor.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAABAP///////wAAAAD//wAAAAAAAP////8BAP////8AAP////9U1f///f8AAFTV////////VNUAAP3/AABU1f//AAAAAP//AAD9/wAA//8AAAAAAAD//////f8AAP//AAABAP///7//////////v///AQD///+/AAD//////7///wEA/////////f8AAP////8AAAAA/////////////wAAAAAAAP//AAD///////8AAAEA/////wAA/f8AAP///3//P/9//z//f/8//3//P1TVqipU1aoqVNWqKlTVqir+//9//v//f/7//3/+//9//3//f/9//3//f/9//3//f/+//3//v/9//7//f/+//3//P/9//z//f/8//3//P/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qvy0y")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y78gj"]
+data = PackedVector3Array(-1.5, -1.5749959, 1.4999999, 1.5, -1.5750002, -1.5000001, -1.5, -1.5750002, -1.5000001, -1.5, -1.5749959, 1.4999999, 1.5, -1.5749959, 1.4999999, 1.5, -1.5750002, -1.5000001, -1.5, -1.4249998, 1.4999999, 1.5, -1.4250041, -1.5000001, 1.5, -1.4249998, 1.4999999, -1.5, -1.4249998, 1.4999999, -1.5, -1.4250041, -1.5000001, 1.5, -1.4250041, -1.5000001, 1.5, -1.5750002, -1.5000001, -1.5, -1.4250041, -1.5000001, -1.5, -1.5750002, -1.5000001, 1.5, -1.5750002, -1.5000001, 1.5, -1.4250041, -1.5000001, -1.5, -1.4250041, -1.5000001, -1.5, -1.5749959, 1.4999999, 1.5, -1.4249998, 1.4999999, 1.5, -1.5749959, 1.4999999, -1.5, -1.5749959, 1.4999999, -1.5, -1.4249998, 1.4999999, 1.5, -1.4249998, 1.4999999, 1.5, -1.5749959, 1.4999999, 1.5, -1.4250041, -1.5000001, 1.5, -1.5750002, -1.5000001, 1.5, -1.5749959, 1.4999999, 1.5, -1.4249998, 1.4999999, 1.5, -1.4250041, -1.5000001, -1.5, -1.5750002, -1.5000001, -1.5, -1.4249998, 1.4999999, -1.5, -1.5749959, 1.4999999, -1.5, -1.5750002, -1.5000001, -1.5, -1.4250041, -1.5000001, -1.5, -1.4249998, 1.4999999)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ih34m"]
+resource_name = "Floor.008"
+cull_mode = 2
+albedo_texture = ExtResource("22_0dhbp")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_us4ui"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5749999, -1.5000001, 3, 0.14999986, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAQADAAIAAAAEAAEAAgADAAUAAgAFAAAAAAAGAAQAAAAFAAYABAAHAAEAAQAHAAMABAAGAAcABQADAAcABQAHAAYA"),
+"name": "Floor.008",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAABAP//AAD//wAAAAAAAAAAAAAAAAAAAAD9/wAAAAD//wEA//8AAAAA/////wAA////////AAD///3/AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_lmckc"]
+resource_name = "09_Floor_Lino_Plane_010"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5749999, -1.5000001, 3, 0.14999986, 3),
+"attribute_data": PackedByteArray("XP9c/6GAoYBc/6GAoYBc/6IAoYBdf1z/ogBc/11/oYBogZV+rQJdf60ClX5ogV1/aQGhgKIA5gFpAeYBogChgGiBDXytAtR8rQINfGiB1HxogYN5rQJLeq0Cg3logUt6"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_ih34m"),
+"name": "Floor.008",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAABAP///////wAAAAD//wAAAAAAAP////8BAP////8AAP////9U1f///f8AAFTV////////VNUAAP3/AABU1f//AAAAAP//AAD9/wAA//8AAAAAAAD//////f8AAP//AAABAP///7//////////v///AQD///+/AAD//////7///wEA/////////f8AAP////8AAAAA/////////////wAAAAAAAP//AAD///////8AAAEA/////wAA/f8AAP///3//P/9//z//f/8//3//P1TVqipU1aoqVNWqKlTVqir+//9//v//f/7//3/+//9//3//f/9//3//f/9//3//f/+//3//v/9//7//f/+//3//P/9//z//f/8//3//P/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_us4ui")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_o6h1s"]
+data = PackedVector3Array(-1.5, -1.5749961, 1.4999999, 1.5, -1.5749999, -1.5000001, -1.5, -1.5749999, -1.5000001, -1.5, -1.5749961, 1.4999999, 1.5, -1.5749961, 1.4999999, 1.5, -1.5749999, -1.5000001, -1.5, -1.4250001, 1.4999999, 1.5, -1.4250039, -1.5000001, 1.5, -1.4250001, 1.4999999, -1.5, -1.4250001, 1.4999999, -1.5, -1.4250039, -1.5000001, 1.5, -1.4250039, -1.5000001, 1.5, -1.5749999, -1.5000001, -1.5, -1.4250039, -1.5000001, -1.5, -1.5749999, -1.5000001, 1.5, -1.5749999, -1.5000001, 1.5, -1.4250039, -1.5000001, -1.5, -1.4250039, -1.5000001, -1.5, -1.5749961, 1.4999999, 1.5, -1.4250001, 1.4999999, 1.5, -1.5749961, 1.4999999, -1.5, -1.5749961, 1.4999999, -1.5, -1.4250001, 1.4999999, 1.5, -1.4250001, 1.4999999, 1.5, -1.5749961, 1.4999999, 1.5, -1.4250039, -1.5000001, 1.5, -1.5749999, -1.5000001, 1.5, -1.5749961, 1.4999999, 1.5, -1.4250001, 1.4999999, 1.5, -1.4250039, -1.5000001, -1.5, -1.5749999, -1.5000001, -1.5, -1.4250001, 1.4999999, -1.5, -1.5749961, 1.4999999, -1.5, -1.5749999, -1.5000001, -1.5, -1.4250039, -1.5000001, -1.5, -1.4250001, 1.4999999)
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_jx0wj"]
+item/0/name = "00_TestCube"
+item/0/mesh = SubResource("ArrayMesh_wwv8h")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/mesh_cast_shadow = 1
+item/0/shapes = [SubResource("ConcavePolygonShape3D_3sfuy"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+item/1/name = "01_Floor"
+item/1/mesh = SubResource("ArrayMesh_nl8l6")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/mesh_cast_shadow = 1
+item/1/shapes = [SubResource("ConcavePolygonShape3D_eg8qr"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
+item/2/name = "02_Wall"
+item/2/mesh = SubResource("ArrayMesh_mu0rh")
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/mesh_cast_shadow = 1
+item/2/shapes = [SubResource("ConcavePolygonShape3D_jx8jr"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
+item/3/name = "03_Wall1Half"
+item/3/mesh = SubResource("ArrayMesh_64era")
+item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/mesh_cast_shadow = 1
+item/3/shapes = [SubResource("ConcavePolygonShape3D_2qwdw"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/navigation_layers = 1
+item/4/name = "04_Doorway"
+item/4/mesh = SubResource("ArrayMesh_j64d7")
+item/4/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/mesh_cast_shadow = 1
+item/4/shapes = []
+item/4/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/4/navigation_layers = 1
+item/5/name = "05_Floor2"
+item/5/mesh = SubResource("ArrayMesh_0qmf7")
+item/5/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/mesh_cast_shadow = 1
+item/5/shapes = [SubResource("ConcavePolygonShape3D_8nkje"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/5/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/5/navigation_layers = 1
+item/6/name = "06_Wall_Wood"
+item/6/mesh = SubResource("ArrayMesh_4iv7s")
+item/6/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/6/mesh_cast_shadow = 1
+item/6/shapes = [SubResource("ConcavePolygonShape3D_al6nd"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/6/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/6/navigation_layers = 1
+item/7/name = "07_Door_flip"
+item/7/mesh = SubResource("ArrayMesh_hnvrf")
+item/7/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/7/mesh_cast_shadow = 1
+item/7/shapes = []
+item/7/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/7/navigation_layers = 1
+item/8/name = "08_Floor_Dark"
+item/8/mesh = SubResource("ArrayMesh_gl31h")
+item/8/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/8/mesh_cast_shadow = 1
+item/8/shapes = [SubResource("ConcavePolygonShape3D_y78gj"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/8/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/8/navigation_layers = 1
+item/9/name = "09_Floor_Lino"
+item/9/mesh = SubResource("ArrayMesh_lmckc")
+item/9/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/9/mesh_cast_shadow = 1
+item/9/shapes = [SubResource("ConcavePolygonShape3D_o6h1s"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/9/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/9/navigation_layers = 1
+item/10/name = "10_ShoppingCube"
+item/10/mesh = SubResource("ArrayMesh_h82d2")
+item/10/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/10/mesh_cast_shadow = 1
+item/10/shapes = [SubResource("ConcavePolygonShape3D_tnbqv"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/10/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/10/navigation_layers = 1
+item/11/name = "11_Wall_Blue"
+item/11/mesh = SubResource("ArrayMesh_711xl")
+item/11/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/11/mesh_cast_shadow = 1
+item/11/shapes = []
+item/11/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/11/navigation_layers = 1
+item/12/name = "12_Hand_Rail"
+item/12/mesh = SubResource("ArrayMesh_of8xc")
+item/12/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/12/mesh_cast_shadow = 1
+item/12/shapes = [SubResource("ConcavePolygonShape3D_6c2fx"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/12/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/12/navigation_layers = 1
+item/13/name = "13_Grass"
+item/13/mesh = SubResource("ArrayMesh_mhj7q")
+item/13/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/13/mesh_cast_shadow = 1
+item/13/shapes = []
+item/13/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/13/navigation_layers = 1
 
 [sub_resource type="FontFile" id="FontFile_7mycd"]
 cache/0/16/0/ascent = 0.0
@@ -157,7 +832,7 @@ cell_size = Vector3(1.5, 3, 1.5)
 cell_center_x = false
 cell_center_z = false
 data = {
-"cells": PackedInt32Array(65512, 1, 1441794, 9, 65519, 655361, 11, 65519, 655361, 11, 65517, 655361, 9, 65517, 655361, 7, 65519, 655361, 5, 65519, 655361, 3, 65519, 655361, 1, 65519, 655361, 9, 65521, 655361, 11, 65521, 655361, 12, 65521, 1048578, 8, 65521, 1048578, 7, 65520, 6, 5, 65520, 6, 3, 65520, 6, 1, 65520, 6, 0, 65519, 1441798, 12, 65519, 1048578, 13, 65518, 2, 15, 65518, 2, 17, 65518, 2, 13, 65519, 5, 13, 65521, 9, 13, 65523, 9, 13, 65529, 9, 13, 65531, 9, 13, 65533, 9, 13, 65535, 9, 12, 65523, 1441794, 12, 65525, 1441794, 12, 65529, 1441794, 12, 65531, 1441794, 12, 65533, 1441794, 12, 65535, 1441794, 9, 65515, 655361, 9, 65513, 655361, 9, 65511, 655361, 7, 65511, 655361, 7, 65513, 655361, 7, 65515, 655361, 7, 65517, 655361, 1, 65517, 655361, 1, 65515, 655361, 1, 65513, 655361, 1, 65511, 655361, 3, 65517, 655361, 3, 65515, 655361, 3, 65513, 655361, 3, 65511, 655361, 5, 65511, 655361, 5, 65513, 655361, 5, 65515, 655361, 5, 65517, 655361, 0, 65517, 1441798, 0, 65515, 1441798, 0, 65513, 1441798, 0, 65511, 1441798, 3, 65510, 655366, 7, 65510, 655366, 4, 65509, 1441794, 8, 65509, 1441798, 8, 65507, 1441798, 8, 65505, 1441798, 4, 65507, 1441794, 4, 65505, 1441794, 15, 65519, 5, 17, 65519, 5, 19, 65519, 5, 21, 65518, 655362, 20, 65519, 1048578, 19, 65520, 2, 15, 65520, 2, 13, 65520, 2, 15, 65521, 9, 17, 65521, 9, 19, 65521, 9, 21, 65521, 9, 21, 65519, 9, 13, 65517, 1, 15, 65517, 1, 17, 65517, 1, 19, 65517, 1, 21, 65517, 1, 23, 65518, 2, 25, 65518, 2, 23, 65517, 1, 25, 65517, 1, 23, 65519, 9, 25, 65519, 9, 23, 65521, 10, 25, 65521, 9, 26, 65519, 1441794, 26, 65521, 1441794, 13, 0, 655362, 15, 0, 655362, 17, 0, 655362, 19, 0, 655362, 21, 0, 655362, 23, 0, 655362, 25, 0, 655362, 26, 65535, 1048578, 26, 65533, 1048578, 26, 65531, 1048578, 26, 65529, 1048578, 26, 65527, 1048578, 26, 65525, 1048578, 26, 65523, 1048578, 15, 65523, 10, 17, 65523, 9, 15, 65525, 10, 17, 65525, 9, 17, 65527, 9, 15, 65527, 10, 15, 65529, 10, 17, 65529, 9, 19, 65523, 10, 21, 65523, 9, 23, 65523, 10, 25, 65523, 9, 25, 65525, 9, 23, 65525, 10, 21, 65525, 9, 19, 65525, 10, 19, 65527, 10, 21, 65527, 9, 23, 65527, 10, 25, 65527, 9, 25, 65529, 9, 23, 65529, 10, 21, 65529, 9, 19, 65529, 10, 15, 65533, 5, 15, 65535, 5, 17, 65531, 9, 17, 65533, 5, 17, 65535, 5, 19, 65535, 5, 19, 65533, 5, 21, 65531, 9, 21, 65533, 5, 21, 65535, 5, 23, 65535, 5, 23, 65533, 5, 25, 65531, 9, 25, 65533, 5, 25, 65535, 5, 1, 65509, 5, 3, 65509, 5, 1, 65507, 5, 1, 65505, 5, 1, 65503, 5, 1, 65501, 5, 5, 65501, 5, 7, 65501, 1, 3, 65503, 5, 3, 65505, 1, 3, 65507, 5, 5, 65509, 5, 5, 65507, 5, 5, 65505, 5, 5, 65503, 5, 7, 65503, 5, 7, 65505, 1, 7, 65507, 5, 7, 65509, 5, 0, 65509, 1441794, 0, 65507, 1441794, 0, 65505, 1441794, 0, 65503, 1441794, 0, 65501, 1441794, 1, 65500, 655362, 3, 65500, 655362, 5, 65500, 655362, 7, 65500, 655362, 4, 65503, 1048578, 4, 65501, 1048578, 8, 65503, 1441798, 8, 65501, 1441798, 10, 65509, 1441798, 10, 65507, 1441798, 10, 65505, 1441798, 10, 65501, 1048578, 9, 65509, 1, 9, 65507, 1, 9, 65505, 1, 9, 65503, 1, 9, 65501, 1, 11, 65515, 5, 11, 65513, 5, 11, 65511, 5, 13, 65511, 5, 13, 65513, 5, 13, 65515, 5, 15, 65515, 5, 15, 65513, 5, 15, 65511, 5, 11, 65502, 655362, 11, 65504, 655362, 10, 65513, 1441798, 10, 65515, 1441795, 11, 65516, 3, 13, 65516, 655366, 15, 65516, 655366, 11, 65512, 2, 13, 65512, 2, 16, 65515, 1441794, 16, 65513, 1441794, 16, 65511, 1441794, 15, 65504, 655362, 17, 65504, 655362, 11, 65505, 5, 11, 65507, 5, 11, 65509, 5, 13, 65509, 5, 13, 65507, 5, 13, 65505, 5, 15, 65505, 5, 15, 65507, 5, 15, 65509, 5, 17, 65509, 655361, 17, 65507, 5, 17, 65505, 5, 11, 65503, 655361, 13, 65503, 655361, 15, 65503, 655361, 17, 65503, 655361, 11, 65501, 5, 13, 65501, 5, 15, 65501, 5, 17, 65501, 5, 17, 65511, 655361, 17, 65513, 655361, 17, 65515, 655361, 19, 65515, 655361, 19, 65513, 655361, 19, 65511, 655361, 19, 65509, 655361, 19, 65507, 5, 11, 65508, 655362, 13, 65508, 655362, 15, 65508, 655362, 16, 65509, 1048578, 14, 65535, 1048578, 15, 65532, 655363, 17, 65532, 655363, 21, 65532, 655362, 23, 65532, 655362, 25, 65532, 655362, 20, 65533, 1048578, 14, 65533, 1048578, 15, 65531, 9, 19, 65531, 9, 23, 65531, 9, 19, 65504, 2, 23, 65504, 2, 24, 65505, 1441794, 24, 65507, 1441794, 24, 65509, 1441794, 24, 65511, 1441794, 24, 65513, 1441794, 24, 65515, 1441794, 20, 65515, 1441794, 20, 65513, 1048580, 20, 65511, 1048580, 20, 65509, 1441794, 17, 65508, 655362, 19, 65508, 655362, 21, 65508, 655362, 23, 65508, 655362, 21, 65512, 655362, 23, 65512, 655362, 21, 65516, 655362, 23, 65516, 655362, 21, 65515, 5, 21, 65513, 5, 23, 65513, 5, 23, 65515, 5, 21, 65509, 5, 23, 65509, 5, 21, 65511, 5, 23, 65511, 5, 19, 65505, 5, 21, 65505, 5, 21, 65507, 5, 23, 65505, 5, 23, 65507, 5, 13, 65502, 655362, 15, 65502, 655362, 17, 65502, 655362, 19, 65502, 655362, 21, 65502, 655362, 23, 65502, 655362, 25, 65502, 655362, 25, 65515, 655361, 27, 65515, 655361, 27, 65513, 655361, 25, 65513, 655361, 25, 65511, 655361, 27, 65511, 655361, 27, 65509, 655361, 25, 65509, 655361, 25, 65507, 655361, 27, 65507, 655361, 25, 65505, 655361, 27, 65505, 655361, 27, 65503, 655361, 25, 65503, 655361, 19, 65503, 655361, 21, 65503, 655361, 23, 65503, 655361, 27, 65517, 655361, 27, 65518, 655362, 28, 65517, 1048578, 28, 65515, 1048578, 28, 65511, 1048578, 28, 65509, 1048578, 28, 65507, 1048578, 28, 65505, 1048578, 29, 65512, 2, 29, 65514, 2, 29, 65508, 2, 31, 65508, 2, 33, 65508, 2, 35, 65508, 2, 29, 65518, 2, 31, 65518, 2, 33, 65518, 2, 35, 65518, 2, 36, 65517, 1441794, 36, 65515, 1441794, 36, 65513, 1441794, 36, 65511, 1441794, 36, 65509, 1441794, 32, 65517, 1048578, 32, 65515, 1048578, 35, 65514, 2, 35, 65512, 2, 32, 65511, 1441794, 32, 65509, 1441794, 29, 65517, 5, 29, 65515, 5, 31, 65515, 5, 31, 65517, 5, 29, 65513, 5, 31, 65513, 5, 29, 65511, 5, 29, 65509, 5, 31, 65509, 5, 33, 65509, 5, 35, 65509, 5, 33, 65511, 5, 33, 65513, 5, 33, 65515, 5, 33, 65517, 5, 35, 65517, 5, 35, 65515, 5, 35, 65513, 5, 35, 65511, 5, 29, 65507, 655361, 29, 65505, 655361, 29, 65503, 655361, 31, 65507, 655361, 31, 65505, 655361, 31, 65503, 655361, 33, 65503, 655361, 33, 65505, 655361, 33, 65507, 655361, 35, 65507, 655361, 35, 65505, 655361, 35, 65503, 655361, 18, 65533, 1048579, 1, 65510, 4, 5, 65510, 4, 10, 65511, 1441796, 19, 65518, 655364, 19, 65532, 655364, 20, 65535, 1048580, 28, 65513, 1048580, 13, 65504, 4, 21, 65504, 4, 19, 65501, 5, 21, 65501, 5, 23, 65501, 5, 25, 65501, 5, 27, 65501, 1, 29, 65501, 1, 31, 65501, 1, 33, 65501, 1, 35, 65501, 1, 11, 65520, 4, 9, 65522, 4, 11, 65522, 4, 26, 65501, 1441794, 27, 65500, 655362, 29, 65500, 655362, 36, 65507, 1048578, 36, 65505, 1048578, 36, 65503, 1048578, 36, 65501, 1048578, 11, 65499, 1048581, 11, 65497, 1048581, 11, 65495, 1048581, 13, 65499, 1048581, 13, 65497, 1048581, 13, 65495, 1048581, 15, 65499, 1048581, 15, 65497, 1048581, 15, 65495, 1048581, 17, 65499, 1048581, 17, 65497, 1048581, 17, 65495, 1048581, 25, 65499, 1048581, 25, 65497, 1048581, 25, 65495, 1048581, 23, 65495, 1048581, 21, 65495, 1048581, 19, 65495, 1048581, 19, 65497, 1048581, 19, 65499, 1048581, 21, 65499, 1048581, 21, 65497, 1048581, 23, 65497, 1048581, 23, 65499, 1048581, 27, 65499, 1048581, 27, 65497, 1048581, 27, 65495, 1048581, 29, 65499, 1048581, 29, 65497, 1048581, 29, 65495, 1048581, 31, 65497, 1048581, 31, 65495, 1048581, 33, 65495, 1048581, 33, 65497, 1048581, 31, 65499, 655361, 33, 65499, 655361, 35, 65497, 1048581, 35, 65495, 1048581, 35, 65499, 655361, 37, 65499, 655361, 37, 65497, 655361, 37, 65495, 655361, 31, 65493, 655361, 29, 65493, 655361, 9, 65499, 655361, 9, 65497, 655361, 9, 65495, 655361, 9, 65493, 655361, 11, 65493, 655361, 13, 65493, 655361, 15, 65493, 655361, 17, 65493, 655361, 19, 65493, 655361, 21, 65493, 655361, 23, 65493, 655361, 25, 65493, 655361, 27, 65493, 655361, 31, 65491, 655361, 31, 65489, 655361, 31, 65487, 655361, 31, 65485, 655361, 33, 65485, 655361, 35, 65485, 655361, 37, 65485, 655361, 39, 65485, 655361, 39, 65487, 655361, 39, 65489, 655361, 39, 65491, 655361, 39, 65493, 655361, 39, 65495, 655361, 33, 65493, 655365, 33, 65491, 655365, 33, 65489, 655365, 33, 65487, 655365, 35, 65487, 655365, 35, 65489, 655365, 35, 65491, 655365, 35, 65493, 655365, 37, 65493, 655365, 37, 65491, 655365, 37, 65489, 655365, 37, 65487, 655365, 7, 65499, 655365, 5, 65499, 655365, 3, 65499, 655365, 1, 65499, 655365, 65535, 65499, 655365, 65533, 65499, 655365, 7, 65497, 655365, 7, 65495, 655365, 7, 65493, 655365, 7, 65491, 655365, 5, 65491, 655365, 3, 65491, 655365, 1, 65491, 655365, 65535, 65491, 655365, 65533, 65491, 655365, 65533, 65493, 655365, 65533, 65495, 655365, 65533, 65497, 655365, 65535, 65497, 655365, 65535, 65495, 655365, 65535, 65493, 655365, 1, 65493, 655365, 1, 65495, 655365, 1, 65497, 655365, 3, 65497, 655365, 3, 65495, 655365, 3, 65493, 655365, 5, 65493, 655365, 5, 65495, 655365, 5, 65497, 655365, 7, 65490, 655362, 5, 65490, 655362, 3, 65490, 655362, 1, 65490, 655362, 65535, 65490, 655362, 65533, 65490, 655362, 65532, 65491, 1048578, 65532, 65493, 1048578, 65532, 65495, 1048578, 65532, 65497, 1048578, 65532, 65499, 1048578, 65533, 65500, 2, 65535, 65500, 2, 8, 65499, 1441794, 8, 65497, 1441794, 8, 65493, 1441794, 8, 65491, 1441794, 9, 65491, 655361, 65532, 65481, 1048578, 65532, 65483, 1048578, 65532, 65485, 1048578, 65532, 65487, 1048578, 65532, 65489, 1048578, 65533, 65480, 655362, 65533, 65481, 655365, 65533, 65483, 655365, 65533, 65485, 655365, 65533, 65487, 655365, 65533, 65489, 655365, 65535, 65480, 655362, 65535, 65481, 655365, 65535, 65483, 655365, 65535, 65485, 655365, 65535, 65487, 655365, 65535, 65489, 655365, 1, 65480, 655362, 1, 65481, 655365, 1, 65483, 655365, 1, 65485, 655365, 1, 65487, 655365, 1, 65489, 655365, 3, 65480, 655362, 3, 65481, 655365, 3, 65483, 655365, 3, 65485, 655365, 3, 65487, 655365, 3, 65489, 655365, 5, 65480, 655362, 5, 65481, 655365, 5, 65483, 655365, 5, 65485, 655365, 5, 65487, 655365, 5, 65489, 655365, 7, 65480, 655362, 7, 65481, 655365, 7, 65483, 655365, 7, 65485, 655365, 7, 65487, 655365, 7, 65489, 655365, 65532, 65471, 1048578, 65532, 65473, 1048578, 65532, 65475, 1048578, 65532, 65477, 1048578, 65532, 65479, 1048578, 65533, 65470, 655362, 65533, 65471, 655365, 65533, 65473, 655365, 65533, 65475, 655365, 65533, 65477, 655365, 65533, 65479, 655365, 65535, 65470, 655362, 65535, 65471, 655365, 65535, 65473, 655365, 65535, 65475, 655365, 65535, 65477, 655365, 65535, 65479, 655365, 1, 65470, 655362, 1, 65471, 655365, 1, 65473, 655365, 1, 65475, 655365, 1, 65477, 655365, 1, 65479, 655365, 3, 65470, 655362, 3, 65471, 655365, 3, 65473, 655365, 3, 65475, 655365, 3, 65477, 655365, 3, 65479, 655365, 5, 65470, 655362, 5, 65471, 655365, 5, 65473, 655365, 5, 65475, 655365, 5, 65477, 655365, 5, 65479, 655365, 7, 65470, 655362, 7, 65471, 655365, 7, 65473, 655365, 7, 65475, 655365, 7, 65477, 655365, 7, 65479, 655365, 8, 65481, 1441794, 8, 65483, 1441794, 8, 65487, 1441794, 8, 65489, 1441794, 9, 65481, 655361, 9, 65483, 655361, 9, 65485, 655361, 9, 65487, 655361, 9, 65489, 655361, 8, 65471, 1441794, 8, 65473, 1441794, 8, 65477, 1441794, 8, 65479, 1441794, 9, 65471, 655361, 9, 65473, 655361, 9, 65475, 655361, 9, 65477, 655361, 9, 65479, 655361, 65533, 65469, 655361, 65533, 65467, 655361, 65535, 65467, 655361, 65535, 65469, 655361, 1, 65469, 655361, 1, 65467, 655361, 3, 65467, 655361, 3, 65469, 655361, 5, 65469, 655361, 5, 65467, 655361, 7, 65467, 655361, 7, 65469, 655361, 9, 65467, 655361, 9, 65469, 655361, 31, 65483, 655361, 31, 65481, 655361, 31, 65479, 655361, 31, 65477, 655361, 31, 65475, 655361, 31, 65473, 655361, 31, 65471, 655361, 31, 65469, 655361, 31, 65467, 655361, 11, 65467, 655361, 11, 65469, 655361, 13, 65469, 655361, 13, 65467, 655361, 15, 65467, 655361, 15, 65469, 655361, 17, 65469, 655361, 17, 65467, 655361, 19, 65467, 655361, 19, 65469, 655361, 21, 65469, 655361, 21, 65467, 655361, 23, 65467, 655361, 23, 65469, 655361, 25, 65469, 655361, 25, 65467, 655361, 27, 65467, 655361, 27, 65469, 655361, 29, 65469, 655361, 29, 65467, 655361, 29, 65483, 655361, 27, 65483, 655361, 25, 65483, 655361, 23, 65483, 655361, 21, 65483, 655361, 19, 65483, 655361, 17, 65483, 655361, 15, 65483, 655361, 13, 65483, 655361, 11, 65483, 655361, 29, 65481, 655361, 29, 65479, 655361, 29, 65477, 655361, 29, 65475, 655361, 29, 65473, 655361, 29, 65471, 655361, 33, 65467, 655361, 33, 65469, 655361, 35, 65467, 655361, 35, 65469, 655361, 37, 65467, 655361, 37, 65469, 655361, 39, 65469, 655361, 39, 65467, 655361, 33, 65471, 655365, 35, 65471, 655365, 37, 65471, 655365, 39, 65471, 655365, 41, 65471, 655365, 33, 65483, 655365, 35, 65483, 655365, 37, 65483, 655365, 39, 65483, 655365, 41, 65483, 655365, 41, 65481, 655365, 41, 65479, 655365, 41, 65477, 655365, 41, 65475, 655365, 41, 65473, 655365, 33, 65473, 655365, 33, 65475, 655365, 33, 65477, 655365, 33, 65479, 655365, 33, 65481, 655365, 35, 65481, 655365, 35, 65479, 655365, 35, 65477, 655365, 35, 65475, 655365, 35, 65473, 655365, 37, 65473, 655365, 37, 65475, 655365, 37, 65477, 655365, 37, 65479, 655365, 37, 65481, 655365, 39, 65481, 655365, 39, 65479, 655365, 39, 65477, 655365, 39, 65475, 655365, 39, 65473, 655365, 11, 65491, 9, 11, 65489, 9, 11, 65487, 9, 11, 65485, 9, 13, 65485, 9, 13, 65487, 9, 13, 65489, 9, 13, 65491, 9, 15, 65491, 9, 15, 65489, 9, 15, 65487, 9, 15, 65485, 9, 17, 65491, 655365, 19, 65491, 655365, 21, 65491, 655365, 25, 65491, 655365, 27, 65491, 655365, 29, 65491, 655365, 29, 65489, 655365, 29, 65487, 655365, 29, 65485, 655365, 27, 65485, 655365, 27, 65487, 655365, 27, 65489, 655365, 25, 65489, 655365, 25, 65487, 655365, 25, 65485, 655365, 21, 65489, 655365, 21, 65487, 9, 21, 65485, 9, 19, 65485, 9, 17, 65485, 9, 17, 65487, 9, 17, 65489, 655365, 19, 65489, 655365, 19, 65487, 9, 23, 65485, 655361, 23, 65487, 655361, 23, 65489, 655361, 23, 65491, 655361, 7, 65465, 655365, 5, 65465, 655365, 3, 65465, 655365, 1, 65465, 655365, 1, 65463, 655365, 1, 65461, 655365, 1, 65459, 655365, 1, 65457, 655365, 31, 65465, 655365, 31, 65463, 655365, 31, 65461, 655365, 31, 65459, 655365, 31, 65457, 655365, 33, 65465, 655365, 33, 65463, 655365, 33, 65461, 655365, 33, 65459, 655365, 35, 65459, 655365, 35, 65461, 655365, 35, 65463, 655365, 35, 65465, 655365, 3, 65457, 655365, 5, 65457, 655365, 7, 65457, 655365, 9, 65457, 655365, 11, 65457, 655365, 13, 65457, 655365, 15, 65457, 655365, 17, 65457, 655365, 19, 65457, 655365, 21, 65457, 655365, 23, 65457, 655365, 25, 65457, 655365, 27, 65457, 655365, 29, 65457, 655365, 3, 65459, 655365, 3, 65461, 655365, 3, 65463, 655365, 5, 65463, 655365, 5, 65461, 655365, 5, 65459, 655365, 7, 65459, 655365, 7, 65461, 655365, 7, 65463, 655365, 9, 65465, 655365, 11, 65465, 655365, 13, 65465, 655365, 15, 65465, 655365, 17, 65465, 655365, 19, 65465, 655365, 21, 65465, 655365, 23, 65465, 655365, 25, 65465, 655365, 27, 65465, 655365, 29, 65465, 655365, 29, 65463, 655365, 29, 65461, 655365, 29, 65459, 655365, 9, 65459, 655365, 9, 65463, 655365, 9, 65461, 655365, 11, 65461, 655365, 13, 65461, 655365, 15, 65461, 655365, 17, 65461, 655365, 19, 65461, 655365, 21, 65461, 655365, 23, 65461, 655365, 25, 65461, 655365, 27, 65461, 655365, 25, 65463, 655365, 25, 65459, 655365, 11, 65459, 655365, 11, 65463, 655365, 13, 65463, 655365, 13, 65459, 655365, 15, 65459, 655365, 15, 65463, 655365, 17, 65463, 655365, 17, 65459, 655365, 19, 65459, 655365, 19, 65463, 655365, 21, 65463, 655365, 21, 65459, 655365, 23, 65459, 655365, 23, 65463, 655365, 27, 65463, 655365, 27, 65459, 655365, 65533, 65466, 2, 65535, 65466, 2, 1, 65456, 2, 3, 65456, 2, 5, 65456, 2, 7, 65456, 2, 11, 65456, 2, 13, 65456, 2, 15, 65456, 2, 17, 65456, 2, 19, 65456, 2, 21, 65456, 2, 23, 65456, 2, 25, 65456, 2, 27, 65456, 2, 29, 65456, 2, 31, 65456, 2, 33, 65458, 2, 35, 65458, 2, 37, 65466, 2, 39, 65466, 2, 33, 65470, 2, 35, 65470, 2, 37, 65470, 2, 39, 65470, 2, 41, 65470, 2, 33, 65484, 2, 35, 65484, 2, 37, 65484, 2, 39, 65484, 2, 33, 65486, 2, 35, 65486, 2, 37, 65486, 2, 25, 65484, 2, 27, 65484, 2, 29, 65484, 2, 42, 65483, 1441794, 42, 65481, 1441794, 42, 65479, 1441794, 42, 65477, 1441794, 42, 65475, 1441794, 42, 65473, 1441794, 42, 65471, 1441794, 41, 65484, 655362, 36, 65459, 1048578, 36, 65461, 1048578, 36, 65463, 1048578, 36, 65465, 1048578, 32, 65457, 1048578, 0, 65457, 1048578, 0, 65459, 1048578, 0, 65461, 1048578, 0, 65463, 1048578, 0, 65465, 1048578, 40, 65485, 1048578, 40, 65487, 1048578, 40, 65489, 1048578, 40, 65491, 1048578, 40, 65493, 1048578, 40, 65495, 1048578, 38, 65497, 1048578, 38, 65499, 1048578, 39, 65496, 524290, 37, 65500, 524290, 38, 65487, 1310722, 38, 65489, 1310722, 38, 65491, 1310722, 38, 65493, 1310722, 37, 65494, 131074, 36, 65495, 1179650, 36, 65497, 1179650, 35, 65498, 524290, 31, 65498, 524290, 30, 65499, 1310722, 35, 65494, 655362, 33, 65494, 655362, 31, 65494, 655362, 30, 65495, 1048578, 30, 65497, 1048578, 27, 65494, 655362, 26, 65495, 1048578, 26, 65497, 1048578, 26, 65499, 1048578, 11, 65494, 2, 13, 65494, 2, 15, 65494, 2, 17, 65494, 2, 19, 65494, 2, 21, 65494, 2, 23, 65494, 2, 25, 65494, 2, 11, 65492, 2, 13, 65492, 2, 15, 65492, 2, 17, 65492, 2, 19, 65492, 2, 21, 65492, 2, 25, 65492, 2, 27, 65492, 2, 29, 65492, 2, 24, 65491, 1441794, 22, 65491, 1441794, 22, 65489, 1441794, 22, 65487, 1441794, 22, 65485, 1441794, 24, 65489, 1441794, 24, 65487, 1441794, 24, 65485, 1441794, 10, 65485, 1441794, 10, 65487, 1441794, 10, 65489, 1441794, 10, 65491, 1441794, 30, 65485, 1441794, 30, 65489, 1441794, 32, 65493, 1441794, 32, 65489, 1441794, 32, 65483, 1441794, 32, 65479, 1441794, 32, 65475, 1441794, 32, 65471, 1441794, 3, 65466, 655362, 7, 65466, 655362, 11, 65466, 655362, 15, 65466, 655362, 33, 65466, 655362, 31, 65466, 655362, 32, 65465, 1048578, 32, 65463, 1048578, 32, 65461, 1048578, 32, 65459, 1048578, 27, 65466, 2, 25, 65466, 2, 23, 65466, 2, 19, 65466, 2, 17, 65466, 2, 32, 65473, 1441796, 32, 65477, 1441796, 32, 65481, 1441796, 29, 65466, 655364, 35, 65466, 655364, 21, 65466, 655364, 13, 65466, 655364, 5, 65466, 655364, 1, 65466, 655364, 32, 65487, 1048580, 32, 65491, 1048580, 30, 65487, 1048580, 30, 65491, 1048580, 29, 65494, 4, 33, 65498, 4, 8, 65495, 1441796, 8, 65485, 1441796, 8, 65475, 1441796, 4, 65465, 1441794, 4, 65463, 1441794, 4, 65461, 1441794, 4, 65459, 1441794, 4, 65457, 1441794, 8, 65465, 1441794, 8, 65463, 1441794, 8, 65461, 1441794, 8, 65459, 1441794, 8, 65457, 1441794, 33, 65462, 655362, 35, 65462, 655364, 16, 65465, 1048578, 16, 65463, 1048578, 16, 65461, 1048578, 16, 65459, 1048578, 16, 65457, 1048578, 24, 65465, 1048578, 24, 65463, 1048578, 24, 65461, 1048578, 24, 65459, 1048578, 24, 65457, 1048578, 33, 65474, 2, 35, 65474, 2, 37, 65474, 2, 39, 65474, 2, 33, 65480, 2, 35, 65480, 2, 37, 65480, 2, 39, 65480, 2, 41, 65480, 2, 35, 65482, 2, 36, 65483, 1441794, 33, 65482, 655364, 41, 65474, 655364, 33, 65490, 655362, 35, 65490, 655362, 37, 65490, 655362, 21, 65488, 3, 19, 65488, 3, 17, 65488, 3, 16, 65489, 1441795, 15, 65488, 3, 13, 65488, 3, 10, 65495, 1441794, 10, 65497, 1441794, 10, 65499, 1441796, 13, 65496, 655362, 15, 65496, 655362, 17, 65496, 655362, 18, 65495, 1048578, 22, 65495, 1048578, 21, 65496, 2, 25, 65496, 2, 25, 65498, 2, 23, 65498, 2, 19, 65498, 2, 18, 65499, 1441794, 18, 65501, 1441794, 21, 65498, 655364, 19, 65496, 655364, 23, 65496, 655364, 33, 65512, 655364, 31, 65514, 655364, 33, 65514, 655364, 11, 65484, 3, 13, 65484, 3, 21, 65484, 3, 19, 65484, 3, 3, 65501, 1, 31, 65511, 5, 9, 65506, 7, 37, 65498, 7, 12, 65527, 1441794, 13, 65525, 9, 13, 65527, 9, 9, 65520, 4, 1, 65535, 1, 5, 65535, 1, 9, 65535, 1, 1, 65534, 2, 2, 65535, 1441794, 0, 65535, 1048578, 1, 0, 655362, 1, 65531, 0, 1, 65527, 0, 1, 65523, 0, 65533, 65519, 0, 65533, 65515, 0, 65533, 65511, 0, 9, 65456, 2)
+"cells": PackedInt32Array(65512, 1, 1441794, 9, 65519, 655361, 11, 65519, 655361, 11, 65517, 655361, 9, 65517, 655361, 7, 65519, 655361, 5, 65519, 655361, 3, 65519, 655361, 1, 65519, 655361, 9, 65521, 655361, 11, 65521, 655361, 12, 65521, 1048578, 8, 65521, 1048578, 7, 65520, 655371, 5, 65520, 655371, 3, 65520, 655371, 1, 65520, 655371, 0, 65519, 1048587, 12, 65519, 1048578, 13, 65518, 2, 15, 65518, 2, 17, 65518, 2, 13, 65519, 5, 13, 65521, 9, 13, 65523, 9, 13, 65529, 9, 13, 65531, 9, 13, 65533, 9, 13, 65535, 9, 12, 65523, 1441794, 12, 65525, 1441794, 12, 65529, 1441794, 12, 65531, 1441794, 12, 65533, 1441794, 12, 65535, 1441794, 9, 65515, 655361, 9, 65513, 655361, 9, 65511, 655361, 7, 65511, 655361, 7, 65513, 655361, 7, 65515, 655361, 7, 65517, 655361, 1, 65517, 655361, 1, 65515, 655361, 1, 65513, 655361, 1, 65511, 655361, 3, 65517, 655361, 3, 65515, 655361, 3, 65513, 655361, 3, 65511, 655361, 5, 65511, 655361, 5, 65513, 655361, 5, 65515, 655361, 5, 65517, 655361, 0, 65517, 1048587, 0, 65515, 1048587, 0, 65513, 1048587, 0, 65511, 1048587, 3, 65510, 11, 7, 65510, 11, 4, 65509, 1441794, 8, 65509, 1441803, 8, 65507, 1441803, 8, 65505, 1441798, 4, 65507, 1441794, 4, 65505, 1441794, 15, 65519, 5, 17, 65519, 5, 19, 65519, 5, 21, 65518, 655362, 20, 65519, 1048578, 19, 65520, 2, 15, 65520, 2, 13, 65520, 2, 15, 65521, 9, 17, 65521, 9, 19, 65521, 9, 21, 65521, 9, 21, 65519, 9, 13, 65517, 1, 15, 65517, 1, 17, 65517, 1, 19, 65517, 1, 21, 65517, 1, 23, 65518, 2, 25, 65518, 2, 23, 65517, 1, 25, 65517, 1, 23, 65519, 9, 25, 65519, 9, 23, 65521, 10, 25, 65521, 9, 26, 65519, 1441794, 26, 65521, 1441794, 13, 0, 655362, 15, 0, 655362, 17, 0, 655362, 19, 0, 655362, 21, 0, 655362, 23, 0, 655362, 25, 0, 655362, 26, 65535, 1048578, 26, 65533, 1048578, 26, 65531, 1048578, 26, 65529, 1048578, 26, 65527, 1048578, 26, 65525, 1048578, 26, 65523, 1048578, 15, 65523, 10, 17, 65523, 9, 15, 65525, 10, 17, 65525, 9, 17, 65527, 9, 15, 65527, 10, 15, 65529, 10, 17, 65529, 9, 19, 65523, 10, 21, 65523, 9, 23, 65523, 10, 25, 65523, 9, 25, 65525, 9, 23, 65525, 10, 21, 65525, 9, 19, 65525, 10, 19, 65527, 10, 21, 65527, 9, 23, 65527, 10, 25, 65527, 9, 25, 65529, 9, 23, 65529, 10, 21, 65529, 9, 19, 65529, 10, 15, 65533, 5, 15, 65535, 5, 17, 65531, 9, 17, 65533, 5, 17, 65535, 5, 19, 65535, 5, 19, 65533, 5, 21, 65531, 9, 21, 65533, 5, 21, 65535, 5, 23, 65535, 5, 23, 65533, 5, 25, 65531, 9, 25, 65533, 5, 25, 65535, 5, 1, 65509, 5, 3, 65509, 5, 1, 65507, 5, 1, 65505, 5, 1, 65503, 5, 1, 65501, 5, 5, 65501, 5, 7, 65501, 1, 3, 65503, 5, 3, 65505, 1, 3, 65507, 5, 5, 65509, 5, 5, 65507, 5, 5, 65505, 5, 5, 65503, 5, 7, 65503, 5, 7, 65505, 1, 7, 65507, 5, 7, 65509, 5, 0, 65509, 1441794, 0, 65507, 1441794, 0, 65505, 1441794, 0, 65503, 1441794, 0, 65501, 1441794, 1, 65500, 655362, 3, 65500, 655362, 5, 65500, 655362, 7, 65500, 655362, 4, 65503, 1048578, 4, 65501, 1048578, 8, 65503, 1441798, 8, 65501, 1441798, 10, 65509, 1441798, 10, 65507, 1441798, 10, 65505, 1441798, 10, 65501, 1048578, 9, 65509, 1, 9, 65507, 1, 9, 65505, 1, 9, 65503, 1, 9, 65501, 1, 11, 65515, 5, 11, 65513, 5, 11, 65511, 5, 13, 65511, 5, 13, 65513, 5, 13, 65515, 5, 15, 65515, 5, 15, 65513, 5, 15, 65511, 5, 11, 65502, 655362, 11, 65504, 655362, 10, 65513, 1441803, 10, 65515, 1441795, 11, 65516, 3, 13, 65516, 655371, 15, 65516, 655371, 11, 65512, 2, 13, 65512, 2, 16, 65515, 1441794, 16, 65513, 1441794, 16, 65511, 1441794, 15, 65504, 655362, 17, 65504, 655362, 11, 65505, 5, 11, 65507, 5, 11, 65509, 5, 13, 65509, 5, 13, 65507, 5, 13, 65505, 5, 15, 65505, 5, 15, 65507, 5, 15, 65509, 5, 17, 65509, 655361, 17, 65507, 5, 17, 65505, 5, 11, 65503, 655361, 13, 65503, 655361, 15, 65503, 655361, 17, 65503, 655361, 11, 65501, 5, 13, 65501, 5, 15, 65501, 5, 17, 65501, 5, 17, 65511, 655361, 17, 65513, 655361, 17, 65515, 655361, 19, 65515, 655361, 19, 65513, 655361, 19, 65511, 655361, 19, 65509, 655361, 19, 65507, 5, 11, 65508, 655362, 13, 65508, 655362, 15, 65508, 655362, 16, 65509, 1048578, 14, 65535, 1048578, 15, 65532, 655363, 17, 65532, 655363, 21, 65532, 655362, 23, 65532, 655362, 25, 65532, 655362, 20, 65533, 1048578, 14, 65533, 1048578, 15, 65531, 9, 19, 65531, 9, 23, 65531, 9, 19, 65504, 2, 23, 65504, 2, 24, 65505, 1441794, 24, 65507, 1441794, 24, 65509, 1441794, 24, 65511, 1441794, 24, 65513, 1441794, 24, 65515, 1441794, 20, 65515, 1441794, 20, 65513, 1048580, 20, 65511, 1048580, 20, 65509, 1441794, 17, 65508, 655362, 19, 65508, 655362, 21, 65508, 655362, 23, 65508, 655362, 21, 65512, 655362, 23, 65512, 655362, 21, 65516, 655362, 23, 65516, 655362, 21, 65515, 5, 21, 65513, 5, 23, 65513, 5, 23, 65515, 5, 21, 65509, 5, 23, 65509, 5, 21, 65511, 5, 23, 65511, 5, 19, 65505, 5, 21, 65505, 5, 21, 65507, 5, 23, 65505, 5, 23, 65507, 5, 13, 65502, 655362, 15, 65502, 655362, 17, 65502, 655362, 19, 65502, 655362, 21, 65502, 655362, 23, 65502, 655362, 25, 65502, 655362, 25, 65515, 655361, 27, 65515, 655361, 27, 65513, 655361, 25, 65513, 655361, 25, 65511, 655361, 27, 65511, 655361, 27, 65509, 655361, 25, 65509, 655361, 25, 65507, 655361, 27, 65507, 655361, 25, 65505, 655361, 27, 65505, 655361, 27, 65503, 655361, 25, 65503, 655361, 19, 65503, 655361, 21, 65503, 655361, 23, 65503, 655361, 27, 65517, 655361, 27, 65518, 655362, 28, 65517, 1048578, 28, 65515, 1048578, 28, 65511, 1048578, 28, 65509, 1048578, 28, 65507, 1048587, 28, 65505, 1048587, 29, 65512, 2, 29, 65514, 2, 29, 65508, 11, 31, 65508, 11, 33, 65508, 11, 35, 65508, 11, 29, 65518, 2, 31, 65518, 2, 33, 65518, 2, 35, 65518, 2, 36, 65517, 1441794, 36, 65515, 1441794, 36, 65513, 1441794, 36, 65511, 1441794, 36, 65509, 1441794, 32, 65517, 1048578, 32, 65515, 1048578, 35, 65514, 2, 35, 65512, 2, 32, 65511, 1441794, 32, 65509, 1441794, 29, 65517, 5, 29, 65515, 5, 31, 65515, 5, 31, 65517, 5, 29, 65513, 5, 31, 65513, 5, 29, 65511, 5, 29, 65509, 5, 31, 65509, 5, 33, 65509, 5, 35, 65509, 5, 33, 65511, 5, 33, 65513, 5, 33, 65515, 5, 33, 65517, 5, 35, 65517, 5, 35, 65515, 5, 35, 65513, 5, 35, 65511, 5, 29, 65507, 655361, 29, 65505, 655361, 29, 65503, 655361, 31, 65507, 655361, 31, 65505, 655361, 31, 65503, 655361, 33, 65503, 655361, 33, 65505, 655361, 33, 65507, 655361, 35, 65507, 655361, 35, 65505, 655361, 35, 65503, 655361, 18, 65533, 1048579, 1, 65510, 4, 5, 65510, 4, 10, 65511, 1441796, 19, 65518, 655364, 19, 65532, 655364, 20, 65535, 1048580, 28, 65513, 1048580, 13, 65504, 4, 21, 65504, 4, 19, 65501, 5, 21, 65501, 5, 23, 65501, 5, 25, 65501, 5, 27, 65501, 1, 29, 65501, 1, 31, 65501, 1, 33, 65501, 1, 35, 65501, 1, 11, 65520, 4, 9, 65522, 4, 11, 65522, 4, 26, 65501, 1441794, 27, 65500, 655362, 29, 65500, 655362, 36, 65507, 1441803, 36, 65505, 1441803, 36, 65503, 1441803, 36, 65501, 1441803, 11, 65499, 1048581, 11, 65497, 1048581, 11, 65495, 1048581, 13, 65499, 1048581, 13, 65497, 1048581, 13, 65495, 1048581, 15, 65499, 1048581, 15, 65497, 1048581, 15, 65495, 1048581, 17, 65499, 1048581, 17, 65497, 1048581, 17, 65495, 1048581, 25, 65499, 1048581, 25, 65497, 1048581, 25, 65495, 1048581, 23, 65495, 1048581, 21, 65495, 1048581, 19, 65495, 1048581, 19, 65497, 1048581, 19, 65499, 1048581, 21, 65499, 1048581, 21, 65497, 1048581, 23, 65497, 1048581, 23, 65499, 1048581, 27, 65499, 1048581, 27, 65497, 1048581, 27, 65495, 1048581, 29, 65499, 1048581, 29, 65497, 1048581, 29, 65495, 1048581, 31, 65497, 1048581, 31, 65495, 1048581, 33, 65495, 1048581, 33, 65497, 1048581, 31, 65499, 655361, 33, 65499, 655361, 35, 65497, 1048581, 35, 65495, 1048581, 35, 65499, 655361, 37, 65499, 655361, 37, 65497, 655361, 37, 65495, 655361, 31, 65493, 655361, 29, 65493, 655361, 9, 65499, 655361, 9, 65497, 655361, 9, 65495, 655361, 9, 65493, 655361, 11, 65493, 655361, 13, 65493, 655361, 15, 65493, 655361, 17, 65493, 655361, 19, 65493, 655361, 21, 65493, 655361, 23, 65493, 655361, 25, 65493, 655361, 27, 65493, 655361, 31, 65491, 655361, 31, 65489, 655361, 31, 65487, 655361, 31, 65485, 655361, 33, 65485, 655361, 35, 65485, 655361, 37, 65485, 655361, 39, 65485, 655361, 39, 65487, 655361, 39, 65489, 655361, 39, 65491, 655361, 39, 65493, 655361, 39, 65495, 655361, 33, 65493, 655365, 33, 65491, 655365, 33, 65489, 655365, 33, 65487, 655365, 35, 65487, 655365, 35, 65489, 655365, 35, 65491, 655365, 35, 65493, 655365, 37, 65493, 655365, 37, 65491, 655365, 37, 65489, 655365, 37, 65487, 655365, 7, 65499, 655365, 5, 65499, 655365, 3, 65499, 655365, 1, 65499, 655365, 65535, 65499, 655365, 65533, 65499, 655365, 7, 65497, 655365, 7, 65495, 655365, 7, 65493, 655365, 7, 65491, 655365, 5, 65491, 655365, 3, 65491, 655365, 1, 65491, 655365, 65535, 65491, 655365, 65533, 65491, 655365, 65533, 65493, 655365, 65533, 65495, 655365, 65533, 65497, 655365, 65535, 65497, 655365, 65535, 65495, 655365, 65535, 65493, 655365, 1, 65493, 655365, 1, 65495, 655365, 1, 65497, 655365, 3, 65497, 655365, 3, 65495, 655365, 3, 65493, 655365, 5, 65493, 655365, 5, 65495, 655365, 5, 65497, 655365, 7, 65490, 655362, 5, 65490, 655362, 3, 65490, 655362, 1, 65490, 655362, 65535, 65490, 655362, 65533, 65490, 655362, 65532, 65491, 1048578, 65532, 65493, 1048578, 65532, 65495, 1048578, 65532, 65497, 1048578, 65532, 65499, 1048578, 65533, 65500, 2, 65535, 65500, 2, 8, 65499, 1441794, 8, 65497, 1441794, 8, 65493, 1441794, 8, 65491, 1441794, 9, 65491, 655361, 65532, 65481, 1048578, 65532, 65483, 1048578, 65532, 65485, 1048578, 65532, 65487, 1048578, 65532, 65489, 1048578, 65533, 65480, 655362, 65533, 65481, 655365, 65533, 65483, 655365, 65533, 65485, 655365, 65533, 65487, 655365, 65533, 65489, 655365, 65535, 65480, 655362, 65535, 65481, 655365, 65535, 65483, 655365, 65535, 65485, 655365, 65535, 65487, 655365, 65535, 65489, 655365, 1, 65480, 655362, 1, 65481, 655365, 1, 65483, 655365, 1, 65485, 655365, 1, 65487, 655365, 1, 65489, 655365, 3, 65480, 655362, 3, 65481, 655365, 3, 65483, 655365, 3, 65485, 655365, 3, 65487, 655365, 3, 65489, 655365, 5, 65480, 655362, 5, 65481, 655365, 5, 65483, 655365, 5, 65485, 655365, 5, 65487, 655365, 5, 65489, 655365, 7, 65480, 655362, 7, 65481, 655365, 7, 65483, 655365, 7, 65485, 655365, 7, 65487, 655365, 7, 65489, 655365, 65532, 65471, 1048578, 65532, 65473, 1048578, 65532, 65475, 1048578, 65532, 65477, 1048578, 65532, 65479, 1048578, 65533, 65470, 655362, 65533, 65471, 655365, 65533, 65473, 655365, 65533, 65475, 655365, 65533, 65477, 655365, 65533, 65479, 655365, 65535, 65470, 655362, 65535, 65471, 655365, 65535, 65473, 655365, 65535, 65475, 655365, 65535, 65477, 655365, 65535, 65479, 655365, 1, 65470, 655362, 1, 65471, 655365, 1, 65473, 655365, 1, 65475, 655365, 1, 65477, 655365, 1, 65479, 655365, 3, 65470, 655362, 3, 65471, 655365, 3, 65473, 655365, 3, 65475, 655365, 3, 65477, 655365, 3, 65479, 655365, 5, 65470, 655362, 5, 65471, 655365, 5, 65473, 655365, 5, 65475, 655365, 5, 65477, 655365, 5, 65479, 655365, 7, 65470, 655362, 7, 65471, 655365, 7, 65473, 655365, 7, 65475, 655365, 7, 65477, 655365, 7, 65479, 655365, 8, 65481, 1441794, 8, 65483, 1441794, 8, 65487, 1441794, 8, 65489, 1441794, 9, 65481, 655361, 9, 65483, 655361, 9, 65485, 655361, 9, 65487, 655361, 9, 65489, 655361, 8, 65471, 1441794, 8, 65473, 1441794, 8, 65477, 1441794, 8, 65479, 1441794, 9, 65471, 655361, 9, 65473, 655361, 9, 65475, 655361, 9, 65477, 655361, 9, 65479, 655361, 65533, 65469, 655361, 65533, 65467, 655361, 65535, 65467, 655361, 65535, 65469, 655361, 1, 65469, 655361, 1, 65467, 655361, 3, 65467, 655361, 3, 65469, 655361, 5, 65469, 655361, 5, 65467, 655361, 7, 65467, 655361, 7, 65469, 655361, 9, 65467, 655361, 9, 65469, 655361, 31, 65483, 655361, 31, 65481, 655361, 31, 65479, 655361, 31, 65477, 655361, 31, 65475, 655361, 31, 65473, 655361, 31, 65471, 655361, 31, 65469, 655361, 31, 65467, 655361, 11, 65467, 655361, 11, 65469, 655361, 13, 65469, 655361, 13, 65467, 655361, 15, 65467, 655361, 15, 65469, 655361, 17, 65469, 655361, 17, 65467, 655361, 19, 65467, 655361, 19, 65469, 655361, 21, 65469, 655361, 21, 65467, 655361, 23, 65467, 655361, 23, 65469, 655361, 25, 65469, 655361, 25, 65467, 655361, 27, 65467, 655361, 27, 65469, 655361, 29, 65469, 655361, 29, 65467, 655361, 29, 65483, 655361, 27, 65483, 655361, 25, 65483, 655361, 23, 65483, 655361, 21, 65483, 655361, 19, 65483, 655361, 17, 65483, 655361, 15, 65483, 655361, 13, 65483, 655361, 11, 65483, 655361, 29, 65481, 655361, 29, 65479, 655361, 29, 65477, 655361, 29, 65475, 655361, 29, 65473, 655361, 29, 65471, 655361, 33, 65467, 655361, 33, 65469, 655361, 35, 65467, 655361, 35, 65469, 655361, 37, 65467, 655361, 37, 65469, 655361, 39, 65469, 655361, 39, 65467, 655361, 33, 65471, 655365, 35, 65471, 655365, 37, 65471, 655365, 39, 65471, 655365, 41, 65471, 655365, 33, 65483, 655365, 35, 65483, 655365, 37, 65483, 655365, 39, 65483, 655365, 41, 65483, 655365, 41, 65481, 655365, 41, 65479, 655365, 41, 65477, 655365, 41, 65475, 655365, 41, 65473, 655365, 33, 65473, 655365, 33, 65475, 655365, 33, 65477, 655365, 33, 65479, 655365, 33, 65481, 655365, 35, 65481, 655365, 35, 65479, 655365, 35, 65477, 655365, 35, 65475, 655365, 35, 65473, 655365, 37, 65473, 655365, 37, 65475, 655365, 37, 65477, 655365, 37, 65479, 655365, 37, 65481, 655365, 39, 65481, 655365, 39, 65479, 655365, 39, 65477, 655365, 39, 65475, 655365, 39, 65473, 655365, 11, 65491, 9, 11, 65489, 9, 11, 65487, 9, 11, 65485, 9, 13, 65485, 9, 13, 65487, 9, 13, 65489, 9, 13, 65491, 9, 15, 65491, 9, 15, 65489, 9, 15, 65487, 9, 15, 65485, 9, 17, 65491, 655365, 19, 65491, 655365, 21, 65491, 655365, 25, 65491, 655365, 27, 65491, 655365, 29, 65491, 655365, 29, 65489, 655365, 29, 65487, 655365, 29, 65485, 655365, 27, 65485, 655365, 27, 65487, 655365, 27, 65489, 655365, 25, 65489, 655365, 25, 65487, 655365, 25, 65485, 655365, 21, 65489, 655365, 21, 65487, 9, 21, 65485, 9, 19, 65485, 9, 17, 65485, 9, 17, 65487, 9, 17, 65489, 655365, 19, 65489, 655365, 19, 65487, 9, 23, 65485, 655361, 23, 65487, 655361, 23, 65489, 655361, 23, 65491, 655361, 7, 65465, 655365, 5, 65465, 655365, 3, 65465, 655365, 1, 65465, 655365, 1, 65463, 655365, 1, 65461, 655365, 1, 65459, 655365, 1, 65457, 655365, 31, 65465, 655365, 31, 65463, 655365, 31, 65461, 655365, 31, 65459, 655365, 31, 65457, 655365, 33, 65465, 655365, 33, 65463, 655365, 33, 65461, 655365, 33, 65459, 655365, 35, 65459, 655365, 35, 65461, 655365, 35, 65463, 655365, 35, 65465, 655365, 3, 65457, 655365, 5, 65457, 655365, 7, 65457, 655365, 9, 65457, 655365, 11, 65457, 655365, 13, 65457, 655365, 15, 65457, 655365, 17, 65457, 655365, 19, 65457, 655365, 21, 65457, 655365, 23, 65457, 655365, 25, 65457, 655365, 27, 65457, 655365, 29, 65457, 655365, 3, 65459, 655365, 3, 65461, 655365, 3, 65463, 655365, 5, 65463, 655365, 5, 65461, 655365, 5, 65459, 655365, 7, 65459, 655365, 7, 65461, 655365, 7, 65463, 655365, 9, 65465, 655365, 11, 65465, 655365, 13, 65465, 655365, 15, 65465, 655365, 17, 65465, 655365, 19, 65465, 655365, 21, 65465, 655365, 23, 65465, 655365, 25, 65465, 655365, 27, 65465, 655365, 29, 65465, 655365, 29, 65463, 655365, 29, 65461, 655365, 29, 65459, 655365, 9, 65459, 655365, 9, 65463, 655365, 9, 65461, 655365, 11, 65461, 655365, 13, 65461, 655365, 15, 65461, 655365, 17, 65461, 655365, 19, 65461, 655365, 21, 65461, 655365, 23, 65461, 655365, 25, 65461, 655365, 27, 65461, 655365, 25, 65463, 655365, 25, 65459, 655365, 11, 65459, 655365, 11, 65463, 655365, 13, 65463, 655365, 13, 65459, 655365, 15, 65459, 655365, 15, 65463, 655365, 17, 65463, 655365, 17, 65459, 655365, 19, 65459, 655365, 19, 65463, 655365, 21, 65463, 655365, 21, 65459, 655365, 23, 65459, 655365, 23, 65463, 655365, 27, 65463, 655365, 27, 65459, 655365, 65533, 65466, 2, 65535, 65466, 2, 1, 65456, 2, 3, 65456, 2, 5, 65456, 2, 7, 65456, 2, 11, 65456, 2, 13, 65456, 2, 15, 65456, 2, 17, 65456, 2, 19, 65456, 2, 21, 65456, 2, 23, 65456, 2, 25, 65456, 2, 27, 65456, 2, 29, 65456, 2, 31, 65456, 2, 33, 65458, 2, 35, 65458, 2, 37, 65466, 2, 39, 65466, 2, 33, 65470, 2, 35, 65470, 2, 37, 65470, 2, 39, 65470, 2, 41, 65470, 2, 33, 65484, 2, 35, 65484, 2, 37, 65484, 2, 39, 65484, 2, 33, 65486, 2, 35, 65486, 2, 37, 65486, 2, 25, 65484, 2, 27, 65484, 2, 29, 65484, 2, 42, 65483, 1441794, 42, 65481, 1441794, 42, 65479, 1441794, 42, 65477, 1441794, 42, 65475, 1441794, 42, 65473, 1441794, 42, 65471, 1441794, 41, 65484, 655362, 36, 65459, 1048578, 36, 65461, 1048578, 36, 65463, 1048578, 36, 65465, 1048578, 32, 65457, 1048578, 0, 65457, 1048578, 0, 65459, 1048578, 0, 65461, 1048578, 0, 65463, 1048578, 0, 65465, 1048578, 40, 65485, 1048578, 40, 65487, 1048578, 40, 65489, 1048578, 40, 65491, 1048578, 40, 65493, 1048578, 40, 65495, 1048578, 38, 65497, 1048578, 38, 65499, 1048578, 39, 65496, 524290, 37, 65500, 524290, 38, 65487, 1310722, 38, 65489, 1310722, 38, 65491, 1310722, 38, 65493, 1310722, 37, 65494, 131074, 36, 65495, 1179650, 36, 65497, 1179650, 35, 65498, 524290, 31, 65498, 524290, 30, 65499, 1310722, 35, 65494, 655362, 33, 65494, 655362, 31, 65494, 655362, 30, 65495, 1048578, 30, 65497, 1048578, 27, 65494, 655362, 26, 65495, 1048578, 26, 65497, 1048578, 26, 65499, 1048578, 11, 65494, 2, 13, 65494, 2, 15, 65494, 2, 17, 65494, 2, 19, 65494, 2, 21, 65494, 2, 23, 65494, 2, 25, 65494, 2, 11, 65492, 2, 13, 65492, 2, 15, 65492, 2, 17, 65492, 2, 19, 65492, 2, 21, 65492, 2, 25, 65492, 2, 27, 65492, 2, 29, 65492, 2, 24, 65491, 1441794, 22, 65491, 1441794, 22, 65489, 1441794, 22, 65487, 1441803, 22, 65485, 1441803, 24, 65489, 1441794, 24, 65487, 1441794, 24, 65485, 1441794, 10, 65485, 1441803, 10, 65487, 1441803, 10, 65489, 1441803, 10, 65491, 1441803, 30, 65485, 1441794, 30, 65489, 1441794, 32, 65493, 1441794, 32, 65489, 1441794, 32, 65483, 1441794, 32, 65479, 1441794, 32, 65475, 1441794, 32, 65471, 1441794, 3, 65466, 655362, 7, 65466, 655362, 11, 65466, 655362, 15, 65466, 655362, 33, 65466, 655362, 31, 65466, 655362, 32, 65465, 1048578, 32, 65463, 1048578, 32, 65461, 1048578, 32, 65459, 1048578, 27, 65466, 2, 25, 65466, 2, 23, 65466, 2, 19, 65466, 2, 17, 65466, 2, 32, 65473, 1441796, 32, 65477, 1441796, 32, 65481, 1441796, 29, 65466, 655364, 35, 65466, 655364, 21, 65466, 655364, 13, 65466, 655364, 5, 65466, 655364, 1, 65466, 655364, 32, 65487, 1048580, 32, 65491, 1048580, 30, 65487, 1048580, 30, 65491, 1048580, 29, 65494, 4, 33, 65498, 4, 8, 65495, 1441796, 8, 65485, 1441796, 8, 65475, 1441796, 4, 65465, 1441794, 4, 65463, 1441794, 4, 65461, 1441794, 4, 65459, 1441794, 4, 65457, 1441794, 8, 65465, 1441794, 8, 65463, 1441794, 8, 65461, 1441794, 8, 65459, 1441794, 8, 65457, 1441794, 33, 65462, 655362, 35, 65462, 655364, 16, 65465, 1048578, 16, 65463, 1048578, 16, 65461, 1048578, 16, 65459, 1048578, 16, 65457, 1048578, 24, 65465, 1048578, 24, 65463, 1048578, 24, 65461, 1048578, 24, 65459, 1048578, 24, 65457, 1048578, 33, 65474, 2, 35, 65474, 2, 37, 65474, 2, 39, 65474, 2, 33, 65480, 2, 35, 65480, 2, 37, 65480, 2, 39, 65480, 2, 41, 65480, 2, 35, 65482, 2, 36, 65483, 1441794, 33, 65482, 655364, 41, 65474, 655364, 33, 65490, 655362, 35, 65490, 655362, 37, 65490, 655362, 21, 65488, 3, 19, 65488, 3, 17, 65488, 3, 16, 65489, 1441795, 15, 65488, 3, 13, 65488, 3, 10, 65495, 1441794, 10, 65497, 1441794, 10, 65499, 1441796, 13, 65496, 655362, 15, 65496, 655362, 17, 65496, 655362, 18, 65495, 1048578, 22, 65495, 1048578, 21, 65496, 2, 25, 65496, 2, 25, 65498, 2, 23, 65498, 2, 19, 65498, 2, 18, 65499, 1441794, 18, 65501, 1441794, 21, 65498, 655364, 19, 65496, 655364, 23, 65496, 655364, 33, 65512, 655364, 31, 65514, 655364, 33, 65514, 655364, 11, 65484, 3, 13, 65484, 3, 21, 65484, 3, 19, 65484, 3, 3, 65501, 1, 31, 65511, 5, 9, 65506, 7, 37, 65498, 7, 12, 65527, 1441794, 13, 65525, 9, 13, 65527, 9, 9, 65520, 4, 1, 65535, 1, 5, 65535, 1, 9, 65535, 1, 1, 65534, 2, 2, 65535, 1441794, 0, 65535, 1048578, 1, 0, 655362, 1, 65531, 0, 1, 65527, 0, 1, 65523, 0, 65533, 65519, 0, 65533, 65515, 0, 65533, 65511, 0, 9, 65456, 2, 11, 65479, 1441805, 11, 65477, 1441805, 11, 65475, 1441805, 11, 65473, 1441805, 11, 65471, 1441805, 13, 65471, 1441805, 13, 65473, 1441805, 13, 65475, 1441805, 13, 65477, 1441805, 13, 65479, 1441805, 13, 65481, 1441805, 15, 65481, 1441805, 15, 65479, 1441805, 15, 65477, 1441805, 15, 65475, 1441805, 15, 65473, 1441805, 15, 65471, 1441805, 17, 65471, 1441805, 17, 65473, 1441805, 17, 65475, 1441805, 17, 65477, 1441805, 17, 65479, 1441805, 17, 65481, 1441805, 19, 65471, 1441805, 19, 65473, 1441805, 19, 65475, 1441805, 19, 65477, 1441805, 19, 65479, 1441805, 19, 65481, 1441805, 21, 65471, 1441805, 21, 65473, 1441805, 21, 65475, 1441805, 21, 65477, 1441805, 21, 65479, 1441805, 21, 65481, 1441805, 23, 65471, 1441805, 23, 65473, 1441805, 23, 65475, 1441805, 23, 65477, 1441805, 23, 65479, 1441805, 23, 65481, 1441805, 25, 65471, 1441805, 25, 65473, 1441805, 25, 65475, 1441805, 25, 65477, 1441805, 25, 65479, 1441805, 25, 65481, 1441805, 27, 65471, 1441805, 27, 65473, 1441805, 27, 65475, 1441805, 27, 65477, 1441805, 27, 65479, 1441805, 27, 65481, 1441805, 11, 65481, 1441805, 10, 65481, 1441804, 10, 65479, 1441804, 10, 65477, 1441804, 10, 65475, 1441804, 10, 65473, 1441804, 10, 65471, 1441804)
 }
 script = ExtResource("9_0cp0l")
 metadata/_editor_floor_ = Vector3(0, 0, 0)
@@ -165,7 +840,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="GridMap-Roof" type="GridMap" parent="."]
 unique_name_in_owner = true
 visible = false
-mesh_library = ExtResource("7_1u8w0")
+mesh_library = SubResource("MeshLibrary_jx0wj")
 cell_size = Vector3(1.5, 3, 1.5)
 cell_center_x = false
 cell_center_z = false
@@ -195,6 +870,12 @@ transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 4.165, 0, -30
 [node name="Fluro2" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 4.2013526, 0, -35.387653)
 
+[node name="Fluro5" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 31.047047, 0, -73.94301)
+
+[node name="Fluro7" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 20.566229, 0, -74.01984)
+
 [node name="Fluro3" parent="Level/Room Entrance Waiting" instance=ExtResource("41_4lmeg")]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 10.788997, 0, -35.339363)
 
@@ -215,6 +896,10 @@ transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 
 
 [node name="Bench4" parent="Level/Room Entrance Waiting" instance=ExtResource("31_facbu")]
 transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 1.6191636, 0.07742554, -24.456816)
+
+[node name="ghoula" parent="Level/Room Entrance Waiting" node_paths=PackedStringArray("target") instance=ExtResource("58_vke2r")]
+transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 5.7173223, 0.12085456, -31.694176)
+target = NodePath("../../../Player/Controller")
 
 [node name="Room Office 1" type="Node3D" parent="Level"]
 
@@ -653,7 +1338,7 @@ autoplay = true
 loop = true
 
 [node name="Gorilla" type="Sprite3D" parent="."]
-transform = Transform3D(0.705, 0, 0, 0, 0.705, 0, 0, 0, 0.705, 28.378, 1, -89.91)
+transform = Transform3D(0.705, 0, 0, 0, 0.705, 0, 0, 0, 0.705, -34.27261, 1, -104.52336)
 billboard = 1
 texture = ExtResource("16_2cqfq")
 

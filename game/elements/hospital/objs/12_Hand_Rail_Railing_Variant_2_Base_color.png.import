@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dutnug411yuas"
-path.s3tc="res://.godot/imported/00_TestCube_lab1_flr4.png-1c2eb31ceaf14322c532be1ee66263da.s3tc.ctex"
+uid="uid://c1huip5pecfcx"
+path.s3tc="res://.godot/imported/12_Hand_Rail_Railing_Variant_2_Base_color.png-a5f4e5314077b69e23161890ab7635d3.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "d707c04a9f025c14e6d3fd35566ae8b4"
+"md5": "8293d1a1af11bc5f5070a28ebfc259ba"
 }
 
 [deps]
 
-source_file="res://elements/hospital/objs/00_TestCube_lab1_flr4.png"
-dest_files=["res://.godot/imported/00_TestCube_lab1_flr4.png-1c2eb31ceaf14322c532be1ee66263da.s3tc.ctex"]
+source_file="res://elements/hospital/objs/12_Hand_Rail_Railing_Variant_2_Base_color.png"
+dest_files=["res://.godot/imported/12_Hand_Rail_Railing_Variant_2_Base_color.png-a5f4e5314077b69e23161890ab7635d3.s3tc.ctex"]
 
 [params]
 

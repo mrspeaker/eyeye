@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bruf3vqkkalyk"
-path="res://.godot/imported/00_TestCube.glb-e8149c8aceb0bef421b5ff6dcb9352a5.scn"
+uid="uid://cfprpd5v54re5"
+path="res://.godot/imported/ghoula.glb-a610267b7ce37b0680e5974640b848db.scn"
 
 [deps]
 
-source_file="res://elements/hospital/objs/00_TestCube.glb"
-dest_files=["res://.godot/imported/00_TestCube.glb-e8149c8aceb0bef421b5ff6dcb9352a5.scn"]
+source_file="res://models/ghoula.glb"
+dest_files=["res://.godot/imported/ghoula.glb-a610267b7ce37b0680e5974640b848db.scn"]
 
 [params]
 

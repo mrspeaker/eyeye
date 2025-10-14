@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bruf3vqkkalyk"
-path="res://.godot/imported/00_TestCube.glb-e8149c8aceb0bef421b5ff6dcb9352a5.scn"
+uid="uid://cvdmmi0m15ba8"
+path="res://.godot/imported/11_Wall_Blue.glb-45694a1e1e1c71f8c1e2f413c39f930c.scn"
 
 [deps]
 
-source_file="res://elements/hospital/objs/00_TestCube.glb"
-dest_files=["res://.godot/imported/00_TestCube.glb-e8149c8aceb0bef421b5ff6dcb9352a5.scn"]
+source_file="res://elements/hospital/objs/11_Wall_Blue.glb"
+dest_files=["res://.godot/imported/11_Wall_Blue.glb-45694a1e1e1c71f8c1e2f413c39f930c.scn"]
 
 [params]
 

@@ -5,7 +5,7 @@ extends Node
 func _ready() -> void:
 	#controller.rotate(Vector3.FORWARD, PI/2.0)
 	pass
-	
+
 func _process(_delta: float) -> void:
 	pass
 
