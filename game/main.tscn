@@ -57,7 +57,7 @@
 [ext_resource type="PackedScene" uid="uid://bg13ugdp78pba" path="res://scenes/table_variant_2.tscn" id="36_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://i0msklgl7gaq" path="res://Assets/lowpoly pack/SM_Light_B.prefab.gltf" id="37_facbu"]
 [ext_resource type="PackedScene" uid="uid://cmeit4kxblibp" path="res://scenes/fluro.tscn" id="41_4lmeg"]
-[ext_resource type="PackedScene" uid="uid://5oisdstv04ia" path="res://elements/ghoula/ghoula.tscn" id="58_vke2r"]
+[ext_resource type="PackedScene" uid="uid://deovjyacfto7g" path="res://elements/ghoula/ghoula_2.tscn" id="59_uit24"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kek77"]
 sky_horizon_color = Color(0.704285, 0.544938, 0.474513, 1)
@@ -897,10 +897,6 @@ transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 
 [node name="Bench4" parent="Level/Room Entrance Waiting" instance=ExtResource("31_facbu")]
 transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 1.6191636, 0.07742554, -24.456816)
 
-[node name="ghoula" parent="Level/Room Entrance Waiting" node_paths=PackedStringArray("target") instance=ExtResource("58_vke2r")]
-transform = Transform3D(0.99997324, 0, -0.0073303217, 0, 1, 0, 0.0073303217, 0, 0.99997324, 5.7173223, 0.12085456, -31.694176)
-target = NodePath("../../../Player/Controller")
-
 [node name="Room Office 1" type="Node3D" parent="Level"]
 
 [node name="compymon" parent="Level/Room Office 1" instance=ExtResource("31_seu75")]
@@ -1341,6 +1337,10 @@ loop = true
 transform = Transform3D(0.705, 0, 0, 0, 0.705, 0, 0, 0, 0.705, -34.27261, 1, -104.52336)
 billboard = 1
 texture = ExtResource("16_2cqfq")
+
+[node name="ghoula2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("59_uit24")]
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 9.000001, 0, -31.000004)
+target = NodePath("../Player/Controller")
 
 [connection signal="died" from="Player/HealthComponent" to="Player" method="_on_health_component_died"]
 [connection signal="died" from="Player/HealthComponent" to="Player/Controller" method="_on_health_component_died"]

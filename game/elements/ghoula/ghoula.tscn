@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://5oisdstv04ia"]
+[gd_scene load_steps=7 format=4 uid="uid://15t1t2o7ehnn"]
 
 [ext_resource type="Texture2D" uid="uid://b4mxs5bemldbi" path="res://elements/ghoul/assets/ghoul.png" id="1_rfp2a"]
-[ext_resource type="Script" uid="uid://clmvm64io4kmf" path="res://elements/ghoula/ghoula.gd" id="1_y5m4x"]
 [ext_resource type="Texture2D" uid="uid://dd5q64v76rr0i" path="res://models/ghoula_ghoul-normal.png" id="2_7adok"]
+[ext_resource type="Script" uid="uid://clmvm64io4kmf" path="res://elements/ghoula/ghoula.gd" id="2_ag5xs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7h2w"]
 resource_name = "Material.001"
@@ -50,7 +50,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sk065")
 
 [node name="ghoula" type="Node3D"]
-script = ExtResource("1_y5m4x")
+script = ExtResource("2_ag5xs")
 
 [node name="ghoula" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0, 0, 0)
