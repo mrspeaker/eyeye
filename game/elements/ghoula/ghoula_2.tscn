@@ -6,5 +6,4 @@
 [node name="ghoula2" instance=ExtResource("1_ek4w2")]
 script = ExtResource("2_ag5xs")
 
-[node name="AnimationPlayer" parent="." index="1"]
-autoplay = "glitchleft"
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_anim_done"]
