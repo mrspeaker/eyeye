@@ -1339,7 +1339,7 @@ billboard = 1
 texture = ExtResource("16_2cqfq")
 
 [node name="ghoula2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("59_uit24")]
-transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 9.000001, 0, -31.000004)
+transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 5.0000005, 0, -34.000004)
 target = NodePath("../Player/Controller")
 
 [connection signal="died" from="Player/HealthComponent" to="Player" method="_on_health_component_died"]

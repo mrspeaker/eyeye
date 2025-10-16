@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://deovjyacfto7g"]
 
 [ext_resource type="PackedScene" uid="uid://cfprpd5v54re5" path="res://models/ghoula.glb" id="1_ek4w2"]
-[ext_resource type="Script" uid="uid://clmvm64io4kmf" path="res://elements/ghoula/ghoula.gd" id="2_ag5xs"]
+[ext_resource type="Script" uid="uid://cgp02ecnumlew" path="res://elements/ghoula/ghoula_2.gd" id="2_ag5xs"]
 
 [node name="ghoula2" instance=ExtResource("1_ek4w2")]
 script = ExtResource("2_ag5xs")
 
-[node name="ghoula" parent="." index="0"]
-transform = Transform3D(1.305, 0, 0, 0, 1.305, 0, 0, 0, 1.305, 0, 0.12375438, 0)
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "glitchleft"
