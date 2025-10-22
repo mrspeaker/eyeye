@@ -176,7 +176,7 @@ func _handle_moving(dt: float):
 	var can_move = move_state == MoveStates.IDLE and not blocked
 	if wants_to_move and can_move:
 		move_start_pos = position
-
+		
 		var target_pos = gridmap.get_pos_in_direction(position, dir)
 		if target_pos == null:
 			# Smoosh into wall
@@ -186,6 +186,7 @@ func _handle_moving(dt: float):
 			move_dest_pos = target_pos + Globals.dir_to_vec(dir)
 			move_state = MoveStates.MOVING
 		else:
+			play_sound($Footstep)
 			# Free to move
 			move_dest_pos = target_pos
 			move_state = MoveStates.MOVING
@@ -427,3 +428,7 @@ func clear_destination():
 func on_item_picked_up(item:Item):
 	print("Picked up a " + item.name)
 	inventory.add_item(item)
+	
+func play_sound(sound):
+	sound.pitch_scale = randf_range(0.9, 1.1)  # optional variation
+	sound.play()
